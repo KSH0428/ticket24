@@ -9,7 +9,10 @@ import lombok.ToString;
 @ToString
 public class MemberVO {
 	private int mem_num;
-	private int auth;
+	private String mem_id;
+	private String mem_nickname;
+	private int mem_auth;
+	
 }
 
 

@@ -16,7 +16,7 @@ public class MainController {
 	public String init(HttpSession session) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		//관리자로 로그인하면 관리자 메인으로 이동 처리
-		if(user!=null && user.getAuth() == 9) {
+		if(user!=null && user.getMem_auth() == 9) {
 			return "redirect:/main/admin";
 		}
 		return "redirect:/main/main";
