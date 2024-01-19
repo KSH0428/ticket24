@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 상단 시작 -->
-<h2 class="align-center">SpringPage</h2>
 <div class="align-right">
-	<a href="${pageContext.request.contextPath}/board/list">게시판</a>
+	<a href="${pageContext.request.contextPath}/reserv/list">공연장대관</a>
+	<a href="${pageContext.request.contextPath}/notice/list">공지사항</a>
 	<c:if test="${!empty user}">
 	<a href="${pageContext.request.contextPath}/member/myPage">MY페이지</a>
 	<img src="${pageContext.request.contextPath}/member/photoView" 
@@ -17,6 +17,7 @@
 	[<span class="user_name">${user.id}</span>]
 	</c:if>
 	<c:if test="${!empty user}">
+	<a href="${pageContext.request.contextPath}/zzim/list">장바구니/찜</a>
 	<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
 	</c:if>
 	
@@ -25,12 +26,20 @@
 	<a href="${pageContext.request.contextPath}/member/login">로그인</a>
 	</c:if>
 	
-	<c:if test="${empty user || user.auth != 9}">
-	<a href="${pageContext.request.contextPath}/main/main">홈으로</a>
-	</c:if>
 	<c:if test="${!empty user && user.auth == 9}">
 	<a href="${pageContext.request.contextPath}/main/admin">관리자</a>
 	</c:if>
+	<a href="${pageContext.request.contextPath}/question/list">고객센터</a>
+</div>
+<div class="align-center">
+	<a href="${pageContext.request.contextPath}/concert/list">콘서트</a>
+	<a href="${pageContext.request.contextPath}/musical/list">뮤지컬</a>
+	<a href="${pageContext.request.contextPath}/play/list">연극</a>
+	<a href="${pageContext.request.contextPath}/classic/list">클래식</a>
+	<a href="${pageContext.request.contextPath}/md/list">MD샵</a>
+	<a href="${pageContext.request.contextPath}/ranking/list">랭킹</a>
+	<a href="${pageContext.request.contextPath}/event/list">이벤트</a>
+	<a href="${pageContext.request.contextPath}/comm/list">커뮤니티</a>
 </div>
 <!-- 상단 끝 -->
 
