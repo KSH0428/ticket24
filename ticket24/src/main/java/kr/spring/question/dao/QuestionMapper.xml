@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.question.dao.QuestionMapper">
+	<!-- 일대일 문의 등록 -->
+	<insert id="insertQuestion" parameterType="questionVO">
+		INSERT INTO question(
+			question_num,
+			mem_num,
+			question_ip,
+			question_category,
+			question_title,
+			question_lock,
+			question_passwd,
+			question_photo,
+			question_content,
+			question_level,
+			question_renum)
+		VALUES(
+			question_seq.nextval,
+			#{mem_num},
+			#{question_ip},
+			#{question_category},
+			#{question_title},
+			#{question_lock},
+			#{question_passwd},
+			#{question_photo,jdbcType=VARCHAR},
+			#{question_content},
+			#{question_level},
+			#{question_renum})
+	</insert>
+	
+	<!-- 작성자 nick_name/ID + 제목으로 검색 -->
+	<sql id="questionSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					question_title LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					mem_id LIKE '%' || #{keyword} || '%' OR
+					mem_nickname LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 상품/주문/배송/기타 카테고리로 조회 -->
+	<sql id="questionOrder">
+
+	</sql>
+	
+	<!-- 문의글 총개수/검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM question JOIN member USING(mem_num)
+		<include refid="questionSearch"></include>
+	</select>
+	
+	<!-- 문의글 전체 목록/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="questionVO">
+		SELECT * FROM
+		(SELECT a.*, rownum rnum FROM
+		(SELECT question_num,
+				mem_num,
+				question_category,
+				<![CDATA[
+				REPLACE(REPLACE(question_title,'<','&lt;'),'>','&gt;') question_title,
+				]]>
+				question_hit,
+				question_regdate,
+				mem_id,
+				mem_nickname,
+				question_level
+			FROM question JOIN member USING(mem_num)
+			<include refid="questionSearch"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 문의글 상세 -->
+	<select id="selectQuestion" parameterType="integer">
+		SELECT * FROM question
+		JOIN member USING(mem_num)
+		LEFT OUTER JOIN member_detail USING(mem_num)
+		WHERE question_num=#{question_num}
+	</select>
+	
+	<!-- 답변글 상세 -->
+	<select id="selectAnswer" parameterType="integer" resultType="questionVO">
+	    SELECT * FROM question
+	    JOIN member USING(mem_num)
+	    LEFT OUTER JOIN member_detail USING(mem_num)
+	    WHERE question_renum = #{question_num}
+	</select>
+	
+	<!-- 문의글 수정 -->
+	<update id="updateQuestion" parameterType="integer">
+		UPDATE question SET
+			<if test="question_photo != null">
+			question_photo=#{question_photo},
+			</if>
+			question_ip=#{question_ip},
+			question_category=#{question_category},
+			question_title=#{question_title},
+			question_content=#{question_content},
+			question_lock=#{question_lock},
+			question_passwd=#{question_passwd}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

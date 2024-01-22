@@ -5,9 +5,28 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="ces" extends="main">
-    	<put-attribute name="title" value="회원가입"/>
-    	<put-attribute name="body" value="/WEB-INF/views/member/memberRegister.jsp"/>                                           
+
+    <definition name="questionList" extends="main">
+    	<put-attribute name="title" value="문의글 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/question/questionList.jsp"/>
+    </definition>
+    
+    <definition name="questionWrite" extends="main">
+    	<put-attribute name="title" value="문의글 쓰기"/>
+    	<put-attribute name="css" value="/WEB-INF/views/question/questionCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/question/questionWrite.jsp"/>
+    </definition>
+    
+    <definition name="adminQuestionWrite" extends="main">
+    	<put-attribute name="title" value="문의글 쓰기"/>
+    	<put-attribute name="css" value="/WEB-INF/views/question/questionCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/question/adminQuestionWrite.jsp"/>
+    </definition>
+    
+    <definition name="questionView" extends="main">
+    	<put-attribute name="title" value="문의글 상세"/>
+    	<put-attribute name="css" value="/WEB-INF/views/question/questionCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/question/questionView.jsp"/>
     </definition>
     
 </tiles-definitions>
