@@ -13,12 +13,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CommVO {
+public class CommVO {		
 	private int comm_num;
 	@NotBlank
 	private String comm_title;
 	@NotBlank
 	private String comm_content;
+	private String comm_category;
 	private int comm_hit;
 	private Date comm_regdate;
 	private Date comm_modifydate;

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.comm.dao.CommMapper">
+	<!-- 게시판 글 등록 -->
+	<insert id="insertComm" parameterType="CommVO">
+		INSERT INTO comm(
+			comm_num,
+			comm_title,
+			comm_content,
+			comm_filename,
+			comm_ip,
+			mem_num)
+		VALUES (
+			comm_seq.nextval,
+			#{comm_title},
+			#{comm_content},
+			#{comm_filename,jdbcType=VARCHAR},
+			#{comm_ip},
+			#{mem_num})
+	</insert>
+	
+	<!-- sql 태그외 include 태그를 이용해 SQL문 재사용 -->
+	<sql id="commSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					comm_title LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					mem_id LIKE '%' || #{keyword} || '%' OR
+					mem_nickname LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					comm_content LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 4">
+					comm_title LIKE '%' || #{keyword} || '%' OR
+					comm_content LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="commOrder">
+		<if test="order == 1">
+			ORDER BY comm_num DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY comm_hit DESC
+		</if>
+		<if test="order == 3">
+			ORDER BY fav_cnt DESC NULLS LAST
+		</if>
+		<if test="order == 4">
+			ORDER BY re_cnt DESC NULLS LAST
+		</if>
+	</sql>
+	
+	<!-- 게시판 글의 총개수/검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+		 COUNT(*)
+		FROM comm JOIN member USING(mem_num)
+		<include refid="commSearch"></include>
+	</select>
+	
+	<!-- 게시판 전체 목록/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="commVO">
+		SELECT
+		  *
+		FROM (SELECT
+				a.*,
+				rownum rnum
+				FROM(SELECT
+				 		comm_num,
+				 		<![CDATA[
+				 		REPLACE(REPLACE(comm_title, '<', '&lt;
+				 		]]>
+				 		comm_hit,
+				 		comm_regdate,
+				 		mem_num,
+				 		mem_id,
+				 		mem_nickname,
+				 		re_cnt,
+				 		fav_cnt
+				 	FROM comm
+				 	LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, comm_num FROM comm_reply GROUPBY comm_num) USING (comm_num)
+				 	LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, comm_num FROM comm_fav GROUP BY comm_num) USING(comm_num)
+			   		JOIN member USING(mem_num)
+			   		<include refid="commSearch"></include>
+			   		<include refid="commOrder"></include>)a)
+			   	<![CDATA[
+			   	WHERE rnum >= #{start} AND rnum <= #{end}
+			   	]]>
+	</select>
+	
+	<!-- 글 상세 -->
+	<select id="selectComm" parameterType="integer">
+		SELECT
+		  *
+		FROM comm
+		JOIN member USING(mem_num)
+		LEFT OUTER JOIN member_detail USING(mem_num)
+		WHERE comm_num=#{comm_num}
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="updateComm" parameterType="commVO">
+		UPDATE comm SET
+		<if test="comm_filename != null">
+		comm_filename=#{comm_filename},
+		</if>
+			comm_title=#{comm_title},
+			comm_content=#{comm_content},
+			comm_ip=#{comm_ip},
+			comm_modifydate=SYSDATE
+		WHERE comm_num=#{comm_num}
+	</update>
+	</mapper>
