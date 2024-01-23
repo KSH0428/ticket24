@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.md.vo.MdVO;
 
+@Mapper
 public interface MdMapper {
 	public List<MdVO> selectList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
