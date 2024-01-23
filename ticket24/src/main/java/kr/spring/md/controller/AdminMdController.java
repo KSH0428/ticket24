@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class MdController {
+public class AdminMdController {
 
 	 @Autowired
 	private MdService mdService;
@@ -36,13 +36,13 @@ public class MdController {
 		*==============================*/
 		
 		//상품등록 폼 호출
-			@GetMapping("/md/list")
+			@GetMapping("/md/regMd")
 			public String form() {
-				return "mdList";//타일스 설정명
+				return "insertMd";//타일스 설정명
 			}
 			
-			//전송된 회원 데이터 처리
-			@PostMapping("/md/list")
+			//전송된 상품 데이터 처리
+			@PostMapping("/md/regMd")
 			public String submit(@Valid MdVO mdVO, BindingResult result, Model model,
 					                                           HttpServletRequest request) {
 				log.debug("<<상품등록>> : " + mdVO);

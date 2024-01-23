@@ -8,7 +8,7 @@ create table md(
 	md_photo2 varchar2(60) not null,
 	md_detail clob not null,
 	md_regdate date default sysdate not null,
-	md_mdate date
+	md_mdate date,
 	md_status number(1) not null,
 	constraint md_pk primary key (md_num)
 );
