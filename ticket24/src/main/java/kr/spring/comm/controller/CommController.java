@@ -2,6 +2,7 @@ package kr.spring.comm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import kr.spring.comm.service.CommService;
@@ -22,4 +23,11 @@ public class CommController {
 	public CommVO initCommand() {
 		return new CommVO();
 	}
+	//등록 폼 호출
+	@GetMapping("/board/write")
+	public String form() {
+		
+		return "commWrite";
+	}
+	
 }
