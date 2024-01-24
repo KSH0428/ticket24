@@ -34,14 +34,8 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void updateMember(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateMember_detail(MemberVO member) {
-		// TODO Auto-generated method stub
-		
+		memberMapper.updateMember(member);
+		memberMapper.updateMember_detail(member);
 	}
 
 	@Override
@@ -64,6 +58,17 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void deleteMemeber_point(MemberVO member) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateProfile(MemberVO member) {
+		memberMapper.updateProfile(member);
+	}
+
+	@Override
+	public void updateMember_detail(MemberVO member) {
 		// TODO Auto-generated method stub
 		
 	}

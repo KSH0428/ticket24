@@ -22,7 +22,7 @@
 	</c:if>
 	
 	<c:if test="${empty user}">
-	<a href="${pageContext.request.contextPath}/member/registerUser">회원가입</a>
+	<a href="${pageContext.request.contextPath}/member/register">회원가입</a>
 	<a href="${pageContext.request.contextPath}/member/login">로그인</a>
 	</c:if>
 	

@@ -2,28 +2,37 @@
     pageEncoding="UTF-8"%>
 <!-- MyPage 메뉴 시작 -->
 <div class="side-bar">
-	<ul>
-		<li>
-			<input type="button" class="menu-btn" value="비밀번호변경"
-			   onclick="location.href='${pageContext.request.contextPath}/member/changePassword'">
+	<h1>마이페이지</h1>
+	<hr>
+	<ul class="side-navbar">
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/reserv/list">공연</a>
+			<ul class="sub-menu">
+				<li><a href="${pageContext.request.contextPath}/reserv/list">찜한 공연</a></li>
+				<li><a href="${pageContext.request.contextPath}/reserv/list">공연 예약 내역</a></li>
+			</ul>
 		</li>
-		<li>
-			<input type="button" class="menu-btn" value="채팅"
-			   onclick="location.href='${pageContext.request.contextPath}/talk/talkList'">
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">공연장</a></li>
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">MD</a>
+			<ul class="sub-menu">
+				<li><a href="${pageContext.request.contextPath}/reserv/list">주문 내역</a></li>
+				<li><a href="${pageContext.request.contextPath}/reserv/list">작성한 문의</a></li>
+			</ul>
 		</li>
-		<li>
-			<input type="button" class="menu-btn" value="회원탈퇴"
-			   onclick="location.href='${pageContext.request.contextPath}/member/delete'">
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">커뮤니티</a>
+			<ul class="sub-menu">
+				<li><a href="${pageContext.request.contextPath}/reserv/list">작성한 게시글</a></li>
+				<li><a href="${pageContext.request.contextPath}/reserv/list">스크랩한 게시글</a></li>
+			</ul>
 		</li>
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">티켓양도</a>
+			<ul class="sub-menu">
+				<li><a href="${pageContext.request.contextPath}/reserv/list">찜한 티켓 양도글</a></li>
+				<li><a href="${pageContext.request.contextPath}/reserv/list">양도 티켓 결제 내역</a></li>
+			</ul>
+		</li>
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">1:1 문의</a></li>
 	</ul>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/member.profile.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/mypage.css.js"></script>
 <!-- MyPage 메뉴 끝 -->
-
-
-
-
-
-
-

@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
+import kr.spring.util.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -37,13 +39,13 @@ public class MemberController {
 	 * 회원가입
 	 *=======================*/
 	//회원가입 폼 호출
-	@GetMapping("/member/registerUser")
+	@GetMapping("/member/register")
 	public String form() {
 		return "memberRegister";
 	}
 	
 	//전송된 회원 데이터 처리
-	@PostMapping("/member/registerUser")
+	@PostMapping("/member/register")
 	public String submit(@Valid MemberVO memberVO, BindingResult result, Model model, HttpServletRequest request) {
 		log.debug("<<회원가입>> : " + memberVO);
 		
@@ -153,6 +155,77 @@ public class MemberController {
 		model.addAttribute("member", member);
 		
 		return "myPage";
+	}
+	/*========================
+	 * 프로필 사진 출력
+	 *=======================*/
+	//프로필 사진 출력(로그인 전용)
+	@RequestMapping("/member/photoView")
+	public String getProfile(HttpSession session, HttpServletRequest request, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		log.debug("<<프로필 사진 읽기>> " + user);
+		if(user == null) {//로그인이 되지 않은 경우
+			getBasicProfileImage(request, model);
+		}else {//로그인 된 경우
+			MemberVO memberVO = memberService.selectMember(user.getMem_num());
+			viewProfile(memberVO, request, model);
 		}
-
+		//빈의 이름이 imageView인 ImageView 객체 호출
+		return "imageView";
+	}
+	//프로필 사진 출력(회원번호 지정)
+	@RequestMapping("/member/viewProfile")
+	public String getProfileByMem_num(@RequestParam int mem_num,HttpServletRequest request,Model model) {
+		MemberVO memberVO = memberService.selectMember(mem_num);
+		
+		viewProfile(memberVO,request,model);
+		
+		return "imageView";
+	}
+	//프로필 사진 처리를 위한 공통 코드
+	public void viewProfile(MemberVO memberVO, HttpServletRequest request, Model model) {
+		if(memberVO == null || memberVO.getMem_filename() == null) {
+			//업로드한 프로필 사진 정보가 없어서 기본 이미지 표시
+			getBasicProfileImage(request, model);
+		}else {//업로드한 이미지 읽기
+			model.addAttribute("imageFile", memberVO.getMem_photo());
+			model.addAttribute("filename", memberVO.getMem_filename());
+		}
+	}
+	//기본 이미지 읽기
+	public void getBasicProfileImage(HttpServletRequest request, Model model) {
+		byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
+		model.addAttribute("imageFile", readbyte);
+		model.addAttribute("filename", "face.png");
+	}
+	
+	/*========================
+	 * 회원 정보 수정
+	 *=======================*/
+	//회원 정보 수정 폼 호출
+	@GetMapping("/member/update")
+	public String updateForm(@RequestParam int mem_num,Model model) {
+		MemberVO memberVO = memberService.selectMember(mem_num);
+		
+		model.addAttribute("memberVO", memberVO);
+		
+		return "memberUpdate";
+	}
+	
+	//수정폼에서 전송된 회원 데이터 처리
+	@PostMapping("/member/update")
+	public String submitUpdate(@Valid MemberVO memberVO, BindingResult result, HttpServletRequest request, Model model) {
+		log.debug("<<회원 정보 수정>> : " + memberVO);
+		
+		if(result.hasErrors()) {
+			return "memberUpdate";
+		}
+		memberService.updateMember(memberVO);
+		
+		model.addAttribute("message", "회원 정보 수정 완료");
+		model.addAttribute("url", request.getContextPath()+"/member/myPage");
+		
+		return "common/resultAlert";
+	}
+	
 }

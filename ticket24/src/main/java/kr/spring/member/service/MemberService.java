@@ -13,6 +13,7 @@ public interface MemberService {
 	public void deleteMember(int mem_num);
 	public void deleteMemeber_detail(MemberVO member);
 	public void deleteMemeber_point(MemberVO member);
-	
+	//프로필 이미지 업데이트
+	public void updateProfile(MemberVO member);
 	//회원관리 - 관리자
 }

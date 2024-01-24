@@ -4,7 +4,7 @@
 <!-- 내용 시작 -->
 <div class="page-main">
 	<h2>회원가입</h2>
-	<form:form action="registerUser" id="member_register" modelAttribute="memberVO">
+	<form:form action="register" id="member_register" modelAttribute="memberVO">
 		<form:errors element="div" cssClass="error-color"/>	
 		<ul>
 			<li>
@@ -20,7 +20,7 @@
 				<form:errors path="mem_name" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="mem_nickname">별명</form:label>
+				<form:label path="mem_nickname">닉네임</form:label>
 				<form:input path="mem_nickname"/>
 			</li>
 			<li>

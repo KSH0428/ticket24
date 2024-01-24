@@ -1,0 +1,47 @@
+/* MY페이지 사이드바
+-------------------------*/
+.side-navbar{
+	width:150px;
+}
+.side-bar h1{
+	text-align:center;
+}
+.main-menu{
+	line-height:2;
+	position:relative;
+}
+.main-menu .sub-menu{
+	position:absolute;
+	width:150px;
+	left:100px;
+	color:white;
+	top:-1px;
+	display:none;
+}
+.main-menu:hover{
+	color:white;
+}
+.main-menu .sub-menu>li:hover{
+	background-color:white;
+}
+/* MY페이지 회원정보창
+-------------------------*/
+.memberinfo{
+  /* 상하좌우 정중앙 정렬하기 */
+	width:600px;
+	height:400px;
+	border:1px solid #000;
+	padding:10px 10px 30px 10px;
+	position:relative;
+	margin:0 auto;
+}
+.memberinfo ul {
+	list-style:none;
+}
+ 
+.memberinfo li {
+	float: left;
+}
+.mypage-button{
+	margin:0 auto;
+}
