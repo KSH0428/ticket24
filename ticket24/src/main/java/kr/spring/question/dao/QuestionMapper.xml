@@ -22,7 +22,7 @@
 			#{question_category},
 			#{question_title},
 			#{question_lock},
-			#{question_passwd},
+			#{question_passwd,jdbcType=VARCHAR},
 			#{question_photo,jdbcType=VARCHAR},
 			#{question_content},
 			#{question_level},
@@ -94,7 +94,7 @@
 	</select>
 	
 	<!-- 문의글 수정 -->
-	<update id="updateQuestion" parameterType="integer">
+	<update id="updateQuestion" parameterType="questionVO">
 		UPDATE question SET
 			<if test="question_photo != null">
 			question_photo=#{question_photo},
@@ -104,7 +104,9 @@
 			question_title=#{question_title},
 			question_content=#{question_content},
 			question_lock=#{question_lock},
-			question_passwd=#{question_passwd}
+			question_passwd=#{question_passwd},
+			question_modifydate=SYSDATE
+		WHERE question_num=#{question_num}
 	</update>
 	
 </mapper>

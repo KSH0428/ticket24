@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.faq.dao.FaqMapper">
+	<!-- 자주 찾는 질문 등록 -->
+	<insert id="insertFaq" parameterType="faqVO">
+		INSERT INTO faq(
+			faq_num,
+			faq_title,
+			faq_content,
+			faq_category)
+		VALUES(
+			faq_seq.nextval,
+			#{faq_title},
+			#{faq_content},
+			#{faq_category})
+	</insert>
+	
+	<sql id="faqSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				faq_title LIKE '%' || #{keyword} || '%'
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectFaqList" parameterType="map" resultType="faqVO">
+		SELECT * FROM faq <include refid="faqSearch"></include>
+	</select>
+	
+	<update id="updateFaq" parameterType="faqVO">
+		UPDATE faq SET
+			faq_title=#{faq_title},
+			faq_content=#{faq_content},
+			faq_category=#{faq_category}
+		WHERE faq_num=#{faq_num}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

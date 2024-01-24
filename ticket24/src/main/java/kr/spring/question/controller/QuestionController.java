@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.vo.MemberVO;
+import kr.spring.question.dao.QuestionMapper;
 import kr.spring.question.service.QuestionService;
 import kr.spring.question.vo.QuestionVO;
 import kr.spring.util.FileUtil;
@@ -116,9 +117,6 @@ public class QuestionController {
 	    questionVO.setQuestion_level(2);
 	    // 답변글 카테고리를 원글 카테고리와 동일하게 설정
 	    questionVO.setQuestion_category(user_question.getQuestion_category());
-	    // 답변글 비밀글 여부를 원글과 동일하게 설정
-	    questionVO.setQuestion_lock(user_question.getQuestion_lock());
-	    questionVO.setQuestion_passwd(user_question.getQuestion_passwd());
 	    // IP 주소 설정
 	    questionVO.setQuestion_ip(request.getRemoteAddr());
 
@@ -193,22 +191,131 @@ public class QuestionController {
 	/*=====================
 	 * 파일 다운로드
 	 *=====================*/
-	
+	@RequestMapping("/question/file")
+	public ModelAndView download(@RequestParam int question_num, HttpServletRequest request) {
+		QuestionVO question = questionService.selectQuestion(question_num);
+		
+		//파일을 절대경로에서 읽어들여 byte[]로 변환
+		byte[] downloadFile = FileUtil.getBytes(
+				request.getServletContext().getRealPath("/upload")
+				+"/"+question.getQuestion_photo());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("downloadView");
+		mav.addObject("downloadFile", downloadFile);
+		mav.addObject("filename", question.getQuestion_photo());
+
+		return mav;
+		
+	}
 	
 	/*=====================
 	 * 문의글 수정
 	 *=====================*/
-	
+	//수정 폼 호출
+	@GetMapping("/question/update")
+	public String formUpdate(@RequestParam int question_num, Model model) {
+		QuestionVO questionVO = questionService.selectQuestion(question_num);
+		
+		model.addAttribute("questionVO", questionVO);
+		
+		return "questionModify";
+	}
+	//수정폼에서 전송된 데이터 처리
+	@PostMapping("/question/update")
+	public String subminUpdate(@Valid QuestionVO questionVO, BindingResult result,
+								HttpServletRequest request, Model model) throws IllegalStateException, IOException {
+		log.debug("<<문의글 수정>> : " + questionVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			//title 또는 content가 입력되지 않아 유효성 체크에 걸리면
+			//파일 정보를 잃어버리기 때문에 폼을 호출할 때 다시 셋팅해주어야 함
+			QuestionVO vo = questionService.selectQuestion(questionVO.getQuestion_num());
+			questionVO.setQuestion_photo(vo.getQuestion_photo());
+			return "questionModify";
+		}
+		
+		//DB에 저장된 파일 정보 구하기
+		QuestionVO db_question = questionService.selectQuestion(questionVO.getQuestion_num());
+		//파일명 셋팅
+		questionVO.setQuestion_photo(FileUtil.createFile(request, questionVO.getUpload()));
+		//ip 셋팅
+		questionVO.setQuestion_ip(request.getRemoteAddr());
+		
+		//글 수정
+		questionService.updateQuestion(questionVO);
+		
+		//전송된 파일이 있을 경우 이전 파일 삭제
+		if(questionVO.getUpload() != null && !questionVO.getUpload().isEmpty()) {
+			//수정 전 파일 삭제 처리
+			FileUtil.removeFile(request, db_question.getQuestion_photo());
+		}
+		
+		model.addAttribute("message", "글 수정 완료!");
+		model.addAttribute("url", request.getContextPath() + "/question/detail?question_num=" + questionVO.getQuestion_num());
+		
+		return "common/resultAlert";
+	}
 	
 	/*=====================
 	 * 문의글 답변 수정(관리자)
 	 *=====================*/
+	@GetMapping("/question/adminUpdate")
+	public String formAdminUpdate(@RequestParam int question_num, Model model) {
+		QuestionVO questionVO = questionService.selectQuestion(question_num);
+		model.addAttribute("questionVO", questionVO);
+	    
+		return "adminQuestionModify";
+	}
+
+	@PostMapping("/question/adminUpdate")
+	public String submitAdminUpdate(QuestionVO questionVO, HttpServletRequest request, Model model) {
+	    log.debug("<<문의글 답변 수정>> : " + questionVO);
+
+	    questionVO.setQuestion_ip(request.getRemoteAddr());
+	    questionService.updateAnswer(questionVO);
+	    
+	    model.addAttribute("message", "글 수정 완료!");
+	    // 수정된 답변이 속한 질문글의 상세 페이지로 이동
+	    model.addAttribute("url", request.getContextPath() + "/question/list");
+
+	    return "common/resultAlert";
+	}
+
+	/*=====================
+	 * 문의글 삭제
+	 *=====================*/
+	//문의글 삭제하면 답변글도 삭제
+	@RequestMapping("/question/delete")
+	public String submitDelete(@RequestParam int question_num, HttpServletRequest request, Model model) {
+		log.debug("<<문의글 삭제 question_num>> : " + question_num);
+		
+		//답변글 삭제
+		questionService.deleteQuestion(question_num);
+		//문의글 삭제
+		questionService.deleteAnswer(question_num);
+		
+		model.addAttribute("message", "삭제 완료!");
+		model.addAttribute("url", request.getContextPath() + "/question/list");
+
+		return "common/resultAlert";
+	}
 	
 	
 	/*=====================
-	 * 문의글,답변 삭제
+	 * 답변글 삭제
 	 *=====================*/
-	
-	
+	@RequestMapping("/question/adminDelete")
+	public String submitAdminDelete(@RequestParam int question_num, HttpServletRequest request, Model model) {
+		log.debug("<<답변글 삭제 question_renum>> : " + question_num);
+		
+		//답변글 삭제
+		questionService.deleteAnswer(question_num);
+		
+		model.addAttribute("message", "삭제 완료!");
+		model.addAttribute("url", request.getContextPath() + "/question/detail?question_num=" + question_num);
+
+		return "common/resultAlert";
+	}
 	
 }

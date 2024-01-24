@@ -58,8 +58,19 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
+	public void updateAnswer(QuestionVO question) {
+		questionMapper.updateAnswer(question);
+	}
+
+	@Override
 	public void deleteQuestion(int question_num) {
 		questionMapper.deleteQuestion(question_num);
+	}
+	
+
+	@Override
+	public void deleteAnswer(int question_num) {
+		questionMapper.deleteAnswer(question_num);
 	}
 
 	@Override

@@ -34,9 +34,6 @@
 		<li>첨부파일 : <a href="file?question_num=${question.question_num}">${question.question_photo}</a></li>
 		</c:if>
 	</ul>
-	<div class="detail-content" style="text-align:center;">
-		${question.question_content}
-	</div>
 	<c:if test="${fn:endsWith(question.question_photo,'.jpg') ||
 				  fn:endsWith(question.question_photo,'.JPG') ||					
 				  fn:endsWith(question.question_photo,'.jpeg') ||
@@ -49,6 +46,9 @@
 		<img src="${pageContext.request.contextPath}/upload/${question.question_photo}" class="detail-img">
 	</div>
 	</c:if>
+	<div class="detail-content" style="text-align:center;">
+		${question.question_content}
+	</div>
 	<hr size="1" width="100%">
 	<h3>1:1 문의 답변 [관리자]</h3>
 	<form:form action="adminWrite" modelAttribute="questionVO" enctype="multipart/form-data">

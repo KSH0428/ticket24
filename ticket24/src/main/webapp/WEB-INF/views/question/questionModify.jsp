@@ -50,16 +50,58 @@
 			<li>
 				<form:label path="upload">첨부파일</form:label>
 				<input type="file" name="upload" id="upload">
+				<c:if test="${!empty questionVO.question_photo}">
+				<div id="file_detail">(${questionVO.question_photo})파일이 등록되어 있습니다.
+					<input type="button" value="파일삭제" id="file_del">
+				</div>
+				<script type="text/javascript">
+					$(function(){
+						$('#file_del').click(function(){
+							let choice = confirm('삭제하시겠습니까?');
+							if(choice){
+								$.ajax({
+									url:'deleteFile',
+									data:{question_num:${questionVO.question_num}
+									type:'post',
+									dataType:'json',
+									success:function(param){
+										if(param.result == 'logout'){
+											alert('로그인 후 사용하세요');
+										}else if(param.result == 'success'){
+											$('#file_detail').hide();
+										}else{
+											alert('파일 삭제 오류 발생');
+										}
+									},
+									error:function(){
+										alert('네트워크 오류 발생');
+									}
+								});
+							}
+						});
+					});
+				</script>
+				</c:if>
 			</li>
 			<li>
 				<form:label path="question_lock">공개 여부</form:label>
 				<form:radiobutton path="question_lock" value="1" onclick="hidePasswordInput()"/>공개
 				<form:radiobutton path="question_lock" value="2" onclick="showPasswordInput()"/>비밀
 			</li>
-			<li id="questionPasswd" style="display:none;">
+			<li id="questionPasswd">
 				<form:label path="question_passwd">비밀번호</form:label>
 				<form:input path="question_passwd"/>
 				<script>
+					window.onload=function(){
+						var isPasswd = true;
+							
+						if(isPasswd){
+							showPasswordInput();
+						}else{
+							hidePasswordInput();
+						}
+					};
+					
 				    function showPasswordInput() {
 				        document.getElementById("questionPasswd").style.display = "block";
 				    }

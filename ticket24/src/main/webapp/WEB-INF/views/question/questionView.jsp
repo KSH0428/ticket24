@@ -46,7 +46,7 @@
 	</div>
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num  == question.mem_num}">
-		<input type="button" value="수정" onclick="location.href='update?question_num=${question.question_num}'">
+		<input type="button" value="수정" onclick="location.href='update?question_num=${answer.question_num}'">
 		<input type="button" value="삭제" id="delete_btn">
 		<script type="text/javascript">
 			let delete_btn = document.getElementById('delete_btn');
@@ -86,14 +86,14 @@
 	</div>
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num  == answer.mem_num}">
-		<input type="button" value="수정" onclick="location.href='update?question_num=${answer.question_num}'">
-		<input type="button" value="삭제" id="delete_btn">
+		<input type="button" value="수정" onclick="location.href='adminUpdate?question_num=${answer.question_num}'">
+		<input type="button" value="삭제" id="delete_btn_answer">
 		<script type="text/javascript">
-			let delete_btn = document.getElementById('delete_btn');
-			delete_btn.onclick=function(){
+			let delete_btn_answer = document.getElementById('delete_btn_answer');
+			delete_btn_answer.onclick=function(){
 				let choice = confirm('삭제하시겠습니까?');
 				if(choice){
-					location.href='delete?question_num=${answer.question_num}';
+					location.href='adminDelete?question_num=${answer.question_renum}';
 				}
 			};
 		</script> 

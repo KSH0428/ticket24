@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<a href="${pageContext.request.contextPath}/question/list">1:1문의</a>
+<a href="#">1:1채팅</a>
+<a href="${pageContext.request.contextPath}/faq/list">자주 찾는 질문</a>
 <div class="page-main">
 	<h2>1:1 문의</h2>
 	<form action="list" id="search_form" method="get">
@@ -44,8 +47,8 @@
 		<c:if test="${question.question_level == 1}">
 		<tr>
 			<td class="align-center">
-				<c:if test="${question.question_category == 1}">주문</c:if>
-				<c:if test="${question.question_category == 2}">상품</c:if>
+				<c:if test="${question.question_category == 1}">상품</c:if>
+				<c:if test="${question.question_category == 2}">주문</c:if>
 				<c:if test="${question.question_category == 3}">배송</c:if>
 				<c:if test="${question.question_category == 4}">기타</c:if>
 			</td>

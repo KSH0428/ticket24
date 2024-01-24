@@ -14,6 +14,8 @@ public interface QuestionService {
 	public QuestionVO selectAnswer(int question_num);
 	public void updateHit(int question_num);
 	public void updateQuestion(QuestionVO question);
+	public void updateAnswer(QuestionVO question);
 	public void deleteQuestion(int question_num);
+	public void deleteAnswer(int question_num);
 	public void deleteFile(int question_num);
 }
