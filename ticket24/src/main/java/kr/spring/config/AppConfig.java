@@ -25,9 +25,9 @@ public class AppConfig implements WebMvcConfigurer{
 		//LoginCheckInterceptor 설정
 		registry.addInterceptor(loginCheck)
 		        .addPathPatterns("/member/myPage")
-		        .addPathPatterns("/board/write")
-		        .addPathPatterns("/board/update")
-		        .addPathPatterns("/board/delete");
+		        .addPathPatterns("/comm/write")
+		        .addPathPatterns("/comm/update")
+		        .addPathPatterns("/comm/delete");
 	}
 	
 	@Bean
