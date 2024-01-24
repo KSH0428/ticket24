@@ -8,12 +8,8 @@ public interface MemberService {
 	public MemberVO selectCheckMember(String id);
 	public MemberVO selectMember(int mem_num);
 	public void updateMember(MemberVO member);
-	public void updateMember_detail(MemberVO member);
 	public void updateMember_point(MemberVO member);
-	public void deleteMember(int mem_num);
 	public void deleteMemeber_detail(MemberVO member);
-	public void deleteMemeber_point(MemberVO member);
 	//프로필 이미지 업데이트
 	public void updateProfile(MemberVO member);
-	//회원관리 - 관리자
 }

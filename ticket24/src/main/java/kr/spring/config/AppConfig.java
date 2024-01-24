@@ -25,10 +25,12 @@ public class AppConfig implements WebMvcConfigurer{
 		//LoginCheckInterceptor 설정
 		registry.addInterceptor(loginCheck)
 		        .addPathPatterns("/member/myPage")
+		        .addPathPatterns("/member/update")
+		        .addPathPatterns("/member/withdraw")
 		        .addPathPatterns("/comm/write")
 		        .addPathPatterns("/comm/update")
 		        .addPathPatterns("/comm/delete");
-	}
+	} 
 	
 	@Bean
 	public TilesConfigurer tilesConfigurer() {

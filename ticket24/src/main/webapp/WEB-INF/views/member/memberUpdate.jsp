@@ -3,8 +3,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 내용 시작 -->
 <div class="page-main">
-	<h2>회원가입</h2>
-	<form:form action="update" id="member_update" modelAttribute="memberVO">
+		<h1 class="align-center">회원 정보 수정</h1>
+		<input type="button" value="마이페이지" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/member/myPage'">
+		<form:form action="update" id="member_update" modelAttribute="memberVO">
+		<form:hidden path="mem_num"/>
 		<form:errors element="div" cssClass="error-color"/>	
 		<ul>
 			<li>
@@ -47,8 +49,8 @@
 			</li>
 		</ul>
 		<div class="align-center">
-			<form:button class="default-btn">전송</form:button>
-			<input type="button" value="홈으로" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/main/main'">
+			<form:button class="default-btn">회원 정보 수정</form:button>
+			<input type="button" value="회원 탈퇴" class="default-btn" onclick="location.href='withdraw?mem_num=${memberVO.mem_num}'">
 		</div>
 	</form:form>
 </div>

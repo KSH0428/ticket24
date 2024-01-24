@@ -45,32 +45,15 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void deleteMember(int mem_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteMemeber_detail(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteMemeber_point(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void updateProfile(MemberVO member) {
 		memberMapper.updateProfile(member);
 	}
 
 	@Override
-	public void updateMember_detail(MemberVO member) {
-		// TODO Auto-generated method stub
-		
+	public void deleteMemeber_detail(MemberVO member) {
+		memberMapper.updateMember_withdraw_auth(member);
+		memberMapper.deleteMemeber_detail(member);
+		memberMapper.deleteMemeber_point(member);
 	}
 
 }

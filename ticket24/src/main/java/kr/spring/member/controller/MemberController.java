@@ -206,7 +206,7 @@ public class MemberController {
 	@GetMapping("/member/update")
 	public String updateForm(@RequestParam int mem_num,Model model) {
 		MemberVO memberVO = memberService.selectMember(mem_num);
-		
+
 		model.addAttribute("memberVO", memberVO);
 		
 		return "memberUpdate";
@@ -218,14 +218,38 @@ public class MemberController {
 		log.debug("<<회원 정보 수정>> : " + memberVO);
 		
 		if(result.hasErrors()) {
+			MemberVO member = memberService.selectMember(memberVO.getMem_num());
+			memberVO.setMem_num(member.getMem_num());
 			return "memberUpdate";
 		}
+		
 		memberService.updateMember(memberVO);
 		
 		model.addAttribute("message", "회원 정보 수정 완료");
-		model.addAttribute("url", request.getContextPath()+"/member/myPage");
+		model.addAttribute("url", request.getContextPath()+"/member/update?mem_num="+memberVO.getMem_num());
 		
 		return "common/resultAlert";
 	}
+	/*========================
+	 * 회원 탈퇴
+	 *=======================*/
+	//회원 탈퇴 폼 호출
+	@GetMapping("/member/withdraw")
+	public String withdrawForm(@RequestParam int mem_num) {
+		log.debug("<<탈퇴 폼 mem_num>> : " + mem_num);
+		return "memberWithdraw";
+		
+	}
+	//탈퇴폼에서 전송된 회원 데이터 처리
+	@PostMapping("/member/withdraw")
+	public String submitWithdraw(@Valid MemberVO memberVO, BindingResult result, HttpServletRequest request, Model model) {
+		log.debug("<<회원 탈퇴>> : " + memberVO);
+		
+		model.addAttribute("message", "회원 탈퇴 완료");
+		model.addAttribute("url", request.getContextPath()+"/main/main");
+		
+		return "common/resultAlert";
+	}
+	
 	
 }
