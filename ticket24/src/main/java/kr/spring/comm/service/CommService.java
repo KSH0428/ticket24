@@ -3,6 +3,7 @@ package kr.spring.comm.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.comm.vo.CommFavVO;
 import kr.spring.comm.vo.CommVO;
 
 public interface CommService {
@@ -15,4 +16,9 @@ public interface CommService {
 	public void updateComm(CommVO comm);
 	public void deleteComm(int comm_num);
 	public void deleteFile(int comm_num);
+	//좋아요
+	public CommFavVO selectFav(CommFavVO fav);
+	public int selectFavCount(int comm_num);
+	public void insertFav(CommFavVO fav);
+	public void deleteFav(CommFavVO comm);
 }

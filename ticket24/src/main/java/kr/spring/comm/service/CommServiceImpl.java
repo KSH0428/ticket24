@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.comm.dao.CommMapper;
+import kr.spring.comm.vo.CommFavVO;
 import kr.spring.comm.vo.CommVO;
 
 @Service
@@ -50,7 +51,7 @@ public class CommServiceImpl implements CommService {
 	@Override
 	public void deleteComm(int comm_num) {
 		//부모글삭제
-		//commMapper.deleteFavByCommNum(comm_num);
+		commMapper.deleteFavByCommNum(comm_num);
 		//댓글이 존재하면 댓글을 우선 삭제하고 부모글 삭제
 		//commMapper.deleteReplyByCommNum(comm_num);
 		//부모글삭제
@@ -61,6 +62,27 @@ public class CommServiceImpl implements CommService {
 	@Override
 	public void deleteFile(int comm_num) {
 		commMapper.deleteFile(comm_num);
+		
+	}
+
+	@Override
+	public CommFavVO selectFav(CommFavVO fav) {
+		return commMapper.selectFav(fav);
+	}
+	@Override
+	public int selectFavCount(int comm_num) {
+		return commMapper.selectFavCount(comm_num);
+	}
+
+	@Override
+	public void insertFav(CommFavVO fav) {
+		commMapper.insertFav(fav);
+		
+	}
+
+	@Override
+	public void deleteFav(CommFavVO comm) {
+		//commMapper.deleteFav(commFav);
 		
 	}
 	
