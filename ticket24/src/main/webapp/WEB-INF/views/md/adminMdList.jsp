@@ -26,7 +26,7 @@ type="text/javascript"></script>
       </button>
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/md/regMd">MD 등록</a></li>
-        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/md/adminMdList">관리자용 MD 목록</a></li> <!-- 테이블 형식으로 구현, 여기서 MD 수정/삭제 가능 -->
+        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/md/mdList">MD 목록</a></li> 
       </ul>
     </div>
   </div>
@@ -34,7 +34,7 @@ type="text/javascript"></script>
 <!-- 관리자용 사이드바 끝 -->
 
 <div class="page-main">
-	<h2>md 목록</h2>
+	<h2>관리자용 md 목록</h2>
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -65,21 +65,6 @@ type="text/javascript"></script>
 	<div class="result-display">표시할 상품이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	
-	<div class="col">
-	<div class="card">
-	  <!--  <img src="..." class="card-img-top" alt="..."> -->
-	  	<div class="card-body" style="margin-bottom:2rem;">
-	    <tr>
-			<td class="align-center">${md.md_num}</td>
-			<td class="align-center">${md.md_name}</td>
-			<!--  <td class="align-center">${md.md_quantity}</td> -->
-			<td class="align-center">${md.md_price}</td>
-		</tr>	
-	  </div>
-	</div>
-	</div>
-	
 	<table class="striped-table">
 		<tr>
 			<th>상품번호</th>
@@ -87,16 +72,21 @@ type="text/javascript"></script>
 			<th>상품명</th>
 			<th>가격</th>
 		</tr>
-		
-		<c:forEach var="md" items="${list}">
+		<!-- 
+		<c:forEach var="row" items="${list}">
 		<tr>
 			<td class="align-center">${md.md_num}</td>
-			<td class="align-center">${md.md_photo1}</td>
-			<td class="align-center">${md.md_name}</td>
-			<td class="align-center">${md.md_price}</td>
+			<td><a href="detail?board_num=${md.md_num}">${md.name}(${board.re_cnt})</a></td>
+			<td class="align-center">
+				<c:if test="${empty board.nick_name}">${board.id}</c:if>
+				<c:if test="${!empty board.nick_name}">${board.nick_name}</c:if>
+			</td>
+			<td class="align-center">${board.reg_date}</td>
+			<td class="align-center">${board.hit}</td>
+			<td class="align-center">${board.fav_cnt}</td>
 		</tr>	
 		</c:forEach>
-		 
+		 -->
 	</table>
 	<div class="align-center">${page}</div>
 	</c:if>

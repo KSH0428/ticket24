@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.md.service.AdminMdService;
 import kr.spring.md.service.MdService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MdAjaxController {
 	@Autowired
-	private MdService boardService;
+	private AdminMdService adminMdService;
 	
 	
 	}

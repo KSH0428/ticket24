@@ -12,14 +12,14 @@ import kr.spring.md.vo.MdVO;
 
 @Mapper
 public interface MdMapper {
-	@Select("SELECT md_seq.nextval FROM dual")
-	public int selectMd_num();
-	//public List<MdVO> selectList(Map<String,Object> map);
-	//public int selectRowCount(Map<String,Object> map);
+	
+	//상품리스트
+	public List<MdVO> selectList(Map<String,Object> map);
+	public int selectRowCount(Map<String,Object> map);
+	//상품등록
 	public void insertMd(MdVO md);
 	public MdVO selectMd(int md_num);
-	//@Update("UPDATE md SET hit=hit+1 WHERE md_num=#{md_num}")
-	public void updateHit(int md_num);
+	//상품 수정
 	public void updateMd(MdVO md);
 	//@Delete("DELETE FROM md WHERE md_num=#{md_num}")
 	public void deleteMd(int md_num);

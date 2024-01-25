@@ -24,4 +24,75 @@
 	) 
 </insert>
 
+<!-- 유저에게 보이는 MD리스트 -->
+<!-- sql 태그와 include 태그를 이용해 SQL문 재사용 -->
+	<sql id="mdSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					md_num LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					md_name '%' || #{keyword} || '%' 
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- MD목록의 총개수/검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM md 
+		<include refid="mdSearch"></include>
+	</select>	
+<select id="selectList" parameterType="map" resultType="MdVO">
+	SELECT
+		   *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM (SELECT
+		               md_num,
+		                md_name,
+						md_price,
+						md_quantity,
+						md_photo1
+					FROM md
+					<include refid="mdSearch"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>  
+
+</select>
+
+
+<!-- 상품 상세 -->
+	<!--  <select id="selectMd" parameterType="integer">
+		SELECT 
+		  * 
+		FROM md
+		JOIN member USING(mem_num)
+		LEFT OUTER JOIN member_detail USING(mem_num)
+		WHERE md_num=#{md_num} 
+	</select>
+	-->
+	
+	<!-- 상품 수정 -->
+	<update id="updateMd" parameterType="MdVO">
+		UPDATE md SET
+		 <!--  <if test="filename != null">
+		  filename=#{filename},
+		  </if>
+		  title=#{title},
+		  content=#{content},
+		  ip=#{ip},
+		  modify_date=SYSDATE
+		WHERE board_num=#{board_num}
+		--> 
+	</update>
+	
+
+
+
 </mapper>

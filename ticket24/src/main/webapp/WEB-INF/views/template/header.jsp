@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!-- 상단 시작 -->
 <div class="align-right">
 	<a href="${pageContext.request.contextPath}/reserv/list">공연장대관</a>
@@ -31,6 +32,7 @@
 	</c:if>
 	<a href="${pageContext.request.contextPath}/question/list">고객센터</a>
 </div>
+</nav>
 <div class="align-center">
 	<a href="${pageContext.request.contextPath}/concert/list">콘서트</a>
 	<a href="${pageContext.request.contextPath}/musical/list">뮤지컬</a>
