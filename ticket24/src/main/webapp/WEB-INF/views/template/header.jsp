@@ -57,7 +57,6 @@
 			<li class="nav-item"><a href="${pageContext.request.contextPath}/md/list" class="nav-link">MD샵</a></li>
 			<li class="nav-item"><a href="${pageContext.request.contextPath}/ranking/list" class="nav-link">랭킹</a></li>
 			<li class="nav-item"><a href="${pageContext.request.contextPath}/comm/list" class="nav-link">커뮤니티</a></li>
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/comm/list" class="nav-link">커뮤니티</a></li>
 			<li class="nav-item"><a href="${pageContext.request.contextPath}/ticket/list" class="nav-link">티켓양도</a></li>
 			<li class="nav-item"><a href="${pageContext.request.contextPath}/event/list" class="nav-link">이벤트</a></li>
 <!-- 검색창	<li><input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></li>
