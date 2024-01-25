@@ -142,7 +142,7 @@ public class CommController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("downloadView");
 		mav.addObject("downloadFile", downloadFile);
-		mav.addObject("comm_filename", comm.getComm_filename());
+		mav.addObject("filename", comm.getComm_filename());
 		
 		return mav;
 	}
@@ -161,7 +161,7 @@ public class CommController {
 	//수정 폼에서 전송된 데이터 처리
 	@PostMapping("/comm/update")
 	public String submitUpdate(@Valid CommVO commVO,BindingResult result,
-			                   HttpServletRequest request, Model model) throws IllegalStateException, IOException{
+			                   HttpServletRequest request, Model model) throws IllegalStateException, IOException {
 		log.debug("<<글 수정>> : " + commVO);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
@@ -190,7 +190,7 @@ public class CommController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "글 수정 완료!!");
-		model.addAttribute("url", request.getContextPath()+"/comm/detail?comm_num"+commVO.getComm_num());
+		model.addAttribute("url", request.getContextPath()+"/comm/detail?comm_num="+commVO.getComm_num());
 			
 		return "common/resultAlert";
 	}

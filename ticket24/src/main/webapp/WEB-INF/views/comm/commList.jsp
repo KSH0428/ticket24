@@ -15,7 +15,7 @@
 			</select>
 		</li>
 		<li>
-			<input type="search" name="keyword"id="keyword" value="${param.keyword}">
+			<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 		</li>
 		<li>
 			<input type="submit" value="찾기">
@@ -52,8 +52,8 @@
 				<td class="align-center">${comm.comm_num}</td>
 				<td><a href="detail?comm_num=${comm.comm_num}">${comm.comm_title}(${comm.re_cnt})</a></td>
 				<td class="align-center">
-					<c:if test="${empty comm.mem_nick_name}">${comm.mem_id}</c:if>
-					<c:if test="${!empty comm.mem_nick_name}">${comm.mem_nickname}</c:if>
+					<c:if test="${empty comm.mem_nickname}">${comm.mem_id}</c:if>
+					<c:if test="${!empty comm.mem_nickname}">${comm.mem_nickname}</c:if>
 				</td>
 				<td class="align-center">${comm.comm_regdate}</td>
 				<td class="align-center">${comm.comm_hit}</td>

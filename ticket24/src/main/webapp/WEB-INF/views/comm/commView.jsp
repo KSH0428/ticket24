@@ -15,11 +15,11 @@
 				<c:if test="${empty comm.mem_nickname}">${comm.mem_id}</c:if>
 				<c:if test="${!empty comm.mem_nickname}">${comm.mem_nickname}</c:if>
 				<br>
-				<c:if test="${empty comm.comm_modifydate}">
+				<c:if test="${!empty comm.comm_modifydate}">
 				최근 수정일 : ${comm.comm_modifydate}
 				</c:if>
 				<c:if test="${empty comm.comm_modifydate}">
-				등록일 : ${comm.comm_regdate}
+				작성일 : ${comm.comm_regdate}
 				</c:if>
 				조회 : ${comm.comm_hit}
 			</li>
@@ -47,6 +47,24 @@
 		</div>
 		<%-- 좋아요 --%>
 		<%-- 댓글수 --%>
+		<hr size="1" width="100%">
+	<div class="align-right">
+		<c:if test="${!empty user && user.mem_num == comm.mem_num}">
+		<input type="button" value="수정" 
+		  onclick="location.href='update?comm_num=${comm.comm_num}'">
+		<input type="button" value="삭제" id="delete_btn">
+		<script type="text/javascript">
+			let delete_btn = document.getElementById('delete_btn');
+			delete_btn.onclick=function(){
+				let choice = confirm('삭제하시겠습니까?');
+				if(choice){
+					location.href='delete?comm_num=${comm.comm_num}';
+				}
+			};
+		</script>  
+		</c:if>
+		<input type="button" value="목록" onclick="location.href='list'">
+	</div>
 		<!-- 댓글 시작 -->
 		<!-- 댓글 목록 출력 시작 -->
 		<!-- 댓글 목록 출력 끝 -->

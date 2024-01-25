@@ -17,7 +17,8 @@ public class CommServiceImpl implements CommService {
 	private CommMapper commMapper;
 	@Override
 	public List<CommVO> selectList(Map<String, Object> map) {
-		return commMapper.selectList(map);	}
+		return commMapper.selectList(map);	
+	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
