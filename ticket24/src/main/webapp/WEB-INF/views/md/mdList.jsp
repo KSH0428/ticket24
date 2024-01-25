@@ -7,34 +7,16 @@
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 type="text/javascript"></script>  
 <!-- 내용 시작 -->
-<!-- 관리자용 사이드바 시작 -->
-<a class="btn btn-primary" data-bs-toggle="offcanvas" 
-		href="#offcanvasExample" role="button" 
-		aria-controls="offcanvasExample"> 관리자 사이드바</a>
-
-<div class="offcanvas offcanvas-start" tabindex="-1" 
-		id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-    	관리자용</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div class="dropdown mt-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-        MD 관리
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/md/regMd">MD 등록</a></li>
-        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/md/adminMdList">관리자용 MD 목록</a></li> <!-- 테이블 형식으로 구현, 여기서 MD 수정/삭제 가능 -->
-      </ul>
-    </div>
-  </div>
-</div>
-<!-- 관리자용 사이드바 끝 -->
-
 <div class="page-main">
-	<h2>md 목록</h2>
+	<br><br>
+	<h2 class="align-center fw-bolder">MD Shop</h2>
+	<div class="align-right">
+	  <input type="button" value="MD 등록" class="btn btn-outline-secondary"
+	  			onclick="location.href='${pageContext.request.contextPath}/md/regMd'">
+	  <input type="button" value="MD 구매내역 확인" 
+	  			class="btn btn-outline-secondary" onclick="location.href='#'">
+	</div> 
+	<br><hr><br><br>
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -48,16 +30,14 @@ type="text/javascript"></script>
 				                                  value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" onclick="location.href='list'">
+				<input type="submit" value="검색">
 			</li>
 		</ul>
 		<div class="align-right">
 			<select id="order" name="order">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
-				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>등록순</option>
-				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>높은가격순</option>
-				<option value="4" <c:if test="${param.order == 4}">selected</c:if>>낮은가격순</option>
+				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>높은가격순</option>
+				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>낮은가격순</option>
 			</select>
 		</div>
 	</form>
@@ -66,39 +46,38 @@ type="text/javascript"></script>
 	</c:if>
 	<c:if test="${count > 0}">
 	
-	<div class="col">
-	<div class="card">
-	  <!--  <img src="..." class="card-img-top" alt="..."> -->
-	  	<div class="card-body" style="margin-bottom:2rem;">
-	    <tr>
-			<td class="align-center">${md.md_num}</td>
-			<td class="align-center">${md.md_name}</td>
-			<!--  <td class="align-center">${md.md_quantity}</td> -->
-			<td class="align-center">${md.md_price}</td>
-		</tr>	
+	<br><br><br>
+	
+	<div class="container overflow-hidden">
+	<div class="row gy-5 justify-content-md-center">
+	<c:forEach var="md" items="${list}">
+	<div class="card col-6" style="width: 18rem;">
+	<div class="p-3">
+	<br>	
+	  <img src="${pageContext.request.contextPath}/image_upload/img6.jpg" class="card-img-top" alt="...">
+	  <div class="card-body">
+	  	<br>
+	    <p class="card-text fs-6">${md.md_name}</p>
+	    <span>
+	    <span class="card-text text-danger fs-5">${md.md_price}</span>
+	    <span>원</span>
+	    </span>
+	  </div>
+	  <div class="card-body d-grid d-md-flex justify-content-md-end">
+	    <input type="button" value="MD수정" class="btn btn-outline-primary btn-sm me-md-2" 
+	    		onclick="location.href=location.href='update?md_num=${md.md_num}'">
+		<input type="button" value="MD삭제" class="btn btn-outline-primary btn-sm" 
+				onclick="location.href='delete?md_num=${md.md_num}'">
+	  </div>
 	  </div>
 	</div>
+	</c:forEach>
+	</div>	
 	</div>
 	
-	<table class="striped-table">
-		<tr>
-			<th>상품번호</th>
-			<th>상품이미지</th>
-			<th>상품명</th>
-			<th>가격</th>
-		</tr>
-		
-		<c:forEach var="md" items="${list}">
-		<tr>
-			<td class="align-center">${md.md_num}</td>
-			<td class="align-center">${md.md_photo1}</td>
-			<td class="align-center">${md.md_name}</td>
-			<td class="align-center">${md.md_price}</td>
-		</tr>	
-		</c:forEach>
-		 
-	</table>
+	<br><br><br>
 	<div class="align-center">${page}</div>
+	<br><br><br>
 	</c:if>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>

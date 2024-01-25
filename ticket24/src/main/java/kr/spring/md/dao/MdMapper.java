@@ -16,13 +16,17 @@ public interface MdMapper {
 	//상품리스트
 	public List<MdVO> selectList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
-	//상품등록
+	//상품 등록
 	public void insertMd(MdVO md);
+	//상품 상세
 	public MdVO selectMd(int md_num);
 	//상품 수정
 	public void updateMd(MdVO md);
-	//@Delete("DELETE FROM md WHERE md_num=#{md_num}")
+	//상품 삭제
+	@Delete("DELETE FROM md WHERE md_num=#{md_num}")
 	public void deleteMd(int md_num);
+	//상품 이미지 수정
+	//@Update("UPDATE md SET photo1='',photo2='' WHERE md_num=#{md_num}")
 	public void deleteFile(int md_num);
 
 }

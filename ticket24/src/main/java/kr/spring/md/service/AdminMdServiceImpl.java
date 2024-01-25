@@ -34,7 +34,7 @@ public class AdminMdServiceImpl implements AdminMdService{
 
 	@Override
 	public void updateMd(MdVO md) {
-		// TODO Auto-generated method stub
+		mdMapper.updateMd(md);
 		
 	}
 
@@ -46,13 +46,13 @@ public class AdminMdServiceImpl implements AdminMdService{
 
 	@Override
 	public void deleteFile(int md_num) {
-		// TODO Auto-generated method stub
+		mdMapper.deleteMd(md_num);
 		
 	}
 
 	@Override
 	public void insertMd(MdVO md) {
-		// TODO Auto-generated method stub
+		mdMapper.insertMd(md);
 		
 	}
 

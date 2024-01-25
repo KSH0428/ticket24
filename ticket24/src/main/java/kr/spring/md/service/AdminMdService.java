@@ -3,6 +3,7 @@ package kr.spring.md.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 
 import kr.spring.md.vo.MdVO;
 
