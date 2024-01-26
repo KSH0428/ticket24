@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.comm.dao.CommMapper;
 import kr.spring.comm.vo.CommFavVO;
+import kr.spring.comm.vo.CommReplyVO;
 import kr.spring.comm.vo.CommVO;
 
 @Service
@@ -53,7 +54,7 @@ public class CommServiceImpl implements CommService {
 		//부모글삭제
 		commMapper.deleteFavByCommNum(comm_num);
 		//댓글이 존재하면 댓글을 우선 삭제하고 부모글 삭제
-		//commMapper.deleteReplyByCommNum(comm_num);
+		commMapper.deleteReplyByComm_num(comm_num);
 		//부모글삭제
 		commMapper.deleteComm(comm_num);
 		
@@ -81,9 +82,41 @@ public class CommServiceImpl implements CommService {
 	}
 
 	@Override
-	public void deleteFav(CommFavVO comm) {
-		//commMapper.deleteFav(commFav);
+	public void deleteFav(CommFavVO commFav) {
+		commMapper.deleteFav(commFav);
 		
 	}
-	
+
+	@Override
+	public List<CommReplyVO> selectListReply(Map<String, Object> map) {
+		return commMapper.selectListReply(map);
+	}
+
+	@Override
+	public int selectRowCountReply(Map<String, Object> map) {
+		return commMapper.selectRowCountReply(map);
+	}
+
+	@Override
+	public CommReplyVO selectReply(int comm_renum) {
+		return commMapper.selectReply(comm_renum);
+	}
+
+	@Override
+	public void insertReply(CommReplyVO commReply) {
+		commMapper.insertReply(commReply);
+		
+	}
+
+	@Override
+	public void updateReply(CommReplyVO commReply) {
+		commMapper.updateReply(commReply);
+		
+	}
+
+	@Override
+	public void deleteReply(int comm_renum) {
+		commMapper.deleteReply(comm_renum);
+		
+	}	
 }

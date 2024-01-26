@@ -30,7 +30,7 @@ create table comm_reply(
  comm_num number not null,
  comm_recontent varchar2(900) not null,
  comm_redate date default sysdate not null,
- comm_remodifydate date not null,
+ comm_remodifydate date,
  comm_reip varchar2(40) not null,
  constraint comm_reply_pk primary key(comm_renum),
  constraint comm_reply_fk1 foreign key(mem_num) references member(mem_num),

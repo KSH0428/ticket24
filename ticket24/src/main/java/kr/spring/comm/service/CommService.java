@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.comm.vo.CommFavVO;
+import kr.spring.comm.vo.CommReplyVO;
 import kr.spring.comm.vo.CommVO;
 
 public interface CommService {
@@ -21,4 +22,11 @@ public interface CommService {
 	public int selectFavCount(int comm_num);
 	public void insertFav(CommFavVO fav);
 	public void deleteFav(CommFavVO comm);
+	//댓글
+	public List<CommReplyVO> selectListReply(Map<String,Object> map);
+	public int selectRowCountReply(Map<String,Object> map);
+	public CommReplyVO selectReply(int comm_renum);
+	public void insertReply(CommReplyVO commReply);
+	public void updateReply(CommReplyVO commReply);
+	public void deleteReply(int comm_renum);
 }

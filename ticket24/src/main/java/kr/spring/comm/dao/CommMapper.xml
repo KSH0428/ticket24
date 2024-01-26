@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.comm.dao.CommMapper">
 	<!-- 게시판 글 등록 -->
-	<insert id="insertComm" parameterType="CommVO">
+	<insert id="insertComm" parameterType="commVO">
 		INSERT INTO comm(
 			comm_num,
 			comm_title,
@@ -116,4 +116,46 @@
 			comm_modifydate=SYSDATE
 		WHERE comm_num=#{comm_num}
 	</update>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertReply" parameterType="commReplyVO">
+		INSERT INTO comm_reply(
+			comm_renum,
+			comm_recontent,
+			comm_reip,
+			comm_num,
+			mem_num)
+		VALUES(
+			comm_reply_seq.nextval,
+			#{comm_recontent},
+			#{comm_reip},
+			#{comm_num},
+			#{mem_num})
+	</insert>
+	<!-- 댓글 목록 -->
+	<select id="selectListReply" parameterType="map" resultType="commReplyVO">
+		SELECT
+		  *
+		 FROM (SELECT
+		 		a.*,
+		 		 rownum rnum
+		 		FROM (SELECT
+		 			  comm_renum,
+		 			  <![CDATA[
+		 			  REPLACE(REPLACE(comm_recontent, '<', '&lt;'), '>', '&gt;') comm_recontent,
+		 			  ]]>
+		 			  comm_redate,
+		 			  comm_remodifydate,
+		 			  comm_num,
+		 			  mem_num,
+		 			  mem_id,
+		 			  mem_nickname
+		 			  FROM comm_reply
+		 			  JOIN member USING(mem_num)
+		 			  WHERE comm_num=#{comm_num}
+		 			  ORDER BY comm_renum DESC)a)
+	<![CDATA[
+	WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>
+	</select>
 	</mapper>
