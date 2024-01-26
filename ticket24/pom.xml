@@ -145,6 +145,12 @@
 		    <version>5.3.0</version>
 		</dependency>
 		<!-- 개인 라이브러리 추가 끝-->
+		
+		<!-- 셀레니움 -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+		</dependency>
 		<!--라이브러리 추가 끝-->
 	</dependencies>
 	
