@@ -43,6 +43,7 @@
     
     <definition name="faqWrite" extends="main">
     	<put-attribute name="title" value="자주찾는질문 등록"/>
+    	<put-attribute name="css" value="/WEB-INF/views/faq/faqCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/faq/faqWrite.jsp"/>
     </definition>
     
@@ -53,6 +54,7 @@
     
     <definition name="faqModify" extends="main">
     	<put-attribute name="title" value="자주찾는질문 수정"/>
+    	<put-attribute name="css" value="/WEB-INF/views/faq/faqCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/faq/faqModify.jsp"/>
     </definition>
     

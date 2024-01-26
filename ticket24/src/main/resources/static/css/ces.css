@@ -1,0 +1,62 @@
+/*questionList*/
+.list{
+	width: 80%;
+	margin: 0 auto;
+	padding: 0;
+	list-style-type: none;
+	line-height:2rem;
+	text-align:center;
+}
+.question-list .nav-item {
+	display: inline-block;
+	text-align: center;
+	border: 1px solid #ccc;
+}
+
+.question-list .nav-link {
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+	color: #333;
+}
+.question-main {
+    width:80% !important;
+    margin:0 auto;
+}
+.question-form{
+	width:800px;
+	margin:0 auto;
+	margin-top:50px;
+	border:none;
+	padding:10px 10px 30px 10px;
+}
+.custom-textarea{
+	height:150px;
+}
+.table th{
+	text-align:center;
+}
+
+.table td {
+	text-align: center;
+}
+.faq-content span {
+    display: block;
+    width: 11px;
+    height: 15px;
+    background: url(//cdnticket.melon.co.kr/resource/image/web/common/bg_btn_barB.png) 0 0 no-repeat;
+}
+.category li{
+	display:inline-block;
+}
+.category li > a:before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 15px;
+    background: #ddd;
+    margin-right:15px;
+}
+.category li a{
+	padding:5px;
+}

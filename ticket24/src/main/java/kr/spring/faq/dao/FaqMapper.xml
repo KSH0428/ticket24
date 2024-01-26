@@ -20,6 +20,9 @@
 			<if test="keyword != null and keyword != ''">
 				faq_title LIKE '%' || #{keyword} || '%'
 			</if>
+			<if test="faq_category != null and faq_category != 0">
+				AND faq_category = #{faq_category}
+			</if>
 		</where>
 	</sql>
 	

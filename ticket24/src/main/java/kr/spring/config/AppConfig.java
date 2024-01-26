@@ -31,7 +31,16 @@ public class AppConfig implements WebMvcConfigurer{
 		        .addPathPatterns("/member/passwdUpdate")
 		        .addPathPatterns("/comm/write")
 		        .addPathPatterns("/comm/update")
-		        .addPathPatterns("/comm/delete");
+		        .addPathPatterns("/comm/delete")
+				.addPathPatterns("/question/write")
+				.addPathPatterns("/question/update")
+				.addPathPatterns("/question/delete")
+				.addPathPatterns("/question/adminWrite")
+				.addPathPatterns("/question/adminUpdate")
+				.addPathPatterns("/question/adminDelete")
+				.addPathPatterns("/faq/write")
+				.addPathPatterns("/faq/update")
+				.addPathPatterns("/faq/delete");
 	} 
 	
 	@Bean

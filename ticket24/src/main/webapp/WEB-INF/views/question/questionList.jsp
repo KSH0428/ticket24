@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<a href="${pageContext.request.contextPath}/question/list">1:1문의</a>
-<a href="#">1:1채팅</a>
-<a href="${pageContext.request.contextPath}/faq/list">자주 찾는 질문</a>
-<div class="page-main">
-	<h2>1:1 문의</h2>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ces.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="question-main">
+<h2>고객센터</h2>
+<!-- 상단 시작 -->
+<ul class="nav list">
+    <li class="nav-item border" style="width: 33.33%;"><a href="/faq/list" class="nav-link link-body-emphasis px-2">자주 찾는 질문</a></li>
+    <li class="nav-item border" style="width: 33.33%;"><a href="/question/list" class="nav-link link-body-emphasis px-2">1:1문의</a></li>
+    <li class="nav-item border" style="width: 33.33%;"><a href="#" class="nav-link link-body-emphasis px-2">1:1채팅</a></li>
+</ul>
+<!-- 상단 끝 -->
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -35,7 +42,7 @@
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table class="striped-table">
+	<table class="table">
 		<tr>
 			<th>카테고리</th>
 			<th width="400">제목</th>

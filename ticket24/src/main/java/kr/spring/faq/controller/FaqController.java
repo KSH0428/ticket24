@@ -47,7 +47,7 @@ public class FaqController {
 	
 	//전송된 데이터 처리
 	@PostMapping("/faq/write")
-	public String submit(FaqVO faqVO, BindingResult result,
+	public String submit(@Valid FaqVO faqVO, BindingResult result,
 						 HttpServletRequest request, HttpSession session, Model model) {
 		log.debug("<<질문 등록>> : " + faqVO);
 		
@@ -69,9 +69,11 @@ public class FaqController {
 	 * 질문 리스트
 	 *=====================*/
 	@RequestMapping("/faq/list")
-	public ModelAndView process(String keyword, HttpSession session) {
+	public ModelAndView process(String keyword, HttpSession session, 
+								@RequestParam (defaultValue = "0") int faq_category) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyword", keyword);
+		map.put("faq_category", faq_category);
 		
 		List<FaqVO> list = faqService.selectFaqList(map);
 		
@@ -104,7 +106,7 @@ public class FaqController {
 							   HttpServletRequest request, Model model) {
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return "questionModify";
+			return "faqModify";
 		}
 		
 		//글 수정
