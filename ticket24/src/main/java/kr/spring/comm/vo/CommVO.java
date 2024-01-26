@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
@@ -19,7 +20,8 @@ public class CommVO {
 	private String comm_title;
 	@NotBlank
 	private String comm_content;
-	private String comm_category;
+	@Range(min=1, max=5) //1:자유게시판,2:뮤지컬,3:연극,4:콘서트,5:클래식
+	private int comm_category;
 	private int comm_hit;
 	private Date comm_regdate;
 	private Date comm_modifydate;
