@@ -8,7 +8,7 @@ create table comm(
  comm_regdate date default sysdate not null,
  comm_modifydate date,
  comm_filename varchar2(200),
- comm_category varchar2(50),
+ comm_category number(1) not null,
  comm_ip varchar2(40),
  constraint comm_pk primary key(comm_num),
  constraint comm_fk foreign key(mem_num) references member(mem_num)
