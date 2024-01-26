@@ -9,6 +9,7 @@ public interface MemberService {
 	public MemberVO selectMember(int mem_num);
 	public void updateMember(MemberVO member);
 	public void updateMember_point(MemberVO member);
+	public void Member_newPasswd(MemberVO member);
 	public void deleteMemeber_detail(MemberVO member);
 	//프로필 이미지 업데이트
 	public void updateProfile(MemberVO member);

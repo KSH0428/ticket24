@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,6 +52,10 @@ public class MemberController {
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
+			for(FieldError error : result.getFieldErrors()) {
+				log.debug("<<에러 필드>> : " + error.getField());
+			}
+			
 			return form();
 		}
 		
@@ -222,13 +227,51 @@ public class MemberController {
 			memberVO.setMem_num(member.getMem_num());
 			return "memberUpdate";
 		}
-		
+
 		memberService.updateMember(memberVO);
 		
 		model.addAttribute("message", "회원 정보 수정 완료");
 		model.addAttribute("url", request.getContextPath()+"/member/update?mem_num="+memberVO.getMem_num());
 		
 		return "common/resultAlert";
+	}
+	/*========================
+	 * 회원 비밀번호 변경
+	 *=======================*/
+	//회원 정보 수정 폼 호출
+	@GetMapping("/member/passwdUpdate")
+	public String passwdUpdateForm(@RequestParam int mem_num, Model model) {
+		log.debug("<<비밀번호 변경 폼 mem_num>> : " + mem_num);
+		return "memberPasswdUpdate";
+	}
+	
+	@PostMapping("/member/passwdUpdate")
+	public String passwdUpdate(MemberVO member, @RequestParam String mem_passwd, @RequestParam String mem_newpasswd, @RequestParam String mem_confirmpasswd, HttpSession session, HttpServletRequest request, Model model){
+		
+		//입력한 현재 비밀번호 일치 체크
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO db_member = memberService.selectMember(user.getMem_num());
+
+		if(!mem_passwd.equals(db_member.getMem_passwd())) {//현재 비밀번호와 입력한 비밀번호 불일치
+			return "memberPasswdUpdate";
+		}
+		
+		//변경할 비밀번호와 변경할 비밀번호 일치 체크
+		if(!mem_newpasswd.equals(mem_confirmpasswd)) {//변경할 비밀번호와 변경할 비밀번호 불일치
+			return "memberPasswdUpdate";
+		}
+		
+		//비밀번호 변경
+		memberService.Member_newPasswd(member);
+		
+		//비밀번호 변경 완료 메시지 보여준 후 로그아웃 처리
+		session.invalidate();
+		
+		model.addAttribute("accessTitle", "회원탈퇴");
+		model.addAttribute("accessMsg", "회원탈퇴가 완료되었습니다.");
+		model.addAttribute("accessUrl", request.getContextPath()+"/main/main");
+		
+		return "common/resultView";
 	}
 	/*========================
 	 * 회원 탈퇴
@@ -238,18 +281,29 @@ public class MemberController {
 	public String withdrawForm(@RequestParam int mem_num) {
 		log.debug("<<탈퇴 폼 mem_num>> : " + mem_num);
 		return "memberWithdraw";
-		
 	}
 	//탈퇴폼에서 전송된 회원 데이터 처리
 	@PostMapping("/member/withdraw")
-	public String submitWithdraw(@Valid MemberVO memberVO, BindingResult result, HttpServletRequest request, Model model) {
-		log.debug("<<회원 탈퇴>> : " + memberVO);
+	public String submitWithdraw(@RequestParam String mem_ckpasswd, HttpSession session, HttpServletRequest request, Model model) {
 		
-		model.addAttribute("message", "회원 탈퇴 완료");
-		model.addAttribute("url", request.getContextPath()+"/main/main");
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		String mem_passwd = member.getMem_passwd();
 		
-		return "common/resultAlert";
+		log.debug("<<회원 탈퇴 기존 비밀번호>> : " + mem_passwd);
+		log.debug("<<회원 탈퇴 입력한 비밀번호>> : " + mem_ckpasswd);
+		
+		if(!mem_passwd.equals(mem_ckpasswd)) {
+			return "memberWithdraw";
+		}
+		
+		memberService.deleteMemeber_detail(member);
+		
+		session.invalidate();
+		
+		model.addAttribute("accessTitle", "회원탈퇴");
+		model.addAttribute("accessMsg", "회원탈퇴가 완료되었습니다.");
+		model.addAttribute("accessUrl", request.getContextPath()+"/main/main");
+		
+		return "common/resultView";
 	}
-	
-	
 }

@@ -28,6 +28,12 @@ public class MemberVO {
 	private String mem_name;
 	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")
 	private String mem_passwd;
+	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")
+	private String mem_ckpasswd; //비밀번호 일치 확인
+	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")
+	private String mem_newpasswd; //변경할 비밀번호
+	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")
+	private String mem_confirmpasswd; //변경할 비밀번호 확인
 	@NotBlank
 	private String mem_phone;
 	@Email

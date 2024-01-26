@@ -25,12 +25,17 @@
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
     </definition>
 
-	<definition name="memberUpdate" extends="myPage">
+	<definition name="memberUpdate" extends="main">
 		<put-attribute name="title" value="회원정보수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberUpdate.jsp"/>
 	</definition>
 	
-	<definition name="memberWithdraw" extends="myPage">
+	<definition name="memberPasswdUpdate" extends="main">
+		<put-attribute name="title" value="회원 비밀번호 변경"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberUpdatePasswd.jsp"/>
+	</definition>
+	
+	<definition name="memberWithdraw" extends="main">
 		<put-attribute name="title" value="회원탈퇴"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberWithdraw.jsp"/>
 	</definition>

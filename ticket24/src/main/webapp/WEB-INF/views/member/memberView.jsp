@@ -32,7 +32,7 @@
 	</ul>
 	<div class="mypage-button">
 		<input type="button" value="회원 정보 수정" onclick="location.href='update?mem_num=${member.mem_num}'">
-		<input type="button" value="비밀번호 변경" onclick="location.href='update'">
+		<input type="button" value="비밀번호 변경" onclick="location.href='passwdUpdate?mem_num=${member.mem_num}'">
 	</div>
 </div>
 <!-- 내용 끝 -->

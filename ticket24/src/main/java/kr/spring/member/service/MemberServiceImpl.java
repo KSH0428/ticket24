@@ -41,7 +41,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void updateMember_point(MemberVO member) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -54,6 +53,12 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.updateMember_withdraw_auth(member);
 		memberMapper.deleteMemeber_detail(member);
 		memberMapper.deleteMemeber_point(member);
+	}
+
+	@Override
+	public void Member_newPasswd(MemberVO member) {
+		memberMapper.Member_newPasswd(member);
+
 	}
 
 }
