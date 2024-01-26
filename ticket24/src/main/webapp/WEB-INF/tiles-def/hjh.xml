@@ -20,6 +20,11 @@
     	<put-attribute name="body"
     	               value="/WEB-INF/views/md/regMd.jsp"/>                                           
     </definition>
+    <definition name="mdView" extends="main">
+    	<put-attribute name="title" value="MD상세"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/md/mdView.jsp"/>                                           
+    </definition>
     
 </tiles-definitions>
 

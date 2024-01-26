@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import kr.spring.md.vo.MdVO;
 
@@ -19,6 +18,7 @@ public interface MdMapper {
 	//상품 등록
 	public void insertMd(MdVO md);
 	//상품 상세
+	@Select("SELECT * FROM md WHERE md_num=#{md_num}")
 	public MdVO selectMd(int md_num);
 	//상품 수정
 	public void updateMd(MdVO md);

@@ -4,28 +4,25 @@
 <!-- 상품 등록 -->
 <insert id="insertMd" parameterType="mdVO"> 
 	INSERT INTO md(
-		md_num, 
+	<!-- md_num 시퀀스로 처리 -->
 		md_name,
 		md_price,
 		md_quantity,
 		md_photo1,
 		md_photo2,
 		md_detail,
-		md_status
-	) VALUES ( 
-		#{md_num}, 
+	) VALUES (  
+	<!-- md_num 시퀀스로 처리 -->
 		#{md_name}, 
 		#{md_price}, 
 		#{md_quantity}, 
 		#{md_photo1}, 
 		#{md_photo2}, 
-		#{md_detail}, 
-		#{md_status}
+		#{md_detail}
 	) 
 </insert>
 
 <!-- 유저에게 보이는 MD리스트 -->
-<!-- sql 태그와 include 태그를 이용해 SQL문 재사용 -->
 	<sql id="mdSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
@@ -33,7 +30,7 @@
 					md_num LIKE '%' || #{keyword} || '%'
 				</if>
 				<if test="keyfield == 2">
-					md_name '%' || #{keyword} || '%' 
+					md_name LIKE '%' || #{keyword} || '%' 
 				</if>
 			</if>
 		</where>
@@ -57,10 +54,12 @@
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT
 		  COUNT(*)
-		FROM md <!--  JOIN member USING(mem_num)-->
+		FROM md 
 		<include refid="mdSearch"></include>
 	</select>	
-<select id="selectList" parameterType="map" resultType="MdVO">
+
+<!-- MD리스트 전체 목록/검색 목록 -->	
+<select id="selectList" parameterType="map" resultType="mdVO">
 	SELECT
 		   *
 		FROM (SELECT
@@ -76,7 +75,7 @@
 						md_photo1
 					FROM md
 					<include refid="mdSearch"></include>
-					<include refid="mdSearch"></include>)a)
+					<include refid="mdOrder"></include>)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>  
@@ -85,7 +84,7 @@
 
 
 <!-- 상품 상세 -->
-	<select id="selectMd" parameterType="integer">
+	<select id="mdView" parameterType="integer">
 		SELECT 
 		  * 
 		FROM md
@@ -94,7 +93,7 @@
 	
 	
 	<!-- 상품 수정 -->
-	<update id="updateMd" parameterType="MdVO">
+	<update id="updateMd" parameterType="mdVO">
 		UPDATE md SET
 		  md_name=#{md_name},
 		  md_price=#{md_price},
@@ -102,10 +101,8 @@
 		  md_photo1=#{md_photo1},
 		  md_photo2=#{md_photo2},
 		  md_detail=#{md_detail},
-		  md_status=#{md_status},
 		  md_mdate=SYSDATE
-		WHERE md_num=#{md_num}
-		
+		WHERE md_num=#{md_num}	
 	</update>
 	
 

@@ -40,13 +40,13 @@ public class AdminMdServiceImpl implements AdminMdService{
 
 	@Override
 	public void deleteMd(int md_num) {
-		// TODO Auto-generated method stub
+		mdMapper.deleteMd(md_num);
 		
 	}
 
 	@Override
 	public void deleteFile(int md_num) {
-		mdMapper.deleteMd(md_num);
+		
 		
 	}
 

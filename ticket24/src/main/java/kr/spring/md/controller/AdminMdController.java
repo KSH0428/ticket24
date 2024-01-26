@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import ch.qos.logback.core.util.FileUtil;
 import kr.spring.md.service.AdminMdService;
 import kr.spring.md.service.MdService;
 import kr.spring.md.vo.MdVO;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class AdminMdController {
 
-	 @Autowired
+	@Autowired
 	private AdminMdService adminMdService;
 
 	/*==============================
@@ -54,19 +56,8 @@ public class AdminMdController {
 			
 			//전송된 상품 데이터 처리
 			@PostMapping("/md/regMd")
-			public String submit(@Valid MdVO mdVO, BindingResult result, Model model,
+			public String submit(MdVO mdVO, BindingResult result, Model model,
 					                                           HttpServletRequest request) {
-				log.debug("<<상품등록>> : " + mdVO);
-				
-				//유효성 체크 결과 오류가 있으면 폼 호출
-				if(result.hasErrors()) {
-					return form();
-				}
-				
-				
-				//파일 업로드
-				//mdVO.setMd_photo1(FileUtil.createFile(request, mdVO.getUpload()));
-				
 				//상품등록
 				adminMdService.insertMd(mdVO);
 				
@@ -74,7 +65,7 @@ public class AdminMdController {
 				model.addAttribute("accessMsg", "상품 등록이 완료되었습니다.");
 				model.addAttribute("accessUrl", request.getContextPath()+"/main/main");
 				
-				return "common/resultView";		
+				return "common/resultView";
 			}
 			
 			/*=================================
@@ -122,10 +113,9 @@ public class AdminMdController {
 				log.debug("<<Md 상세 md_num>> : " + md_num);
 				
 				MdVO md = adminMdService.selectMd(md_num);
-				//제목에 태그를 허용하지 않음
-				md.setMd_name(StringUtil.useNoHtml(md.getMd_name()));
+
 				                        //타일스 설정명,속성명,속성값
-				return new ModelAndView("mdView","md",md);
+				return new ModelAndView("/md/mdView","md",md);
 			}
 			
 			/*=================================
@@ -142,53 +132,26 @@ public class AdminMdController {
 			}
 			//수정 폼에서 전송된 데이터 처리
 			@PostMapping("/md/update")
-			public String submitUpdate( MdVO mdVO,
+			public String submitUpdate(@Valid MdVO mdVO,
 					                   BindingResult result,
 					                   HttpServletRequest request,
 					                   Model model) throws IllegalStateException, IOException {
 				log.debug("<<MD정보수정>> : " + mdVO);
-				
-				//유효성 체크 결과 오류가 있으면 폼 호출
-				/*
+					              
 				if(result.hasErrors()) {
-					//title 또는 content가 입력되지 않아 유효성 체크에 걸리면
-					//파일 정보를 잃어버리기 때문에 폼을 호출할 때 다시 셋팅해주어야 함
-					MdVO vo = adminMdService.selectMd(mdVO.getMd_num());
-					mdVO.setMd_photo1(vo.getMd_photo1());
-					mdVO.setMd_photo2(vo.getMd_photo2());
-					return "mdModify";
+					MdVO md= adminMdService.selectMd(mdVO.getMd_num());
+					md.setMd_num(md.getMd_num());
+					return "/md/mdModify";
 				}
-				*/
 				
-				//DB에 저장된 파일 정보 구하기
-				//MdVO db_md = adminMdService.selectMd(
-				//		                         mdVO.getMd_num());
 				
-				//파일명 셋팅
-				//MdVO.setmd_photo1(FileUtil.createFile(
-				//		                 request, mdVO.getUpload()));
-						                 
-				
-				//정보 수정
+				//MD 수정
 				adminMdService.updateMd(mdVO);
-				
-				//전송된 파일이 있을 경우 이전 파일 삭제
-				/*
-				if(mdVO.getUpload() != null && !mdVO.getUpload().isEmpty()) {
-					//수정전 파일 삭제 처리
-					FileUtil.removeFile(request, db_md.getFilename());
-				}
-				*/
 				
 				//View에 표시할 메시지
 				model.addAttribute("message", "정보 수정 완료!!");
-				model.addAttribute("url", 
-				           request.getContextPath()+"/md/list?md_num="+mdVO.getMd_num());
-				/*
-				model.addAttribute("url", 
-				           request.getContextPath()+"/md/list?md_num="
-				                                        +mdVO.getMd_num());
-				*/ 
+				model.addAttribute("url", request.getContextPath()+"/md/update?md_num="+mdVO.getMd_num());
+				
 				
 				return "common/resultAlert";
 			}

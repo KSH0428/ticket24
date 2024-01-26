@@ -3,9 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
-<script
-src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-type="text/javascript"></script>  
 <!-- 내용 시작 -->
 <div class="page-main">
 	<br><br>
@@ -31,6 +28,8 @@ type="text/javascript"></script>
 			</li>
 			<li>
 				<input type="submit" value="검색">
+				<input type="submit" value="'전체보기'버튼누르면리스트전체목록으로넘어가게구현하기" 
+							onclick="location.href='${pageContext.request.contextPath}/md/list'">
 			</li>
 		</ul>
 		<div class="align-right">
@@ -51,9 +50,9 @@ type="text/javascript"></script>
 	<div class="container overflow-hidden">
 	<div class="row gy-5 justify-content-md-center">
 	<c:forEach var="md" items="${list}">
-	<div class="card col-6" style="width: 18rem;">
+	<div class="card" style="width: 18rem;">
 	<div class="p-3">
-	<br>	
+	<p class="card-text fs-6">no.${md.md_num}</p>	
 	  <img src="${pageContext.request.contextPath}/image_upload/img6.jpg" class="card-img-top" alt="...">
 	  <div class="card-body">
 	  	<br>
@@ -62,6 +61,11 @@ type="text/javascript"></script>
 	    <span class="card-text text-danger fs-5">${md.md_price}</span>
 	    <span>원</span>
 	    </span>
+	    <br><br>
+	    <div class="d-grid">
+	    <input type="button" value="상세보기" class="btn btn-dark btn-sm me-md-2" 
+	    		onclick="location.href=location.href='detail?md_num=${md.md_num}'">
+	    </div>
 	  </div>
 	  <div class="card-body d-grid d-md-flex justify-content-md-end">
 	    <input type="button" value="MD수정" class="btn btn-outline-primary btn-sm me-md-2" 
