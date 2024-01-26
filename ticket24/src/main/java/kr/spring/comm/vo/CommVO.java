@@ -20,7 +20,7 @@ public class CommVO {
 	private String comm_title;
 	@NotBlank
 	private String comm_content;
-	@Range(min=1, max=5) //1:자유게시판,2:뮤지컬,3:연극,4:콘서트,5:클래식
+	@Range(min=1,max=5) //1:자유게시판,2:뮤지컬,3:연극,4:콘서트,5:클래식
 	private int comm_category;
 	private int comm_hit;
 	private Date comm_regdate;
