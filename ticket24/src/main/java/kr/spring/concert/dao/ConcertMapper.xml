@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.concert.dao.ConcertMapper">
+	<!-- 콘서트 목록 데이터-->
+	<insert id="insertConcert" parameterType="concertVO">
+		INSERT INTO concert (
+			concert_num,
+			concert_title,
+			period,
+			concert_hall,
+			monopoly,
+			img_poster
+			)
+		VALUES (
+			concert_seq.nextval,
+			#{concert_title},
+			#{period},
+			#{concert_hall},
+			#{monopoly},
+			#{img_poster}
+			)
+	</insert>
+	<!-- 콘서트 상세 페이지 -->
+	<insert id="insertConcertDetail" parameterType="concertDetailVO">
+		INSERT INTO concert_detail (
+			concert_num,
+			grade,
+			viewing_time,
+			casting,
+			c_round_1,
+			c_round_2,
+			image_1,
+			image_2,
+			image_3,
+			image_4,
+			image_5,
+			image_6,
+			image_7
+			)
+		VALUES (
+			#{concert_num},
+			#{grade},
+			#{viewing_time},
+			#{casting},
+			#{c_round_1},
+			#{c_round_2},			
+			#{image_1},	
+			#{image_2},	
+			#{image_3},	
+			#{image_4},	
+			#{image_5},	
+			#{image_6},	
+			#{image_7}
+			)
+	</insert>
+</mapper>
+<!-- #{img_poster} -->
+
+
+
+
+
