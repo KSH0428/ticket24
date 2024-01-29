@@ -9,6 +9,7 @@
 			comm_content,
 			comm_filename,
 			comm_ip,
+			comm_category,
 			mem_num)
 		VALUES (
 			comm_seq.nextval,
@@ -16,6 +17,7 @@
 			#{comm_content},
 			#{comm_filename,jdbcType=VARCHAR},
 			#{comm_ip},
+			#{comm_category},
 			#{mem_num})
 	</insert>
 	
@@ -37,6 +39,9 @@
 					comm_title LIKE '%' || #{keyword} || '%' OR
 					comm_content LIKE '%' || #{keyword} || '%'
 				</if>
+			</if>
+			<if test="comm_category != null and comm_category != ''">
+				comm_category = #{comm_category}
 			</if>
 		</where>
 	</sql>
@@ -78,6 +83,7 @@
 				 		]]>
 				 		comm_hit,
 				 		comm_regdate,
+				 		comm_category,
 				 		mem_num,
 				 		mem_id,
 				 		mem_nickname,

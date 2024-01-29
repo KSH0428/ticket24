@@ -83,16 +83,18 @@ public class CommController {
 	@RequestMapping("/comm/list")
 	public ModelAndView proces(@RequestParam(value="pageNum",defaultValue="1")int currentPage,
 			                   @RequestParam(value="order",defaultValue="1") int order,
+			                   @RequestParam(value="comm_category",defaultValue="") Integer comm_category,
 			                   String keyfield, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("comm_category", comm_category);
 		
 		//전체/검색 레코드 수
 		int count = commService.selectRowCount(map);
 		log.debug("<<count>> : " + count);
 		
-		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order+"&comm_category="+comm_category);
 		
 		List<CommVO> list = null;
 		if(count > 0) {

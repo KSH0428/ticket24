@@ -11,6 +11,16 @@
 	<form:form action="write" modelAttribute="commVO" id="register_form" enctype="multipart/form-data">
 	<form:errors element="div" cssClass="error-color"/>
 	<ul>
+	 <li>
+            <form:label path="comm_category">카테고리</form:label>
+            <select name="comm_category" id="comm_category">
+                <option value="1">자유게시판</option>
+                <option value="2">뮤지컬</option>
+                <option value="3">공연</option>
+                <option value="4">콘서트</option>
+                <option value="5">클래식</option>
+            </select>
+        </li>
 		<li>
 			<form:label path="comm_title">제목</form:label>
 			<form:input path="comm_title"/>
