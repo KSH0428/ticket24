@@ -1,5 +1,8 @@
 package kr.spring.concert.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +18,20 @@ public class ConsertServiceImpl implements ConcertService{
 	private ConcertMapper concertMapper;
 	
 	@Override
+	public List<ConcertVO> selectList(Map<String, Object> map) {
+		return concertMapper.selectList(map);
+	}
+
+	@Override
+	public int selectRowCount(Map<String, Object> map) {
+		return concertMapper.selectRowCount(map);
+	}
+	
+	//-------------------------------
+	// 웹 크롤링
+	//-------------------------------
+	
+	@Override
 	public void insertConcert(ConcertVO concert) {
 		concertMapper.insertConcert(concert);
 		
@@ -24,5 +41,8 @@ public class ConsertServiceImpl implements ConcertService{
 	public void insertConcertDetail(ConcertDetailVO concertdetail) {
 		concertMapper.insertConcertDetail(concertdetail);
 	}
+
+
+
 
 }

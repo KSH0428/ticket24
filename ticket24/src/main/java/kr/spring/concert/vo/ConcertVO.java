@@ -7,7 +7,7 @@ public class ConcertVO {
 	private String concert_hall;
 	private String monopoly;
 	private String img_poster;
-	private String getImg_poster;
+	
 	public int getConcert_num() {
 		return concert_num;
 	}
@@ -43,12 +43,6 @@ public class ConcertVO {
 	}
 	public void setImg_poster(String img_poster) {
 		this.img_poster = img_poster;
-	}
-	public String getGetImg_poster() {
-		return getImg_poster;
-	}
-	public void setGetImg_poster(String getImg_poster) {
-		this.getImg_poster = getImg_poster;
 	}
 	
 	
