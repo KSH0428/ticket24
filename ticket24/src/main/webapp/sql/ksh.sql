@@ -41,7 +41,7 @@ create sequence comm_reply_seq;
 --티켓 양도 게시판
 create table ticket(
  ticket_num number not null,
- ticket_category varchar2(50) not null,
+ ticket_category number(1) not null,
  ticket_name varchar2(150) not null,
  ticket_date varchar2(10) not null,
  ticket_quantity number(3) not null,

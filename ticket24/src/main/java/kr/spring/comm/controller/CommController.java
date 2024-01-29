@@ -83,7 +83,7 @@ public class CommController {
 	@RequestMapping("/comm/list")
 	public ModelAndView proces(@RequestParam(value="pageNum",defaultValue="1")int currentPage,
 			                   @RequestParam(value="order",defaultValue="1") int order,
-			                   @RequestParam(value="comm_category",defaultValue="") Integer comm_category,
+			                   @RequestParam(value="comm_category",defaultValue="") String comm_category,
 			                   String keyfield, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
