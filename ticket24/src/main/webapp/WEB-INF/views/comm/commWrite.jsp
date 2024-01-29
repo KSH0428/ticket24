@@ -13,13 +13,13 @@
 	<ul>
 	 <li>
             <form:label path="comm_category">카테고리</form:label>
-            <select name="comm_category" id="comm_category">
-                <option value="1">자유게시판</option>
-                <option value="2">뮤지컬</option>
-                <option value="3">공연</option>
-                <option value="4">콘서트</option>
-                <option value="5">클래식</option>
-            </select>
+            <form:select path="comm_category">
+                <form:option value="1">자유게시판</form:option>
+                <form:option value="2">뮤지컬</form:option>
+                <form:option value="3">공연</form:option>
+                <form:option value="4">콘서트</form:option>
+                <form:option value="5">클래식</form:option>
+            </form:select>
         </li>
 		<li>
 			<form:label path="comm_title">제목</form:label>
