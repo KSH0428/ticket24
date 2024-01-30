@@ -41,6 +41,7 @@ public class AppConfig implements WebMvcConfigurer{
 				.addPathPatterns("/faq/write")
 				.addPathPatterns("/faq/update")
 				.addPathPatterns("/faq/delete");
+				
 	} 
 	
 	@Bean

@@ -4,21 +4,23 @@
 <!-- 상품 등록 -->
 <insert id="insertMd" parameterType="mdVO"> 
 	INSERT INTO md(
-	<!-- md_num 시퀀스로 처리 -->
+		md_num,
 		md_name,
 		md_price,
 		md_quantity,
 		md_photo1,
 		md_photo2,
 		md_detail,
+		md_status
 	) VALUES (  
-	<!-- md_num 시퀀스로 처리 -->
+	 	md_seq.nextval,
 		#{md_name}, 
 		#{md_price}, 
 		#{md_quantity}, 
 		#{md_photo1}, 
 		#{md_photo2}, 
-		#{md_detail}
+		#{md_detail},
+		#{md_status}
 	) 
 </insert>
 
@@ -102,7 +104,8 @@
 		  md_photo2=#{md_photo2},
 		  md_detail=#{md_detail},
 		  md_mdate=SYSDATE
-		WHERE md_num=#{md_num}	
+		WHERE md_num=#{md_num}
+		
 	</update>
 	
 
