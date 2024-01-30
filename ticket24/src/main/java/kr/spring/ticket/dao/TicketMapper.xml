@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.ticket.dao.TicketMapper">
+	<!-- 티켓양도 상품 등록 -->
+	<insert id="insertTicket" parameterType="ticketVO">
+		INSERT INTO ticket(
+			ticket_num,
+			ticket_category,
+			ticket_name,
+			ticket_date,
+			ticket_quantity,
+			ticket_price,
+			ticket_place,
+			ticket_seat,
+			ticket_special1,
+			ticket_special2,
+			ticket_content,
+			ticket_filename1,
+			ticket_filename2,
+			ticket_filename3,
+			ticket_filename4,
+			ticket_status)
+		VALUES (
+			ticket_seq.nextval,
+			#{ticket_category},
+			#{ticket_name},
+			#{ticket_date},
+			#{ticket_quantity},
+			#{ticket_price},
+			#{ticket_place},
+			#{ticket_seat},
+			#{ticket_special1},
+			#{ticket_special2},
+			#{ticket_content},
+			#{ticket_filename1,jdbcType=VARCHAR},
+			#{ticket_filename2,jdbcType=VARCHAR},
+			#{ticket_filename3,jdbcType=VARCHAR},
+			#{ticket_filename4,jdbcType=VARCHAR},
+			#{ticket_status})
+	</insert>
+	
+	<!-- 검색 -->
+		<sql id="ticketSearch">
+			<where>
+				<if test="keyword != null and keyword != ''">
+					<if test="keyfield == 1"> 
+						ticket_name LIKE '%' || #{keyword} || '%'
+					</if>
+					<if test="keyfield == 2">
+						ticket_content LIKE '%' || #{keyword} || '%'
+					</if>
+					<if test="keyfield == 3">
+						ticket_name LIKE '%' || #{keyword} || '%' OR
+						ticket_content LIKE '%' || #{keyword} || '%'
+					</if>
+				</if>
+				<if test="ticket_category != null and ticket_category != ''">
+					ticket_category = #{ticket_category}
+				</if>
+			</where>
+		</sql>
+		
+		<!-- 티켓양도 목록의 총개수/검색 개수 -->
+		<select id="selectRowCount" parameterType="map" resultType="integer">
+			SELECT 
+			  COUNT(*)
+			  FROM ticket
+			  <include refid="ticketSearch"></include>
+		</select>
+		
+		<!-- 티켓양도글 전체 목록/검색 목록 -->
+		<select id="selectList" parameterType="map" resultType="ticketVO">
+			SELECT
+			  *
+			FROM (SELECT
+					a.*
+					rownum rnum
+					FROM(SELECT
+							ticket_num,
+							ticket_category,
+							<![CDATA[
+				 			REPLACE(REPLACE(ticket_name, '<', '&lt;'),'>','&gt;') ticket_name, 
+				 			]]>
+				 			ticket_place,
+				 			ticket_date,
+				 			ticket_seat,
+				 			ticket_status,
+				 			ticket_quantity,
+				 			ticket_price
+				 		FROM ticket
+				 		<include refid="ticketSearch"></include>))
+				 		<![CDATA[
+			   			WHERE rnum >= #{start} AND rnum <= #{end}
+			   			]]>
+		</select>
+		
+		<!-- 티켓 양도글 상세 -->
+		<select id="selectTicket" parameterType="integer">
+			SELECT
+			  *
+			FROM ticket
+			WHERE ticket_num=#{ticket_num}
+		</select>
+		
+		<!-- 티켓 양도글 수정 -->
+		<update id="updateTicket" parameterType="TicketVO">
+			UPDATE ticket SET
+			<if test="ticket_filename1 != null">
+			ticket_filename1=#{ticket_filename1}
+			</if>
+			<if test="ticket_filename2 != null">
+			ticket_filename2=#{ticket_filename2}
+			</if>
+			<if test="ticket_filename3 != null">
+			ticket_filename3=#{ticket_filename1}
+			</if>
+			<if test="ticket_filename4 != null">
+			ticket_filename1=#{ticket_filename4}
+			</if>
+			ticket_name=#{ticket_name},
+			ticket_date=#{ticket_date},
+			ticket_quantity=#{ticket_quantity},
+			ticket_price=#{ticket_price},
+			ticket_place=#{ticket_place},
+			ticket_seat=#{ticket_seat},
+			ticket_special1=#{ticket_special1},
+			ticket_special2=#{ticket_special2},
+			ticket_content=#{ticket_content},
+			ticket_status=#{ticket_status}		
+		</update>
+</mapper>

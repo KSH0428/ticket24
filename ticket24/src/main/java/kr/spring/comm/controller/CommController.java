@@ -56,7 +56,7 @@ public class CommController {
 						 HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<게시판 글 저장>> : " + commVO);	
 		
-		//유효성 채크 결과 오류가 있으면 폼 호출
+		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
 		}
@@ -81,7 +81,7 @@ public class CommController {
 	 * 게시판 글 목록
 	 *======================================*/
 	@RequestMapping("/comm/list")
-	public ModelAndView proces(@RequestParam(value="pageNum",defaultValue="1")int currentPage,
+	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1")int currentPage,
 			                   @RequestParam(value="order",defaultValue="1") int order,
 			                   @RequestParam(value="comm_category",defaultValue="") String comm_category,
 			                   String keyfield, String keyword) {

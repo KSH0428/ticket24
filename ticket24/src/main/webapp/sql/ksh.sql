@@ -57,7 +57,7 @@ create table ticket(
  ticket_filename2 varchar2(200),
  ticket_filename3 varchar2(200),
  ticket_filename4 varchar2(200),
- ticket_status number(20) not null,
+ ticket_status number(1) not null,
  constraint ticket_pk primary key(ticket_num)
 );
 create sequence ticket_seq;

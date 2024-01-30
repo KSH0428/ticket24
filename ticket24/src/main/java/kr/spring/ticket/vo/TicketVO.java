@@ -5,6 +5,7 @@ import java.sql.Date;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,8 @@ public class TicketVO {
 	@NotBlank
 	private int ticket_price;
 	@NotBlank
+	private String ticket_place;
+	@NotBlank
 	private String ticket_seat;
 	private String ticket_special1;
 	private String ticket_special2;
@@ -33,6 +36,7 @@ public class TicketVO {
 	private Date ticket_modifydate;
 	@NotBlank
 	private String ticket_content;
+	private MultipartFile Upload;
 	private String ticket_filename1;
 	private String ticket_filename2;
 	private String ticket_filename3;
