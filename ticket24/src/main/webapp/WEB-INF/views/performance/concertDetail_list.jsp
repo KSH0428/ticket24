@@ -9,42 +9,86 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ysw.css">
 </head>
 <body>
-<ul>	
-	<li><img src="${concert.img_poster}"></li>
-	<li>${concert.concert_title}</li>
-	<li>${concert.period}</li>
-	<li>${concert.concert_hall}</li>
-	<li>${concert.monopoly}</li>	
-	<li>${concert.grade}</li>
-	<li>${concert.viewing_time}</li>
-	<li>${concert.casting}</li>
-	<li>${concert.c_round_1}</li>
-	<c:if test="${concert.c_round_2!='null'}">
-	<li>${concert.c_round_2}</li>
-	</c:if>
-	<c:if test="${concert.image_1!='null'}">
-	<li><img src="${concert.image_1}"></li>
-	</c:if>
-	<c:if test="${concert.image_2!='null'}">
-	<li><img src="${concert.image_2}"></li>
-	</c:if>
-	<c:if test="${concert.image_3!='null'}">
-	<li><img src="${concert.image_3}"></li>
-	</c:if>
-	<c:if test="${concert.image_4!='null'}">
-	<li><img src="${concert.image_4}"></li>
-	</c:if>
-	<c:if test="${concert.image_5!='null'}">
-	<li><img src="${concert.image_5}"></li>
-	</c:if>
-	<c:if test="${concert.image_6!='null'}">
-	<li><img src="${concert.image_6}"></li>
-	</c:if>
-	<c:if test="${concert.image_7!='null'}">
-	<li><img src="${concert.image_7}"></li>
-	</c:if>
-	
-	
-</ul>
+<div class="common-container">
+	<div class="detail-container">
+		<div class="img-container">
+			<img width= 100%; height=100% src="${concert.img_poster}">
+		</div>
+		<div class="info-container">
+			<c:if test="${concert.monopoly eq '단독'}">
+			<div style="margin-bottom: 17px;">
+				<span class="concert-monopoly">${concert.monopoly}</span>
+			</div>
+			</c:if>
+			<div class="concert-title">
+				<h1 class="concert-title-content">${concert.concert_title}</h1>
+			</div>
+			<div class="concert-info">
+				<ul class="concert-info-l1" style="list-style: none">
+					<li class="info">
+						<span>장소</span>
+						<div>${concert.concert_hall}</div>
+					</li>
+					<li class="info">
+						<span>관람시간</span>
+						<div>${concert.viewing_time}</div>
+					</li>
+					<li class="info">
+						<span>공연기간</span>
+						<div>${concert.period}</div>
+					</li>
+					<li class="info">
+						<span>관람등급</span>
+						<div>${concert.grade}</div>
+					</li>
+					<li class="info2">
+						<span>출연진</span>
+						<div>${concert.casting}</div>
+					</li>
+					<li class="info2">
+						<span>공연 회차</span>
+						<div>${concert.c_round_1}</div>
+			
+					</li>
+					<c:if test="${concert.c_round_2!='null'}">
+					<li class="info2">
+						<span></span>
+						<div>${concert.c_round_2}</div>
+					</li>
+					</c:if>
+				</ul>
+			</div>
+			<div class="concert-price-info">
+				<div>가격 미정</div>
+			</div>
+		</div>
+	</div>
+	<!-- 공연 상세 이미지 -->
+	<div class="concert-detail-img">
+		<c:if test="${concert.image_1!='null'}">
+		<div><img src="${concert.image_1}"></div>
+		</c:if>
+		<c:if test="${concert.image_2!='null'}">
+		<div><img src="${concert.image_2}"></div>
+		</c:if>
+		<c:if test="${concert.image_3!='null'}">
+		<div><img src="${concert.image_3}"></div>
+		</c:if>
+		<c:if test="${concert.image_4!='null'}">
+		<div><img src="${concert.image_4}"></div>
+		</c:if>
+		<c:if test="${concert.image_5!='null'}">
+		<div><img src="${concert.image_5}"></div>
+		</c:if>
+		<c:if test="${concert.image_6!='null'}">
+		<div><img src="${concert.image_6}"></div>
+		</c:if>
+		<c:if test="${concert.image_7!='null'}">
+		<div><img src="${concert.image_7}"></div>
+		</c:if>
+	</div>
+</div>
+
+
 </body>
 </html>
