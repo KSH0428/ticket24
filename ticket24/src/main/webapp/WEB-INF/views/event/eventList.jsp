@@ -25,7 +25,7 @@
 	<c:if test="${count > 0}">
 	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 	<c:forEach var="event" items="${list}">
-	  <a href="detail?event_num=${event_num}">
+	  <a href="detail?event_num=${event.event_num}">
         <div class="col">
           <div class="card shadow-sm">
             <img src="${pageContext.request.contextPath}/upload/${event.event_photo1}" class="bd-placeholder-img card-img-top" width="100%" height="125"></svg>

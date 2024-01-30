@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.event.service.EventService;
 import kr.spring.event.vo.EventVO;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.question.vo.QuestionVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
@@ -107,18 +108,20 @@ public class EventController {
 	 * 이벤트 상세
 	 *=====================*/
 	@RequestMapping("/event/detail")
-	public ModelAndView process(@RequestParam int event_num) {
+	public ModelAndView process(@RequestParam int event_num, HttpSession session) {
 		log.debug("<<이벤트 상세>> : " + event_num);
 		
 		//해당 글의 조회수 증가
 		eventService.updateHit(event_num);
 		
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		//이벤트 조회
 		EventVO event = eventService.selectEvent(event_num);
 		event.setEvent_title(StringUtil.useNoHtml(event.getEvent_title()));
 		
 		ModelAndView mav = new ModelAndView("eventView");
 		mav.addObject("event", event);
+		mav.addObject("user", user);
 		
 		return mav;
 	}

@@ -62,7 +62,7 @@
 }
 
 .event-main {
-    width:60% !important;
+    width:50% !important;
     margin:0 auto;
 }
 
@@ -70,6 +70,7 @@
     position: relative;
     border: 1px solid #eee;
     padding: 21px 29px 25px;
+    margin-top:50px;
 }
 .tit_event {
     overflow: hidden;
@@ -85,4 +86,20 @@
     font-size: 14px;
     color: #666;
     font-family: AppleSDGothicNeo-Regular, "돋움",Dotum;
+}
+.photo2{
+	margin-top:30px;
+	text-align:center;
+}
+.event_content{
+	margin-top:30px;
+	margin-left:30px;
+}
+.buttons{
+	text-align:right;
+	margin-top:30px;
+}
+.event_list{
+	margin-top:30px;
+	text-align:center;
 }
