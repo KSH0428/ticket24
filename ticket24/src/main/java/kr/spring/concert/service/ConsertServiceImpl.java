@@ -27,8 +27,13 @@ public class ConsertServiceImpl implements ConcertService{
 		return concertMapper.selectRowCount(map);
 	}
 	
+	@Override
+	public ConcertDetailVO selectConcert(int concert_num) {
+		return concertMapper.selectConcert(concert_num);
+	}
+	
 	//-------------------------------
-	// 웹 크롤링
+	// 웹 크롤링 시작
 	//-------------------------------
 	
 	@Override
@@ -41,6 +46,10 @@ public class ConsertServiceImpl implements ConcertService{
 	public void insertConcertDetail(ConcertDetailVO concertdetail) {
 		concertMapper.insertConcertDetail(concertdetail);
 	}
+
+	//-------------------------------
+	// 웹 크롤링 끝
+	//-------------------------------
 
 
 

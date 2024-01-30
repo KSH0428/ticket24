@@ -36,11 +36,6 @@ public class ConcertController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-
-		System.out.print("keyfield : ");
-		System.out.println(keyfield);
-		System.out.print("keyword : ");
-		System.out.println(keyword);
 		
 		//전체/검색 레코드 수
 		int count = concertService.selectRowCount(map);
@@ -69,8 +64,24 @@ public class ConcertController {
 		 
 		return mav;
 	}
+	
+	//게시판 상세 글
+	@RequestMapping("/concert/detail")
+	public ModelAndView process(@RequestParam int concert_num) {
+		log.debug("<<콘서트 게시물 상세 concert_num>> : " + concert_num);
+		
+		//조회수 처리?
+		
+		ConcertDetailVO concert = concertService.selectConcert(concert_num);
+		
+		System.out.println(concert);
+		
+		//제목에 노 태그 처리?
+		
+		return new ModelAndView("concertView","concert",concert);
+	}
 
-
+	//---------------------------------------------------------------------------------------------------
 	//웹 크롤링 호출
 	@RequestMapping("/concert.do")
 	public String upload() throws InterruptedException {

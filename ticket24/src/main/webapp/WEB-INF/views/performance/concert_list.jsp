@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>콘서트 메인</title>
+<title>콘서트 목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ysw.css">
 
 <!-- css 파일 무시 -->
@@ -77,7 +77,7 @@
 	</c:if>
 	<c:if test="${count > 0}">
 		<c:forEach var="concert" items="${list}">
-			<a style="cusor: pointer;" href="#">
+			<a style="cusor: pointer;" href="detail?concert_num=${concert.concert_num}">
 				<div class="list-product-img">
 					<img src="${concert.img_poster}">
 					<div class="list-product-txt">

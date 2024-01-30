@@ -5,7 +5,9 @@
 		<where>
 			<if test="keyword != null and keyword != ''">
 				<if test="keyfield == 1">
-					concert_title LIKE '%' || #{keyword} || '%'
+					<!-- concert_title LIKE '%' || #{keyword} || '%' -->
+					<!-- 정규 표현식으로 표현. 3번째 인수 i는 대소문자 포함 -->
+					REGEXP_LIKE (concert_title, '|' || #{keyword} || '|', 'i')
 				</if>
 				<if test="keyfield == 2">
 					<!-- casting LIKE '%' || #{keyword} || '%' -->
@@ -43,6 +45,15 @@
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]> 		
+	</select>
+	
+	<!-- 콘서트 상세 -->
+	<select id="selectConcert" parameterType="integer">
+		SELECT
+			*
+		FROM concert JOIN concert_detail
+		USING(concert_num)
+		WHERE concert_num=#{concert_num}
 	</select>
 
 
