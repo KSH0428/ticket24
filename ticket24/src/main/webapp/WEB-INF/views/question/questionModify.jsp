@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ces.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
-<div class="page-main">
+<div class="question-main">
 	<h2>1:1 문의 수정</h2>
-	<form:form action="update" modelAttribute="questionVO" id="update_form" enctype="multipart/form-data">
+	<form:form action="update" modelAttribute="questionVO" id="update_form" enctype="multipart/form-data" class="question-form">
 		<form:hidden path="question_num"/>
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
@@ -61,7 +62,7 @@
 							if(choice){
 								$.ajax({
 									url:'deleteFile',
-									data:{question_num:${questionVO.question_num}
+									data:{question_num:${questionVO.question_num}},
 									type:'post',
 									dataType:'json',
 									success:function(param){

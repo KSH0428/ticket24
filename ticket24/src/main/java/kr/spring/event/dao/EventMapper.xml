@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.event.dao.EventMapper">
+	<insert id="insertEvent" parameterType="eventVO">
+		INSERT INTO event(
+			event_num,
+			event_title,
+			event_start,
+			event_end,
+			event_content,
+			event_point,
+			event_photo1,
+			event_photo2)
+		VALUES(
+			event_seq.nextval,
+			#{event_title},
+			#{event_start},
+			#{event_end},
+			#{event_content},
+			#{event_point},
+			#{event_photo1},
+			#{event_photo2})
+	</insert>
+	
+	<sql id="eventSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				event_title LIKE '%' || #{keyword} || '%' OR
+				event_content LIKE '%' || #{keyword} || '%'
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM event
+		<include refid="eventSearch"></include>
+	</select>
+	
+	<select id="selectList" parameterType="map" resultType="eventVO">
+		SELECT * FROM
+		(SELECT a.*, rownum rnum FROM
+		(SELECT event_num,
+				<![CDATA[
+				REPLACE(REPLACE(event_title,'<','&lt;'),'>','&gt;') event_title,
+				]]>
+				event_start,
+				event_end,
+				event_hit,
+				event_regdate,
+				event_point,
+				event_photo1
+			FROM event <include refid="eventSearch"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<update id="updateEvent">
+		UPDATE event SET
+			event_title=#{event_title},
+			event_start=#{event_start},
+			event_end=#{event_end},
+			event_content=#{event_content},
+			<if test="event_photo1 != null">
+			event_photo1=#{event_photo1},
+			</if>
+			<if test="event_photo2 != null">
+			event_photo2=#{event_photo2},
+			</if>
+			event_point=#{event_point}
+		WHERE event_num=#{event_num}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

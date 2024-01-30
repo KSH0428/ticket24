@@ -30,6 +30,5 @@ public interface QuestionMapper {
 	public void deleteAnswer(int question_num);
 	@Update("UPDATE question SET question_photo='' WHERE question_num=#{question_num}")
 	public void deleteFile(int question_num);
-	
 	//회원 글 삭제시 답변글도 같이 삭제 되나?
 }

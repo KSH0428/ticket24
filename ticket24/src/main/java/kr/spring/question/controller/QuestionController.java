@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.spring.member.vo.MemberVO;
 import kr.spring.question.dao.QuestionMapper;
@@ -52,7 +53,7 @@ public class QuestionController {
 	
 	//전송된 데이터 처리
 	@PostMapping("/question/write")
-	public String submit(QuestionVO questionVO, BindingResult result,
+	public String submit(@Valid QuestionVO questionVO, BindingResult result,
 						 HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<1:1 문의글 저장>> : " + questionVO);
 		
@@ -136,10 +137,12 @@ public class QuestionController {
 	@RequestMapping("/question/list")
 	public ModelAndView process(
 						@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+						@RequestParam(defaultValue="0") int question_category,
 						String keyfield, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("question_category", question_category);
 		
 		//전체/검색 레코드수
 		int count = questionService.selectRowCount(map);
@@ -162,6 +165,38 @@ public class QuestionController {
 		mav.addObject("page", page.getPage());
 		
 		return mav;
+	}
+	
+	/*=====================
+	 * 문의글 진입 페이지
+	 *=====================*/	
+	//해당 문의글의 글 번호 불러오기
+	@GetMapping("/question/checkPassword")
+	public String formCheck(@RequestParam int question_num, Model model) {
+		QuestionVO questionVO = questionService.selectQuestion(question_num);
+		model.addAttribute("questionVO", questionVO);
+		
+		return "checkPassword";
+	}
+	
+	@PostMapping("/question/checkPassword")
+	public String submitCheck(@RequestParam int question_num,
+							  @RequestParam String question_passwd,
+							  HttpServletRequest request,
+							  QuestionVO questionVO, Model model) {
+		
+		QuestionVO db_question = questionService.selectQuestion(questionVO.getQuestion_num());
+		
+	    if (db_question != null && question_passwd.equals(db_question.getQuestion_passwd())) {
+	        // 비밀번호 일치 시 상세 페이지로 리다이렉트
+	    	model.addAttribute("question_num", question_num);
+	        return "redirect:/question/detail?question_num=" + question_num;
+	    } else {
+	    	model.addAttribute("message", "비밀번호 불일치");
+	    	model.addAttribute("url", request.getContextPath() + "/question/checkPassword?question_num=" + question_num);
+	    	
+	    	return "common/resultAlert";
+	    }
 	}
 	
 	/*=====================
@@ -290,10 +325,17 @@ public class QuestionController {
 	public String submitDelete(@RequestParam int question_num, HttpServletRequest request, Model model) {
 		log.debug("<<문의글 삭제 question_num>> : " + question_num);
 		
+		//DB에 저장된 파일 정보 구하기
+		QuestionVO db_question = questionService.selectQuestion(question_num);
+		
 		//답변글 삭제
 		questionService.deleteQuestion(question_num);
 		//문의글 삭제
 		questionService.deleteAnswer(question_num);
+		//파일 삭제
+		if(db_question.getQuestion_photo() != null) {
+			FileUtil.removeFile(request, db_question.getQuestion_photo());
+		}
 		
 		model.addAttribute("message", "삭제 완료!");
 		model.addAttribute("url", request.getContextPath() + "/question/list");

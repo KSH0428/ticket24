@@ -41,6 +41,13 @@
     	<put-attribute name="body" value="/WEB-INF/views/question/adminQuestionModify.jsp"/>
     </definition>
     
+    <definition name="checkPassword" extends="main">
+    	<put-attribute name="title" value="문의글 비밀번호 확인"/>
+    	<put-attribute name="css" value="/WEB-INF/views/question/questionCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/question/checkPassword.jsp"/>
+    </definition>
+    
+    
     <definition name="faqWrite" extends="main">
     	<put-attribute name="title" value="자주찾는질문 등록"/>
     	<put-attribute name="css" value="/WEB-INF/views/faq/faqCSS.jsp"/>
@@ -58,6 +65,30 @@
     	<put-attribute name="body" value="/WEB-INF/views/faq/faqModify.jsp"/>
     </definition>
     
+    <definition name="eventWrite" extends="main">
+    	<put-attribute name="title" value="이벤트 등록"/>
+    	<put-attribute name="css" value="/WEB-INF/views/event/eventCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventWrite.jsp"/>
+    </definition>
+    
+    <definition name="eventList" extends="main">
+    	<put-attribute name="title" value="이벤트 목록"/>
+    	<put-attribute name="css" value="/WEB-INF/views/event/eventCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventList.jsp"/>
+    </definition>
+    
+    <definition name="eventModify" extends="main">
+    	<put-attribute name="title" value="이벤트 목록"/>
+    	<put-attribute name="css" value="/WEB-INF/views/event/eventCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventModify.jsp"/>
+    </definition>
+    
+    <definition name="eventView" extends="main">
+    	<put-attribute name="title" value="이벤트 상세"/>
+    	<put-attribute name="css" value="/WEB-INF/views/event/eventCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventView.jsp"/>
+    </definition>
+
 </tiles-definitions>
 
 

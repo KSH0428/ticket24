@@ -31,7 +31,39 @@ create table faq(
 
 create sequence faq_seq;
 
+--이벤트
+create table event(
+ event_num number not null,
+ event_title varchar2(150) not null,
+ event_start varchar2(10) not null,
+ event_end varchar2(10) not null,
+ event_content clob,
+ event_hit number(9) default 0 not null,
+ event_photo1 varchar2(150),
+ event_photo2 varchar2(150),
+ event_point number not null,
+ event_regdate date default sysdate not null,
+ event_modifydate date,
+ constraint event_pk primary key (event_num)
+);
 
+create sequence event_seq;
+
+--이벤트 댓글
+create table event_reply(
+ event_renum number not null,
+ event_recontent varchar2(900),
+ event_regdate date default sysdate not null,
+ event_modifydate date,
+ event_reip varchar2(40) not null,
+ event_num number not null,
+ mem_num number not null,
+ constraint event_reply_pk primary key (event_renum),
+ constraint event_reply_fk1 foreign key (event_num) references event(event_num),
+ constraint event_reply_fk2 foreign key (mem_num) references member(mem_num)
+);
+
+create sequence event_reply_seq;
 
 
 

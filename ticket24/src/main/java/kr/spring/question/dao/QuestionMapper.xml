@@ -41,12 +41,11 @@
 					mem_nickname LIKE '%' || #{keyword} || '%'
 				</if>
 			</if>
+			<!-- 상품/주문/배송/기타 카테고리로 조회 -->
+			<if test="question_category != null and question_category != 0">
+				AND question_category = #{question_category}
+			</if>
 		</where>
-	</sql>
-	
-	<!-- 상품/주문/배송/기타 카테고리로 조회 -->
-	<sql id="questionOrder">
-
 	</sql>
 	
 	<!-- 문의글 총개수/검색 개수 -->
@@ -69,7 +68,8 @@
 				question_regdate,
 				mem_id,
 				mem_nickname,
-				question_level
+				question_level,
+				question_lock
 			FROM question JOIN member USING(mem_num)
 			<include refid="questionSearch"></include>)a)
 		<![CDATA[
