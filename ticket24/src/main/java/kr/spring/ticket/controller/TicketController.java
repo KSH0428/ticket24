@@ -122,5 +122,5 @@ public class TicketController {
 								//타일스 설정명,   속성명,    속성값
 		return new ModelAndView("ticketView", "ticket", ticket);
 	}
-
+	
 }
