@@ -13,10 +13,10 @@
 		</ul>
 		<ul>
 			<li>
-				'${memberVO.mem_name}'님은 '${memberVO.mem_auth}'등급입니다.
+				'${member.mem_name}'님은 '${member.mem_auth}'등급입니다.
 			</li>
 			<li>	
-				적립금 : ${memberVO.pt_amount}
+				적립금 : ${member.pt_amount}
 			</li>
 		</ul>
 	</div>

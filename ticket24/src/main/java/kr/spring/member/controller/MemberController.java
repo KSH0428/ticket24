@@ -214,7 +214,7 @@ public class MemberController {
 	 * 포인트 조회
 	 *=======================*/
 	@RequestMapping("/member/point")
-	public ModelAndView process(MemberVO memberVO,@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order,String keyfield, String keyword, HttpSession session) {
+	public ModelAndView process(MemberVO member,@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order,String keyfield, String keyword, HttpSession session) {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
@@ -222,7 +222,7 @@ public class MemberController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("mem_num", user.getMem_num());
-		map.put("member", memberVO);
+		map.put("member", member);
 		
 		//전체/검색 레코드 수
 		int count = memberService.selectRowCount(map);
@@ -232,7 +232,7 @@ public class MemberController {
 
 		List<MemberVO> list = null;
 		if(count > 0) {
-			map.put("member", memberVO);
+			map.put("member", member);
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
@@ -245,6 +245,7 @@ public class MemberController {
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
+		mav.addObject("member", member);
 		
 		return mav;
 	}
