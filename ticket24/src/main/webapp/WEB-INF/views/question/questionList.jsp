@@ -29,15 +29,17 @@
 				<input type="button" value="목록" onclick="location.href='list'">
 			</li>
 		</ul>
-		<div class="align-right">
-			<select id="order" name="order">
-			
-			</select>
-		</div>
-		<c:if test="${!empty user}">
-		<input type="button" value="문의글 작성" onclick="location.href='write'">
-		</c:if>
 	</form>
+	<ul class="category">
+		<li><a href="list">전체</a></li>
+		<li><a href="list?question_category=1">상품</a></li>
+		<li><a href="list?question_category=2">주문</a></li>
+		<li><a href="list?question_category=3">배송</a></li>
+		<li><a href="list?question_category=4">기타</a></li>
+	</ul>
+	<c:if test="${!empty user}">
+	<input type="button" value="문의글 작성" onclick="location.href='write'" class="btn btn-warning float-end">
+	</c:if>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
@@ -60,11 +62,13 @@
 				<c:if test="${question.question_category == 4}">기타</c:if>
 			</td>
 			<td class="align-center">
-			<c:if test="${question.question_lock == 2}">
-			<img src="${pageContext.request.contextPath}/images/question_lock.png" width="8">
-			</c:if>
-			<a href="detail?question_num=${question.question_num}">${question.question_title}</a>
-			</td>
+            	<c:if test="${question.question_lock == 2}">
+                	<a href="checkPassword?question_num=${question.question_num}">${question.question_title}</a>
+                </c:if>
+                <c:if test="${question.question_lock == 1}">
+                    <a href="detail?question_num=${question.question_num}">${question.question_title}</a>
+                </c:if>
+            </td>
 			<td class="align-center">
 				<c:if test="${empty question.mem_nickname}">${question.mem_id}</c:if>
 				<c:if test="${!empty question.mem_nickname}">${question.mem_nickname}</c:if>
@@ -77,4 +81,3 @@
 	</table>
 	</c:if>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>

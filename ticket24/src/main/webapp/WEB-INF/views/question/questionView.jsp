@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ces.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
-<div class="page-main">
+<div class="question-main">
 	<h3>Q. ${question.question_title}</h3>
 	<ul class="detail-info">
 		<li>
@@ -46,7 +47,7 @@
 	</div>
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num  == question.mem_num}">
-		<input type="button" value="수정" onclick="location.href='update?question_num=${answer.question_num}'">
+		<input type="button" value="수정" onclick="location.href='update?question_num=${question.question_num}'">
 		<input type="button" value="삭제" id="delete_btn">
 		<script type="text/javascript">
 			let delete_btn = document.getElementById('delete_btn');

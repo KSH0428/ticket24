@@ -60,3 +60,29 @@
 .category li a{
 	padding:5px;
 }
+
+.event-main {
+    width:60% !important;
+    margin:0 auto;
+}
+
+.box_tit {
+    position: relative;
+    border: 1px solid #eee;
+    padding: 21px 29px 25px;
+}
+.tit_event {
+    overflow: hidden;
+    max-height: 60px;
+    padding-right: 90px;
+    font-size: 20px;
+    line-height: 30px;
+    color: #333;
+    font-family: AppleSDGothicNeo-Regular, "맑은 고딕","Malgun Gothic";
+}
+.data_info {
+    padding-top: 13px;
+    font-size: 14px;
+    color: #666;
+    font-family: AppleSDGothicNeo-Regular, "돋움",Dotum;
+}
