@@ -11,7 +11,7 @@
 
 <!-- css 파일 무시 -->
 <script type="text/javascript">
-	document.querySelector('link[href="${pageContext.request.contextPath}/css/layout.css"]').remove();
+	/* document.querySelector('link[href="${pageContext.request.contextPath}/css/layout.css"]').remove(); */
 </script>
 <!-- swiper js 시작 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
@@ -52,9 +52,7 @@
 		<div class="search">
 			<select name="keyfield" id="keyfield">
 				<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>공연명</option>
-				<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>배우</option>
-				<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
-				<option value="4" <c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option>
+				<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>출연진</option>
 			</select>
 			
   			<input type="text" class="search-bar" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어 입력">
