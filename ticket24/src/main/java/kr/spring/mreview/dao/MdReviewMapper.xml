@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.mreview.dao.MdReviewMapper">
+	<!-- 게시판 글 등록 -->
+	<insert id="insertMdReview" parameterType="mdReviewVO">
+		INSERT INTO md_review(
+		   md_review_num,
+		   md_title,
+		   md_content,
+		   md_filename,
+		   md_ip,
+		   mem_num)
+		VALUES (
+		   md_review_seq.nextval,
+		   #{md_title},
+		   #{md_content},
+		   #{md_filename,jdbcType=VARCHAR},
+		   #{md_ip},
+		   #{mem_num})
+	</insert>
+	
+	<sql id="mdReviewOrder">
+		<if test="order == 1">
+			ORDER BY md_review_num DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY fav_cnt DESC NULLS LAST
+		</if>
+		<if test="order == 3">
+			ORDER BY fav_cnt ASC NULLS LAST
+		</if>
+	</sql>
+	
+	<!-- 리뷰 글의 총개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM md_review JOIN member USING(mem_num)
+	</select>
+	
+	<!-- 리뷰 전체 목록/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="mdReviewVO">
+		SELECT
+		   *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM (SELECT
+		               md_review_num,
+		               <![CDATA[
+		               REPLACE(REPLACE(md_title,'<','&lt;'),'>','&gt;') md_title,
+		               ]]>
+		               md_regdate,
+		               mem_num,
+		               mem_id,
+		               mem_nickname,
+		               fav_cnt
+		            FROM md_review 
+		            LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, md_review_num FROM md_review_fav GROUP BY md_review_num) USING(md_review_num)
+		            JOIN member USING(mem_num) 
+		            <include refid="mdReviewOrder"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>            
+	</select>
+	
+	<!-- 글 상세 -->
+	<select id="selectMdReview" parameterType="integer">
+		SELECT 
+		  * 
+		FROM md_review 
+		JOIN member USING(mem_num)
+		LEFT OUTER JOIN member_detail USING(mem_num)
+		WHERE md_review_num=#{md_review_num} 
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="updateMdreview" parameterType="mdReviewVO">
+		UPDATE md_review SET
+		  <if test="md_filename != null">
+		  md_filename=#{md_filename},
+		  </if>
+		  md_title=#{md_title},
+		  md_content=#{md_content},
+		  md_ip=#{md_ip},
+		  me_mdate=SYSDATE
+		WHERE md_review_num=#{md_review_num}
+	</update>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

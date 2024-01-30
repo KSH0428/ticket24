@@ -27,7 +27,7 @@
 			적립금 : ${member.pt_amount}
 		</li>
 		<li>
-			<input type="button" value="자세히보기" onclick="location.href='update'">
+			<input type="button" value="자세히보기" onclick="location.href='point'">
 		</li>
 	</ul>
 	<div class="mypage-button">

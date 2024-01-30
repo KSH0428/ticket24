@@ -1,5 +1,9 @@
 package kr.spring.member.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,11 +19,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -205,6 +211,46 @@ public class MemberController {
 	}
 	
 	/*========================
+	 * 포인트 조회
+	 *=======================*/
+	@RequestMapping("/member/point")
+	public ModelAndView process(MemberVO member,@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order,String keyfield, String keyword, HttpSession session) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num());
+		map.put("member", member);
+		
+		//전체/검색 레코드 수
+		int count = memberService.selectRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+
+		List<MemberVO> list = null;
+		if(count > 0) {
+			map.put("member", member);
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectPointList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memberPoint");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		mav.addObject("member", member);
+		
+		return mav;
+	}
+	
+	/*========================
 	 * 회원 정보 수정
 	 *=======================*/
 	//회원 정보 수정 폼 호출
@@ -241,38 +287,51 @@ public class MemberController {
 	//회원 정보 수정 폼 호출
 	@GetMapping("/member/passwdUpdate")
 	public String passwdUpdateForm(@RequestParam int mem_num, Model model) {
-		log.debug("<<비밀번호 변경 폼 mem_num>> : " + mem_num);
+		log.debug("<<회원 비밀번호 수정>> : " + mem_num);
+		model.addAttribute("mem_num", mem_num);
 		return "memberPasswdUpdate";
 	}
-	
 	@PostMapping("/member/passwdUpdate")
-	public String passwdUpdate(MemberVO member, @RequestParam String mem_passwd, @RequestParam String mem_newpasswd, @RequestParam String mem_confirmpasswd, HttpSession session, HttpServletRequest request, Model model){
+	public String passwdUpdate(@Valid MemberVO memberVO, BindingResult result, HttpSession session, HttpServletRequest request, Model model){
 		
-		//입력한 현재 비밀번호 일치 체크
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		MemberVO db_member = memberService.selectMember(user.getMem_num());
-
-		if(!mem_passwd.equals(db_member.getMem_passwd())) {//현재 비밀번호와 입력한 비밀번호 불일치
+		if(result.hasFieldErrors("mem_passwd")||result.hasFieldErrors("mem_newpasswd")||result.hasFieldErrors("mem_confirmpasswd")) {
+			List<FieldError> list = result.getFieldErrors(); 
+			for(FieldError error : list) {
+				log.debug("<<에러 필드>> : " + error.getField());
+			}
 			return "memberPasswdUpdate";
 		}
 		
-		//변경할 비밀번호와 변경할 비밀번호 일치 체크
-		if(!mem_newpasswd.equals(mem_confirmpasswd)) {//변경할 비밀번호와 변경할 비밀번호 불일치
+		//입력한 현재 비밀번호 일치 체크 
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO db_member = memberService.selectMember(user.getMem_num());
+		
+		log.debug("<<비밀번호 변경 mem_num>> : " + memberVO.getMem_num());
+		log.debug("<<비밀번호 변경 newpasswd>> : " + memberVO.getMem_newpasswd());
+		
+		if(!memberVO.getMem_passwd().equals(db_member.getMem_passwd())) {//현재 비밀번호와 입력한 비밀번호 불일치
+			result.rejectValue("mem_passwd", "invalidPassword");
+			return "memberPasswdUpdate";
+		}
+		
+		//변경할 비밀번호와 확인 비밀번호 일치 체크
+		if(!memberVO.getMem_newpasswd().equals(memberVO.getMem_confirmpasswd())) {//변경할 비밀번호와 확인 비밀번호 불일치
+			result.rejectValue("mem_newpasswd", "invalidConfirm");
 			return "memberPasswdUpdate";
 		}
 		
 		//비밀번호 변경
-		memberService.Member_newPasswd(member);
+		memberService.Member_newPasswd(memberVO);
 		
 		//비밀번호 변경 완료 메시지 보여준 후 로그아웃 처리
-		session.invalidate();
+		//session.invalidate();
 		
-		model.addAttribute("accessTitle", "회원탈퇴");
-		model.addAttribute("accessMsg", "회원탈퇴가 완료되었습니다.");
-		model.addAttribute("accessUrl", request.getContextPath()+"/main/main");
+		model.addAttribute("message", "비밀번호 변경이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath()+"/member/myPage");
 		
-		return "common/resultView";
+		return "common/resultAlert";
 	}
+	
 	/*========================
 	 * 회원 탈퇴
 	 *=======================*/

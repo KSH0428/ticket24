@@ -25,7 +25,12 @@
     	<put-attribute name="body"
     	               value="/WEB-INF/views/md/mdView.jsp"/>                                           
     </definition>
-    
+    <definition name="reviewWrite" extends="main">
+		<put-attribute name="title" value="리뷰작성" />
+		<put-attribute name="css" value="/WEB-INF/views/mdReview/mdReviewCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/mdReview/mdReviewWrite.jsp"/>
+	</definition>
+	 
 </tiles-definitions>
 
 

@@ -24,27 +24,6 @@
     z-index: 1;
   	
 }
-.swiper-slider{
-    /*width: 100%;
- 	 height: 200px;
- 	 overflow: visible;*/
-}
-.swiper-wrapper {
-
-}
-
-.swiper-slide {
-  /*text-align: center;
-  font-size: 18px;
-  display: flax;
-  justify-content: center;
-  align-items: center;
-  margin: 0px;
-  background: white;
-  transition: all .3s ease;*/
-  
-}
-
 .image {
 width: 450px;
   height : 405px;
@@ -178,4 +157,107 @@ width: 450px;
 }
 /*공연 리스트 끝*/
 
+/*공연 상세 시작*/
+.common-container{
+	display: flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 1180px;
+    min-height: 100%;
+}
 
+.detail-container{
+	display: flex;
+    position: relative;
+    padding-bottom: 40px;
+    margin: 64px auto;
+    width: 1120px
+}
+
+.detail-container .img-container{
+	position: relative;
+    overflow: hidden;
+    flex: none;
+    margin-right: 40px;
+    width: 405px;
+    height:550px;
+    border-radius: 10px;
+    background: #f5f6f9;
+}
+.detail-container .info-container{
+	flex:1;
+	margin: 0;
+    padding: 0;
+}
+.concert-monopoly{
+	background-color: #fa2828;
+    border-color: #fa2828;
+    color: #fff;
+    
+    display: inline-block;
+    margin: 4px 0 0 4px;
+    padding: 4px 8px;
+    font-size: 16px;
+    line-height: 15px;
+    border-radius: 16px;
+}
+.concert-title{
+	position: relative;
+    padding: 0 75px 10px 0;
+    border-bottom: 1px solid #242428;
+    line-height: 0;
+    color: #242428
+}
+.concert-title-content{
+	background: none;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 34px;
+    color: #242428;
+}
+.concert-info-l1{
+	display: flex;
+    flex-wrap: wrap;
+    padding: 14px 0 20px;
+}
+.info{
+	width: 50%;
+	display: flex;
+    padding: 7px 0 6px;
+    font-size: 15px;
+    line-height: 22px;
+    box-sizing: border-box;
+}
+.info2{
+	width: 100%;
+	display: flex;
+    padding: 7px 0 6px;
+    font-size: 15px;
+    line-height: 22px;
+    box-sizing: border-box;
+}
+
+.info span{
+	flex: none;
+    width: 70px;
+    margin-right: 10px;
+    color: #62676c;
+}
+.info2 span{
+	flex: none;
+    width: 70px;
+    margin-right: 10px;
+    color: #62676c;
+}
+.concert-info-l1 .info div{
+	flex: 1;
+}
+.concert-price-info{
+	position:relative;
+}
+
+.concert-detail-img{
+    margin:0 auto;
+}
+
+/*공연 상세 끝*/
