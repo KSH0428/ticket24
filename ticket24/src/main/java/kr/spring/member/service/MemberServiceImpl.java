@@ -1,5 +1,8 @@
 package kr.spring.member.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,6 +62,16 @@ public class MemberServiceImpl implements MemberService{
 	public void Member_newPasswd(MemberVO member) {
 		memberMapper.Member_newPasswd(member);
 
+	}
+
+	@Override
+	public List<MemberVO> selectPointList(Map<String, Object> map) {
+		return memberMapper.selectPointList(map);
+	}
+
+	@Override
+	public int selectRowCount(Map<String, Object> map) {
+		return memberMapper.selectRowCount(map);
 	}
 
 }

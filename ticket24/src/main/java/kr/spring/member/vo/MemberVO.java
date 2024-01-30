@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,10 +36,12 @@ public class MemberVO {
 	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")
 	private String mem_confirmpasswd; //변경할 비밀번호 확인
 	@NotBlank
+	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$")
 	private String mem_phone;
 	@Email
 	@NotBlank
 	private String mem_email;
+	@Size(min=5, max=5)
 	private String mem_zipcode;
 	@NotBlank
 	private String mem_address1;
@@ -51,7 +54,8 @@ public class MemberVO {
 	private String now_passwd; //비밀번호 변경
 	
 	private int pt_num;
-	private String pt_amount;
+	private int pt_status; //0:적립 1:사용
+	private String pt_amount; //적립금 잔액
 	private String pt_content;
 	private Date pt_reg_date;
 	
