@@ -66,7 +66,6 @@
 		SELECT
 		 COUNT(*)
 		FROM comm JOIN member USING(mem_num)
-		WHERE mem_num=#{mem_num}
 		<include refid="commSearch"></include>
 	</select>
 	
@@ -94,7 +93,6 @@
 				 	LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, comm_num FROM comm_reply GROUP BY comm_num) USING (comm_num)
 				 	LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, comm_num FROM comm_fav GROUP BY comm_num) USING(comm_num)
 			   		JOIN member USING(mem_num)
-			   		WHERE mem_num=#{mem_num}
 			   		<include refid="commSearch"></include>
 			   		<include refid="commOrder"></include>)a)
 			   	<![CDATA[
