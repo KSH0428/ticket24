@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.reserv.dao.ReservMapper">
+	<!-- 대관 신청 -->
+	<insert id="insertReserv" parameterType="reservHallVO">
+		INSERT INTO reservhall (
+			reservation_num,
+			mem_num,
+			reservation_form1,
+			<if test="reservation_form2 != null and reservation_form2 != ''">
+				reservation_form2,
+			</if>
+			<if test="reservation_form3 != null and reservation_form3 != ''">
+				reservation_form3,
+			</if>
+			reservation_name,
+			reservation_email,
+			reservation_phone
+			) 
+		VALUES (
+			#{reservation_num},
+			#{mem_num},
+			#{reservation_form1},
+			<if test="reservation_form2 != null and reservation_form2 != ''">
+				#{reservation_form2},
+			</if>
+			<if test="reservation_form3 != null and reservation_form3 != ''">
+				#{reservation_form3},
+			</if>
+			#{reservation_name},
+			#{reservation_email},
+			#{reservation_phone}
+			)
+	</insert>
+	
+	
+</mapper>

@@ -20,6 +20,7 @@ public class DownloadView extends AbstractView{
 			HttpServletResponse response) throws Exception {
 		byte[] file = (byte[])model.get("downloadFile");
 		String filename = (String)model.get("filename");
+		filename = removePrefix(filename, "_");
 		
 		response.setContentType("application/download; charset=utf-8");
 		response.setContentLength(file.length);
@@ -42,6 +43,17 @@ public class DownloadView extends AbstractView{
 			if(input!=null) input.close();
 		}
 	}
+	//앞의 난수 없애기
+	public static String removePrefix(String originalFileName, String delimiter) {
+        int index = originalFileName.indexOf(delimiter);
+        if (index != -1) {
+            // "_" 다음의 문자열을 가져옴
+            return originalFileName.substring(index + 1);
+        } else {
+            // "_"이 없을 경우 원래 파일 이름 반환
+            return originalFileName;
+        }
+    }
 
 }
 
