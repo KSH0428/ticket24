@@ -123,5 +123,4 @@ public class TicketController {
 		return new ModelAndView("ticketView", "ticket", ticket);
 	}
 	
-	
 }
