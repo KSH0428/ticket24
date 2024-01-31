@@ -16,3 +16,5 @@ public interface TicketService {
 	public void deleteFile(int ticket_num);
 	
 }
+
+

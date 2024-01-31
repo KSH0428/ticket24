@@ -22,3 +22,5 @@ public interface TicketMapper {
 	public void deleteFile(int ticket_num);
 		
 }
+
+
