@@ -37,7 +37,10 @@ public class TicketVO {
 	private Date ticket_modifydate;
 	@NotBlank
 	private String ticket_content;
-	private MultipartFile[] upload;
+	private MultipartFile Upload;
+	private MultipartFile Upload2;
+	private MultipartFile Upload3;
+	private MultipartFile Upload4;
 	private String ticket_filename1;
 	private String ticket_filename2;
 	private String ticket_filename3;
