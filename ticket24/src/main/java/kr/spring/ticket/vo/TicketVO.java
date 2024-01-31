@@ -21,8 +21,11 @@ public class TicketVO {
 	private int ticket_category;
 	@NotBlank
 	private String ticket_name;
-	@NotBlank
 	private String ticket_date;
+	@NotBlank
+	private String temp_date;
+	@NotBlank
+	private String temp_time;
 	@NotBlank
 	private int ticket_quantity;
 	@NotBlank

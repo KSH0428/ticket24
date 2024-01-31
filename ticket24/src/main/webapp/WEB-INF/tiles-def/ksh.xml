@@ -28,16 +28,16 @@
     	<put-attribute name="title" value="티켓양도 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/ticket/ticketList.jsp"/>                                           
     </definition>
-	<definition name="commWrite" extends="main">
+	<definition name="ticketWrite" extends="main">
 		<put-attribute name="title" value="티켓양도 등록" />
 		<put-attribute name="css" value="/WEB-INF/views/ticket/ticketCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketWrite.jsp"/>
 	</definition>
-	 <definition name="commView" extends="main">
+	 <definition name="ticketView" extends="main">
     	<put-attribute name="title" value="티켓양도글 상세"/>
     	<put-attribute name="body" value="/WEB-INF/views/ticket/ticketView.jsp"/>
     </definition>
-    <definition name="commModify" extends="main">
+    <definition name="ticketModify" extends="main">
     	<put-attribute name="title" value="티켓양도글 수정"/>
     	<put-attribute name="css" value="/WEB-INF/views/ticket/ticketCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/ticket/ticketModify.jsp"/>

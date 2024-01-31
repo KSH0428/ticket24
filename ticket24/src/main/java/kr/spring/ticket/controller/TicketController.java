@@ -55,6 +55,8 @@ public class TicketController {
 						  HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<티켓양도 글 저장>> : " + ticketVO);
 		
+		ticketVO.setTicket_date(ticketVO.getTemp_date() + " " + ticketVO.getTemp_time());
+		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
