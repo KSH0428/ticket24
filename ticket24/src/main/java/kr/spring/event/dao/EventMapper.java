@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.event.vo.EventReplyVO;
 import kr.spring.event.vo.EventVO;
+import kr.spring.member.vo.MemberVO;
 
 @Mapper
 public interface EventMapper {
@@ -43,4 +44,7 @@ public interface EventMapper {
 	//부모글 지울때 딸려있는 자식 데이터도 삭제해야됨
 	@Delete("DELETE FROM event_reply WHERE event_num=#event_num")
 	public void deleteReplyByEventNum(int event_num);
+	
+	//적립금 적립
+	public void insertPoint(MemberVO member);
 }

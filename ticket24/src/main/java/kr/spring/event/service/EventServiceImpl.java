@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.event.dao.EventMapper;
 import kr.spring.event.vo.EventReplyVO;
 import kr.spring.event.vo.EventVO;
+import kr.spring.member.vo.MemberVO;
 
 @Service
 @Transactional
@@ -86,6 +87,11 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public void deleteReply(int event_renum) {
 		eventMapper.deleteReply(event_renum);
+	}
+
+	@Override
+	public void insertPoint(MemberVO member) {
+		eventMapper.insertPoint(member);
 	}
 	
 }

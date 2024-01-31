@@ -101,6 +101,21 @@
 			WHERE event_num=#{event_num} ORDER BY event_renum DESC)a)
 		<![CDATA[WHERE rnum >= #{start} AND rnum <= #{end}]]>		
 	</select>
+	
+	<insert id="insertPoint" parameterType="memberVO">
+		INSERT INTO member_point(
+			pt_num,
+			mem_num,
+			pt_amount,
+			pt_content,
+			event_num)
+		VALUES(
+			member_point_seq.nextval,
+			#{mem_num},
+			#{pt_amount},
+			'이벤트 적립',
+			#{event_num})
+	</insert>
 
 </mapper>
 
