@@ -78,7 +78,7 @@
     </definition>
     
     <definition name="eventModify" extends="main">
-    	<put-attribute name="title" value="이벤트 목록"/>
+    	<put-attribute name="title" value="이벤트 수정"/>
     	<put-attribute name="css" value="/WEB-INF/views/event/eventCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/event/eventModify.jsp"/>
     </definition>

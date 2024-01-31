@@ -71,6 +71,37 @@
 		WHERE event_num=#{event_num}
 	</update>
 	
+	<insert id="insertReply" parameterType="eventReplyVO">
+		INSERT INTO event_reply(
+			event_renum,
+			event_recontent,
+			event_reip,
+			event_num,
+			mem_num)
+		VALUES(
+			event_reply_seq.nextval,
+			#{event_recontent},
+			#{event_reip},
+			#{event_num},
+			#{mem_num})
+	</insert>
+	
+	<select id="selectListReply">
+		SELECT * FROM 
+			(SELECT a.*, rownum rnum FROM 
+			(SELECT event_renum,
+					<![CDATA[REPLACE(REPLACE(event_recontent,'<','&lt;'),'>','&gt;') event_recontent,]]>
+					event_regdate,
+					event_modifydate,
+					event_num,
+					mem_num,
+					mem_id,
+					mem_nickname
+			FROM event_reply JOIN member USING(mem_num)
+			WHERE event_num=#{event_num} ORDER BY event_renum DESC)a)
+		<![CDATA[WHERE rnum >= #{start} AND rnum <= #{end}]]>		
+	</select>
+
 </mapper>
 
 

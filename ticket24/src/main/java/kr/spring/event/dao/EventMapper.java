@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.event.vo.EventReplyVO;
 import kr.spring.event.vo.EventVO;
 
 @Mapper
@@ -27,4 +28,19 @@ public interface EventMapper {
 	public void deleteFile(int event_num);
 	
 	//이벤트 댓글
+	public List<EventReplyVO> selectListReply(Map<String,Object> map);
+	@Select("SELECT COUNT(*) FROM event_reply WHERE event_num=#{event_num}")
+	public int selectRowCountReply(Map<String,Object> map);
+	@Select("SELECT * FROM event_reply WHERE event_renum=#{event_renum}")
+	public EventReplyVO selectReply(int event_renum);
+	public void insertReply(EventReplyVO eventReply);
+	@Update("UPDATE event_reply SET event_recontent=#{event_recontent},"
+			+ "event_reip=#{event_reip},event_modifydate=SYSDATE WHERE event_renum=#{event_renum}")
+	public void updateReply(EventReplyVO eventReply);
+	@Delete("DELETE FROM event_reply WHERE event_renum=#{event_renum}")
+	public void deleteReply(int event_renum);
+	//부모글 삭제시 댓글이 존재하면 부모글 삭제 전 댓글 삭제
+	//부모글 지울때 딸려있는 자식 데이터도 삭제해야됨
+	@Delete("DELETE FROM event_reply WHERE event_num=#event_num")
+	public void deleteReplyByEventNum(int event_num);
 }

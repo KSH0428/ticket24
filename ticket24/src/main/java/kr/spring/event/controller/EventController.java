@@ -178,8 +178,26 @@ public class EventController {
 		return "common/resultAlert";
 	}
 	
-	
-	
+	/*=====================
+	 * 이벤트 삭제
+	 *=====================*/
+	@RequestMapping("/event/delete")
+	public String submitDelete(@RequestParam int event_num, HttpServletRequest request) {
+		log.debug("<<이벤트 삭제>> : " + event_num);
+		
+		//DB에 저장된 이벤트 정보 구하기
+		EventVO db_event = eventService.selectEvent(event_num);
+		//이벤트 글 삭제
+		eventService.deleteEvent(event_num);
+		//사진 삭제
+		if(db_event.getEvent_photo1() != null) {
+			FileUtil.removeFile(request, db_event.getEvent_photo1());
+		}else if(db_event.getEvent_photo2() != null) {
+			FileUtil.removeFile(request, db_event.getEvent_photo2());
+		}
+		
+		return "redirect:/event/list";
+	}
 	
 	
 	

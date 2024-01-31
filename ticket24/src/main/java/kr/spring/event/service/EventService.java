@@ -3,6 +3,11 @@ package kr.spring.event.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import kr.spring.event.vo.EventReplyVO;
 import kr.spring.event.vo.EventVO;
 
 public interface EventService {
@@ -14,4 +19,12 @@ public interface EventService {
 	public void updateEvent(EventVO event);
 	public void deleteEvent(int event_num);
 	public void deleteFile(int event_num);
+
+	//이벤트 댓글
+	public List<EventReplyVO> selectListReply(Map<String,Object> map);
+	public int selectRowCountReply(Map<String,Object> map);
+	public EventReplyVO selectReply(int event_renum);
+	public void insertReply(EventReplyVO eventReply);
+	public void updateReply(EventReplyVO eventReply);
+	public void deleteReply(int event_renum);
 }

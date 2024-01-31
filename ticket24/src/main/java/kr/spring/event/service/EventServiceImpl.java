@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.event.dao.EventMapper;
+import kr.spring.event.vo.EventReplyVO;
 import kr.spring.event.vo.EventVO;
 
 @Service
@@ -49,11 +50,42 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public void deleteEvent(int event_num) {
 		eventMapper.deleteEvent(event_num);
+		eventMapper.deleteReplyByEventNum(event_num);
 	}
 
 	@Override
 	public void deleteFile(int event_num) {
 		eventMapper.deleteFile(event_num);
+	}
+
+	@Override
+	public List<EventReplyVO> selectListReply(Map<String, Object> map) {
+		return eventMapper.selectListReply(map);
+	}
+
+	@Override
+	public int selectRowCountReply(Map<String, Object> map) {
+		return eventMapper.selectRowCountReply(map);
+	}
+
+	@Override
+	public EventReplyVO selectReply(int event_renum) {
+		return eventMapper.selectReply(event_renum);
+	}
+
+	@Override
+	public void insertReply(EventReplyVO eventReply) {
+		eventMapper.insertReply(eventReply);
+	}
+
+	@Override
+	public void updateReply(EventReplyVO eventReply) {
+		eventMapper.updateReply(eventReply);
+	}
+
+	@Override
+	public void deleteReply(int event_renum) {
+		eventMapper.deleteReply(event_renum);
 	}
 	
 }

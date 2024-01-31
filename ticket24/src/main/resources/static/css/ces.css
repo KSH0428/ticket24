@@ -62,10 +62,14 @@
 }
 
 .event-main {
-    width:50% !important;
+    width:70% !important;
     margin:0 auto;
 }
-
+.card{
+	margin:20px;
+	width:280px;
+	height:225px;
+}
 .box_tit {
     position: relative;
     border: 1px solid #eee;

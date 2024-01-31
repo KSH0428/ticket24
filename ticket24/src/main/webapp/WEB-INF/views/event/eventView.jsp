@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ces.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/event.reply.js"></script>
 <div class="event-main">
 	<div class="box_tit">
 		<p class="tit_event">${event.event_title}</p>
@@ -33,4 +35,31 @@
 		</script>
 	</c:if>
 	</div>
+	<div id="reply_div">
+		<span class="re-title">댓글</span>
+		<form id="re_form">
+			<input type="hidden" name="event_num" value="${event.event_num}" id="event_num">
+			<textarea rows="3" cols="50" name="event_recontent" id="event_recontent" class="rep-content"
+				<c:if test="${empty user}">disabled="disabled"</c:if>
+				><c:if test="${empty user}">로그인해야 작성할 수 있습니다.</c:if></textarea>
+			<c:if test="${!empty user}">
+			<div id="re_first">
+				<span class="letter-count">300/300</span>
+			</div>
+			<div id="re_second" class="align-right">
+				<input type="submit" value="전송">
+			</div>
+			</c:if>
+		</form>
+	</div>
+	<!-- 댓글 목록 출력 시작 -->
+	<div id="output"></div>
+	<div class="paging-button" style="display:none;">
+		<input type="button" value="더보기">
+	</div>
+	<div id="loading" style="display:none;">
+		<img src="${pageContext.request.contextPath}/images/loading.gif" width="100" height="100">
+	</div>
+	<!-- 댓글 목록 출력 끝 -->
+	<!-- 댓글 끝 -->	
 </div>
