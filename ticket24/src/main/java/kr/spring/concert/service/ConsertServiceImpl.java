@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.concert.dao.ConcertMapper;
 import kr.spring.concert.vo.ConcertDetailVO;
+import kr.spring.concert.vo.ConcertRoundVO;
 import kr.spring.concert.vo.ConcertVO;
 
 @Service
@@ -45,6 +46,12 @@ public class ConsertServiceImpl implements ConcertService{
 	@Override
 	public void insertConcertDetail(ConcertDetailVO concertdetail) {
 		concertMapper.insertConcertDetail(concertdetail);
+	}
+
+	@Override
+	public void insertConcertRound(ConcertRoundVO round) {
+		concertMapper.insertConcertRound(round);
+		
 	}
 
 	//-------------------------------

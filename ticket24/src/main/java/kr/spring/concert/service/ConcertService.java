@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.concert.vo.ConcertDetailVO;
+import kr.spring.concert.vo.ConcertRoundVO;
 import kr.spring.concert.vo.ConcertVO;
 
 public interface ConcertService {
@@ -17,9 +18,12 @@ public interface ConcertService {
 	
 	//--------------웹 스크롤 -----------------
 
-	//콘서트 리스트 읽어오기
+	//콘서트 리스트
 	public void insertConcert(ConcertVO concert);
 
-	//콘서트 상세 페이지 읽어오기
+	//콘서트 상세
 	public void insertConcertDetail(ConcertDetailVO concertdetail);
+	
+	//콘서트 회차
+	public void insertConcertRound(ConcertRoundVO round);
 }

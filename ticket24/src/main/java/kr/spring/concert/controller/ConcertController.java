@@ -1,5 +1,8 @@
 package kr.spring.concert.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,13 +14,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.concert.service.ConcertService;
 import kr.spring.concert.vo.ConcertDetailVO;
+import kr.spring.concert.vo.ConcertRoundVO;
 import kr.spring.concert.vo.ConcertVO;
 import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -210,18 +213,75 @@ public class ConcertController {
 
 			//공연정보
 			str2[1] = str2[1].trim();
-			concert.setC_round_1(str2[1]);
-
-			if(!str2[2].contains("배송")) {
+			
+			//문자열이 숫자로 시작하지 않으면
+			if(!str2[1].matches("^\\d.*")) {
+				//숫자로 시작하는 인덱스를 찾아서 앞부분을 자른다.
+				int index = 0;
+				for(int i = 0; i < str2[1].length(); i++) {
+					char c = str2[1].charAt(i);
+					if (Character.isDigit(c)) {
+		                index = i;
+		                break;
+		            }
+					str2[1] = str2[1].substring(index,str2[1].length());
+				}
+			}
+			
+			
+			//기간으로 표시된 경우 잘라서 표시한다.
+			if(str2[1].matches(".*[,|~].*")) {
+				String[] strArr = str2[1].split(",|~");
+				int cnt = 0;
+				for(String s : strArr) {
+					str2[++cnt] = s;
+				}
+				//날짜 형식 맞춰주기
+				//"일"으로 끝나는지 확인. 이떄 (일)요일은 후순위라 신경쓰지 않아도 된다.
+				if(str2[1].contains("일")) {
+					//오전/오후 시간 포함인지 파악
+					if(str2[1].contains("오")) {
+						str2[2] = str2[1].substring(0,str2[1].indexOf("오")+2) + str2[2];
+					//오전/오후 시간 앞 시간대에 가져오기
+					}else if(str2[2].contains("오")) {
+						str2[1] = str2[1] + str2[2].substring(str2[2].indexOf("오")-1);
+						str2[2] = str2[1].substring(0,str2[1].indexOf("일")-2) + str2[2];
+					}else if(str2[2].contains("박")){
+						str2[2] = "2024년 " + str2[2];
+					//오전/오후 없는 경우
+					}else {
+						str2[2] = str2[1].substring(0,str2[1].indexOf("일")-2) + str2[2];
+					}
+				}else if(!str2[2].contains("년")) {
+					str2[2] = "2024년 " + str2[2].trim();
+				}
+				
+				
+				concert.setC_round_2(str2[2].trim());
+			}else if(!str2[2].contains("배송")) {
 				str2[2] = str2[2].trim();
 				concert.setC_round_2(str2[2]);
 				//else if로 분기 한 번 더 만들어야함
 			}else {
 				concert.setC_round_2("null");
 			}
+			
+			concert.setC_round_1(str2[1]);
+			
+			/*
+			System.out.print("c_round_1 : ");
+			System.out.println(concert.getC_round_1());
+			System.out.print("c_round_2 : ");
+			System.out.println(concert.getC_round_2());
+			System.out.println("-----------------------------");
+			*/
+			
+
+			concert_round(concert.getC_round_1(), num);
+			concert_round(concert.getC_round_2(), num);
+			System.out.println("-------------------------");
 
 			//소개 이미지
-
 			switch(list_detail3.size()) {
 			case 7:
 				concert.setImage_7(list_detail3.get(6).getAttribute("src"));
@@ -249,5 +309,59 @@ public class ConcertController {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private void concert_round(String src, int num) {
+		
+		if(src.matches(".*[(|)].*")) {
+			
+			String[] strArr = src.split("\\(|\\)");
+			String src_date = strArr[0];
+			String src_time = null;
+			if(strArr.length > 2) {
+				src_time = strArr[2].trim();
+			}
+			
+			//가끔 형태가 다른 것들이 나오므로(ex.2024년, 24년. 3월, 03월) 날짜 포맷을 통일시키고 년, 월, 일 순으로 자른다.
+			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy년 MM월 dd일");
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+			
+			try {
+				Date fm = sdf1.parse(src_date);
+				String s = sdf2.format(fm);
+				
+				String[] date = s.split("-");
+				
+				String year = date[0];
+				String month = date[1];
+				String day = date[2];
+				
+				ConcertRoundVO round = new ConcertRoundVO();
+				
+				round.setConcert_num(num);
+				round.setYear(year);
+				round.setMonth(month);
+				round.setDay(day);
+				round.setTime(src_time);
+				
+				concertService.insertConcertRound(round);
+				
+				
+				System.out.print("year : ");
+				System.out.print(year);
+				System.out.print(", ");
+				System.out.print("month : ");
+				System.out.print(month);
+				System.out.print(", ");
+				System.out.print("day : ");
+				System.out.println(day);
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
 	}
 }

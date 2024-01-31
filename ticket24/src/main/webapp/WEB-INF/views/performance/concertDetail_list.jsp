@@ -63,6 +63,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 공연 예약 부분 -->
+	
 	<!-- 공연 상세 이미지 -->
 	<div class="concert-detail-img">
 		<c:if test="${concert.image_1!='null'}">

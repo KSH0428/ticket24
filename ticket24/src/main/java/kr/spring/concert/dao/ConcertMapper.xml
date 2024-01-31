@@ -115,8 +115,27 @@
 			#{image_7}
 			)
 	</insert>
+	
+	<!-- 콘서트 회차 -->
+	<insert id="insertConcertRound" parameterType="concertRoundVO">
+		INSERT INTO concert_round (
+			c_round_num,
+			concert_num,
+			year,
+			month,
+			day,
+			concert_time
+			)
+		VALUES (
+			concert_round_seq.nextval,
+			#{concert_num},
+			#{year},
+			#{month},
+			#{day},
+			#{time}
+			)
+	</insert>
 </mapper>
-<!-- #{img_poster} -->
 
 
 
