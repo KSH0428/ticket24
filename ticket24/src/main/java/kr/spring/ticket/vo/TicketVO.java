@@ -2,6 +2,7 @@ package kr.spring.ticket.vo;
 
 import java.sql.Date;
 
+
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Range;
@@ -36,7 +37,7 @@ public class TicketVO {
 	private Date ticket_modifydate;
 	@NotBlank
 	private String ticket_content;
-	private MultipartFile Upload;
+	private MultipartFile[] upload;
 	private String ticket_filename1;
 	private String ticket_filename2;
 	private String ticket_filename3;

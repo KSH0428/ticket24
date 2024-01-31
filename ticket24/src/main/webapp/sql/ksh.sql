@@ -80,6 +80,10 @@ create table ticket_pay(
  ticket_pay_address1 varchar2(50) not null,
  ticket_pay_address2 varchar2(50) not null,
  ticket_pay_phone varchar2(15) not null,
- ticket_pay_method number(1) not null
+ ticket_pay_method number(1) not null,
+ mem_num number not null,
+ constraint ticket_pay_pk primary key(ticket_pay_num),
+ constraint mem_num_fk foreign key (mem_num) references member(mem_num)
+ 
 );
 create sequence ticket_pay_seq;
