@@ -6,7 +6,7 @@
 	<h2>게시판 목록</h2>
 	<form action="list" id="searh_form" method="get">
 	<ul class="search">
-				<li>
+			<li>
 			<select name="keyfield" id="keyfield">
 				<option value="1"<c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 				<option value="2"<c:if test="${param.keyfield == 2}">selected</c:if>>ID+별명</option>
