@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.event.vo.EventReplyVO;
 import kr.spring.event.vo.EventVO;
+import kr.spring.member.vo.MemberVO;
 
 public interface EventService {
 	public List<EventVO> selectList(Map<String,Object> map);
@@ -27,4 +28,6 @@ public interface EventService {
 	public void insertReply(EventReplyVO eventReply);
 	public void updateReply(EventReplyVO eventReply);
 	public void deleteReply(int event_renum);
+	//이벤트 적립
+	public void insertPoint(MemberVO member);
 }
