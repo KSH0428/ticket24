@@ -200,15 +200,15 @@ public class TicketController {
 			// 수정전 파일 삭제 처리
 			FileUtil.removeFile(request, db_ticket.getTicket_filename1());
 		}
-		else if(ticketVO.getUpload2() != null && !ticketVO.getUpload2().isEmpty()) {
+		if(ticketVO.getUpload2() != null && !ticketVO.getUpload2().isEmpty()) {
 			// 수정전 파일 삭제 처리
 			FileUtil.removeFile(request, db_ticket.getTicket_filename2());
 		}
-		else if(ticketVO.getUpload3() != null && !ticketVO.getUpload3().isEmpty()) {
+		if(ticketVO.getUpload3() != null && !ticketVO.getUpload3().isEmpty()) {
 			// 수정전 파일 삭제 처리
 			FileUtil.removeFile(request, db_ticket.getTicket_filename3());
 		}
-		else if(ticketVO.getUpload4() != null && !ticketVO.getUpload4().isEmpty()) {
+		if(ticketVO.getUpload4() != null && !ticketVO.getUpload4().isEmpty()) {
 			// 수정전 파일 삭제 처리
 			FileUtil.removeFile(request, db_ticket.getTicket_filename4());
 		}
@@ -222,4 +222,34 @@ public class TicketController {
 	/*=======================================
 	 * 게시판 글 삭제
 	 *======================================*/
+	@RequestMapping("ticket/delete")
+	public String submitDelete (@RequestParam int ticket_num, HttpServletRequest request) {
+		log.debug("<<티켓 양도 글 삭제 ticket_num>> : " + ticket_num);
+		
+		//DB에 저장된 파일 정보 구하기
+		TicketVO db_ticket = ticketService.selectTicket(ticket_num);
+		
+		//글 삭제
+		ticketService.deleteTicket(ticket_num);
+		
+		if(db_ticket.getTicket_filename1() != null) {
+			//파일 삭제
+			FileUtil.removeFile(request, db_ticket.getTicket_filename1());
+		}
+		if(db_ticket.getTicket_filename2() != null) {
+			//파일 삭제
+			FileUtil.removeFile(request, db_ticket.getTicket_filename2());
+		}
+		if(db_ticket.getTicket_filename3() != null) {
+			//파일 삭제
+			FileUtil.removeFile(request, db_ticket.getTicket_filename3());
+		}
+		if(db_ticket.getTicket_filename4() != null) {
+			//파일 삭제
+			FileUtil.removeFile(request, db_ticket.getTicket_filename4());
+		}
+		
+		
+		return "redirect:/ticket/list";
+	}
 }
