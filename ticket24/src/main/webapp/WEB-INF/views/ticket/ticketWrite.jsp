@@ -22,7 +22,7 @@
 	 </li>
 	  <li>
 			<form:label path="ticket_name">공연명</form:label>
-			<form:input path="ticket_name"/>
+			<form:input path="ticket_name" placeholder="공연명을 입력하세요"/>
 			<form:errors path="ticket_name" cssClass="error-color"/>
 		</li>
 		 <li>
@@ -31,6 +31,27 @@
 			<form:input path="temp_time" id="time" type="time"/>
 			<form:errors path="ticket_date" cssClass="error-color"/>
 		</li>
+		<li>
+			<form:label path="ticket_place">공연 장소</form:label>
+			<form:input path="ticket_place" placeholder="공연 장소를 입력하세요"/>
+			<form:errors path="ticket_place" cssClass="error-color"/>
+		</li>
+		<li>
+			<form:label path="ticket_seat">좌석 정보</form:label>
+			<form:input path="ticket_seat" placeholder="좌석정보를 입력하세요"/>
+			<form:errors path="ticket_seat" cssClass="error-color"/>
+		</li>
+		<li>
+			<form:label path="ticket_quantity">티켓 수량</form:label>
+			<form:input path="ticket_quantity" type="number" min="1" size="3" placeholder="수량을 입력하세요"/>장
+			<form:errors path="ticket_quantity" cssClass="error-color"/>
+		</li>
+		<li>
+			<form:label path="ticket_price">티켓 가격</form:label>
+			<form:input path="ticket_price" type="number" maxlength="30" placeholder="가격을 입력하세요"/>원
+			<form:errors path="ticket_price" cssClass="error-color"/>
+		</li>
+		
 	 </ul>
 	 </form:form>
 </div>
