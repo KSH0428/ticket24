@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member.profile.js"></script>
 <!-- 내용 시작 -->
 <div class="page-main">
@@ -13,37 +14,16 @@
 		</ul>
 		<ul>
 			<li>
-				'${member.mem_name}'님은 '${member.mem_auth}'등급입니다.
+				'${member.mem_name}'님은 <c:if test="${member.mem_auth == 1}">'실버' 등급입니다.</c:if><br>
+									    <c:if test="${member.mem_auth == 2}">'골드' 등급입니다.</c:if><br>
+									    <c:if test="${member.mem_auth == 3}">'플래티넘' 등급입니다.</c:if><br>
+									    <c:if test="${member.mem_auth == 9}">'관리자' 입니다.</c:if><br>
 			</li>
-			<li>	
-				적립금 : ${member.pt_amount}
+			<li>
+				적립금 : <fmt:formatNumber value="${point.pt_sum}" pattern="#,###" /> 원
 			</li>
 		</ul>
 	</div>
-	<form action="point" id="search_form" method="get">
-		<ul class="search">
-			<li>
-				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>ID+별명</option>
-					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
-				</select>
-			</li>
-			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
-			</li>
-			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" onclick="location.href='point'">
-			</li>
-		</ul>
-		<div class="align-right">
-			<select id="order" name="order">
-				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
-				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
-			</select>
-		</div>
-	</form>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
@@ -60,7 +40,7 @@
 			<td class="align-center">${point.pt_reg_date}</td>
 			<td class="align-center">${point.pt_amount}</td>
 			<td class="align-center">${point.pt_content}</td>
-			<td class="align-center">${point.pt_amount}</td>
+			<td class="align-center">${point.pt_sum}</td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -68,22 +48,4 @@
 	</c:if>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	//검색 유효성 체크
-	$('#search_form').submit(function(){
-		if($('#keyword').val().trim()==''){
-			alert('검색어를 입력하세요!');
-			$('#keyword').val('').focus();
-			return false;
-		}
-	});//end of submit
-	
-	//정렬 선택
-	$('#order').change(function(){
-		location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
-	});
-	
-});	
-</script>
 <!-- 내용 끝 -->

@@ -74,4 +74,14 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.selectRowCount(map);
 	}
 
+	@Override
+	public MemberVO selectMemberPoint(int mem_num) {
+		return memberMapper.selectMemberPoint(mem_num);
+	}
+
+	@Override
+	public MemberVO selectMemberPointSum(int mem_num) {
+		return memberMapper.selectMemberPointSum(mem_num);
+	}
+
 }

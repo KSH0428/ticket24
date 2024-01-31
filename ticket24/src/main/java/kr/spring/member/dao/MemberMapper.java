@@ -27,8 +27,14 @@ public interface MemberMapper {
 	
 	//회원 정보
 	public MemberVO selectCheckMember(String id);
-	@Select("SELECT * FROM member JOIN member_detail USING(mem_num) JOIN member_point USING(mem_num) WHERE mem_num=#{mem_num}")
+	@Select("SELECT * FROM member JOIN member_detail USING(mem_num) WHERE mem_num=#{mem_num}")
 	public MemberVO selectMember(int mem_num);
+	//포인트 테이블
+	@Select("SELECT * FROM member_point WHERE mem_num=#{mem_num}")
+	public MemberVO selectMemberPoint(int mem_num);
+	//포인트 합계 구하기
+	@Select("SELECT SUM(pt_amount) AS pt_sum FROM member_point WHERE mem_num=#{mem_num}")
+	public MemberVO selectMemberPointSum(int mem_num);
 	
 	//회원 정보 업데이트
 	@Update("UPDATE member SET mem_nickname=#{mem_nickname} WHERE mem_num=#{mem_num}")

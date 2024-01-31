@@ -31,9 +31,10 @@
 	width:600px;
 	height:400px;
 	border:1px solid #000;
-	padding:10px 10px 30px 10px;
+	padding:70px 25px 70px 25px;
 	position:relative;
 	margin:0 auto;
+	margin-top:50px;
 }
 .memberinfo ul {
 	list-style:none;
@@ -44,6 +45,22 @@
 }
 .mypage-button{
 	margin:0 auto;
+}
+.mypage-button input[type="button"]{
+	padding:5px 20px;
+	border:1px solid #09aa5c;
+	border-radius:2px;
+	color:#fff;
+	background-color:#666666;
+	font-weight:bold;
+	cursor:pointer;
+}
+.member-photo{
+	float: left;
+}
+.member-point{
+	font-size:150%;
+	font-weight:bold;
 }
 /* 회원 정보 수정
 -------------------------*/

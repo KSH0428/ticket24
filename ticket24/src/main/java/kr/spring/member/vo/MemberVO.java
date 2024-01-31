@@ -54,8 +54,8 @@ public class MemberVO {
 	private String now_passwd; //비밀번호 변경
 	
 	private int pt_num;
-	private int pt_status; //0:적립 1:사용
 	private String pt_amount; //적립금 잔액
+	private String pt_sum; //적립금 총액
 	private String pt_content;
 	private Date pt_reg_date;
 	

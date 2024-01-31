@@ -160,10 +160,13 @@ public class MemberController {
 		
 		//회원 정보
 		MemberVO member = memberService.selectMember(user.getMem_num());
+		MemberVO point = memberService.selectMemberPointSum(user.getMem_num());
 		
 		log.debug("<<회원 상세 정보>> : " + member);
+		log.debug("<<회원 포인트 합계>> : " + point);
 		
 		model.addAttribute("member", member);
+		model.addAttribute("point", point);
 		
 		return "myPage";
 	}
@@ -211,29 +214,26 @@ public class MemberController {
 	}
 	
 	/*========================
-	 * 포인트 조회
+	 * 포인트 리스트 
 	 *=======================*/
 	@RequestMapping("/member/point")
-	public ModelAndView process(MemberVO member,@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order,String keyfield, String keyword, HttpSession session) {
+	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,HttpSession session) {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO member = memberService.selectMember(user.getMem_num());
+		MemberVO point = memberService.selectMemberPointSum(user.getMem_num());
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
 		map.put("mem_num", user.getMem_num());
-		map.put("member", member);
 		
 		//전체/검색 레코드 수
 		int count = memberService.selectRowCount(map);
 		log.debug("<<count>> : " + count);
 		
-		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+		PageUtil page = new PageUtil(currentPage,count,10,10,"point");
 
 		List<MemberVO> list = null;
 		if(count > 0) {
-			map.put("member", member);
-			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
@@ -246,6 +246,7 @@ public class MemberController {
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
 		mav.addObject("member", member);
+		mav.addObject("point", point);
 		
 		return mav;
 	}
