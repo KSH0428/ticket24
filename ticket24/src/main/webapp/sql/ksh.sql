@@ -41,6 +41,7 @@ create sequence comm_reply_seq;
 --티켓 양도 게시판
 create table ticket(
  ticket_num number not null,
+ mem_num number not null,
  ticket_category number(1) not null,
  ticket_name varchar2(150) not null,
  ticket_date varchar2(10) not null,
@@ -58,7 +59,8 @@ create table ticket(
  ticket_filename3 varchar2(200),
  ticket_filename4 varchar2(200),
  ticket_status number(1) not null,
- constraint ticket_pk primary key(ticket_num)
+ constraint ticket_pk primary key(ticket_num),
+ constraint ticket_fk foreign key(mem_num) references member(mem_num)
 );
 create sequence ticket_seq;
 
