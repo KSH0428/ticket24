@@ -19,6 +19,13 @@
 	    WHERE mem_num = #{mem_num}
 	</select>
 	
+	<!-- 채팅 메시지 읽기 -->
+	<select id="selectChatDetail" parameterType="integer" resultType="chatMessageVO">
+		SELECT * FROM chatmessage
+		WHERE chatroom_num=?
+		ORDER BY send_date ASC
+	</select>
+	
 </mapper>
 
 

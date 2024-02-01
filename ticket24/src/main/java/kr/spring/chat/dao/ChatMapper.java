@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -20,10 +19,9 @@ public interface ChatMapper {
 	//채팅방 번호 생성
 	@Select("SELECT chatroom_seq.nextval FROM dual")
 	public int selectChatRoomNum();
-	//채팅방 생성 & 멤버 등록?
+	//채팅방 생성 & 멤버 등록
 	@Insert("INSERT INTO chatroom (chatroom_num,mem_num) VALUES (#{chatroom_num},#{mem_num})")
 	public void insertChatRoom(ChatRoomVO chatRoomVO);
-	
 	//채팅 멤버 읽기 (필요한가?)
 	public List<ChatRoomVO> selectChatMember(int chatroom_num);
 	//채팅 메시지 번호 생성
