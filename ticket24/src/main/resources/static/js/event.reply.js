@@ -4,7 +4,7 @@ $(function(){
 	let count;
 	
 	/*-----------------
-	 *	댓글 목록
+	 * 댓글 목록
 	 ----------------- */
 	//댓글 목록
 	function selectList(pageNum){
@@ -35,7 +35,7 @@ $(function(){
 					if(item.mem_nickname){
 						output += item.mem_nickname + '<br>';
 					}else{
-						output += item.id + '<br>';
+						output += item.mem_id + '<br>';
 					}
 					
 					if(item.event_modifydate){
@@ -82,7 +82,7 @@ $(function(){
 	});
 	
 	/*-----------------
-	 *	댓글 등록
+	 * 댓글 등록
 	 ----------------- */
 	$('#re_form').submit(function(event){
 		if($('#event_recontent').val().trim()==''){
@@ -121,7 +121,7 @@ $(function(){
 	}
 	
 	/*-----------------
-	 *	댓글 수정
+	 * 댓글 수정
 	 ----------------- */
 	//댓글 수정 버튼 클릭시 수정폼 노출
 	$(document).on('click','.modify-btn',function(){
@@ -209,7 +209,7 @@ $(function(){
 	});
 	
 	/*-----------------
-	 *	댓글 글자수 체크
+	 * 댓글 글자수 체크
 	 ----------------- */
 	//textarea에 내용 입력시 글자수 체크
 	$(document).on('keyup','textarea',function(){
@@ -233,7 +233,7 @@ $(function(){
 	});	
 	
 	/*-----------------
-	 *	댓글 삭제
+	 * 댓글 삭제
 	 ----------------- */
 	$(document).on('click','.delete-btn',function(){
 		//댓글 번호
@@ -264,7 +264,7 @@ $(function(){
 	});
 	
 	/*-----------------
-	 *	초기데이터(목록) 호출
+	 * 초기데이터(목록) 호출
 	 ----------------- */
 	selectList(1);
 });

@@ -88,6 +88,11 @@
     	<put-attribute name="css" value="/WEB-INF/views/event/eventCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/event/eventView.jsp"/>
     </definition>
+    
+    <definition name="chatMain" extends="main">
+    	<put-attribute name="title" value="채팅 메인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/chat/chatMain.jsp"/>
+    </definition>
 
 </tiles-definitions>
 

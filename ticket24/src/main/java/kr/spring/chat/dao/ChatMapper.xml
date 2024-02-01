@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.chat.dao.ChatMapper">
+	<resultMap type="chatRoomVO" id="chatMap" >
+		<result property="chatMessageVO.message" column="message"/>
+		<result property="chatMessageVO.send_date" column="send_date"/>
+	</resultMap>
+
+	<select id="selectChatRoomList" parameterType="map" resultMap="chatMap">
+		SELECT *
+		FROM chatroom
+		WHERE mem_num = #{mem_num}
+		ORDER BY chatroom_num DESC
+	</select>
+
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+	    SELECT COUNT(*)
+	    FROM chatroom
+	    WHERE mem_num = #{mem_num}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

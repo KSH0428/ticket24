@@ -65,6 +65,50 @@ create table event_reply(
 
 create sequence event_reply_seq;
 
+--채팅방
+create table chatroom(
+ chatroom_num number not null,
+ mem_num number not null,
+ constraint chatroom_pk primary key (chatroom_num),
+ constraint chatroom_fk foreign key (mem_num) references member(mem_num)
+);
+
+create sequence chatroom_seq;
+
+--채팅 메시지
+create table chatmessage(
+ chat_num number not null,
+ chatroom_num number not null,
+ mem_num number not null,
+ message varchar2(4000) not null,
+ send_date date default sysdate not null,
+ read_check number default 1 not null,
+ constraint chatmessage_pk primary key (chat_num),
+ constraint chatmessage_fk1 foreign key (chatroom_num) references chatroom(chatroom_num),
+ constraint chatmessage_fk2 foreign key (mem_num) references member(mem_num)
+);
+
+create sequence chatmessage_seq;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
