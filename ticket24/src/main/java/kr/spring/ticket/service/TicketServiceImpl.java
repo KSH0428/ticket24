@@ -35,7 +35,13 @@ public class TicketServiceImpl implements TicketService {
 	public TicketVO selectTicket(int ticket_num) {
 		return ticketMapper.selectTicket(ticket_num);
 	}
-
+	
+	@Override
+	public void updateTicket_hit(int ticket_num) {
+		ticketMapper.updateTicket_hit(ticket_num);
+		
+	}
+	
 	@Override
 	public void updateTicket(TicketVO ticket) {
 		ticketMapper.updateTicket(ticket);
@@ -53,6 +59,7 @@ public class TicketServiceImpl implements TicketService {
 		ticketMapper.deleteFile(ticket_num);
 		
 	}
+	
 
 }
 

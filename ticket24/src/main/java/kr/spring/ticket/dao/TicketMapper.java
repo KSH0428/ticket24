@@ -15,6 +15,8 @@ public interface TicketMapper {
 	public int selectRowCount(Map<String,Object> map);
 	public void insertTicket(TicketVO ticket);
 	public TicketVO selectTicket(int ticket_num);
+	@Update("UPDATE ticket SET ticket_hit=ticket_hit+1 WHERE ticket_num=#{ticket_num}")
+	public void updateTicket_hit(int ticket_num);
 	public void updateTicket(TicketVO ticket);
 	@Delete("DELETE FROM ticket WHERE ticket_num=#{ticket_num}")
 	public void deleteTicket(int ticket_num);

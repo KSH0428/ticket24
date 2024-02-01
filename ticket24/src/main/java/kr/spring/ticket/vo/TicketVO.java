@@ -17,6 +17,7 @@ import lombok.ToString;
 @ToString
 public class TicketVO {
 	private int ticket_num;
+	private int mem_num;
 	@Range(min=1,max=4) //1:뮤지컬,2:공연,3:콘서트,4:클래식
 	private int ticket_category;
 	@NotBlank
@@ -26,9 +27,9 @@ public class TicketVO {
 	private String temp_date;
 	@NotBlank
 	private String temp_time;
-	@NotBlank
+	@Range(min=1,max=999)
 	private int ticket_quantity;
-	@NotBlank
+	@Range(min=1,max=99999999)
 	private int ticket_price;
 	@NotBlank
 	private String ticket_place;
@@ -36,6 +37,7 @@ public class TicketVO {
 	private String ticket_seat;
 	private String ticket_special1;
 	private String ticket_special2;
+	private int ticket_hit;
 	private Date ticket_regdate;
 	private Date ticket_modifydate;
 	@NotBlank
@@ -49,6 +51,9 @@ public class TicketVO {
 	private String ticket_filename3;
 	private String ticket_filename4;
 	private int ticket_status;
+	
+	private String mem_id;
+	private String mem_nickname;
 		
 }
 

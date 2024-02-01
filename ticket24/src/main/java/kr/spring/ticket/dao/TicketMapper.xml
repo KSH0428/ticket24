@@ -5,13 +5,14 @@
 	<insert id="insertTicket" parameterType="ticketVO">
 		INSERT INTO ticket(
 			ticket_num,
+			mem_num,
 			ticket_category,
 			ticket_name,
 			ticket_date,
-			ticket_quantity,
-			ticket_price,
 			ticket_place,
 			ticket_seat,
+			ticket_quantity,
+			ticket_price,
 			ticket_special1,
 			ticket_special2,
 			ticket_content,
@@ -22,13 +23,14 @@
 			ticket_status)
 		VALUES (
 			ticket_seq.nextval,
+			#{mem_num},
 			#{ticket_category},
 			#{ticket_name},
 			#{ticket_date},
-			#{ticket_quantity},
-			#{ticket_price},
 			#{ticket_place},
 			#{ticket_seat},
+			#{ticket_quantity},
+			#{ticket_price},
 			#{ticket_special1},
 			#{ticket_special2},
 			#{ticket_content},
@@ -60,11 +62,19 @@
 			</where>
 		</sql>
 		
+		<sql id="ticketOrder">
+		<if test="order == 1">
+			ORDER BY ticket_num DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY ticket_hit DESC
+		</if>
+		</sql>
 		<!-- 티켓양도 목록의 총개수/검색 개수 -->
 		<select id="selectRowCount" parameterType="map" resultType="integer">
 			SELECT 
 			  COUNT(*)
-			  FROM ticket
+			  FROM ticket JOIN member USING(mem_num)
 			  <include refid="ticketSearch"></include>
 		</select>
 		
@@ -73,7 +83,7 @@
 			SELECT
 			  *
 			FROM (SELECT
-					a.*
+					a.*,
 					rownum rnum
 					FROM(SELECT
 							ticket_num,
@@ -83,12 +93,19 @@
 				 			]]>
 				 			ticket_place,
 				 			ticket_date,
+				 			ticket_regdate,
 				 			ticket_seat,
 				 			ticket_status,
 				 			ticket_quantity,
-				 			ticket_price
+				 			ticket_price,
+				 			ticket_hit,
+				 			mem_num,
+				 			mem_id,
+				 			mem_nickname
 				 		FROM ticket
-				 		<include refid="ticketSearch"></include>))
+				 		JOIN member USING(mem_num)
+				 		<include refid="ticketSearch"></include>
+				 		<include refid="ticketOrder"></include>)a)
 				 		<![CDATA[
 			   			WHERE rnum >= #{start} AND rnum <= #{end}
 			   			]]>
@@ -99,6 +116,8 @@
 			SELECT
 			  *
 			FROM ticket
+			JOIN member USING(mem_num)
+			LEFT OUTER JOIN member_detail USING(mem_num)
 			WHERE ticket_num=#{ticket_num}
 		</select>
 		
@@ -126,7 +145,9 @@
 			ticket_special1=#{ticket_special1},
 			ticket_special2=#{ticket_special2},
 			ticket_content=#{ticket_content},
-			ticket_status=#{ticket_status}		
+			ticket_status=#{ticket_status},
+			ticket_modifydate=SYSDATE
+			WHERE ticket_num=#{ticket_num}		
 		</update>
 </mapper>
 

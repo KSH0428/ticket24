@@ -11,6 +11,7 @@ public interface TicketService {
 	public int SelectRowCount(Map<String,Object> map);
 	public void insertTicket(TicketVO ticket);
 	public TicketVO selectTicket(int ticket_num);
+	public void updateTicket_hit(int ticket_num);
 	public void updateTicket(TicketVO ticket);
 	public void deleteTicket(int ticket_num);
 	public void deleteFile(int ticket_num);

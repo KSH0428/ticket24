@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.member.vo.MemberVO;
 import kr.spring.ticket.service.TicketService;
 import kr.spring.ticket.vo.TicketVO;
 import kr.spring.util.FileUtil;
@@ -55,8 +56,12 @@ public class TicketController {
 						  HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<티켓양도 글 저장>> : " + ticketVO);
 		
+		//회원번호 셋팅
+		MemberVO vo = (MemberVO)session.getAttribute("user");
+		ticketVO.setMem_num(vo.getMem_num());
 		ticketVO.setTicket_date(ticketVO.getTemp_date() + " " + ticketVO.getTemp_time());
 		
+		log.debug("<<티켓양도 글 저장>> : " + ticketVO);
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
@@ -118,6 +123,9 @@ public class TicketController {
 	@RequestMapping("/ticket/detail")
 	public ModelAndView process(@RequestParam int ticket_num) {
 		log.debug("<<티켓양도 글 상세 ticket_num>> : " + ticket_num);
+		
+		//해당 글의 조회수 증가
+		ticketService.updateTicket_hit(ticket_num);
 		
 		TicketVO ticket = ticketService.selectTicket(ticket_num);
 		//제목에 태그를 허용하지 않음
