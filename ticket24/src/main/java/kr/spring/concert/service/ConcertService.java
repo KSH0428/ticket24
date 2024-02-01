@@ -16,6 +16,8 @@ public interface ConcertService {
 	//콘서트 상세
 	public ConcertDetailVO selectConcert(int concert_num);
 	
+	//콘서트 회차
+	public List<ConcertRoundVO> selectRoundList(int concert_num);
 	//--------------웹 스크롤 -----------------
 
 	//콘서트 리스트

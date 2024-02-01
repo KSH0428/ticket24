@@ -56,8 +56,13 @@
 		WHERE concert_num=#{concert_num}
 	</select>
 
-
-
+	<!-- 콘서트 회차 -->
+	<select id="selectRoundList" parameterType="integer" resultType="concertRoundVO">
+		SELECT
+			*
+		FROM concert_round
+		WHERE concert_num=#{concert_num}
+	</select>
 
 
 

@@ -76,10 +76,13 @@ public class ConcertController {
 		//조회수 처리?
 		
 		ConcertDetailVO concert = concertService.selectConcert(concert_num);
+		List<ConcertRoundVO> round = concertService.selectRoundList(concert_num);
 		
-		System.out.println(concert);
+		//System.out.println(concert);
 		
-		//제목에 노 태그 처리?
+		//제목에 노태그 처리?
+		
+		
 		
 		return new ModelAndView("concertView","concert",concert);
 	}
@@ -222,9 +225,9 @@ public class ConcertController {
 					char c = str2[1].charAt(i);
 					if (Character.isDigit(c)) {
 		                index = i;
+		                str2[1] = str2[1].substring(index,str2[1].length());
 		                break;
 		            }
-					str2[1] = str2[1].substring(index,str2[1].length());
 				}
 			}
 			
@@ -236,9 +239,10 @@ public class ConcertController {
 				for(String s : strArr) {
 					str2[++cnt] = s;
 				}
+				
 				//날짜 형식 맞춰주기
 				//"일"으로 끝나는지 확인. 이떄 (일)요일은 후순위라 신경쓰지 않아도 된다.
-				if(str2[1].contains("일")) {
+				if(str2[1].contains("일")&&!(str2[1].matches(".*['PM'|'AM'].*"))) {
 					//오전/오후 시간 포함인지 파악
 					if(str2[1].contains("오")) {
 						str2[2] = str2[1].substring(0,str2[1].indexOf("오")+2) + str2[2];
@@ -246,9 +250,11 @@ public class ConcertController {
 					}else if(str2[2].contains("오")) {
 						str2[1] = str2[1] + str2[2].substring(str2[2].indexOf("오")-1);
 						str2[2] = str2[1].substring(0,str2[1].indexOf("일")-2) + str2[2];
-					}else if(str2[2].contains("박")){
+					//X박X일 형식
+					}else if(str2[2].contains("박")&&!str2[1].contains("박")){
+						str2[1] = str2[1] + str2[2].substring(str2[2].indexOf("박")-2);
 						str2[2] = "2024년 " + str2[2];
-					//오전/오후 없는 경우
+						//오전/오후 없는 경우
 					}else {
 						str2[2] = str2[1].substring(0,str2[1].indexOf("일")-2) + str2[2];
 					}
@@ -279,7 +285,7 @@ public class ConcertController {
 
 			concert_round(concert.getC_round_1(), num);
 			concert_round(concert.getC_round_2(), num);
-			System.out.println("-------------------------");
+
 
 			//소개 이미지
 			switch(list_detail3.size()) {
@@ -313,6 +319,9 @@ public class ConcertController {
 	
 	private void concert_round(String src, int num) {
 		
+		System.out.println("num : " + num + ", " + src);
+		System.out.println("---------------------------");
+		
 		if(src.matches(".*[(|)].*")) {
 			
 			String[] strArr = src.split("\\(|\\)");
@@ -344,9 +353,9 @@ public class ConcertController {
 				round.setDay(day);
 				round.setTime(src_time);
 				
-				concertService.insertConcertRound(round);
+				//concertService.insertConcertRound(round);
 				
-				
+				/*
 				System.out.print("year : ");
 				System.out.print(year);
 				System.out.print(", ");
@@ -355,7 +364,7 @@ public class ConcertController {
 				System.out.print(", ");
 				System.out.print("day : ");
 				System.out.println(day);
-				
+				*/
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}

@@ -18,6 +18,33 @@ public class ConsertServiceImpl implements ConcertService{
 	@Autowired
 	private ConcertMapper concertMapper;
 	
+	//-------------------------------
+	// 웹 크롤링 시작
+	//-------------------------------
+
+	@Override
+	public void insertConcert(ConcertVO concert) {
+		concertMapper.insertConcert(concert);
+
+	}
+
+	@Override
+	public void insertConcertDetail(ConcertDetailVO concertdetail) {
+		concertMapper.insertConcertDetail(concertdetail);
+	}
+
+	@Override
+	public void insertConcertRound(ConcertRoundVO round) {
+		concertMapper.insertConcertRound(round);
+
+	}
+
+
+
+	//-------------------------------
+	// 웹 크롤링 끝
+	//-------------------------------
+	
 	@Override
 	public List<ConcertVO> selectList(Map<String, Object> map) {
 		return concertMapper.selectList(map);
@@ -33,30 +60,12 @@ public class ConsertServiceImpl implements ConcertService{
 		return concertMapper.selectConcert(concert_num);
 	}
 	
-	//-------------------------------
-	// 웹 크롤링 시작
-	//-------------------------------
+	@Override
+	public List<ConcertRoundVO> selectRoundList(int concert_num) {
+		return concertMapper.selectRoundList(concert_num);
+	}
 	
-	@Override
-	public void insertConcert(ConcertVO concert) {
-		concertMapper.insertConcert(concert);
-		
-	}
-
-	@Override
-	public void insertConcertDetail(ConcertDetailVO concertdetail) {
-		concertMapper.insertConcertDetail(concertdetail);
-	}
-
-	@Override
-	public void insertConcertRound(ConcertRoundVO round) {
-		concertMapper.insertConcertRound(round);
-		
-	}
-
-	//-------------------------------
-	// 웹 크롤링 끝
-	//-------------------------------
+	
 
 
 

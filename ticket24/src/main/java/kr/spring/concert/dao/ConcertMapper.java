@@ -16,7 +16,7 @@ public interface ConcertMapper {
 	public int selectRowCount(Map<String,Object> map);
 	public List<ConcertVO> selectList(Map<String,Object> map);
 	public ConcertDetailVO selectConcert(int concert_num);
-	
+	public List<ConcertRoundVO> selectRoundList(int concert_num);
 	//--------------웹 스크롤 -----------------
 
 	//콘서트 리스트
