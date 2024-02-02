@@ -76,6 +76,7 @@ public class EventAjaxController {
 			EventVO event = eventService.selectEvent(eventReplyVO.getEvent_num());
 			//적립금 적립
 			user.setEvent_num(eventReplyVO.getEvent_num());
+			user.setPt_amount(event.getEvent_point());
 			eventService.insertPoint(user);
 			
 			mapJson.put("result", "success");
