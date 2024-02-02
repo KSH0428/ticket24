@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.mdorder.dao.MdOrderMapper">
+
+<!-- 주문 넣기(등록) -->
+<!-- md_order_num 구하기 -->
+<select id="insertOrder" parameterType="integer">
+SELECT md_order_seq.nextval
+ FROM dual
+</select>
+
+<insert id="insertMdOrder" parameterType="mdOrderVO">
+INSERT INTO md_order (
+	md_order_num,
+	md_item_name,
+	md_order_total,
+	md_payment,
+	md_receive_name,
+	md_receive_post,
+	md_receive_address1,
+	md_receive_address2,
+	md_receive_phone,
+	md_notice,
+	mem_num 
+) VALUES (
+	#{md_order_num},
+	#{md_item_name},
+	#{md_order_total},
+	#{md_payment},
+	#{md_receive_name},
+	#{md_receive_post},
+	#{md_receive_address1},
+	#{md_receive_address2},
+	#{md_receive_phone},
+	#{md_notice},
+	#{mem_num}
+)	
+</insert>
+
+<!-- 주문 상세 정보 저장 -->
+<insert id="insertMdOrderDetail" parameterType="mdOrderVO">
+INSERT INTO md_order_detail (
+	md_detail_num,
+	md_num,
+	md_item_name,
+	md_item_price,
+	md_item_total,
+	order_quantity,
+	md_order_num 
+) VALUES (
+	order_detail_seq.nextval,
+	#{md_num},
+	#{md_item_name},
+	#{md_item_price},
+	#{md_item_total},
+	#{order_quantity},
+	#{md_order_num}
+)	
+</insert> 
+<!-- 상품의 재고수 차감 
+ <update id="">
+UPDATE md SET md_quantity=#{md_quantity}-?
+WHERE md_num=#{md_num}
+</update>
+
+장바구니에서 주문상품 삭제
+<delete id="">
+DELETE FROM md_cart
+WHERE mem_num=?
+</delete>
+
+
+관리자 - 전체 주문 개수/검색 주문 개수
+<select id="getOrderCount">
+SELECT COUNT(*) FROM md_order
+JOIN member 
+USING(mem_num)
+</select>
+
+관리자 - 전체 주문 목록/검색 주문 목록
+<select id="">
+SELECT
+	* FROM
+	(SELECT a.*, 
+	rownum rnum
+	FROM (SELECT * FROM md_order
+	JOIN member USING(mem_num) sub_sql
+	ORDER BY md_order_num DESC)a) 
+	WHERE rnum >= ? AND rnum <= ?
+</select>
+
+사용자 - 전체 주문 개수/검색 주문 개수
+<select id="">
+SELECT COUNT(*) FROM md_order 
+WHERE mem_num = #{mem_num} + sub_sql
+</select>
+
+//사용자 - 전체 주문 목록/검색 주문 목록
+<select id="">
+SELECT 
+	*
+	 FROM (SELECT 
+		a.*, 
+		rownum rnum 
+		FROM (SELECT 
+			* 
+		FROM md_order 
+		WHERE mem_num=#{mem_num} + sub_sql
+		ORDER BY md_order_num DESC)a)
+		WHERE rnum >= ? AND rnum <= ?"
+</select>
+			
+개별 상품 목록
+<select id="">
+SELECT 
+	* 
+	FROM md_order_detail 
+	WHERE md_order_num=#{md_order_num}
+	ORDER BY md_num DESC
+</select>
+			
+주문 삭제(삭제시 재고를 원상 복귀시키지 않음, 주문취소일 때 원상 복귀)
+관리자/사용자 - 주문상세
+<select id="">
+SELECT 
+	* 
+	FROM md_order 
+	WHERE md_order_num=?
+</select>
+			
+관리자/사용자 - 배송지정보 수정			
+<update id="">
+UPDATE md_order SET 
+	md_receive_name=#{md_receive_name},
+	md_receive_post=#{md_receive_post},
+	md_receive_address1=#{md_receive_address1},
+	md_receive_address2=#{receive_address2},
+	md_receive_phone=#{md_receive_phone},
+	md_notice=#{md_notice},
+	md_order_mdate=SYSDATE 
+	WHERE md_order_num=#{md_order_num}	
+</update>
+			
+관리자 - 배송상태 수정
+<update id="">
+UPDATE md_order SET 
+	md_order_status=#{md_order_status},
+	md_order_mdate=SYSDATE 
+	WHERE md_order_num=#{md_order_num}
+</update>
+
+//주문 취소일 경우만 상품개수 조정
+			if(order.getStatus() == 5) {
+				//주문번호에 해당하는 상품정보 구하기
+				List<OrderDetailVO> detailList = 
+						getListOrderDetail(order.getOrder_num());
+				//SQL문 작성
+				sql = "UPDATE zitem SET quantity=quantity+? WHERE item_num=?";
+			
+			 
+사용자 - 주문취소	
+<update id="">
+UPDATE md_order set 
+	md_order_status=5,
+	md_order_mdate=SYSDATE 
+ 	WHERE md_order_num=#{md_order_num}
+</update>		 
+
+			
+//주문번호에 해당하는 상품정보 구하기
+			List<OrderDetailVO> detailList = 
+					       getListOrderDetail(order_num);
+			//주문 취소로 주문 상품의 재고수 환원
+			sql = "UPDATE zitem SET quantity=quantity+? WHERE item_num=?";
+						 
+			 
+			  --> 
+
+
+</mapper>
