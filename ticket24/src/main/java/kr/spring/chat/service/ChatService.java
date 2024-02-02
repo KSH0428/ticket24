@@ -16,7 +16,7 @@ public interface ChatService {
 		public int selectRowCount(Map<String,Object> map);
 		//채팅방 생성 & 멤버 등록
 		@Insert("INSERT INTO chatroom (chatroom_num,mem_num) VALUES (#{chatroom_num},#{mem_num})")
-		public void insertChatRoom(ChatRoomVO chatRoomVO);
+		public int insertChatRoom(ChatRoomVO chatRoomVO);
 		//채팅 멤버 읽기 (필요한가?)
 		public List<ChatRoomVO> selectChatMember(int chatroom_num);
 		//채팅 메시지 등록
@@ -28,4 +28,6 @@ public interface ChatService {
 		//읽은 채팅 기록 업데이트
 		@Update("UPDATE chatmessage SET read_check=0 WHERE chat_num=#{chat_num}")
 		public void updateChatRead(int chat_num);
+		
+		public List<ChatRoomVO> selectChatList(int mem_num);
 }

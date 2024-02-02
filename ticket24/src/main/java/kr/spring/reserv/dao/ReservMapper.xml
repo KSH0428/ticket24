@@ -33,5 +33,32 @@
 			)
 	</insert>
 	
+	<select id="selectReservListAdmin" parameterType="map" resultType="reservHallVO">
+		SELECT
+		  *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM (SELECT
+		             *
+		            FROM reservhall ORDER BY reservation_regdate DESC)
+		      a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	<select id="selectReservListAdminCount" resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM reservhall
+	</select>
 	
+	<insert id="insertPaymentHall" parameterType="integer">
+		 INSERT INTO paymentHall (reservation_num, reservation_price) 
+		    VALUES (#{reservation_num},
+		    	(SELECT
+					  SUM(CASE WHEN TO_CHAR(reservation_date, 'D') IN ('1', '7') THEN 400000 ELSE 300000 END)
+						FROM reservhalldate WHERE reservation_num = #{reservation_num} GROUP BY reservation_num)
+		    )
+	</insert>
 </mapper>

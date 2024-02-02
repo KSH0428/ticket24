@@ -2,11 +2,14 @@ package kr.spring.reserv.dao;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
+import kr.spring.reserv.vo.PaymentHallVO;
 import kr.spring.reserv.vo.ReservHallDateVO;
 import kr.spring.reserv.vo.ReservHallVO;
 
@@ -34,6 +37,22 @@ public interface ReservMapper {
 	@Select("SELECT * FROM reservhall WHERE reservation_num=#{reservation_num}")
 	public ReservHallVO selectReservListByReservNum(int reservation_num);
 	
+	//관리자
+	//전체 예약기록 조회
+	public List<ReservHallVO> selectReservListAdmin(Map<String,Object> map);
+	public int selectReservListAdminCount();
+	//진행 상황 변경
+	@Update("UPDATE reservhall SET reservation_status=#{reservation_status} WHERE reservation_num=#{reservation_num}")
+	public void updateReservStatus(int reservation_num, int reservation_status);
 	
 	
+	//결제
+	//결제 테이블 생성
+	public void insertPaymentHall(int reservation_num);
+	//결제 테이블 조회
+	@Select("SELECT * FROM paymenthall WHERE reservation_num=#{reservation_num}")
+	public PaymentHallVO selectPaymentHall(int reservation_num);
+	//결제완료
+	@Update("UPDATE ")
+	public void updatePayment(int reservation_num);
 }

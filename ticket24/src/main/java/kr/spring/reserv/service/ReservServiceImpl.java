@@ -2,12 +2,14 @@ package kr.spring.reserv.service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.reserv.dao.ReservMapper;
+import kr.spring.reserv.vo.PaymentHallVO;
 import kr.spring.reserv.vo.ReservHallDateVO;
 import kr.spring.reserv.vo.ReservHallVO;
 
@@ -27,7 +29,7 @@ public class ReservServiceImpl implements ReservService{
 		List<Date> date = reservHallVO.getReservation_date();
 		
 		
-		for (Date d : date) { // 대괄호 '['와 ']'를 제거 String dateString =
+		for (Date d : date) {
 			dateVO.setReservation_date(d);
 			reservMapper.insertReservDate(dateVO);
 		}
@@ -53,4 +55,31 @@ public class ReservServiceImpl implements ReservService{
 		return reservMapper.selectReservListByReservNum(reservation_num);
 	}
 
+	@Override
+	public List<ReservHallVO> selectReservListAdmin(Map<String, Object> map) {
+		return reservMapper.selectReservListAdmin(map);
+	}
+
+	@Override
+	public int selectReservListAdminCount() {
+		return reservMapper.selectReservListAdminCount();
+	}
+
+	@Override
+	public void insertPaymentHall(int reservation_num) {
+		reservMapper.insertPaymentHall(reservation_num);
+	}
+
+	@Override
+	public void updateReservStatus(int reservation_num, int reservation_status) {
+		reservMapper.updateReservStatus(reservation_num, reservation_status);
+		if(reservation_status==2) insertPaymentHall(reservation_num);
+	}
+
+	@Override
+	public PaymentHallVO selectPaymentHall(int reservation_num) {
+		return reservMapper.selectPaymentHall(reservation_num);
+	}
+
+	
 }

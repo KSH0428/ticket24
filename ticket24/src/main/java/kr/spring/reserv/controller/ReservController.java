@@ -3,7 +3,10 @@ package kr.spring.reserv.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,8 +25,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.vo.MemberVO;
 import kr.spring.reserv.service.ReservService;
+import kr.spring.reserv.vo.PaymentHallVO;
 import kr.spring.reserv.vo.ReservHallVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
     
 @Controller
@@ -115,7 +120,28 @@ public class ReservController {
 		
 		detail.setReservation_date(reservService.selectReservDateList(reservation_num));
 		
+		int weekendCount = 0;
+	    int weekdayCount = 0;
+		
+		for (Date date : reservService.selectReservDateList(reservation_num)) {
+            // Calendar 객체 생성 및 날짜 설정
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            // 주말이면 weekendCount 증가, 아니면 weekdayCount 증가
+            if (isWeekend(calendar)) {
+                weekendCount++;
+            } else {
+                weekdayCount++;
+            }
+        }
+		
+		//결제정보
+		PaymentHallVO payment = reservService.selectPaymentHall(reservation_num);
+		
+		model.addAttribute("payment", payment);
 		model.addAttribute("detail", detail);
+		model.addAttribute("result", weekendCount*400000+weekdayCount*300000);
 		
 		return "reservDetail";
 	}
@@ -151,4 +177,134 @@ public class ReservController {
 		return mav;
 	}
 	
+	//관리자 예약목록
+	@RequestMapping("/reserv/reservListAdmin")
+	public ModelAndView reservListAdmin(@RequestParam(value="pageNum", defaultValue = "1") int currentPage) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int count = reservService.selectReservListAdminCount();
+		
+		PageUtil page = new PageUtil(currentPage, count, 20, 10, "reservListAdmin");
+		
+		List<ReservHallVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = reservService.selectReservListAdmin(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("reservListAdmin");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	
+	@RequestMapping("/reserv/reservDetailAdmin")
+	public String AdminReservListDetail(@RequestParam int reservation_num, Model model) {
+		
+		int weekendCount = 0;
+	    int weekdayCount = 0;
+		
+		ReservHallVO detail = new ReservHallVO();
+		detail = reservService.selectReservListByReservNum(reservation_num);
+		
+		detail.setReservation_date(reservService.selectReservDateList(reservation_num));
+		
+		for (Date date : reservService.selectReservDateList(reservation_num)) {
+            // Calendar 객체 생성 및 날짜 설정
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            // 주말이면 weekendCount 증가, 아니면 weekdayCount 증가
+            if (isWeekend(calendar)) {
+                weekendCount++;
+            } else {
+                weekdayCount++;
+            }
+        }
+		
+		model.addAttribute("detail", detail);
+		model.addAttribute("result", weekendCount*400000+weekdayCount*300000);
+		
+		
+		return "reservDetailAdmin";
+	}
+	//주말여부 확인
+	private boolean isWeekend(Calendar calendar) {
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
+    }
+	
+	//결제 페이지
+	@GetMapping("/reserv/reservPayment")
+	public String reservPayment(@RequestParam int reservation_num, HttpSession session, Model model, HttpServletRequest request) {
+		ReservHallVO db_hall = reservService.selectReservListByReservNum(reservation_num);
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user.getMem_num()!=db_hall.getMem_num()) {
+			model.addAttribute("message", "잘못된 접근입니다.");
+			model.addAttribute("url", request.getContextPath()+"/reserv/list");
+			
+			return "common/resultAlert";
+		}
+		ReservHallVO date = new ReservHallVO();
+		date.setReservation_date(reservService.selectReservDateList(reservation_num));
+		PaymentHallVO payment = reservService.selectPaymentHall(reservation_num);
+		
+		int weekendCount = 0;
+	    int weekdayCount = 0;
+		
+		ReservHallVO detail = new ReservHallVO();
+		detail = reservService.selectReservListByReservNum(reservation_num);
+		
+		detail.setReservation_date(reservService.selectReservDateList(reservation_num));
+		
+		for (Date dd : reservService.selectReservDateList(reservation_num)) {
+            // Calendar 객체 생성 및 날짜 설정
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dd);
+
+            // 주말이면 weekendCount 증가, 아니면 weekdayCount 증가
+            if (isWeekend(calendar)) {
+                weekendCount++;
+            } else {
+                weekdayCount++;
+            }
+        }
+		
+		
+		model.addAttribute("reserv", db_hall);
+		model.addAttribute("payment", payment);
+		model.addAttribute("date", date);
+		model.addAttribute("weekendCount", weekendCount);
+		model.addAttribute("weekdayCount", weekdayCount);
+		
+		return "reservPayment";
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

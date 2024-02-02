@@ -33,9 +33,9 @@ create sequence reserv_seq;
 create table paymenthall(
 	reservation_num number primary key,
 	reservation_price number not null,
-	payment_date date default sysdate not null,
-	payment_name varchar2(100) not null,
-	payment_phone varchar2(50) not null,
-	payment_status number(1) default 0 not null,
+	payment_date date,
+	payment_name varchar2(100),
+	payment_phone varchar2(50),
+	payment_status number(1) default 0 not null
 );
 

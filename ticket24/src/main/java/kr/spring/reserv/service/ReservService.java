@@ -2,8 +2,10 @@ package kr.spring.reserv.service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 
+import kr.spring.reserv.vo.PaymentHallVO;
 import kr.spring.reserv.vo.ReservHallVO;
 
 public interface ReservService {
@@ -19,4 +21,18 @@ public interface ReservService {
 	
 	//예약번호로 예약 내역 조회
 	public ReservHallVO selectReservListByReservNum(int reservation_num);
+	
+	//관리자
+	//전체 예약기록 조회
+	public List<ReservHallVO> selectReservListAdmin(Map<String,Object> map);
+	public int selectReservListAdminCount();
+	//진행 상황 변경
+	public void updateReservStatus(int reservation_num, int reservation_status);
+	
+	//결제
+	//결제 테이블 생성
+	public void insertPaymentHall(int reservation_num);
+	//결제 테이블 조회
+	public PaymentHallVO selectPaymentHall(int reservation_num);
+		
 }

@@ -55,18 +55,10 @@ input[type="file"] {
 				</div>
 			</div>
 			<div class="row mb-3">
-				<label class="col-sm-3 col-form-label">신청서</label>
+				<label class="form-col col-form-label">신청서</label>
 				<div class="col-sm-9">
 				<div id="uploadSpace"></div><br>
 				<div id="uploadList"></div>
-				<div class="toast align-items-center" role="alert" data-autohide="false" aria-live="assertive" aria-atomic="true">
-  <div class="d-flex">
-    <div class="toast-body">
-      Hello, world! This is a toast message.
-    </div>
-    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-</div>
 				</div>
 			</div>
 		</div>

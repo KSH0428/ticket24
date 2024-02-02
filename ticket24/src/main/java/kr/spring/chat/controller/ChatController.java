@@ -1,10 +1,13 @@
 package kr.spring.chat.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,29 +37,24 @@ public class ChatController {
 	//채팅 메시지 페이지 호출
 	@RequestMapping("/chat/chatDetail")
 	public String chatDetail(ChatRoomVO chatRoomVO, ChatMessageVO chatMessageVO, 
-								Model model, HttpSession session) {
+								Model model, HttpSession session, @RequestParam(value = "chatroom_num", defaultValue = "0") int chatroom_num) {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		//채팅방 생성
 		chatRoomVO.setMem_num(user.getMem_num());
-		chatService.insertChatRoom(chatRoomVO);
+		List<ChatRoomVO> list = chatService.selectChatList(user.getMem_num());
+		if(list.size()>0) {
+			log.debug("chatroom_num : " + chatroom_num);
+			return "/chat/chatDetail";
+		}else {
+			int nchatroom_num = chatService.insertChatRoom(chatRoomVO);
+			return "redirect:/chat/chatDetail?chatroom_num=" + nchatroom_num;
+		}
 		
-		model.addAttribute("user", user);
-		model.addAttribute("chatroom_num", chatRoomVO.getChatroom_num());
-		
-		return "redirect:/chat/chatDetail?chatroom_num=" + chatRoomVO.getChatroom_num();
 	}
 	
 	// 채팅방 상세 페이지
-	@RequestMapping("/chat/chatDetail")
-	public String chatDetailPage(@RequestParam("chatroom_num") int chatroom_num, Model model, HttpSession session) {
-	    MemberVO user = (MemberVO) session.getAttribute("user");
-
-	    model.addAttribute("user", user);
-	    model.addAttribute("chatroom_num", chatroom_num);
-
-	    return "chatDetail"; // 실제 채팅방 상세 페이지
-	}
+	
 }
 
 

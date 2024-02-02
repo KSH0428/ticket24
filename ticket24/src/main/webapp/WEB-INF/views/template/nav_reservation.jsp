@@ -15,6 +15,9 @@
   <li class="nav-item">
     <a class="nav-link" id="reservList" href="reservList">예약확인</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="reservListAdmin" href="reservListAdmin">[관리자]예약목록</a>
+  </li>
 </ul>
 </div>
 <!-- reservation 메뉴 끝 -->

@@ -29,10 +29,11 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	@Override
-	public void insertChatRoom(ChatRoomVO chatRoomVO) {
+	public int insertChatRoom(ChatRoomVO chatRoomVO) {
 		//기본키 생성
 		chatRoomVO.setChatroom_num(chatMapper.selectChatRoomNum());
 		chatMapper.insertChatRoom(chatRoomVO);
+		return chatRoomVO.getChatroom_num();
 	}
 
 	@Override
@@ -54,6 +55,11 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public void updateChatRead(int chat_num) {
 		chatMapper.updateChatRead(chat_num);
+	}
+
+	@Override
+	public List<ChatRoomVO> selectChatList(int mem_num) {
+		return chatMapper.selectChatList(mem_num);
 	}
 
 }

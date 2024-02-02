@@ -44,6 +44,18 @@
     	<put-attribute name="title" value="예약상세"/>
     	<put-attribute name="body" value="/WEB-INF/views/reserv/reservDetail.jsp"/>                                           
     </definition>
+    <definition name="reservListAdmin" extends="reservation">
+    	<put-attribute name="title" value="[관리자]예약목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserv/reservListAdmin.jsp"/>                                           
+    </definition>
+    <definition name="reservDetailAdmin" extends="reservation">
+    	<put-attribute name="title" value="[관리자]예약상세"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserv/reservDetailAdmin.jsp"/>                                           
+    </definition>
+    <definition name="reservPayment" extends="reservation">
+    	<put-attribute name="title" value="대관결제"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserv/reservPayment.jsp"/>                                           
+    </definition>
     
 </tiles-definitions>
 

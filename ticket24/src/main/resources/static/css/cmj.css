@@ -91,6 +91,7 @@ a:hover{
 }
 .align-right{
 	text-align:right;
+	margin-top:100px;
 }
 /* 상단 메뉴
 -------------------------*/
@@ -474,6 +475,42 @@ hr{
 	width: 200px;
     font-size: 30px;
 }
+.floatL{
+	float: left;
+	margin-right: 20px;
+}
+.payment-box{
+	font-size: 25px;
+    border: 2px solid gray;
+    padding-top: 15px;
+    padding-left:15px;
+}
+.span-right{
+	float: right;
+	margin-right: 10px;
+}
+.gray-font{
+	color: gray;
+	font-size: 18px;
+}
+.payment-method{
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+.payment-method div{
+	padding-left: 2em;
+	margin-left: 30px;
+	margin-top:15px;
+	border: 1px solid;
+	border-radius: 5px;
+	font-size: 15px;
+	width:40%;
+	height:40px;
+	padding-top:7px;
+	float: left;
+	align-content: center;
+}
+
 
 
 
