@@ -17,7 +17,7 @@ public class EventVO {
 	private Date event_start;
 	private Date event_end;
 	private String event_content;
-	private String event_point;
+	private int event_point;
 	private int event_hit;
 	private MultipartFile upload1;
 	private MultipartFile upload2;
