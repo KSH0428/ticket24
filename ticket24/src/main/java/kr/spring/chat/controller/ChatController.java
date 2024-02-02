@@ -33,17 +33,29 @@ public class ChatController {
 	 *==========================*/
 	//채팅 메시지 페이지 호출
 	@RequestMapping("/chat/chatDetail")
-	public String chatDetail(ChatRoomVO chatroomVO, ChatMessageVO chatMessageVO,
-							 Model model, HttpSession session) {
+	public String chatDetail(ChatRoomVO chatRoomVO, ChatMessageVO chatMessageVO, 
+								Model model, HttpSession session) {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		//채팅방 생성
-		chatroomVO.setMem_num(user.getMem_num());
-		chatService.insertChatRoom(chatroomVO);
+		chatRoomVO.setMem_num(user.getMem_num());
+		chatService.insertChatRoom(chatRoomVO);
 		
 		model.addAttribute("user", user);
+		model.addAttribute("chatroom_num", chatRoomVO.getChatroom_num());
 		
-		return "chatDetail";
+		return "redirect:/chat/chatDetail?chatroom_num=" + chatRoomVO.getChatroom_num();
+	}
+	
+	// 채팅방 상세 페이지
+	@RequestMapping("/chat/chatDetail")
+	public String chatDetailPage(@RequestParam("chatroom_num") int chatroom_num, Model model, HttpSession session) {
+	    MemberVO user = (MemberVO) session.getAttribute("user");
+
+	    model.addAttribute("user", user);
+	    model.addAttribute("chatroom_num", chatroom_num);
+
+	    return "chatDetail"; // 실제 채팅방 상세 페이지
 	}
 }
 

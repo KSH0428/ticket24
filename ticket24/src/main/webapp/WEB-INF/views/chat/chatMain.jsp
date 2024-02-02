@@ -11,6 +11,8 @@
 </ul>
 <!-- 상단 끝 -->
 	<div class="chat_main">
-		<a href="#"><img src="${pageContext.request.contextPath}/images/chat_icon.png" width="250" height="250"></a>
+		<a href="chatDetail">
+			<img src="${pageContext.request.contextPath}/images/chat_icon.png" width="250" height="250">
+		</a>
 	</div>
 </div>
