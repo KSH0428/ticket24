@@ -19,8 +19,6 @@ public interface MemberMapper {
 	//회원가입
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
-	
-	//회원가입 및 포인트 관리
 	@Select("SELECT member_point_seq.nextval FROM dual")
 	public int selectPt_num();
 	public void insertMember_point(MemberVO member);
@@ -33,8 +31,8 @@ public interface MemberMapper {
 	@Select("SELECT * FROM member_point WHERE mem_num=#{mem_num}")
 	public MemberVO selectMemberPoint(int mem_num);
 	//포인트 합계 구하기
-	@Select("SELECT SUM(pt_amount) AS pt_sum FROM member_point WHERE mem_num=#{mem_num}")
-	public MemberVO selectMemberPointSum(int mem_num);
+	@Select("SELECT NVL(SUM(pt_amount),0) AS pt_sum FROM member_point WHERE mem_num=#{mem_num}")
+	public int selectMemberPointSum(int mem_num);
 	
 	//회원 정보 업데이트
 	@Update("UPDATE member SET mem_nickname=#{mem_nickname} WHERE mem_num=#{mem_num}")

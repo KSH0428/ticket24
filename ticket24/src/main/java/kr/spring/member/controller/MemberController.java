@@ -160,13 +160,13 @@ public class MemberController {
 		
 		//회원 정보
 		MemberVO member = memberService.selectMember(user.getMem_num());
-		MemberVO point = memberService.selectMemberPointSum(user.getMem_num());
+		int point = memberService.selectMemberPointSum(user.getMem_num());
 		
 		log.debug("<<회원 상세 정보>> : " + member);
 		log.debug("<<회원 포인트 합계>> : " + point);
 		
 		model.addAttribute("member", member);
-		model.addAttribute("point", point);
+		model.addAttribute("all_point", point);
 		
 		return "myPage";
 	}
@@ -221,11 +221,18 @@ public class MemberController {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		MemberVO member = memberService.selectMember(user.getMem_num());
-		MemberVO point = memberService.selectMemberPointSum(user.getMem_num());
+		int point = memberService.selectMemberPointSum(user.getMem_num());
+		//MemberVO point1 = memberService.selectMemberPoint(user.getMem_num());
 		
+		log.debug("<<찍히나>>" + point);
+	    
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("mem_num", user.getMem_num());
-		
+
+	    MemberVO ptAmountList = new MemberVO();
+	    ptAmountList.setPt_amount(ptAmountList.getPt_amount() + point);
+	    
+	    
 		//전체/검색 레코드 수
 		int count = memberService.selectRowCount(map);
 		log.debug("<<count>> : " + count);
@@ -236,9 +243,12 @@ public class MemberController {
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
+			map.put("ptAmountList", ptAmountList);
 			
 			list = memberService.selectPointList(map);
 		}
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("memberPoint");
@@ -331,6 +341,13 @@ public class MemberController {
 		model.addAttribute("url", request.getContextPath()+"/member/myPage");
 		
 		return "common/resultAlert";
+	}
+	/*========================
+	 * 마이페이지 공연
+	 *=======================*/
+	@RequestMapping("/member/memberConcert")
+	public String mpConcert() {
+		return "memberConcert";
 	}
 	
 	/*========================

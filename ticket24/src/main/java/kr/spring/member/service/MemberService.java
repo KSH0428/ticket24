@@ -3,7 +3,6 @@ package kr.spring.member.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
 
 import kr.spring.member.vo.MemberVO;
 
@@ -17,7 +16,7 @@ public interface MemberService {
 	public void Member_newPasswd(MemberVO member);
 	public void deleteMemeber_detail(MemberVO member);
 	public MemberVO selectMemberPoint(int mem_num);
-	public MemberVO selectMemberPointSum(int mem_num);
+	public int selectMemberPointSum(int mem_num);
 	//회원 포인트 조회
 	public List<MemberVO> selectPointList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);

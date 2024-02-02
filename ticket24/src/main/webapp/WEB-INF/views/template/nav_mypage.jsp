@@ -5,13 +5,13 @@
 	<h1>마이페이지</h1>
 	<hr>
 	<ul class="side-navbar">
-		<li class="main-menu"><a href="${pageContext.request.contextPath}/reserv/list">공연</a>
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/member/memberConcert">공연</a>
 			<ul class="sub-menu">
 				<li><a href="${pageContext.request.contextPath}/reserv/list">찜한 공연</a></li>
 				<li><a href="${pageContext.request.contextPath}/reserv/list">공연 예약 내역</a></li>
 			</ul>
 		</li>
-		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">공연장</a></li>
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/reserv/reservList">공연장</a></li>
 		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">MD</a>
 			<ul class="sub-menu">
 				<li><a href="${pageContext.request.contextPath}/reserv/list">주문 내역</a></li>

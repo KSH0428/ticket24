@@ -80,7 +80,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO selectMemberPointSum(int mem_num) {
+	public int selectMemberPointSum(int mem_num) {
 		return memberMapper.selectMemberPointSum(mem_num);
 	}
 

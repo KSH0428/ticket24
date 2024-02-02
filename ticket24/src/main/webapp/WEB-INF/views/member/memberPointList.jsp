@@ -14,13 +14,13 @@
 		</ul>
 		<ul>
 			<li>
-				'${member.mem_name}'님은 <c:if test="${member.mem_auth == 1}">'실버' 등급입니다.</c:if><br>
-									    <c:if test="${member.mem_auth == 2}">'골드' 등급입니다.</c:if><br>
-									    <c:if test="${member.mem_auth == 3}">'플래티넘' 등급입니다.</c:if><br>
-									    <c:if test="${member.mem_auth == 9}">'관리자' 입니다.</c:if><br>
+				'${member.mem_name}'님은 <c:if test="${member.mem_auth == 1}">'실버' 등급입니다.</c:if>
+									    <c:if test="${member.mem_auth == 2}">'골드' 등급입니다.</c:if>
+									    <c:if test="${member.mem_auth == 3}">'플래티넘' 등급입니다.</c:if>
+									    <c:if test="${member.mem_auth == 9}">'관리자' 입니다.</c:if>
 			</li>
 			<li>
-				적립금 : <fmt:formatNumber value="${point.pt_sum}" pattern="#,###" /> 원
+				<br>적립금 : <fmt:formatNumber value="${all_point}" pattern="#,###" /> 원
 			</li>
 		</ul>
 	</div>
@@ -38,9 +38,9 @@
 		<c:forEach var="point" items="${list}">
 		<tr>
 			<td class="align-center">${point.pt_reg_date}</td>
-			<td class="align-center">${point.pt_amount}</td>
+			<td class="align-center"><fmt:formatNumber value="${point.pt_amount}" pattern="#,###" /> 원</td>
 			<td class="align-center">${point.pt_content}</td>
-			<td class="align-center">${point.pt_sum}</td>
+			<td class="align-center">${point.total_point}</td>
 		</tr>
 		</c:forEach>
 	</table>

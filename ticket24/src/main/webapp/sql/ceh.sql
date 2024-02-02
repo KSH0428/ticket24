@@ -28,9 +28,7 @@ create sequence member_seq;
 create table member_point(
  pt_num number not null,
  mem_num number not null,
- pt_amount varchar2(50) not null,
- pt_sum varchar2(50) not null,
- pt_status number(1) not null,
+ pt_amount number(50) not null,
  pt_content varchar2(100) not null,
  pt_reg_date date default sysdate not null,
  reserve_num number not null,

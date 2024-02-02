@@ -54,11 +54,11 @@ public class MemberVO {
 	private String now_passwd; //비밀번호 변경
 	
 	private int pt_num;
-	private String pt_amount; //적립금 잔액
-	private String pt_sum; //적립금 총액
+	private int pt_amount; //적립/사용금액
+	private int total_point; //적립금 누적금액
 	private String pt_content;
 	private Date pt_reg_date;
-	
+
 	//테이블 생성 후 DB에 추가
 	private int reserve_num; //예약 번호
 	private int event_num; //이벤트 번호

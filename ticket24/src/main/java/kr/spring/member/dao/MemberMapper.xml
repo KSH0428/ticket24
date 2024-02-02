@@ -41,13 +41,11 @@
 			pt_num,
 			mem_num,
 			pt_amount,
-			pt_status,
 			pt_content)
 		VALUES (
 			#{pt_num},
 			#{mem_num},
 			'2000',
-			'1',
 			'회원가입')
 	</insert>
 	
@@ -93,12 +91,15 @@
 		FROM (SELECT
 				a.*,
 				rownum rnum
-			FROM (SELECT
-					*
-				FROM member_point 
-				JOIN member USING(mem_num)
-				JOIN member_detail USING(mem_num)
-				WHERE mem_num=#{mem_num})a)
+			FROM (SELECT 
+			        pt_num,
+			        pt_amount, 
+			        SUM(pt_amount) OVER (ORDER BY pt_num ASC) total_point,
+			        pt_content,
+			        pt_reg_date 
+			      FROM member_point 
+			      WHERE mem_num=#{mem_num} 
+			      ORDER BY pt_reg_date DESC)a)
 			<![CDATA[
 		   	WHERE rnum >= #{start} AND rnum <= #{end}
 		   	]]>
