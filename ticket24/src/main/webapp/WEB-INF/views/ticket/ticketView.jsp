@@ -56,7 +56,7 @@
     		<fmt:formatNumber value="${totalPrice}" pattern="###,###"/>원</li>
 		</ul>
 		<div class="align-right">
-    	 <c:if test="${empty user || user.mem_num != ticket.mem_num}">
+    	 <c:if test="${!empty user && user.mem_num != ticket.mem_num}">
         <input type="button" value="결제하기">
     	</c:if>
     	</div>
