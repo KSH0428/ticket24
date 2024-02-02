@@ -353,7 +353,7 @@ public class ConcertController {
 				round.setDay(day);
 				round.setTime(src_time);
 				
-				//concertService.insertConcertRound(round);
+				concertService.insertConcertRound(round);
 				
 				/*
 				System.out.print("year : ");
