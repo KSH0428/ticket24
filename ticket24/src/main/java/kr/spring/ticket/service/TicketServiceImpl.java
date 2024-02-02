@@ -21,7 +21,7 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public int SelectRowCount(Map<String, Object> map) {
+	public int selectRowCount(Map<String, Object> map) {
 		return ticketMapper.selectRowCount(map);
 	}
 

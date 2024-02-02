@@ -41,6 +41,7 @@
 			#{ticket_status})
 	</insert>
 	
+	<!-- sql 태그외 include 태그를 이용해 SQL문 재사용 -->
 	<!-- 검색 -->
 		<sql id="ticketSearch">
 			<where>

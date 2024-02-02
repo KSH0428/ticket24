@@ -90,12 +90,12 @@ public class TicketController {
 								@RequestParam(value="ticket_category", defaultValue="") String ticket_category,
 								String keyfield, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfield", keyword);
+		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("ticket_category", ticket_category);
 		
 		//전체/검색 레코드 수
-		int count = ticketService.SelectRowCount(map);
+		int count = ticketService.selectRowCount(map);
 		log.debug("<<count>> : " + count);
 		
 		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list", "&order="+order+"&ticket_category="+ticket_category);
@@ -140,27 +140,31 @@ public class TicketController {
 	public ModelAndView download(@RequestParam int ticket_num, @RequestParam int file_num,
 								 HttpServletRequest request) {
 		TicketVO ticket = ticketService.selectTicket(ticket_num);
-		
 		//파일을 절대경로에서 읽어들여 byte[]로 변환
-		byte[] downloadFile = FileUtil.getBytes(request.getServletContext().getRealPath("/upload")
-												+"/"+ticket.getTicket_filename1());
-		byte[] downloadFile2 = FileUtil.getBytes(request.getServletContext().getRealPath("/upload")
-				+"/"+ticket.getTicket_filename2());
-		byte[] downloadFile3 = FileUtil.getBytes(request.getServletContext().getRealPath("/upload")
-				+"/"+ticket.getTicket_filename3());
-		byte[] downloadFile4 = FileUtil.getBytes(request.getServletContext().getRealPath("/upload")
-				+"/"+ticket.getTicket_filename4());
+		byte[] downloadFile = null;
+		String filename = null;
+		if(file_num==1) {
+			downloadFile = FileUtil.getBytes(request.getServletContext().getRealPath("/upload")
+					+"/"+ticket.getTicket_filename1());
+			filename = ticket.getTicket_filename1();
+		}else if(file_num==2) {
+			downloadFile = FileUtil.getBytes(request.getServletContext().getRealPath("/upload")
+					+"/"+ticket.getTicket_filename2());
+			filename = ticket.getTicket_filename2();
+		}else if(file_num==3) {
+			downloadFile =  FileUtil.getBytes(request.getServletContext().getRealPath("/upload")
+					+"/"+ticket.getTicket_filename3());
+			filename = ticket.getTicket_filename3();
+		}else if(file_num==4) {
+			downloadFile = FileUtil.getBytes(request.getServletContext().getRealPath("/upload")
+					+"/"+ticket.getTicket_filename4());
+			filename = ticket.getTicket_filename4();
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("downloadView");
 		mav.addObject("downloadFile", downloadFile);
-		mav.addObject("downloadFile2", downloadFile2);
-		mav.addObject("downloadFile3", downloadFile3);
-		mav.addObject("downloadFile4", downloadFile4);
-		mav.addObject("filename",ticket.getTicket_filename1());
-		mav.addObject("filename",ticket.getTicket_filename2());
-		mav.addObject("filename",ticket.getTicket_filename3());
-		mav.addObject("filename",ticket.getTicket_filename4());
+		mav.addObject("filename",filename);
 				
 		return mav;
 		
@@ -169,7 +173,7 @@ public class TicketController {
 	 * 티켓양도 글 수정
 	 *======================================*/
 	//수정폼 호출
-	@GetMapping("/ticket/delete")
+	@GetMapping("/ticket/update")
 	public String formUpdate(@RequestParam int ticket_num,Model model) {
 		TicketVO ticketVO = ticketService.selectTicket(ticket_num);
 		
@@ -232,7 +236,7 @@ public class TicketController {
 	/*=======================================
 	 * 게시판 글 삭제
 	 *======================================*/
-	@RequestMapping("ticket/delete")
+	@GetMapping("ticket/delete")
 	public String submitDelete (@RequestParam int ticket_num, HttpServletRequest request) {
 		log.debug("<<티켓 양도 글 삭제 ticket_num>> : " + ticket_num);
 		

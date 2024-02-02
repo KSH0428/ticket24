@@ -7,7 +7,7 @@
 	<form action="list" id="search_form" method="get">
 	<ul class="search">
 		<li>
-		<select name="keyfiled" id="keyfield">
+		<select name="keyfield" id="keyfield">
 				<option value="1"<c:if test="${param.keyfield == 1}">selected</c:if>>공연명</option>
 				<option value="2"<c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
 				<option value="3"<c:if test="${param.keyfield == 3}">selected</c:if>>공연명+내용</option>
@@ -62,7 +62,7 @@
 									test="${ticket.ticket_category == 2}">공연</c:if> <c:if
 									test="${ticket.ticket_category == 3}">콘서트</c:if> <c:if
 									test="${ticket.ticket_category == 4}">클래식</c:if></td>
-					<td><a href="detail?ticket_num=${ticket_num}">${ticket.ticket_name}</a></td>
+					<td><a href="detail?ticket_num=${ticket.ticket_num}">${ticket.ticket_name}</a></td>
 					<td class="align-center">${ticket.ticket_place}</td>
 					<td class="align-center">${ticket.ticket_date}</td>
 					<td class="align-center">${ticket.ticket_seat}</td>

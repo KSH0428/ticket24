@@ -8,7 +8,7 @@ import kr.spring.ticket.vo.TicketVO;
 public interface TicketService {
 	//티켓 양도글
 	public List<TicketVO> selectList(Map<String,Object> map);
-	public int SelectRowCount(Map<String,Object> map);
+	public int selectRowCount(Map<String,Object> map);
 	public void insertTicket(TicketVO ticket);
 	public TicketVO selectTicket(int ticket_num);
 	public void updateTicket_hit(int ticket_num);
