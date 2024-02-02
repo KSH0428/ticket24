@@ -10,7 +10,10 @@
 	<div class="align-right">
 	  <input type="button" value="MD 등록" class="btn btn-outline-secondary"
 	  			onclick="location.href='${pageContext.request.contextPath}/md/regMd'">
-	  <input type="button" value="MD 구매내역 확인" 
+		<input type="button" value="장바구니" 
+	  			class="btn btn-outline-secondary" 
+	  			onclick="location.href='${pageContext.request.contextPath}/mdCart/cartList'">	  
+	  	<input type="button" value="MD 구매내역 확인" 
 	  			class="btn btn-outline-secondary" onclick="location.href='#'">
 	</div> 
 	<br><hr><br><br>
@@ -27,9 +30,17 @@
 				                                  value="${param.keyword}">
 			</li>
 			<li>
+				<!-- <img class="search-btn" id="search-btn" 
+					src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+					<script>
+        		function submitForm() {
+           		 document.getElementById("search_form").submit();
+       			}
+
+       			// 이미지 클릭 이벤트에 함수 할당
+        		document.getElementById("search-btn").addEventListener("click", submitForm);
+   			</script> -->
 				<input type="submit" value="검색">
-				<input type="submit" value="'전체보기'버튼누르면리스트전체목록으로넘어가게구현하기" 
-							onclick="location.href='${pageContext.request.contextPath}/md/list'">
 			</li>
 		</ul>
 		<div class="align-right">

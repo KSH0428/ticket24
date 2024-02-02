@@ -50,6 +50,9 @@
 		               <![CDATA[
 		               REPLACE(REPLACE(md_title,'<','&lt;'),'>','&gt;') md_title,
 		               ]]>
+		               <![CDATA[
+		               REPLACE(REPLACE(md_content,'<','&lt;'),'>','&gt;') md_content,
+		               ]]>
 		               md_regdate,
 		               mem_num,
 		               mem_id,
@@ -58,6 +61,8 @@
 		            FROM md_review 
 		            LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, md_review_num FROM md_review_fav GROUP BY md_review_num) USING(md_review_num)
 		            JOIN member USING(mem_num) 
+		            <!-- LEFT OUTER JOIN member_detail USING(mem_num) -->
+					<!-- WHERE md_review_num=#{md_review_num}  -->
 		            <include refid="mdReviewOrder"></include>)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}

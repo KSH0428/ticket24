@@ -55,7 +55,7 @@ create table md_review_fav(
 
 --장바구니
 create table md_cart(
-	md_cart_num not null,
+	md_cart_num number not null,
 	order_quantity number(5) not null,
 	cart_regdate date default sysdate not null,
 	md_num number not null,

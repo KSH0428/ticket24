@@ -30,6 +30,19 @@
 		<put-attribute name="css" value="/WEB-INF/views/mdReview/mdReviewCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/mdReview/mdReviewWrite.jsp"/>
 	</definition>
+	<definition name="reviewList" extends="main">
+		<put-attribute name="title" value="리뷰목록" />
+		<put-attribute name="css" value="/WEB-INF/views/mdReview/mdReviewCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/mdReview/reviewList.jsp"/>
+	</definition>
+	<definition name="reviewView" extends="main">
+		<put-attribute name="title" value="리뷰상세" />
+		<put-attribute name="body" value="/WEB-INF/views/mdReview/reviewView.jsp"/>
+	</definition>
+	<definition name="cartList" extends="main">
+		<put-attribute name="title" value="장바구니 목록" />
+		<put-attribute name="body" value="/WEB-INF/views/mdCart/cartList.jsp"/>
+	</definition>
 	 
 </tiles-definitions>
 

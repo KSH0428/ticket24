@@ -116,17 +116,21 @@ public class MdReviewController {
 
 
 	/*=================================
-	 * 게시판 글 상세
+	 * 리뷰 상세
 	 *=================================*/
 	
-	  @RequestMapping("/mdReview/mdView") 
+	  @RequestMapping("/mdReview/reviewView") 
 	  public ModelAndView process(
-			  @RequestParam int md_review_num) { log.debug("<<리뷰 상세 md_review_num>> : " + md_review_num);
+			  @RequestParam int md_review_num) { 
+		  log.debug("<<리뷰 상세 md_review_num>> : " + md_review_num);
 	  
 	  
-	  MdReviewVO review = mdReviewService.selectMdReview(md_review_num); //제목에 태그를 허용하지 않음
-	  review.setMd_title(StringUtil.useNoHtml(review.getMd_title())); //타일스 설정명,속성명,속성값
-	  return new ModelAndView("reviewView","review",review); }
+	  MdReviewVO review = mdReviewService.selectMdReview(md_review_num); 
+	  //제목에 태그를 허용하지 않음
+	  review.setMd_title(StringUtil.useNoHtml(review.getMd_title())); 
+
+	  return new ModelAndView("reviewView","review",review); 
+	  }
 	 
 
 	/*=================================
@@ -147,7 +151,7 @@ public class MdReviewController {
 			BindingResult result,
 			HttpServletRequest request,
 			Model model) throws IllegalStateException, IOException {
-		log.debug("<<글 수정>> : " + mdReviewVO);
+		log.debug("<<리뷰 수정>> : " + mdReviewVO);
 
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
@@ -155,13 +159,15 @@ public class MdReviewController {
 			//파일 정보를 잃어버리기 때문에 폼을 호출할 때 다시 셋팅해주어야 함
 			MdReviewVO vo = mdReviewService.selectMdReview(mdReviewVO.getMd_review_num());
 			mdReviewVO.setMd_filename(vo.getMd_filename());
-			return "reviewModify";
+			return "/mdReview/reviewModify";
 		}
 
 		//DB에 저장된 파일 정보 구하기
-		MdReviewVO db_review = mdReviewService.selectMdReview(
-				mdReviewVO.getMd_review_num());
-
+		
+		  MdReviewVO db_review = mdReviewService.selectMdReview(
+		  mdReviewVO.getMd_review_num());
+		 
+	
 		//파일명 셋팅
 		mdReviewVO.setMd_filename(FileUtil.createFile(
 				request, mdReviewVO.getUpload()));
@@ -180,7 +186,7 @@ public class MdReviewController {
 		//View에 표시할 메시지
 		model.addAttribute("message", "리뷰 수정 완료");
 		model.addAttribute("url", 
-				request.getContextPath()+"/mdReview/detail?md_review_num="
+				request.getContextPath()+"/mdReview/list?md_review_num="
 						+mdReviewVO.getMd_review_num());
 
 		return "common/resultAlert";

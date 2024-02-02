@@ -7,12 +7,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<jsp:include page="/WEB-INF/views/template/header.jsp"/>
 <!-- 내용 시작 -->
 <div class="page-main">
 <div class="content-main">
 			<div class="container d-flex justify-content-center">
 				<div class="col-8 col8md-4">
+	<br><br><br>
 	<h2>MD상품수정</h2>
+	<br>
 	<form id="update_form" accept-charset="UTF-8"
 			 role="form" action="update" method="post">
 		<input type="hidden" name="md_num" value="${mdVO.md_num}">	 
@@ -54,6 +57,7 @@
 			
 
 		</ul>
+		<br><br>
 		<div class="align-center">
 			<button class="default-btn" type="button">수정</button>
 			<input type="button" value="MD삭제" class="default-btn"

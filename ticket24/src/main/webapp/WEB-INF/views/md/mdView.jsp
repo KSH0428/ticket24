@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+<jsp:include page="/WEB-INF/views/template/header.jsp" />
 <!-- 내용 시작 -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
-
 <div class="page-main">
 	<br> <br> <br>
 	<div class="container">
@@ -28,22 +29,22 @@
 			<div class="col">
 				<br>
 				<p class="card-text fs-4 fw-bold">${md.md_name}</p>
-				<br> <span> <span class="card-text fs-2 fw-bolder">${md.md_price}</span>
+				<hr>
+				<span> <span class="card-text fs-2 fw-bolder">${md.md_price}</span>
 					<span class="card-text fs-2 fw-bolder">원</span>
 				</span> <br> <br>
 				<div class="card text-bg-light mb-3 border-0" style="width: 40rem;">
 					<div class="card-body">
 						<div>
-							<span class="font-monospace text-dark fw-bold">택배</span> <span
-								class="font-monospace">3,000원 (60,000원 이상 주문시 무료)</span>
+							<span class="font-monospace text-dark fw-bold">택배</span> <span>3,000원
+								(60,000원 이상 주문시 무료)</span>
 						</div>
 						<div>
-							<span class="font-monospace text-dark fw-bold">원산지</span> <span
-								class="font-monospace">기타</span>
+							<span class="font-monospace text-dark fw-bold">원산지</span> <span>기타</span>
 						</div>
 						<div>
-							<span class="font-monospace text-dark fw-bold">혜택</span> <span
-								class="font-monospace">무이자 할부</span>
+							<span class="font-monospace text-dark fw-bold">혜택</span> <span>무이자
+								할부</span>
 						</div>
 					</div>
 				</div>
@@ -60,17 +61,48 @@
 				<br>
 				<div>
 					<div class="d-grid gap-2 col-8 mx-auto">
-						<button class="btn btn-outline-secondary btn-lg" type="button">장바구니</button>
+						
+						<div class="md-detail">
+						<form id="addCart" action="/mdCart/addCart" method="post">
+							<input type="hidden" name="md_num" value="${md.md_num}"
+								id="md_num"> <input type="hidden" name="md_price"
+								value="${md.md_price}" id="md_price"> <input
+								type="hidden" name="md_quantity" value="${md.md_quantity}"
+								id="md_quantity">
+							<ul>
+								<li>가격 : <b><fmt:formatNumber value="${md.md_price}" />원</b></li>
+								<li>재고 : <span><fmt:formatNumber
+											value="${md.md_quantity}" /></span></li>
+								<c:if test="${md.md_quantity > 0}">
+									<li><label for="order_quantity">구매수량</label> <input
+										type="number" name="order_quantity" min="1"
+										max="${md.md_quantity}" autocomplete="off" id="order_quantity"
+										class="quantity-width"></li>
+									<li><span id="sub_total">총주문 금액 : 0원</span></li>
+									<li><input type="submit" value="장바구니에 담기"></li>	
+								</c:if>
+								<c:if test="${md.md_quantity <= 0}">
+									<li class="align-center"><span class="sold-out">품절</span>
+									</li>
+								</c:if>
+							</ul>
+						</form>
+						</div>
+
+
+
+						<input type="submit" value="장바구니 담기"
+							class="btn btn-outline-secondary"
+							onclick="location.href='${pageContext.request.contextPath}/mdCart/addCart'">
 						<button class="btn btn-secondary btn-lg" type="button">바로구매</button>
 					</div>
-
 
 					<br> <br> <br>
 				</div>
 			</div>
 		</div>
 		<br> <br> <br>
-		
+
 		<ul id="navbar2"
 			class="nav justify-content-center nav-underline bg-dark">
 			<li class="nav-item text-light"><a
@@ -98,18 +130,15 @@
 						<br> <br> <br> <br> <br>
 						<h4 id="scrollspyHeading2" class="fw-bold">상품 리뷰</h4>
 						<div class="row justify-content-between">
-							<div class="col-4">상품을
-								구매한 분들이 작성한 리뷰 입니다.</div>
+							<div class="col-4">상품을 구매한 분들이 작성한 리뷰 입니다.</div>
 							<div class="col-4">
 								<c:if test="${!empty user}">
 									<input type="button" value="리뷰 작성"
-										class="btn btn-secondary btn-sm"
+										class="btn btn-secondary btn-sm float-end"
 										onclick="location.href='/mdReview/reviewWrite'">
-								</c:if></div>
+								</c:if>
+							</div>
 						</div>
-
-
-						
 						<hr>
 						<p>
 							<img
@@ -120,53 +149,19 @@
 						<input type="button" value="리뷰목록 "
 							class="btn btn-outline-secondary btn-sm"
 							onclick="location.href='/mdReview/reviewList'"> <br>
-						<form action="list" id="search_form" method="get">
-							<div class="align-right">
-								<select id="order" name="order">
-									<option value="1"
-										<c:if test="${param.order == 1}">selected</c:if>>최신순</option>
-									<option value="2"
-										<c:if test="${param.order == 2}">selected</c:if>>좋아요높은순</option>
-									<option value="3"
-										<c:if test="${param.order == 3}">selected</c:if>>좋아요낮은순</option>
-								</select>
-							</div>
-						</form>
-						<h2>${board.title}</h2>
-						<ul class="detail-info">
-							<li><img
-								src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${mdReview.mem_num}"
-								width="40" height="40" class="my-photo"></li>
-							<li><c:if test="${empty mdReview.mem_nickname}">${mdReview.mem_id}</c:if>
-								<c:if test="${!empty mdReview.mem_nickname}">${mdReview.mem_nickname}</c:if>
-								<br> <c:if test="${!empty mdReview.md_mdate}">
-			최근 수정일 : ${mdReview.md_mdate}
-			</c:if> <c:if test="${empty mdReview.md_mdate}">
-			작성일 : ${mdReview.md_regdate}
-			</c:if></li>
-						</ul>
-
-						<c:forEach var="md" items="${list}">
-							<td><a href="list?md_review_num=${mdReview.md_review_num}">${mdReview.md_title}</a></td>
-							<td class="align-center"><c:if
-									test="${empty mdReview.mem_nickname}">${mdReview.mem_id}</c:if>
-								<c:if test="${!empty mdReview.mem_nickname}">${md_review.mem_nickname}</c:if>
-							</td>
-							<td class="align-center">${mdReview.md_regdate}</td>
-							<td class="align-center">${mdReview.fav_cnt}</td>
-						</c:forEach>
-
-
+						<br> <br>
 
 						<hr>
-						<br> <br> <br> <br>
+						<br> <br>
 						<h4 id="scrollspyHeading3" class="fw-bold">상품 문의</h4>
 						<br>
 						<ul>
 							<li>구매한 상품의 취소/반품은 마이쿠팡 구매내역에서 신청 가능합니다.</li>
 							<li>상품문의 및 후기게시판을 통해 취소나 환불, 반품 등은 처리되지 않습니다.</li>
-							<li class="fw-bold">가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련 없는 문의는 고객센터 내 1:1 문의하기를 이용해주세요.</li>
-							<li class="fw-bold">"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설, 비방, 도배 등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수 있습니다.</li>
+							<li class="fw-bold">가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련 없는
+								문의는 고객센터 내 1:1 문의하기를 이용해주세요.</li>
+							<li class="fw-bold">"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설, 비방, 도배
+								등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수 있습니다.</li>
 							<li>공개 게시판이므로 전화번호, 메일 주소 등 고객님의 소중한 개인정보는 절대 남기지 말아주세요.</li>
 						</ul>
 						<hr>
@@ -273,7 +268,9 @@
 										</ul></td>
 								</tr>
 							</table>
-
+							<br>
+							<br>
+							<br>
 						</div>
 					</div>
 				</div>
