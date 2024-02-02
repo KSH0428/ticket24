@@ -61,4 +61,15 @@
 						FROM reservhalldate WHERE reservation_num = #{reservation_num} GROUP BY reservation_num)
 		    )
 	</insert>
+	
+	<update id="updatePayment" parameterType="paymentHallVO">
+		UPDATE paymenthall 
+			SET 
+				payment_date=SYSDATE,
+				payment_name=#{payment_name},
+				payment_phone=#{payment_phone},
+				payment_status=1,
+				payment_method=#{payment_method}
+			 WHERE reservation_num=#{reservation_num}
+	</update>
 </mapper>

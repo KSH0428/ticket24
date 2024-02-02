@@ -53,6 +53,5 @@ public interface ReservMapper {
 	@Select("SELECT * FROM paymenthall WHERE reservation_num=#{reservation_num}")
 	public PaymentHallVO selectPaymentHall(int reservation_num);
 	//결제완료
-	@Update("UPDATE ")
 	public void updatePayment(int reservation_num);
 }

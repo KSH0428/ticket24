@@ -81,5 +81,11 @@ public class ReservServiceImpl implements ReservService{
 		return reservMapper.selectPaymentHall(reservation_num);
 	}
 
+	@Override
+	public void updatePayment(int reservation_num) {
+		reservMapper.updatePayment(reservation_num);
+		reservMapper.updateReservStatus(reservation_num, 3);
+	}
+
 	
 }

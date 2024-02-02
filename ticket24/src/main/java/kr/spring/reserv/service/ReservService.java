@@ -34,5 +34,6 @@ public interface ReservService {
 	public void insertPaymentHall(int reservation_num);
 	//결제 테이블 조회
 	public PaymentHallVO selectPaymentHall(int reservation_num);
-		
+	//결제완료
+	public void updatePayment(int reservation_num);
 }

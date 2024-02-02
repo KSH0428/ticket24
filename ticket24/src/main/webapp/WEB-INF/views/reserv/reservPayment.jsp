@@ -65,7 +65,7 @@
 				<span class="gray-font">주말 : <span class="span-right">${weekendCount}일</span></span><br>
 				<span style="margin-top: 5px;">총 결제금액 : <span class="span-right" style="color: blue;"><fmt:formatNumber value="${payment.reservation_price}" pattern="#,###" />원</span></span>
 			<div>
-				<hr size="1" width="100%">
+				<hr size="1" width="100%" style="margin-top: 40px;">
 			</div>
 			<div class="payment-method">
 				<div class="form-check">
@@ -93,13 +93,69 @@
 				  </label>
 				</div>
 			</div>
-			<div style="float: none;margin-top: 30px;">
-				<hr size="1" width="100%">
+			<div style="clear: both;padding-top: 18px;">
+				<hr  width="100%" >
 			</div>
+			<div class="form-check purchase">
+			  <input class="form-check-input" type="checkbox" value="" id="purchase_consent">
+			  <label class="form-check-label" for="purchase_consent" style="line-height: 2.3;">
+			    구매조건 확인 및 결제진행에 동의
+			  </label>
+				<div class="d-grid gap-2 mt-4">
+				  <button class="btn btn-primary" type="button" id="payment">결제하기</button>
+				</div>
 			</div>
 		</div>
 	</form:form>
 	
 </div>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script type="text/javascript">
+$('#reservList').addClass('active');
+/* 결제 시작 */
+var IMP = window.IMP;
+IMP.init('imp06364606');
+function requestPay() {
+    IMP.request_pay({
+      pg: "html5_inicis",
+      pay_method: $('input[type="radio"]:checked').attr('id'),
+      merchant_uid: 'ticket_hall'+new Date().getTime(),   // 주문번호
+      name: "TICKET24 아트센터",
+      amount: 100,                         // 숫자 타입
+      buyer_email: $('#reservation_email').val(),
+      buyer_name: $('#reservation_name').val(),
+      buyer_tel: $('#reservation_phone').val(),
+    }, function (rsp) { // callback
+    	 if (rsp.success) {
+   		     payment();
+   		} else {
+   		      var msg = '결제에 실패하였습니다.';
+   		      msg += '에러내용 : ' + rsp.error_msg;
+   		      alert(msg);
+   		}
+    });
+ }
+ function payment(){
+	$.ajax({
+		url:'../reserv/updatePayment',
+		type:'post',
+		data:{reservation_num:${payment.reservation_num},payment_name:$('#reservation_name').val(),payment_phone:$('#reservation_phone').val(),payment_email:$('#reservation_name').val()},
+		dataType:'json',
+		success:function(param){
+			if(param.result=='success'){
+				 var msg = '결제가 완료되었습니다.';
+	   		     alert(msg);
+	   		     location.href = 'reservDetail?reservation_num=${payment.reservation_num}'
+			}else{
+				alert('결제 오류 : 문의처에 문의해주세요.');
+			}
+		},
+		error:function(){
+			alert('결제 오류 : 문의처에 문의해주세요.');
+		}
+	});
+ }
+/* 결제 끝 */
+</script>
 <!-- 결제 끝 -->
     

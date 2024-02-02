@@ -36,6 +36,7 @@ create table paymenthall(
 	payment_date date,
 	payment_name varchar2(100),
 	payment_phone varchar2(50),
-	payment_status number(1) default 0 not null
+	payment_status number(1) default 0 not null,
+	payment_method number(1)
 );
 
