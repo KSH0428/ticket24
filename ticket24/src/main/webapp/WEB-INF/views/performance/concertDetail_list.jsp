@@ -20,7 +20,7 @@ $(function() {
     let y;
     let m;
     let d;
-	
+    
 	$.ajax({
 		url: 'concertRound',
 		type: 'post',
@@ -30,14 +30,25 @@ $(function() {
 			for(var i = 0; i < param.length; i++){
 				
 				dates[i] = param[i].year+'-'+param[i].month+'-'+ param[i].day;
+				/*
 				y = param[i].year;
 				m = param[i].month;
 				d = param[i].day;
+				*/
 			}
-			console.log(dates[0]);
+			
+			let date1 = new Date(dates[0]);
+			let date2;
+			
+			if(param.length == 2)
+				date2 = new Date(dates[1]);
+			else
+				date2 = date1;
+			
+			
 			 $("#datepicker").datepicker({
 			        dateFormat: 'yy-mm-dd' //달력 날짜 형태
-			        ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+			        ,showOtherMonths: false //빈 공간에 현재월의 앞뒤월의 날짜를 표시
 			        ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
 			        ,changeYear: false //option값 년 선택 가능
 			        ,changeMonth: false //option값  월 선택 가능                
@@ -46,8 +57,8 @@ $(function() {
 			        ,buttonText: "선택" //버튼 호버 텍스트              
 			        ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
 			        //,minDate:new Date(dates[0].year,dates[0].month-1,dates[0].day)
-			 		,minDate:0
-			        ,maxDate:new Date('2024-05-05')
+			 		,minDate:date1
+			        ,maxDate:date2
 			        //달력 달 약자
 			        ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 			    	//달력 달
@@ -71,11 +82,6 @@ $(function() {
 			            }
 			            return [false, ''];
 			          }
-			    	//특정 달만 고를 수 있음
-					/*,beforeShowMonth: function(date) {
-						var formattedMonth = $.datepicker.formatDate('yy-mm-dd', date);
-						return date.getMonth() === formattedMonth.getMonth() && date.getFullYear() === formattedMonth.getFullYear();
-				      }*/
 			     });
 					
 			 $("#datepicker").datepicker('setDate',new Date(dates[0]));
