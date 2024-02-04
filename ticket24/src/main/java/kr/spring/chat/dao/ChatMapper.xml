@@ -9,20 +9,24 @@
 	<select id="selectChatRoomList" parameterType="map" resultMap="chatMap">
 		SELECT *
 		FROM chatroom
-		WHERE mem_num = #{mem_num}
 		ORDER BY chatroom_num DESC
 	</select>
 
 	<select id="selectRowCount" parameterType="map" resultType="integer">
-	    SELECT COUNT(*)
-	    FROM chatroom
-	    WHERE mem_num = #{mem_num}
+	    SELECT COUNT(*) FROM chatroom
 	</select>
 	
 	<!-- 채팅 메시지 읽기 -->
 	<select id="selectChatDetail" parameterType="integer" resultType="chatMessageVO">
-		SELECT * FROM chatmessage
-		WHERE chatroom_num=?
+		SELECT 
+		    message,
+		    send_date,
+		    read_check,
+		    mem_num,
+		    mem_id
+		FROM chatmessage
+		JOIN member USING(mem_num)
+		WHERE chatroom_num=#{chatroom_num}
 		ORDER BY send_date ASC
 	</select>
 	

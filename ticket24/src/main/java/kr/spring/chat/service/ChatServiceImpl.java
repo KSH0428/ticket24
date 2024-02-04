@@ -24,8 +24,7 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return chatMapper.selectRowCount(map);
 	}
 	
 	@Override
