@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -102,8 +103,36 @@ public class MemberController {
 		model.addAttribute("mem_id", mem_id);
 		model.addAttribute("url", request.getContextPath()+"/member/login");
 		
-		return "member/findIdResult";
+		return "findIdResult";
 	}
+	
+	/*========================
+	 * 비밀번호 찾기
+	 *=======================*/
+	@GetMapping("/member/findPwCheck")
+	public String findPwForm() {
+		return "findPwCheck";
+	}
+	
+	@PostMapping("/member/findPwCheck")
+	public String findPwCheck(@RequestParam String mem_id,
+							  @RequestParam String mem_name,
+							  @RequestParam String mem_email,
+							  @Valid MemberVO member, BindingResult result,
+							  Model model, HttpServletRequest request) {
+		if(result.hasFieldErrors("mem_id") || result.hasFieldErrors("mem_name") || result.hasFieldErrors("mem_email")) {
+			return findPwForm();
+		}
+		
+		member.setMem_id(mem_id);
+		member.setMem_name(mem_name);
+		member.setMem_email(mem_email);
+		
+
+		return "findPwCheck";
+	}
+	
+	
 	/*========================
 	 * 회원로그인
 	 *=======================*/
