@@ -87,6 +87,13 @@ public class ConcertController {
 		return new ModelAndView("concertView","concert",concert);
 	}
 
+	//예약 팝업 창
+	@RequestMapping
+	public ModelAndView reserveConcert() {
+		
+		
+		return null;
+	}
 	//---------------------------------------------------------------------------------------------------
 	//웹 크롤링 호출
 	@RequestMapping("/concert.do")
