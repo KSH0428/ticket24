@@ -14,7 +14,7 @@ import kr.spring.mdcart.vo.MdCartVO;
 public interface MdCartMapper {
 
 	//카트 등록
-	@Insert("INSERT INTO md_cart (md_cart_num,md_num,order_quantity,mem_num) VALUES (#{md_cart_num},#{md_num},#{order_quantity},#{mem_num})")
+	@Insert("INSERT INTO md_cart (md_cart_num,md_num,order_quantity,mem_num) VALUES (md_cart_seq.nextval,#{md_num},#{order_quantity},#{mem_num})")
 	public void insertCart(MdCartVO cart);
 	//회원번호(mem_num)별 총구매액
 	public int getTotalByMem_num(int mem_num);

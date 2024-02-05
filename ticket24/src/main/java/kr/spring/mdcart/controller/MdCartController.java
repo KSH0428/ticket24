@@ -36,85 +36,73 @@ public class MdCartController {
 	@Autowired
 	private MdCartService mdCartService;
 
-	/*==============================
-	 * 자바빈(VO) 초기화
-	 *==============================*/
+	/*
+	 * ============================== 자바빈(VO) 초기화 ==============================
+	 */
 	@ModelAttribute
 	public MdCartVO initCommand() {
 		return new MdCartVO();
 	}
 
-	/*=================================
-	 * 장바구니 등록
-	 *=================================*/
-	@PostMapping("/mdCart/addCart")
+	/*
+	 * ================================= 
+	 * 장바구니 등록 
+	 * =================================
+	 */
+	@RequestMapping("/mdCart/addCart")
 	@ResponseBody
-	public void insertCart(MdCartVO cartVO,
-			HttpSession session){
+	public void insertCart(
+			@RequestParam int md_num,
+			MdCartVO cartVO, HttpSession session) {
+		
 		log.debug("<<장바구니 등록 MdCartVO >> : " + cartVO);
 
-		MemberVO user = (MemberVO)(session.getAttribute("user"));
+		MemberVO user = (MemberVO) (session.getAttribute("user"));
 
 		cartVO.setMem_num(user.getMem_num());
 
 		mdCartService.insertCart(cartVO);
-
-		//if(user!=null) {
-		//	cartVO.setMem_num(user.getMem_num());
-		//	mdCartService.insertCart(cart);
-		//}
-
-
+		
 	}
 
-	//장바구니 페이지로 이동
-	@GetMapping("/mdCart/cartList")
-	public String cartList(){
-
-		return "/mdCart/cartList";
-	}
-
-	/*=================================
-	 * 장바구니 목록
-	 *=================================*/
+	/*
+	 * ================================= 
+	 * 장바구니 목록 
+	 * =================================
+	 */
 	@RequestMapping("/mdCart/cartList")
 	@ResponseBody
-	public Map<String,Object> getList(
-			@RequestParam int md_cart_num,HttpSession session){
-
-
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("md_cart_num", md_cart_num);
+	public Map<String, Object> getList(
+			@RequestParam int md_cart_num, 
+			HttpSession session) {
 
 		List<MdCartVO> list = null;
-
 		list = mdCartService.selectList(md_cart_num);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("md_cart_num", md_cart_num);
+		//map.put("list", list);
 
-		Map<String,Object> mapJson = new HashMap<String,Object>();
-		mapJson.put("list", list);
+		return map;
+}
 
-		//로그인한 회원정보 셋팅
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(user!=null) {
-			mapJson.put("mem_num", user.getMem_num());
-		}		
-		return mapJson;
-	}
-
-	/*=================================
+	/*
+	 * ================================= 
 	 * 회원번호별 총 구매액
-	 *=================================*/
+	 * =================================
+	 */
 
-
-
-	/*=================================
+	/*
+	 * ================================= 
 	 * 장바구니 상세
-	 *=================================*/
+	 *  =================================
+	 */
 
-
-	/*=================================
+	/*
+	 * ================================= 
 	 * 장바구니 수정
-	 *=================================*/
+	 *  =================================
+	 */
 	/*
 	 * @RequestMapping("/mdCart/updateCart")
 	 * 
@@ -134,10 +122,8 @@ public class MdCartController {
 	 * 
 	 */
 
-	/*=================================
-	 * 장바구니 삭제
-	 *=================================*/
-
-
+	/*
+	 * ================================= 장바구니 삭제 =================================
+	 */
 
 }

@@ -63,7 +63,7 @@
 					<div class="d-grid gap-2 col-8 mx-auto">
 						
 						<div class="md-detail">
-						<form id="addCart" action="/mdCart/addCart" method="post">
+						<form id="addCart" action="/mdCart/addCart">
 							<input type="hidden" name="md_num" value="${md.md_num}"
 								id="md_num"> <input type="hidden" name="md_price"
 								value="${md.md_price}" id="md_price"> <input
@@ -88,12 +88,14 @@
 							</ul>
 						</form>
 						</div>
+					
+					
 
 
 
 						<input type="submit" value="장바구니 담기"
 							class="btn btn-outline-secondary"
-							onclick="location.href='${pageContext.request.contextPath}/mdCart/addCart'">
+							onclick="location.href='#">
 						<button class="btn btn-secondary btn-lg" type="button">바로구매</button>
 					</div>
 

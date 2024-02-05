@@ -86,7 +86,8 @@ public class MdReviewController {
 	public ModelAndView process(
 			@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 			@RequestParam(value="order",defaultValue="1") int order, String keyfield,
-			String keyword) { Map<String,Object> map = new HashMap<String,Object>();
+			String keyword) {
+			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("keyfield", keyfield); 
 			map.put("keyword", keyword);
 
@@ -103,6 +104,7 @@ public class MdReviewController {
 							map.put("end", page.getEndRow());
 
 			list = mdReviewService.selectList(map); }
+			
 
 			ModelAndView mav = new ModelAndView(); 
 			mav.setViewName("reviewList");
@@ -111,6 +113,7 @@ public class MdReviewController {
 			mav.addObject("page", page.getPage());
 
 			return mav; 
+			
 			
 	}
 

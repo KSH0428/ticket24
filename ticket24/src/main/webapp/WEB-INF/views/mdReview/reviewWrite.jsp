@@ -29,7 +29,7 @@
 	                                      enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
-			<li>
+			<li class="list-style: none;">
 				<form:label path="md_title">제목</form:label>
 				<form:input path="md_title"/>
 				<form:errors path="md_title" cssClass="error-color"/>

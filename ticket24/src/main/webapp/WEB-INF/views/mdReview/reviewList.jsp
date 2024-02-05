@@ -55,10 +55,10 @@
 										<br> <img
 											src="${pageContext.request.contextPath}/upload/${mdReview.md_filename}"
 											class="detail-img"> <br>
-										<br> <span> <span lass="float-end">이 리뷰가
+										<br> <span> <span class="float-end">이 리뷰가
 												도움이 되었나요? ${mdReview.fav_cnt}</span>
-												 <%-- 좋아요 --%> <span> <img
-												id="output_fav" data-num="${mdReview.md_review_num}"
+												 <%-- 좋아요 --%> 
+												 <span> <img id="output_fav" data-num="${mdReview.md_review_num}"
 												src="${pageContext.request.contextPath}/images/fav01.gif"
 												width="40"> <span id="output_fcount"></span>
 										</span>
