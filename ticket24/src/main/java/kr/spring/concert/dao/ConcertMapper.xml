@@ -63,6 +63,14 @@
 		FROM concert_round
 		WHERE concert_num=#{concert_num}
 	</select>
+	
+	<!-- 콘서트 회차 좌석 정보 -->
+	<select id="selectC_roundRemainingSeats" parameterType="integer" resultType="integer">
+		SELECT
+			total_seat
+		FROM concert_round
+		WHERE c_round_num=#{c_round_num}
+	</select>
 
 
 
@@ -137,7 +145,7 @@
 			#{year},
 			#{month},
 			#{day},
-			#{time}
+			#{concert_time}
 			)
 	</insert>
 </mapper>

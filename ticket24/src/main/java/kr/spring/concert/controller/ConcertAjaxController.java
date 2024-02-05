@@ -27,7 +27,14 @@ public class ConcertAjaxController {
 		return round;
 	}
 	
-	/*
+	
 	//콘서트 해당 회차 좌석 정보
-	public */
+	@RequestMapping("/concert/concertRemainingSeats")
+	@ResponseBody
+	public int getRemainingSeats(int c_round_num) {
+		
+		int remainingSeats = concertService.selectC_roundRemainingSeats(c_round_num);
+		log.debug("<<콘서트 회차 남은 자리 수>> : " + remainingSeats);
+		return remainingSeats;
+	}
 }

@@ -18,6 +18,9 @@ public interface ConcertService {
 	
 	//콘서트 회차
 	public List<ConcertRoundVO> selectRoundList(int concert_num);
+	
+	//콘서트 회차 좌석 정보
+	public int selectC_roundRemainingSeats(int c_round_num);
 	//--------------웹 스크롤 -----------------
 
 	//콘서트 리스트

@@ -302,7 +302,7 @@ width: 450px;
     height: 100%;
     list-style: none;
 }
-#concert-time-btn{
+#concert-time-btn, #concert-time-btn2{
 	padding: 11px 18px 11px 15px;
     width: 100%;
     border: 1px solid #dcdde1;
@@ -324,6 +324,23 @@ width: 450px;
     border-radius: 0 10px 10px 0;
     background: #f8f9fa;
 }
+.concert-seats{
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    line-height: 18px;
+    
+    margin: 0;
+    padding: 0;
+}
+#seatsNum{
+	display: inline-flex;
+    color: #242428;
+    font-weight: 700;
+    padding-right: 24px;
+}
+
 /*공연 상세 끝*/
 
 

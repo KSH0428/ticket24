@@ -14,4 +14,5 @@ public class ConcertRoundVO {
 	private String month;
 	private String day;
 	private String concert_time; 
+	private int total_seat;
 }

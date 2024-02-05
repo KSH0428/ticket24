@@ -24,6 +24,7 @@ $(function() {
 	
     let dates = [];
 	let round = [];
+	let c_round_num = [];
     
 	$.ajax({
 		url: 'concertRound',
@@ -33,7 +34,7 @@ $(function() {
 		success:function(param){
 			for(var i = 0; i < param.length; i++){
 				dates[i] = param[i].year+'-'+param[i].month+'-'+ param[i].day;
-				
+				c_round_num[i] = param[i].c_round_num;
 				round[i] = param[i].concert_time;
 			}
 			
@@ -44,7 +45,6 @@ $(function() {
 				date2 = new Date(dates[1]);
 			else
 				date2 = date1;
-			console.log(new Date(date1.getYear(),date1.getMonth(),1));
 			
 			 $("#datepicker").datepicker({
 			        dateFormat: 'yy-mm-dd' //달력 날짜 형태
@@ -85,35 +85,41 @@ $(function() {
 			          }
 			    	
 			    	 ,onSelect : function(dateString, inst){
-			    		 
-				    		//해당 날짜의 인덱스 구하기
-				    		var num = dates.indexOf(dateString);
+			    		 	
+			    		//날짜 선택 태그가 존재하는지 확인
+				    	var existingTag = $("#concert-time-btn");
 				    		
-				    		//날짜 선택 태그가 존재하는지 확인
-				    		var existingTag = $("#concert-time-btn");
-				    		
-				    		//존재한다면 삭제한다
-				    		if(existingTag.length > 0){
-				    			existingTag.remove();
-				    		}
-				    		//ID : concert-time-item에 태그 추가
-				    		$('#concert-time-item').append("<button id='concert-time-btn'><span class='time-box'></span></button>");
-				    		//span 태그에 날짜 입력
-				    		$('#concert-time-item span').append(round[num]);
-				    		
-				    		/*
-				    		//해당 날짜의 회차 정보 수신하기
-				    		for(var i = 0; i < dates.length; i++){
-				    			if(dates[i] == dateString){
-				    				alert(round[i]);
-				    			}
-				    		}*/
+				    	//존재한다면 삭제한다
+				    	if(existingTag.length > 0){
+				    		existingTag.remove();
 				    	}
+			    		 	
+				    	//해당 날짜의 인덱스 구하기
+				    	//먼저 1회차 2회차 날짜가 같은지 비교
+				    	var count = 0;
+				    	for(var i = 0; i < 2; i++){
+				    		if(dates[i] == dateString){
+								count++;
+			 				}
+				    	}
+				    	
+				    	//ID : concert-time-item에 태그 추가
+    					$('#concert-time-item').append("<button id='concert-time-btn'><span class='time-box'></span></button>");
+    					//span 태그에 날짜 입력
+    					$('#concert-time-btn span').append(round[0]);
+				    	
+				    	if(count == 2){
+	    					$('#concert-time-item').append("<button id='concert-time-btn2'><span class='time-box'></span></button>");
+	    					//span 태그에 날짜 입력
+	    					$('#concert-time-btn2 span').append(round[1]);
+				    	}
+				    		
+				    }
 			     });
 					
 		},
 		error:function(){
-			alert('에이젝스 오류');
+			alert('통신 오류');
 		}
 	});
 	
@@ -130,9 +136,46 @@ $(function() {
 		$('#concert-time-btn').css({
 		    'border-color': '#242428'
 		});
+		$('#concert-time-btn2').css({
+		    'border-color': '#dcdde1'
+		});
+		
+		$('#seatsNum').text(getRemainingSeats(c_round_num[0]));
+		
+	});
+	$(document).on('click', '#concert-time-btn2', function() {
+		//CSS 테두리 색깔 변경
+		$('#concert-time-btn2').css({
+		    'border-color': '#242428'
+		});
+		$('#concert-time-btn').css({
+		    'border-color': '#dcdde1'
+		});
+		
+		$('#seatsNum').text(getRemainingSeats(c_round_num[1]));
 	});
 
-	
+	//공연 회차 좌석 정보 얻어오기
+	function getRemainingSeats(num){
+		
+		let result_seat;
+		$.ajax({
+			url: 'concertRemainingSeats',
+			type: 'post',
+			data: {c_round_num:num},
+			//return 값을 이용하기 위해선 ajax를 비동기로 바꿔야 한다.
+			async: false,
+			dataType: 'json',
+			success:function(param){
+				result_seat = param;
+			},
+			error:function(){
+				alert('통신 오류');
+			}
+		});
+		
+		return result_seat;
+	}
 });
 
 
@@ -220,6 +263,10 @@ $(function() {
 				<h3 class="date-header">
 					<span class="reserve-step1">남은좌석</span>
 				</h3>
+				<ul class="concert-seats">
+					<span style="color: #62676c;">남은 좌석 : </span>
+					<span id="seatsNum"></span>
+				</ul>
 			</div>
 		</div>
 	</div>
