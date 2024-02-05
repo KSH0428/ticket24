@@ -21,9 +21,9 @@ public class ConcertAjaxController {
 	@RequestMapping("/concert/concertRound")
 	@ResponseBody
 	public List<ConcertRoundVO> getConcertRound(int concert_num) {
-		log.debug("<<콘서트 회차 정보 가져오기 >>");
-		List<ConcertRoundVO> round = concertService.selectRoundList(concert_num);
 		
+		List<ConcertRoundVO> round = concertService.selectRoundList(concert_num);
+		log.debug("<<콘서트 회차 정보 가져오기 >> : " + round);
 		return round;
 	}
 }

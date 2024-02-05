@@ -351,7 +351,7 @@ public class ConcertController {
 				round.setYear(year);
 				round.setMonth(month);
 				round.setDay(day);
-				round.setTime(src_time);
+				round.setConcert_time(src_time);
 				
 				concertService.insertConcertRound(round);
 				

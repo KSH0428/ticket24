@@ -259,12 +259,75 @@ width: 450px;
 .concert-detail-img{
     margin:0 auto;
 }
-
+.concert-reserve-container{
+	position: relative;
+	margin: 0 auto;
+    width: 1120px;
+}
+.reserve-border{
+	display: flex;
+    max-height: 320px;
+    border: 1px solid #878d95;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.datepicker-container{
+	display: flex;
+    padding: 20px 24px 13px 23px;
+}
+.date-header{
+	margin-bottom: 18px;
+    width: 100px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    color: #242428;
+}
+.reserve-step1{
+	font-weight: 700;
+	font-size: 16px;
+    line-height: 24px;
+}
+.reserveTime-container{
+	display: flex;
+    align-items: flex-start;
+    padding: 20px 0 20px 24px;
+    border-left: 1px solid #ecedf2;
+}
+.concert-time-list{
+	overflow-y: overlay;
+    scrollbar-width: thin;
+    padding-right: 24px;
+    width: 257px;
+    height: 100%;
+    list-style: none;
+}
+#concert-time-btn{
+	padding: 11px 18px 11px 15px;
+    width: 100%;
+    border: 1px solid #dcdde1;
+    background-color: rgba(0,0,0,0);
+    border-radius: 6px;
+    text-align: left;
+}
+.time-box{
+	display: block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #242428;
+}
+.reserve-seat-info{
+	flex: 1;
+    padding: 19px 0 20px 20px;
+    border-left: 1px solid #ecedf2;
+    border-radius: 0 10px 10px 0;
+    background: #f8f9fa;
+}
 /*공연 상세 끝*/
 
+
 /*datepicker ui 시작*/
-
-
 .ui-datepicker-calendar>thead>tr>th {
 	font-size: 14px !important;
 }
@@ -273,7 +336,7 @@ width: 450px;
 	position: relative;
 	padding: 10px 0;
 }
-
+/*기본 날짜*/
 .ui-state-default, .ui-widget-content .ui-state-default,
 	.ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover,
 	html .ui-button.ui-state-disabled:active {
@@ -281,7 +344,6 @@ width: 450px;
 	border: 0px solid #c5c5c5;
 	background-color: transparent;
 	font-weight: normal;
-	color: #454545;
 	text-align: center;
 }
 
@@ -289,8 +351,9 @@ width: 450px;
 	margin: 0 0em;
 	line-height: 16px;
 	text-align: center;
-	font-size: 14px;
+	font-size: 20px;
 	padding: 0px;
+	padding-bottom: 10px;
 	font-weight: bold;
 }
 
@@ -298,17 +361,12 @@ width: 450px;
 	display: none;
 	background-color: #fff;
 	border-radius: 4px;
-	margin-top: 10px;
+	/* margin-top: 10px; */
 	margin-left: 0px;
 	margin-right: 0px;
-	padding: 20px;
+	/* padding: 20px; */
 	padding-bottom: 10px;
 	width: 300px;
-	box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1);
-}
-
-.ui-widget.ui-widget-content {
-	border: 1px solid #eee;
 }
 
 #datepicker:focus>.ui-datepicker {
@@ -416,14 +474,15 @@ width: 450px;
 	outline: none;
 	background-color: #eee;
 }
-/*선택된 날짜*/
+/*선택한 날짜*/
 .ui-datepicker-calendar .ui-state-active {
-	/* line-height: 33px; */
 	border-radius: 50%;
-	padding: 6px;
+/* 	padding: 6px; */
 	border: 0px solid #000;
 	background-color: #f4aa10;
 	color: white !important;
+	display:block;
+	width:30px;
 }
 
 /*datepicker ui 끝*/

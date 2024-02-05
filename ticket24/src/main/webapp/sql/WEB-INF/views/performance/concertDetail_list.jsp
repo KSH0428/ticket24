@@ -7,27 +7,19 @@
 <meta charset="UTF-8">
 <title>콘서트 상세</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ysw.css">
-<!-- css 파일 무시 -->
-<script type="text/javascript">
-	//document.querySelector('link[href="${pageContext.request.contextPath}/css/ysw.css"]').remove();
-</script>
 <!-- datePicker 시작 -->
-<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<!--  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <!-- datePicker 끝 -->
 <script>
 $(function() {
-	//회차 날짜 번호 클릭 이벤트
-	$("#concerttimebtn").on("click", function() {
-	      // 클릭 이벤트에 대한 동작을 여기에 추가
-	      alert("버튼이 클릭되었습니다!");
-	});
-	
-	//Ajax로 공연 회차 정보 가져오기
+	//Ajax로 회차 정보 가져오기
 	
     let dates = [];
-	let round = [];
+    let y;
+    let m;
+    let d;
     
 	$.ajax({
 		url: 'concertRound',
@@ -36,9 +28,13 @@ $(function() {
 		dataType: 'json',
 		success:function(param){
 			for(var i = 0; i < param.length; i++){
-				dates[i] = param[i].year+'-'+param[i].month+'-'+ param[i].day;
 				
-				round[i] = param[i].concert_time;
+				dates[i] = param[i].year+'-'+param[i].month+'-'+ param[i].day;
+				/*
+				y = param[i].year;
+				m = param[i].month;
+				d = param[i].day;
+				*/
 			}
 			
 			let date1 = new Date(dates[0]);
@@ -48,7 +44,7 @@ $(function() {
 				date2 = new Date(dates[1]);
 			else
 				date2 = date1;
-			console.log(new Date(date1.getYear(),date1.getMonth(),1));
+			
 			
 			 $("#datepicker").datepicker({
 			        dateFormat: 'yy-mm-dd' //달력 날짜 형태
@@ -60,13 +56,9 @@ $(function() {
 			        ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
 			        ,buttonText: "선택" //버튼 호버 텍스트              
 			        ,yearSuffix: "." //달력의 년도 부분 뒤 텍스트
-			        /*
+			        //,minDate:new Date(dates[0].year,dates[0].month-1,dates[0].day)
 			 		,minDate:date1
 			        ,maxDate:date2
-			        */
-			        //getYear()하면 잘못된 년도가 들어가서 일단 2024년 적음
-			 		,minDate:new Date('2024',date1.getMonth(),'1')
-			        ,maxDate:new Date('2024',date2.getMonth(),getLastDayOfMonth(date2.getYear(),date2.getMonth()))
 			        //달력 달 약자
 			        ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 			    	//달력 달
@@ -75,8 +67,11 @@ $(function() {
 			        ,dayNamesMin: ['일','월','화','수','목','금','토']
 			    	//달력 요일
 			        ,dayNames: ['일','월','화','수','목','금','토'] 
-					
-			 
+			    	//선택한 날짜 수신 예시)2024-02-01
+			    	,onSelect : function(dateString){
+			    		$("#date").val(dateString);
+			    		console.log(dateString);
+			    	}
 			 
 			    	//공연 날짜만 클릭할 수 있도록하기
 			    	,beforeShowDay: function(date) {
@@ -87,52 +82,16 @@ $(function() {
 			            }
 			            return [false, ''];
 			          }
-			    	
-			    	 ,onSelect : function(dateString, inst){
-			    		 
-				    		//해당 날짜의 인덱스 구하기
-				    		var num = dates.indexOf(dateString);
-				    		
-				    		//날짜 선택 태그가 존재하는지 확인
-				    		var existingTag = $("#concert-time-btn");
-				    		
-				    		//존재한다면 삭제한다
-				    		if(existingTag.length > 0){
-				    			existingTag.remove();
-				    		}
-				    		//ID : concert-time-item에 태그 추가
-				    		$('#concert-time-item').append("<button id='concert-time-btn'><span class='time-box'></span></button>");
-				    		//span 태그에 날짜 입력
-				    		$('#concert-time-item span').append(round[num]);
-				    		
-				    		/*
-				    		//해당 날짜의 회차 정보 수신하기
-				    		for(var i = 0; i < dates.length; i++){
-				    			if(dates[i] == dateString){
-				    				alert(round[i]);
-				    			}
-				    		}*/
-				    	}
 			     });
 					
+			 $("#datepicker").datepicker('setDate',new Date(dates[0]));
 		},
 		error:function(){
 			alert('에이젝스 오류');
 		}
 	});
 	
-	//달의 마지막 날을 읽어온다.
-	function getLastDayOfMonth(year, month) {
- 		//month는 0부터 시작하므로, 1을 더해줌
-  		const lastDay = new Date(year, month + 1, 0).getDate();
-  		return lastDay;
-	}
-	
-
-	
 });
-
-
 </script>
 </head>
 <body>
@@ -192,39 +151,10 @@ $(function() {
 	</div>
 	
 	<!-- 공연 예약 부분 -->
-	<div class="concert-reserve-container">
-		<div class="reserve-border">
-			<div class="datepicker-container">
-				<h3 class="date-header">
-					<span class="reserve-step1">날짜선택</span>
-				</h3>
-				
-				<!-- datePicker 시작 -->
-				<!-- div 사용 이유 : datepicker를 처음부터 띄우기 위함 -->
-				<div id="datepicker" class="calendar"></div>
-				<!-- datePicker 끝 -->
-			
-			</div>
-			<div class="reserveTime-container">
-				<h3 class="date-header">
-					<span class="reserve-step1">회차선택</span>
-				</h3>
-				<ul class="concert-time-list">
-					<li id="concert-time-item"></li>
-				</ul>
-			</div>
-			<div class="reserve-seat-info">
-				<h3 class="date-header">
-					<span class="reserve-step1">남은좌석</span>
-				</h3>
-			</div>
-		</div>
-	</div>
-	<!-- sticky -->
-	&nbsp;
-	&nbsp;
-	&nbsp;
-	&nbsp;
+	<!-- datePicker 시작 -->
+	<!-- div 사용 이유 : datepicker를 처음부터 띄우기 위함 -->
+	<div id="datepicker" class="calendar"></div>
+	<!-- datePicker 끝 -->
 	<!-- 공연 상세 이미지 -->
 	<div class="concert-detail-img">
 		<c:if test="${concert.image_1!='null'}">
