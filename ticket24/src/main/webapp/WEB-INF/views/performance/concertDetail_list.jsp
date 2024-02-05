@@ -161,7 +161,16 @@ $(function() {
 		$('#seatsNum').text('');
 		$('#seatsNum').text(getRemainingSeats(c_round_num[num]));
 		
+		
+		/* 버튼 활성화 */
+		$('#reserve-btn').css({
+			'border' : '1px solid #fa2828',
+		    "background-color" : '#fa2828'
+		});
+		$('#reserve-btn').prop("disabled", false);
+		
 	});
+	
 	$(document).on('click', '#concert-time-btn2', function() {
 		//CSS 테두리 색깔 변경
 		$('#concert-time-btn2').css({
@@ -173,6 +182,13 @@ $(function() {
 		
 		$('#seatsNum').text('');
 		$('#seatsNum').text(getRemainingSeats(c_round_num[1]));
+		
+		/* 버튼 활성화 */
+		$('#reserve-btn').css({
+			'border' : '1px solid #fa2828',
+		    "background-color" : '#fa2828'
+		});
+		$('#reserve-btn').prop("disabled", false);
 	});
 
 	//공연 회차 좌석 정보 얻어오기
@@ -289,7 +305,18 @@ $(function() {
 				</ul>
 			</div>
 		</div>
+		
+		<!-- 예약 버튼 -->
+		<div class="concert-reserve-btn-container">
+			<div class="concert-btn-area">
+				<!-- 날짜 회차를 골라야 버튼 활성화 -->
+				<button disabled id="reserve-btn" class="reserve-btn">예매하기</button>
+			</div>
+		</div>
+		
 	</div>
+	
+	
 	
 	<!-- sticky -->
 	&nbsp;
