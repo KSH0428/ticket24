@@ -14,7 +14,7 @@ public interface TicketService {
 	public void updateTicket_hit(int ticket_num);
 	public void updateTicket(TicketVO ticket);
 	public void deleteTicket(int ticket_num);
-	public void deleteFile(int ticket_num);
+	public void deleteFile(Map<String,Integer> map);
 	
 }
 

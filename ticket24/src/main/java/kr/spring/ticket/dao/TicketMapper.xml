@@ -150,5 +150,22 @@
 			ticket_modifydate=SYSDATE
 			WHERE ticket_num=#{ticket_num}		
 		</update>
+		
+		<update id="deleteFile" parameterType="map">
+			UPDATE ticket SET 
+			  <if test="file_num==1">
+			   ticket_filename1=''
+			  </if>
+			  <if test="file_num==2">
+			   ticket_filename2=''
+			  </if>
+			  <if test="file_num==3">
+			   ticket_filename3=''
+			  </if>
+			  <if test="file_num==4">
+			   ticket_filename4=''
+			  </if>
+			 WHERE ticket_num=#{ticket_num}
+		</update>
 </mapper>
 

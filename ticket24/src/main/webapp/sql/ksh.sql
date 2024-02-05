@@ -80,7 +80,7 @@ create table ticket_pay(
  ticket_pay_price number(20) not null,
  ticket_pay_name varchar2(30) not null,
  ticket_pay_zipcode varchar2(5) not null,
- ticket_pay_address1 varchar2(50) not null,3 
+ ticket_pay_address1 varchar2(50) not null,
  ticket_pay_address2 varchar2(50) not null,
  ticket_pay_phone varchar2(15) not null,
  ticket_pay_method number(1) not null,

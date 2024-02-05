@@ -55,8 +55,8 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public void deleteFile(int ticket_num) {
-		ticketMapper.deleteFile(ticket_num);
+	public void deleteFile(Map<String,Integer> map) {
+		ticketMapper.deleteFile(map);
 		
 	}
 	

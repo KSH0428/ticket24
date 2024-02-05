@@ -97,42 +97,60 @@
 					})
 			</script>
 		</li>
-				<li>
-			<form:label path="upload">파일업로드</form:label>
-			<input type="file" name="upload" id="upload">
-			<c:if test="${!empty ticketVO.ticket_filename1 }">			
-			<div id="file_detail">(${ticketVO.ticket_filename1})파일이 등록되어 있습니다.
-				<input type="button" value="파일삭제" id="file_del">
-			</div>
-			<script type="text/javascript">
-				$(function(){
-					$('#file_del').click(function(){
-						let choice = confirm('삭제하시겠습니까?');
-						if(choice){
-							$.ajax({
-								url:'deleteFile',
-								data:{ticket_num:${ticketVO.ticket_num}},
-								type:'post',
-								dataType:'json',
-								success:function(param){
-									if(param.result == 'logout'){
-										alert('로그인 후 사용하세요');
-									}else if(param.result == 'success'){
-										$('#file_detail').hide();										
-									}else{
-										alert('파일 삭제 오류 발생');
-									}
-								},
-								error:function(){
-									alert('네트워크 오류 발생');
-								}
-							});
-						}
-					});
-				});
-			</script>
-			</c:if>
- 		
+		<li>
+    <form:label path="upload">파일업로드</form:label>
+    <input type="file" name="upload" id="upload">
+    <c:if test="${!empty ticketVO.ticket_filename1}">
+        <div class="file_detail">(${ticketVO.ticket_filename1})파일이 등록되어 있습니다.
+            <input type="button" value="파일삭제" class="file_del" data-filenum="1">
+        </div>
+    </c:if>
+    <c:if test="${!empty ticketVO.ticket_filename2}">
+        <div class="file_detail">(${ticketVO.ticket_filename2})파일이 등록되어 있습니다.
+            <input type="button" value="파일삭제" class="file_del" data-filenum="2">
+        </div>
+    </c:if>
+    <c:if test="${!empty ticketVO.ticket_filename3}">
+        <div class="file_detail">(${ticketVO.ticket_filename3})파일이 등록되어 있습니다.
+            <input type="button" value="파일삭제" class="file_del" data-filenum="3">
+        </div>
+    </c:if>
+    <c:if test="${!empty ticketVO.ticket_filename4}">
+        <div class="file_detail">(${ticketVO.ticket_filename4})파일이 등록되어 있습니다.
+            <input type="button" value="파일삭제" class="file_del" data-filenum="4">
+        </div>
+    </c:if>
+    <script type="text/javascript">
+        $(function(){
+            $('.file_del').click(function(){
+            	let choice_file =  $(this);
+                let file_num = choice_file.attr('data-filenum');
+                let choice = confirm('파일을 삭제하시겠습니까?');
+                if(choice){
+                    $.ajax({
+                        url:'deleteFile',
+                        data:{ticket_num:${ticketVO.ticket_num},file_num:file_num},
+                        type:'post',
+                        dataType:'json',
+                        success:function(param){
+                            if(param.result == 'logout'){
+                                alert('로그인 후 사용하세요');
+                            }else if(param.result == 'success'){
+                            	choice_file.parent().hide();                                        
+                            }else{
+                                alert('파일 삭제 오류 발생');
+                            }
+                        },
+                        error:function(){
+                            alert('네트워크 오류 발생');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</li>
+ 		<li>
 		<label>보유여부</label>
 		<form:radiobutton path="ticket_status" value="1"/>보유중
 		<form:radiobutton path="ticket_status" value="2"/>판매 완료
