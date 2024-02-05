@@ -18,10 +18,10 @@
                 type:'post',
                 dataType:'json',
                 success: function(param) {
-                    if (param.result == "success") {
+                    if (param.result == 'success') {
                         // 채팅방 숨김
                         $('#chatDetail').hide();
-                        window.location.href = '/chat/chatMain';
+                        window.location.href = '/chat/main';
                     } else {
                         alert("채팅방 나가기 실패");
                     }

@@ -119,12 +119,24 @@
 			<artifactId>spring-social-google</artifactId>
 			<version>1.0.0.RELEASE</version>
 		</dependency>
-		
+
 		<!-- mail -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-mail</artifactId>
-		    <version>1.4.3.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.5.7</version>
+			<type>pom</type>
 		</dependency>
 
 		<!-- 개인 라이브러리 추가 시작-->

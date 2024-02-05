@@ -17,6 +17,18 @@ spring:
       maximum-pool-size: 10 #최대 커넥션 개수 설정
       max-lifetime: 1800000 #커넥션 풀에서 살아있을 수 있는 커넥션의 최대 수명시간 1,800초(30분)
       
+  mail:
+    host: smtp.gmail.com
+    port: 8000
+    username: zewntlr78@gmail.com
+    password: "dmsgml12!"
+    properties:
+      mail:
+        smtp:
+        auth: true
+        starttls:
+          enable: true
+          
   messages: #메시지
     basename: messages.ceh,messages.ysw,messages.ces,messages.cmj,messages.hjh,messages.ksh
     encoding: UTF-8
@@ -31,8 +43,8 @@ spring:
   servlet:
     multipart:
       max-file-size: 50MB #파일 한 개당 최대 사이즈
-      max-request-size: 200MB #요청당 최대 파일 크기      
-              
+      max-request-size: 200MB #요청당 최대 파일 크기    
+
 mybatis: #mybatis 설정
   type-aliases-package: kr.spring.**.vo 
   mapper-locations: kr/spring/**/dao/*.xml

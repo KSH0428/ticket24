@@ -62,7 +62,18 @@ public class AppConfig implements WebMvcConfigurer, WebSocketConfigurer{
 				.addPathPatterns("/question/adminDelete")
 				.addPathPatterns("/faq/write")
 				.addPathPatterns("/faq/update")
-				.addPathPatterns("/faq/delete");
+				.addPathPatterns("/faq/delete")
+				.addPathPatterns("/chat/main")
+				.addPathPatterns("/chat/chatDetail")
+				.addPathPatterns("/chat/writeChat")
+				.addPathPatterns("/chat/chatDetailAjax")
+				.addPathPatterns("/chat/deleteChat")
+				.addPathPatterns("/event/write")
+				.addPathPatterns("/event/list")
+				.addPathPatterns("/event/detail")
+				.addPathPatterns("/event/update")
+				.addPathPatterns("/event/delete")
+				.addPathPatterns("/event/writeReply");
 				
 				
 	} 

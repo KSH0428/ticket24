@@ -68,7 +68,7 @@ public class ChatController {
 		//채팅방 생성
 		chatRoomVO.setMem_num(user.getMem_num());
 		List<ChatRoomVO> list = chatService.selectChatList(user.getMem_num());
-		if(list.size()>0) {
+		if(list.size()>0 || user.getMem_auth() == 9) {
 			log.debug("chatroom_num : " + chatroom_num);
 			return "/chat/chatDetail";
 		}else {
@@ -126,16 +126,17 @@ public class ChatController {
 	 * 채팅방 나가기
 	 *==========================*/
 	@RequestMapping("/chat/deleteChat")
+	@ResponseBody
 	public Map<String,String> deleteChat(@RequestParam int chatroom_num, 
-							HttpServletRequest request) {
+											HttpServletRequest request) {
 		log.debug("<<채팅방 삭제>> : " + chatroom_num);
 		
 		chatService.deleteChatRoom(chatroom_num);
 		
-		Map<String,String> result = new HashMap<String,String>();
-		result.put("result", "success");
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("result", "success");
 		
-		return result;
+		return map;
 	}
 }
 

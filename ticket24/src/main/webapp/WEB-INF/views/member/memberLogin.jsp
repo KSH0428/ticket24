@@ -27,7 +27,7 @@
 	</form:form>
 	<div>
 		<input type="button" value="아이디 찾기" onclick="location.href='findIdCheck'">
-		<input type="button" value="비밀번호 찾기" onclick="location.href='findPasswdCheck'">
+		<input type="button" value="비밀번호 찾기" onclick="location.href='findPwCheck'">
 	</div>
 	<p class="align-center">
 		<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main'">
