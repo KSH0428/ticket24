@@ -503,28 +503,3 @@ width: 450px;
 }
 
 /*datepicker ui 끝*/
-
-
-/*예약 버튼 시작*/
-.concert-reserve-btn-container{
-	display: flex;
-    margin-top: 19px;
-}
-.concert-btn-area{
-	margin-left: auto;
-    font-size: 0;
-}
-.reserve-btn{
-	width: 270px;
-	vertical-align: middle;
-	height: 56px;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 28px;
-    letter-spacing: -0.04em;
-    /* border: 1px solid #fa2828; */
-    /* background-color: #fa2828; */
-    background-color: #ced4da;
-    border: 1px solid #ced4da;
-    color: #fff;
-}
