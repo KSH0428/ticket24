@@ -101,7 +101,6 @@ public class MemberController {
 		
 		model.addAttribute("mem_id", mem_id);
 		model.addAttribute("url", request.getContextPath()+"/member/login");
-		model.addAttribute("url", request.getContextPath()+"/member/login");
 		
 		return "member/findIdResult";
 	}
@@ -143,7 +142,7 @@ public class MemberController {
 					String mem_au_id = member.getMem_au_id();
 					if(mem_au_id==null) {
 						mem_au_id = UUID.randomUUID().toString();
-						log.debug("<<au_id>> : " + mem_au_id);
+						log.debug("<<mem_au_id>> : " + mem_au_id);
 						member.setMem_au_id(mem_au_id);
 						memberService.updateAu_id(member.getMem_au_id(),member.getMem_num());
 					}
@@ -160,7 +159,7 @@ public class MemberController {
 				log.debug("<<id>>" + member.getMem_id());
 				log.debug("<<mem_num>>" + member.getMem_num());
 				log.debug("<<mem_auth>>" + member.getMem_auth());
-				log.debug("<<mem_au_id>>" + member.getMem_auto());
+				log.debug("<<mem_au_id>>" + member.getMem_au_id());
 				
 				if(member.getMem_auth() == 9) {//관리자는 관리자 메인으로 이동
 					//======추후 수정======//

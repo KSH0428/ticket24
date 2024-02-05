@@ -11,7 +11,7 @@ import kr.spring.member.vo.MemberVO;
 public interface MemberService {
 	//회원관리 - 사용자
 	public void insertMember(MemberVO member);
-	public void updateAu_id(String au_id, int mem_num);
+	public void updateAu_id(String mem_au_id, int mem_num);
 	public MemberVO selectAu_id(String mem_au_id);
 	public void deleteAu_id(int mem_num);
 	public MemberVO selectMemberId(MemberVO member);

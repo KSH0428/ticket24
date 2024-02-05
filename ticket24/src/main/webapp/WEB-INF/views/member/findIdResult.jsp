@@ -18,8 +18,9 @@
         </c:otherwise>
 	</c:choose>
 	<p>
-	<input type="button" value="로그인" onclick="location.href='request.getContextPath()+"/member/login">
-	<input type="button" value="비밀번호 찾기" onclick="location.href='request.getContextPath()+"/member/login">
+	<input type="button" value="로그인" onclick="location.href='login'">
+	<input type="button" value="비밀번호 찾기" onclick="location.href='request.getContextPath()+/member/login'">
+	<input type="button" value="메인으로" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/main/main'">
 </div>
 </body>
 </html>

@@ -26,13 +26,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void updateAu_id(String au_id, int mem_num) {
-		memberMapper.updateAu_id(au_id, mem_num);		
+	public void updateAu_id(String mem_au_id, int mem_num) {
+		memberMapper.updateAu_id(mem_au_id, mem_num);		
 	}
 
 	@Override
-	public MemberVO selectAu_id(String au_id) {
-		return memberMapper.selectAu_id(au_id);
+	public MemberVO selectAu_id(String mem_au_id) {
+		return memberMapper.selectAu_id(mem_au_id);
 	}
 
 	@Override
