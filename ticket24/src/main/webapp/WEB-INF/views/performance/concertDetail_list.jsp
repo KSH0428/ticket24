@@ -18,11 +18,7 @@
 <!-- datePicker 끝 -->
 <script>
 $(function() {
-	//회차 날짜 번호 클릭 이벤트
-	$("#concerttimebtn").on("click", function() {
-	      // 클릭 이벤트에 대한 동작을 여기에 추가
-	      alert("버튼이 클릭되었습니다!");
-	});
+
 	
 	//Ajax로 공연 회차 정보 가져오기
 	
@@ -128,6 +124,13 @@ $(function() {
   		return lastDay;
 	}
 	
+	//회차 날짜 번호 클릭 이벤트
+	$(document).on('click', '#concert-time-btn', function() {
+		//CSS 테두리 색깔 변경
+		$('#concert-time-btn').css({
+		    'border-color': '#242428'
+		});
+	});
 
 	
 });
@@ -220,6 +223,7 @@ $(function() {
 			</div>
 		</div>
 	</div>
+	
 	<!-- sticky -->
 	&nbsp;
 	&nbsp;

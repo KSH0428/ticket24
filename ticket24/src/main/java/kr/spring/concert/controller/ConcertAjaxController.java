@@ -26,4 +26,8 @@ public class ConcertAjaxController {
 		log.debug("<<콘서트 회차 정보 가져오기 >> : " + round);
 		return round;
 	}
+	
+	/*
+	//콘서트 해당 회차 좌석 정보
+	public */
 }

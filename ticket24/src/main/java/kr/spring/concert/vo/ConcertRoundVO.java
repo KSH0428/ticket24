@@ -13,5 +13,5 @@ public class ConcertRoundVO {
 	private String year;
 	private String month;
 	private String day;
-	private String concert_time;
+	private String concert_time; 
 }
