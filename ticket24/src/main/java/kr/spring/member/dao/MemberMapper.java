@@ -23,6 +23,8 @@ public interface MemberMapper {
 	public int selectPt_num();
 	public void insertMember_point(MemberVO member);
 	
+	//아이디찾기
+	public MemberVO selectMemberId(MemberVO member);
 	//회원 정보
 	public MemberVO selectCheckMember(String id);
 	@Select("SELECT * FROM member JOIN member_detail USING(mem_num) WHERE mem_num=#{mem_num}")

@@ -15,6 +15,16 @@
     	<put-attribute name="title" value="회원로그인"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberLogin.jsp"/>                                           
     </definition>
+    
+    <definition name="findIdCheck" extends="main">
+    	<put-attribute name="title" value="아이디찾기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/findIdCheck.jsp"/>                                           
+    </definition>
+    
+    <definition name="findIdResult" extends="main">
+    	<put-attribute name="title" value="아이디찾기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/findIdResult.jsp"/>                                           
+    </definition>
 
     <!-- myPage -->
     <definition name="myPage" template="/WEB-INF/views/template/layout_mypage.jsp">
@@ -25,23 +35,28 @@
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
     </definition>
     
-    <definition name="memberPoint" extends="main">
+    <definition name="memberPoint" extends="myPage">
 		<put-attribute name="title" value="회원적립금조회"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberPointList.jsp"/>
 	</definition>
 
-	<definition name="memberUpdate" extends="main">
+	<definition name="memberUpdate" extends="myPage">
 		<put-attribute name="title" value="회원정보수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberUpdate.jsp"/>
 	</definition>
 	
-	<definition name="memberPasswdUpdate" extends="main">
+	<definition name="memberPasswdUpdate" extends="myPage">
 		<put-attribute name="title" value="회원 비밀번호 변경"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberUpdatePasswd.jsp"/>
 	</definition>
 	
-	<definition name="memberWithdraw" extends="main">
+	<definition name="memberWithdraw" extends="myPage">
 		<put-attribute name="title" value="회원탈퇴"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberWithdraw.jsp"/>
+	</definition>
+	
+	<definition name="memberConcert" extends="myPage">
+		<put-attribute name="title" value="마이페이지공연"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberConcert.jsp"/>
 	</definition>
 </tiles-definitions>

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"charset="utf-8"></script>
-<!-- 내용 시작 -->
 <div class="page-main">
 	<h2>회원로그인</h2>
 	<form:form id="member_login" action="login" modelAttribute="memberVO">
@@ -26,8 +25,11 @@
 			<form:button class="login-btn">로그인</form:button>
 		</div>
 	</form:form>
+	<div>
+		<input type="button" value="아이디 찾기" onclick="location.href='findIdCheck'">
+		<input type="button" value="비밀번호 찾기" onclick="location.href='findPasswdCheck'">
+	</div>
 	<p class="align-center">
 		<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main'">
 	</p>
 </div>
-<!-- 내용 끝 -->

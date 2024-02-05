@@ -74,7 +74,35 @@ public class MemberController {
 		
 		return "common/resultView";
 	}
+	/*========================
+	 * 아이디 찾기
+	 *=======================*/
+	@GetMapping("/member/findIdCheck")
+	public String findIdForm() {
+		return "findIdCheck";
+	}
 	
+	@PostMapping("/member/findIdCheck")
+	public String findIdCheck(@RequestParam String mem_name,
+							  @RequestParam String mem_email,
+							  @Valid MemberVO member,BindingResult result,
+							  Model model,HttpServletRequest request) {
+		
+		if(result.hasFieldErrors("mem_name") || result.hasFieldErrors("mem_email")) {
+			return findIdForm();
+		}
+
+		member.setMem_name(mem_name);
+		member.setMem_email(mem_email);
+		//아이디 찾기
+		MemberVO mem_id = memberService.selectMemberId(member);
+		
+		model.addAttribute("mem_id", mem_id);
+		model.addAttribute("url", request.getContextPath()+"/member/login");
+		model.addAttribute("url", request.getContextPath()+"/member/login");
+		
+		return "member/findIdResult";
+	}
 	/*========================
 	 * 회원로그인
 	 *=======================*/
@@ -160,13 +188,13 @@ public class MemberController {
 		
 		//회원 정보
 		MemberVO member = memberService.selectMember(user.getMem_num());
-		int point = memberService.selectMemberPointSum(user.getMem_num());
+		int all_point = memberService.selectMemberPointSum(user.getMem_num());
 		
 		log.debug("<<회원 상세 정보>> : " + member);
-		log.debug("<<회원 포인트 합계>> : " + point);
+		log.debug("<<회원 포인트 합계>> : " + all_point);
 		
 		model.addAttribute("member", member);
-		model.addAttribute("all_point", point);
+		model.addAttribute("all_point", all_point);
 		
 		return "myPage";
 	}
@@ -221,18 +249,11 @@ public class MemberController {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		MemberVO member = memberService.selectMember(user.getMem_num());
-		int point = memberService.selectMemberPointSum(user.getMem_num());
-		//MemberVO point1 = memberService.selectMemberPoint(user.getMem_num());
-		
-		log.debug("<<찍히나>>" + point);
+		int all_point = memberService.selectMemberPointSum(user.getMem_num());
 	    
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("mem_num", user.getMem_num());
 
-	    MemberVO ptAmountList = new MemberVO();
-	    ptAmountList.setPt_amount(ptAmountList.getPt_amount() + point);
-	    
-	    
 		//전체/검색 레코드 수
 		int count = memberService.selectRowCount(map);
 		log.debug("<<count>> : " + count);
@@ -243,7 +264,6 @@ public class MemberController {
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			map.put("ptAmountList", ptAmountList);
 			
 			list = memberService.selectPointList(map);
 		}
@@ -256,7 +276,7 @@ public class MemberController {
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
 		mav.addObject("member", member);
-		mav.addObject("point", point);
+		mav.addObject("all_point", all_point);
 		
 		return mav;
 	}
@@ -333,9 +353,6 @@ public class MemberController {
 		
 		//비밀번호 변경
 		memberService.Member_newPasswd(memberVO);
-		
-		//비밀번호 변경 완료 메시지 보여준 후 로그아웃 처리
-		//session.invalidate();
 		
 		model.addAttribute("message", "비밀번호 변경이 완료되었습니다.");
 		model.addAttribute("url", request.getContextPath()+"/member/myPage");

@@ -31,7 +31,7 @@
 									    <c:if test="${member.mem_auth == 9}">'관리자' 입니다.</c:if>
 			</li>
 			<li>
-				<br>적립금 : <fmt:formatNumber value="${point.pt_sum}" pattern="#,###" /> 원
+				<br>적립금 : <fmt:formatNumber value="${all_point}" pattern="#,###" /> 원
 			</li>
 			<li>
 				<input type="button" value="자세히보기" onclick="location.href='point'">
