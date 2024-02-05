@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +120,22 @@ public class ChatController {
 			mapAjax.put("result", "success");
 		}
 		return mapAjax;
+	}
+	
+	/*==========================
+	 * 채팅방 나가기
+	 *==========================*/
+	@RequestMapping("/chat/deleteChat")
+	public Map<String,String> deleteChat(@RequestParam int chatroom_num, 
+							HttpServletRequest request) {
+		log.debug("<<채팅방 삭제>> : " + chatroom_num);
+		
+		chatService.deleteChatRoom(chatroom_num);
+		
+		Map<String,String> result = new HashMap<String,String>();
+		result.put("result", "success");
+		
+		return result;
 	}
 }
 

@@ -12,4 +12,5 @@ public class ChatRoomVO {
 	private int mem_num;
 	
 	private String mem_id;
+	private ChatMessageVO chatMessageVO;
 }
