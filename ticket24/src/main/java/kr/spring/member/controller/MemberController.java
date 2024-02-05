@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -97,6 +98,7 @@ public class MemberController {
 
 		member.setMem_name(mem_name);
 		member.setMem_email(mem_email);
+		
 		//아이디 찾기
 		MemberVO mem_id = memberService.selectMemberId(member);
 		
@@ -109,6 +111,8 @@ public class MemberController {
 	/*========================
 	 * 비밀번호 찾기
 	 *=======================*/
+	@Autowired
+	private JavaMailSender javaMailSender;
 	@GetMapping("/member/findPwCheck")
 	public String findPwForm() {
 		return "findPwCheck";
