@@ -18,8 +18,8 @@ spring:
       max-lifetime: 1800000 #커넥션 풀에서 살아있을 수 있는 커넥션의 최대 수명시간 1,800초(30분)
       
   mail:
-    host: smtp.gmail.com
-    port: 8000
+    host: smtp.naver.com
+    port: 587
     username:
     password:
     properties:
