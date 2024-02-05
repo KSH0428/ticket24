@@ -24,7 +24,8 @@ public class MemberVO {
 	private String mem_id;
 	private String mem_nickname;
 	private int mem_auth; //0:탈퇴회원,1:실버,2:골드,3:플래티넘,9:관리자
-	private String mem_au_id; //자동로그인
+	private String mem_auto; //자동로그인
+	private String mem_au_id;
 	@NotBlank
 	private String mem_name;
 	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")

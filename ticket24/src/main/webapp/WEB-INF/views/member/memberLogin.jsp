@@ -18,7 +18,7 @@
 				<form:errors path="mem_passwd" element="div" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
+				<label for="mem_auto"><input type="checkbox" name="mem_auto" id="mem_auto">로그인상태유지</label>
 			</li>
 		</ul>
 		<div>

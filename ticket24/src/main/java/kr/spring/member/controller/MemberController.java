@@ -3,7 +3,9 @@ package kr.spring.member.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -133,8 +135,24 @@ public class MemberController {
 				//비밀번호 일치 여부 체크
 				check = member.isCheckedPassword(memberVO.getMem_passwd());
 			}
-			if(check) {
+			if(check) {//인증성공
 				//======자동로그인 체크 시작======//
+				boolean autoLogin = memberVO.getMem_auto() != null && memberVO.getMem_auto().equals("on");
+				if(autoLogin) {
+					//자동로그인 체크를 한 경우
+					String mem_au_id = member.getMem_au_id();
+					if(mem_au_id==null) {
+						mem_au_id = UUID.randomUUID().toString();
+						log.debug("<<au_id>> : " + mem_au_id);
+						member.setMem_au_id(mem_au_id);
+						memberService.updateAu_id(member.getMem_au_id(),member.getMem_num());
+					}
+					Cookie auto_cookie = new Cookie("au-log",mem_au_id);
+					auto_cookie.setMaxAge(60*60^24*7);//유효기간 1주일
+					auto_cookie.setPath("/");
+					
+					response.addCookie(auto_cookie);
+				}
 				//======자동로그인 체크 끝=======//
 				//인증 성공, 로그인 처리
 				session.setAttribute("user", member);
@@ -142,7 +160,7 @@ public class MemberController {
 				log.debug("<<id>>" + member.getMem_id());
 				log.debug("<<mem_num>>" + member.getMem_num());
 				log.debug("<<mem_auth>>" + member.getMem_auth());
-				log.debug("<<mem_au_id>>" + member.getMem_au_id());
+				log.debug("<<mem_au_id>>" + member.getMem_auto());
 				
 				if(member.getMem_auth() == 9) {//관리자는 관리자 메인으로 이동
 					//======추후 수정======//
@@ -173,6 +191,12 @@ public class MemberController {
 		//로그아웃
 		session.invalidate();
 		//=======자동로그인 처리=======//
+		//클라이언트쿠키 처리
+		Cookie auto_cookie = new Cookie("au-log","");
+		auto_cookie.setMaxAge(0);
+		auto_cookie.setPath("/");
+		
+		response.addCookie(auto_cookie);
 		//=====자동로그인 처리 끝=======//
 		return "redirect:/main/main";
 	}

@@ -26,6 +26,22 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public void updateAu_id(String au_id, int mem_num) {
+		memberMapper.updateAu_id(au_id, mem_num);		
+	}
+
+	@Override
+	public MemberVO selectAu_id(String au_id) {
+		return memberMapper.selectAu_id(au_id);
+	}
+
+	@Override
+	public void deleteAu_id(int mem_num) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public MemberVO selectMemberId(MemberVO member) {
 		return memberMapper.selectMemberId(member);
 	}
@@ -88,11 +104,5 @@ public class MemberServiceImpl implements MemberService{
 	public int selectMemberPointSum(int mem_num) {
 		return memberMapper.selectMemberPointSum(mem_num);
 	}
-
-
-
-
-
-	
 
 }

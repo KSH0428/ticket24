@@ -25,6 +25,14 @@ public interface MemberMapper {
 	
 	//아이디찾기
 	public MemberVO selectMemberId(MemberVO member);
+	
+	//자동 로그인
+	@Update("UPDATE member_detail SET mem_au_id=#{mem_au_id} WHERE mem_num=#{mem_num}")
+	public void updateAu_id(String mem_au_id, int mem_num);
+	@Select("SELECT mem_num,mem_id,mem_auth,mem_au_id,mem_passwd,mem_nickname,mem_email FROM member JOIN member_detail USING(mem_num) WHERE mem_au_id=#{mem_au_id}")
+	public MemberVO selectAu_id(String mem_au_id);
+	public void deleteAu_id(int mem_num);
+		
 	//회원 정보
 	public MemberVO selectCheckMember(String id);
 	@Select("SELECT * FROM member JOIN member_detail USING(mem_num) WHERE mem_num=#{mem_num}")
