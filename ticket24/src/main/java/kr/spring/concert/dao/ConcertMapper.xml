@@ -62,6 +62,7 @@
 			*
 		FROM concert_round
 		WHERE concert_num=#{concert_num}
+		order by c_round_num
 	</select>
 	
 	<!-- 콘서트 회차 좌석 정보 -->

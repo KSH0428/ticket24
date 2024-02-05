@@ -47,15 +47,15 @@ $(function() {
 				date2 = date1;
 			
 			 $("#datepicker").datepicker({
-			        dateFormat: 'yy-mm-dd' //달력 날짜 형태
-			        ,showOtherMonths: false //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-			        ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
-			        ,changeYear: false //option값 년 선택 가능
-			        ,changeMonth: false //option값  월 선택 가능                
-			        ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-			        ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
-			        ,buttonText: "선택" //버튼 호버 텍스트              
-			        ,yearSuffix: "." //달력의 년도 부분 뒤 텍스트
+			        dateFormat: 'yy-mm-dd' 
+			        ,showOtherMonths: false
+			        ,showMonthAfterYear:true 
+			        ,changeYear: false 
+			        ,changeMonth: false                
+			        ,showOn: "both" 
+			        ,buttonImageOnly: true 
+			        ,buttonText: "선택"              
+			        ,yearSuffix: "." 
 			        /*
 			 		,minDate:date1
 			        ,maxDate:date2
@@ -84,12 +84,14 @@ $(function() {
 			            return [false, ''];
 			          }
 			    	
-			    	 ,onSelect : function(dateString, inst){
-			    		 	
+			    	 ,onSelect : function(dateString){
+			    		 $('#datepicker').val(dateString);
+			    		 
 			    		//날짜 선택 태그가 존재하는지 확인
-				    	var existingTag = $("#concert-time-btn");
-				    		
-				    	//존재한다면 삭제한다
+				    	let existingTag = $("#concert-time-btn");
+				    	let num;
+				    	
+				    	//존재한다면 삭제
 				    	if(existingTag.length > 0){
 				    		existingTag.remove();
 				    	}
@@ -97,21 +99,25 @@ $(function() {
 				    	//해당 날짜의 인덱스 구하기
 				    	//먼저 1회차 2회차 날짜가 같은지 비교
 				    	var count = 0;
-				    	for(var i = 0; i < 2; i++){
+				    	for(var i = 0; i < dates.length; i++){
 				    		if(dates[i] == dateString){
 								count++;
+								num = i;
 			 				}
 				    	}
-				    	
-				    	//ID : concert-time-item에 태그 추가
-    					$('#concert-time-item').append("<button id='concert-time-btn'><span class='time-box'></span></button>");
-    					//span 태그에 날짜 입력
-    					$('#concert-time-btn span').append(round[0]);
-				    	
+
 				    	if(count == 2){
-	    					$('#concert-time-item').append("<button id='concert-time-btn2'><span class='time-box'></span></button>");
+				    		//ID : concert-time-item에 태그 추가
+	    					$('#concert-time-item').append("<button id='concert-time-btn'><span class='time-box'></span></button>");
 	    					//span 태그에 날짜 입력
+	    					$('#concert-time-btn span').append(round[0]);
+	    					$('#concert-time-item').append("<button id='concert-time-btn2'><span class='time-box'></span></button>");
 	    					$('#concert-time-btn2 span').append(round[1]);
+				    	} else {
+				    		//ID : concert-time-item에 태그 추가
+	    					$('#concert-time-item').append("<button id='concert-time-btn'><span class='time-box'></span></button>");
+	    					//span 태그에 날짜 입력
+	    					$('#concert-time-btn span').append(round[num]);
 				    	}
 				    		
 				    }
@@ -140,7 +146,20 @@ $(function() {
 		    'border-color': '#dcdde1'
 		});
 		
-		$('#seatsNum').text(getRemainingSeats(c_round_num[0]));
+		//alert($('#datepicker').val());
+		let num ;
+		let count = 0;
+		for(var i=0; i<dates.length; i++){
+			if(dates[i] == $('#datepicker').val()){
+				num = i;
+				count++;
+			}
+		}
+		
+		if(count == 2) num = 0;
+		
+		$('#seatsNum').text('');
+		$('#seatsNum').text(getRemainingSeats(c_round_num[num]));
 		
 	});
 	$(document).on('click', '#concert-time-btn2', function() {
@@ -152,6 +171,7 @@ $(function() {
 		    'border-color': '#dcdde1'
 		});
 		
+		$('#seatsNum').text('');
 		$('#seatsNum').text(getRemainingSeats(c_round_num[1]));
 	});
 
