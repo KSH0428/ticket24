@@ -285,6 +285,12 @@ public class ReservController {
 		return "reservPayment";
 	}
 	
+	//대관일정
+	@RequestMapping("/reserv/reservSchedule")
+	public String reservSchedule() {
+		
+		return "reservSchedule";
+	}
 }
 
 

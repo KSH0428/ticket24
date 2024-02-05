@@ -16,5 +16,6 @@ public class PaymentHallVO {
 	private String payment_name;
 	private String payment_phone;
 	private int payment_status;
-	private int payment_method;
+	private String payment_method;
+	private String payment_email;
 }

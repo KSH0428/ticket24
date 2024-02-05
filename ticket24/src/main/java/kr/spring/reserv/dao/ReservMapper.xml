@@ -68,6 +68,7 @@
 				payment_date=SYSDATE,
 				payment_name=#{payment_name},
 				payment_phone=#{payment_phone},
+				payment_email=#{payment_email},
 				payment_status=1,
 				payment_method=#{payment_method}
 			 WHERE reservation_num=#{reservation_num}

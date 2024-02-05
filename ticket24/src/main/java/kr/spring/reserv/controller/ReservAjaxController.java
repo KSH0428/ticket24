@@ -49,12 +49,21 @@ public class ReservAjaxController {
 	@ResponseBody
 	public Map<String, String> updatePayment(PaymentHallVO payment, HttpSession session){
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		log.debug("<<결제 ajax vo>> : " + payment);
+		PaymentHallVO userPayment = reservService.selectPaymentHall(payment.getReservation_num());
+		//email 추가할것!!!
+		userPayment.setPayment_name(payment.getPayment_name());
+		userPayment.setPayment_phone(payment.getPayment_phone());
+		userPayment.setPayment_email(payment.getPayment_email());
+		userPayment.setPayment_method(payment.getPayment_method());
+		
+		log.debug("<<결제 ajax sql>> : " + userPayment);
 		Map<String, String> mapAjax = new HashMap<String, String>();
 		
 		if(user==null) {
 			mapAjax.put("result", "logout");
 		}else {
-			reservService.updatePayment(payment.getReservation_num());
+			reservService.updatePayment(userPayment);
 			mapAjax.put("result", "success");
 		}
 		

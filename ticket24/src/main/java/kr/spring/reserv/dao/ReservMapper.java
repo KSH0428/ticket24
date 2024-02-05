@@ -28,7 +28,7 @@ public interface ReservMapper {
 	public List<String> selectReservDate();
 	
 	//멤버로 예약기록 조회
-	@Select("SELECT * FROM reservhall WHERE mem_num=#{mem_num}")
+	@Select("SELECT * FROM reservhall WHERE mem_num=#{mem_num} ORDER BY reservation_regdate DESC")
 	public List<ReservHallVO> selectReservList(int mem_num);
 	//예약번호로 예약 날짜 조회
 	@Select("SELECT reservation_date FROM reservhalldate WHERE reservation_num=#{reservation_num}")
@@ -53,5 +53,5 @@ public interface ReservMapper {
 	@Select("SELECT * FROM paymenthall WHERE reservation_num=#{reservation_num}")
 	public PaymentHallVO selectPaymentHall(int reservation_num);
 	//결제완료
-	public void updatePayment(int reservation_num);
+	public void updatePayment(PaymentHallVO paymentHallVO);
 }

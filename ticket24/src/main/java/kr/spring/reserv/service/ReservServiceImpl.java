@@ -82,9 +82,9 @@ public class ReservServiceImpl implements ReservService{
 	}
 
 	@Override
-	public void updatePayment(int reservation_num) {
-		reservMapper.updatePayment(reservation_num);
-		reservMapper.updateReservStatus(reservation_num, 3);
+	public void updatePayment(PaymentHallVO paymentHallVO) {
+		reservMapper.updatePayment(paymentHallVO);
+		reservMapper.updateReservStatus(paymentHallVO.getReservation_num(), 3);
 	}
 
 	
