@@ -61,4 +61,10 @@ public class ChatServiceImpl implements ChatService{
 		return chatMapper.selectChatList(mem_num);
 	}
 
+	@Override
+	public void deleteChatRoom(int chatroom_num) {
+		chatMapper.deleteChatMessage(chatroom_num);
+		chatMapper.deleteChatRoom(chatroom_num);
+	}
+
 }

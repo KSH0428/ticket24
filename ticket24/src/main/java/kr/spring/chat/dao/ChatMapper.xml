@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.chat.dao.ChatMapper">
-	<resultMap type="chatRoomVO" id="chatMap" >
-		<result property="chatMessageVO.message" column="message"/>
-		<result property="chatMessageVO.send_date" column="send_date"/>
+	<resultMap type="kr.spring.chat.vo.ChatRoomVO" id="chatMap" >
+	    <result property="chatroom_num" column="chatroom_num"/>
+	    <result property="mem_num" column="mem_num"/>
+	    <result property="mem_id" column="mem_id"/>
+	    <association property="chatMessageVO" resultMap="chatMessageMap"/>
+	</resultMap>
+	
+	<resultMap type="kr.spring.chat.vo.ChatMessageVO" id="chatMessageMap">
+	    <result property="message" column="message"/>
+	    <result property="send_date" column="send_date"/>
 	</resultMap>
 
 	<select id="selectChatRoomList" parameterType="map" resultMap="chatMap">
-		SELECT *
-		FROM chatroom
-		ORDER BY chatroom_num DESC
+		SELECT m.mem_id,
+			   cm.message,
+			   cr.chatroom_num
+		FROM chatroom cr
+		LEFT OUTER JOIN member m ON cr.mem_num = m.mem_num
+		LEFT OUTER JOIN chatmessage cm ON cr.chatroom_num = cm.chatroom_num
+		LEFT OUTER JOIN (
+			SELECT chatroom_num,
+				   MAX(send_date) max_send_date 
+			FROM chatmessage GROUP BY chatroom_num)
+		latest_msg ON cm.chatroom_num = latest_msg.chatroom_num AND cm.send_date = latest_msg.max_send_date
+		ORDER BY cr.chatroom_num
 	</select>
 
 	<select id="selectRowCount" parameterType="map" resultType="integer">

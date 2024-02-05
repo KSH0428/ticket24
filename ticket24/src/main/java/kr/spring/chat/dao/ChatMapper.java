@@ -3,6 +3,7 @@ package kr.spring.chat.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -38,4 +39,11 @@ public interface ChatMapper {
 	public void updateChatRead(int chat_num);
 	@Select("SELECT * FROM chatroom WHERE mem_num=#{mem_num}")
 	public List<ChatRoomVO> selectChatList(int mem_num);
+	
+	//채팅기록 삭제
+	@Delete("DELETE FROM chatmessage WHERE chatroom_num=#{chatroom_num}")
+	public void deleteChatMessage(int chatroom_num);
+	//채팅방 삭제
+	@Delete("DELETE FROM chatroom WHERE chatroom_num=#{chatroom_num}")
+	public void deleteChatRoom(int chatroom_num);
 }

@@ -28,7 +28,7 @@
 	  <a href="detail?event_num=${event.event_num}">
         <div class="col">
           <div class="card shadow-sm">
-            <img src="${pageContext.request.contextPath}/upload/${event.event_photo1}" class="bd-placeholder-img card-img-top" width="100%" height="125"></svg>
+            <img src="${pageContext.request.contextPath}/upload/${event.event_photo1}" class="bd-placeholder-img card-img-top" width="100%" height="125">
             <div class="card-body">
               <p class="card-text"><b>${event.event_title}</b></p>
               <p class="card-text">이벤트 기간 : ${event.event_start} ~ ${event.event_end}</p>

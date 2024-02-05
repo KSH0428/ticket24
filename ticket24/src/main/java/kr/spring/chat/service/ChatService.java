@@ -29,4 +29,6 @@ public interface ChatService {
 		public void updateChatRead(int chat_num);
 		
 		public List<ChatRoomVO> selectChatList(int mem_num);
+		//채팅방 삭제
+		public void deleteChatRoom(int chatroom_num);
 }
