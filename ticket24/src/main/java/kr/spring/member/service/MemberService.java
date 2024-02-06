@@ -15,10 +15,10 @@ public interface MemberService {
 	public MemberVO selectAu_id(String mem_au_id);
 	public void deleteAu_id(int mem_num);
 	public MemberVO selectMemberId(MemberVO member);
+	public MemberVO selectMemberPw(String mem_email);
 	public MemberVO selectCheckMember(String id);
 	public MemberVO selectMember(int mem_num);
 	public void updateMember(MemberVO member);
-	public void updateMember_point(MemberVO member);
 	public void Member_newPasswd(MemberVO member);
 	public void deleteMemeber_detail(MemberVO member);
 	public MemberVO selectMemberPoint(int mem_num);

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,7 +39,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	
 	/*==========================
 	 * 자바빈(VO) 초기화
 	 *=========================*/
@@ -113,26 +116,18 @@ public class MemberController {
 	public String findPwForm() {
 		return "findPwCheck";
 	}
-	
+
 	@PostMapping("/member/findPwCheck")
 	public String findPwCheck(@RequestParam String mem_id,
 							  @RequestParam String mem_name,
 							  @RequestParam String mem_email,
-							  @Valid MemberVO member, BindingResult result,
+							  @Valid MemberVO member, BindingResult result, HttpSession session,
 							  Model model, HttpServletRequest request) {
 		if(result.hasFieldErrors("mem_id") || result.hasFieldErrors("mem_name") || result.hasFieldErrors("mem_email")) {
 			return findPwForm();
 		}
-		
-		member.setMem_id(mem_id);
-		member.setMem_name(mem_name);
-		member.setMem_email(mem_email);
-		
-
-		return "findPwCheck";
+	    return "findPwCheck";		
 	}
-	
-	
 	/*========================
 	 * 회원로그인
 	 *=======================*/
@@ -319,8 +314,6 @@ public class MemberController {
 			
 			list = memberService.selectPointList(map);
 		}
-		
-		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("memberPoint");

@@ -25,6 +25,8 @@ public interface MemberMapper {
 	
 	//아이디찾기
 	public MemberVO selectMemberId(MemberVO member);
+	//비밀번호찾기
+	public MemberVO selectMemberPw(String mem_email);
 	
 	//자동 로그인
 	@Update("UPDATE member_detail SET mem_au_id=#{mem_au_id} WHERE mem_num=#{mem_num}")
