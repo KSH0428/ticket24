@@ -40,4 +40,9 @@ public class FaqServiceImpl implements FaqService{
 	public FaqVO selectFaq(int faq_num) {
 		return faqMapper.selectFaq(faq_num);
 	}
+
+	@Override
+	public int selectRowCount(Map<String, Object> map) {
+		return faqMapper.selectRowCount(map);
+	}
 }

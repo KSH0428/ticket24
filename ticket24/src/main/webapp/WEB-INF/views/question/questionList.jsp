@@ -38,10 +38,10 @@
 			<li><a href="list?question_category=3">배송</a></li>
 			<li><a href="list?question_category=4">기타</a></li>
 		</ul>
+		<c:if test="${!empty user}">
+		<input type="button" value="문의글 작성" onclick="location.href='write'" class="btn btn-warning float-end">
+		</c:if>
 	</div>
-	<c:if test="${!empty user}">
-	<input type="button" value="문의글 작성" onclick="location.href='write'" class="btn btn-warning float-end">
-	</c:if>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
@@ -65,7 +65,14 @@
 			</td>
 			<td class="align-center">
             	<c:if test="${question.question_lock == 2}">
-                	<a href="checkPassword?question_num=${question.question_num}">${question.question_title}</a>
+                	<a href="checkPassword?question_num=${question.question_num}">
+                	<span><img src= "${pageContext.request.contextPath}/images/question_lock.png" width="14" height="17"></span>
+                	${question.question_title}
+                	<br>
+                	<c:if test="${question.question_renum != 0}">
+                	<span>[답변완료]</span>
+                	</c:if>
+                	</a>
                 </c:if>
                 <c:if test="${question.question_lock == 1}">
                     <a href="detail?question_num=${question.question_num}">${question.question_title}</a>
@@ -82,4 +89,7 @@
 		</c:forEach>
 	</table>
 	</c:if>
+</div>
+<div style="text-align:center;">
+	${page}
 </div>

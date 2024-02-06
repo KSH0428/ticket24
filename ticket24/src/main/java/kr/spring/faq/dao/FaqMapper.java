@@ -15,6 +15,8 @@ public interface FaqMapper {
 	public void updateFaq(FaqVO faq);
 	@Delete("DELETE FROM faq WHERE faq_num=#{faq_num}")
 	public void deleteFaq(int faq_num);
+	@Select("SELECT COUNT(*) FROM faq")
+	public int selectRowCount(Map<String,Object> map);
 	public List<FaqVO> selectFaqList(Map<String,Object> map);
 	@Select("SELECT * FROM faq WHERE faq_num=#{faq_num}")
 	public FaqVO selectFaq(int faq_num);

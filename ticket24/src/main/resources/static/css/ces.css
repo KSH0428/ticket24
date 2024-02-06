@@ -63,6 +63,7 @@
 }
 .category{
 	padding:0;
+	float:left;
 }
 .category li{
 	display:inline-block;

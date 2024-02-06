@@ -32,16 +32,17 @@
 			<li><a href="list?faq_category=2">취소/환불</a></li>
 			<li><a href="list?faq_category=3">기타</a></li>
 		</ul>
+		<c:if test="${user.mem_auth == 9}">
+		<input type="button" value="질문 등록" onclick="location.href='write'" class="btn btn-warning float-end">
+		</c:if>
 	</div>
-	<c:if test="${user.mem_auth == 9}">
-	<input type="button" value="질문 등록" onclick="location.href='write'" class="btn btn-warning float-end">
-	</c:if>
 	<table class="table">
 		<tr class="table-secondary">
 			<th>번호</th>
 			<th>카테고리</th>
 			<th colspan="2">질문</th>
 		</tr>
+		<c:if test="${count > 0}">
 		<c:forEach var="faq" items="${list}" varStatus="loop">
 		<tr>
 			<td>${loop.index + 1}</td>
@@ -77,8 +78,14 @@
 			</c:if>
 		</tr>
 		</c:forEach>
+		</c:if>
 	</table>
 </div>
+<c:if test="${param.faq_category == null or param.faq_category == '0'}">
+<div style="text-align:center;">
+	${page}
+</div>
+</c:if>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         let faqTitles = document.querySelectorAll('.faq-title');

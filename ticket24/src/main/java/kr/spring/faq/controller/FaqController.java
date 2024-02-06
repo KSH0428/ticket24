@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.faq.service.FaqService;
 import kr.spring.faq.vo.FaqVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -70,19 +71,32 @@ public class FaqController {
 	 *=====================*/
 	@RequestMapping("/faq/list")
 	public ModelAndView process(String keyword, HttpSession session, 
+								@RequestParam(value="pageNum", defaultValue="1") int currentPage,
 								@RequestParam (defaultValue = "0") int faq_category) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyword", keyword);
 		map.put("faq_category", faq_category);
 		
-		List<FaqVO> list = faqService.selectFaqList(map);
+		int count = faqService.selectRowCount(map);
 		
+		PageUtil page = new PageUtil(null,null,currentPage,count,10,10,"list");
+		
+		
+		List<FaqVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			list = faqService.selectFaqList(map);
+		}
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("faqList");
 		mav.addObject("list", list);
 		mav.addObject("user", user);
+		mav.addObject("count", count);
+		mav.addObject("page", page.getPage());
 		
 		return mav;
 	}

@@ -137,7 +137,7 @@ public class QuestionController {
 	@RequestMapping("/question/list")
 	public ModelAndView process(
 						@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-						@RequestParam(defaultValue="0") int question_category,
+						@RequestParam(defaultValue="0") int question_category, 
 						String keyfield, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
@@ -157,6 +157,8 @@ public class QuestionController {
 			
 			list = questionService.selectList(map);
 		}
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("questionList");

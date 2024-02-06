@@ -27,7 +27,12 @@
 	</sql>
 	
 	<select id="selectFaqList" parameterType="map" resultType="faqVO">
-		SELECT * FROM faq <include refid="faqSearch"></include>
+		SELECT * FROM
+		(SELECT a.*, rownum rnum FROM
+		(SELECT * FROM faq <include refid="faqSearch"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
 	</select>
 	
 	<update id="updateFaq" parameterType="faqVO">
