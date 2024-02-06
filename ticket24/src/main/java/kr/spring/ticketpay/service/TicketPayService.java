@@ -12,3 +12,5 @@ public interface TicketPayService {
     public List<TicketVO> getReservHistory(int mem_num);
 }
 
+
+
