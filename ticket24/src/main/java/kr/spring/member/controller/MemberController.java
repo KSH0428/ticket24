@@ -130,19 +130,33 @@ public class MemberController {
 		
 		member = memberService.selectMemberPw(mem_id, mem_name, mem_email);
 		
-		if(member!=null && member.getMem_name().equals(mem_name)) {
-			result.reject("noAuthority");
-        }else if(member.getMem_id().equals(mem_id)) {
-        	result.reject("noAuthority");
-        }else if(member.getMem_email().equals(mem_email)) {
-        	result.reject("noAuthority");
+		log.debug("<<비밀번호찾기 >> : " + member);
+		log.debug("<<비밀번호찾기 >> : " + mem_name);
+		log.debug("<<비밀번호찾기 >> : " + mem_id);
+		log.debug("<<비밀번호찾기 >> : " + mem_email);
+		
+		if(member == null) {
+			result.reject("noMember");
+			return findPwForm();
+		}else if(!member.getMem_name().equals(mem_name)) {
+			result.reject("invalidName");
+			return findPwForm();
+        }else if(!member.getMem_id().equals(mem_id)) {
+        	result.reject("invalidId");
+        	return findPwForm();
+        }else if(!member.getMem_email().equals(mem_email)) {
+        	result.reject("invalidEmail");
+        	return findPwForm();
         }
-		
-		MailVO vo = new MailVO(); 
-		vo = sendEmailService.createMailAndChangePassword(mem_email, mem_name, mem_id);
-		
+
+		MailVO vo = sendEmailService.createMailAndChangePassword(mem_email, mem_name, mem_id);
         sendEmailService.mailSend(vo);
-	    return "findPwCheck";		
+        
+        model.addAttribute("accessTitle", "비밀번호 찾기");
+		model.addAttribute("accessMsg", "이메일로 임시비밀번호를 발송해드렸습니다. <br> 로그인 후 비밀번호를 변경해주세요.");
+		model.addAttribute("accessUrl", request.getContextPath()+"/member/login");
+		
+		return "common/resultView";		
     }
 	/*========================
 	 * 회원로그인

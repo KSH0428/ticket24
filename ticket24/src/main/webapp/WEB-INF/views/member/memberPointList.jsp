@@ -40,7 +40,7 @@
 			<td class="align-center">${point.pt_reg_date}</td>
 			<td class="align-center"><fmt:formatNumber value="${point.pt_amount}" pattern="#,###" /> 원</td>
 			<td class="align-center">${point.pt_content}</td>
-			<td class="align-center">${point.total_point}</td>
+			<td class="align-center"><fmt:formatNumber value="${point.total_point}" pattern="#,###" /> 원</td>
 		</tr>
 		</c:forEach>
 	</table>

@@ -8,32 +8,37 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.member.vo.MailVO;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @Transactional
-@AllArgsConstructor
 public class SendEmailServiceImpl implements SendEmailService{
 	@Autowired
 	private MemberService memberService;
-
+	@Autowired
     private JavaMailSender mailSender;
     private static final String FROM_ADDRESS = "zewntlr78@gmail.com";
 
     public MailVO createMailAndChangePassword(String mem_email, String mem_name, String mem_id){
-        String str = getTempPassword();
+        
+    	String str = getTempPassword();
         MailVO vo = new MailVO();
-        vo.setAddress(mem_name);
-        vo.setTitle(mem_name+"님의 임시비밀번호 안내 이메일 입니다.");
-        vo.setMessage("안녕하세요. 임시비밀번호 안내 관련 이메일 입니다." + "[" + mem_name + "]" +"님의 임시 비밀번호는 "
+        vo.setAddress(mem_email);
+        vo.setTitle("<티켓24> " + mem_name + " 님의 임시비밀번호 안내 이메일 입니다.");
+        vo.setMessage("안녕하세요. 티켓24입니다. 임시비밀번호 안내 이메일 드립니다." + "[" + mem_name + "]" +"님의 임시 비밀번호는 "
         + str + " 입니다.");
+        
         updatePassword(str,mem_email,mem_name,mem_id);
+        log.debug("<<비밀번호변경 진입확인>>");
         return vo;
     }
 
     public void updatePassword(String str, String mem_email,String mem_name,String mem_id){
-        String passwd = str;
+        String new_passwd = str;
         String email = memberService.selectMemberPw(mem_id, mem_name, mem_email).getMem_email();
-        memberService.updateUserPassword(email,passwd);
+        log.debug("<<이메일>> : " + email);
+        memberService.updateUserPassword(email,new_passwd);
     }
 
     public String getTempPassword(){

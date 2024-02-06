@@ -16,7 +16,7 @@ public interface MemberService {
 	public void deleteAu_id(int mem_num);
 	public MemberVO selectMemberId(MemberVO member);
 	public MemberVO selectMemberPw(String mem_id, String mem_name, String mem_email);
-	public MemberVO updateUserPassword(String mem_id, String mem_passwd);
+	public void updateUserPassword(String mem_id, String mem_passwd);
 	public MemberVO selectCheckMember(String id);
 	public MemberVO selectMember(int mem_num);
 	public void updateMember(MemberVO member);

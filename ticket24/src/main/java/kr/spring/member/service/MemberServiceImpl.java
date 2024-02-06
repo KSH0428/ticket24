@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.MemberVO;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @Transactional
 public class MemberServiceImpl implements MemberService{
@@ -51,8 +53,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO updateUserPassword(String mem_id, String mem_passwd) {
-		return memberMapper.updateUserPassword(mem_id, mem_passwd);
+	public void updateUserPassword(String mem_id, String mem_passwd) {
+		log.debug("updateUserPassword 진입");
+		memberMapper.updateUserPassword(mem_id, mem_passwd);
 	}
 
 	@Override
