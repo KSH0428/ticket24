@@ -19,4 +19,5 @@
         SELECT * FROM ticket WHERE mem_num = #{mem_num}
     </select>
     
+    
 </mapper>

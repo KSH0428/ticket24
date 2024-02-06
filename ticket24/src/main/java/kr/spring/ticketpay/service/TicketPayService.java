@@ -11,3 +11,4 @@ public interface TicketPayService {
     // 예약 내역 조회
     public List<TicketVO> getReservHistory(int mem_num);
 }
+
