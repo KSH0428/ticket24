@@ -21,8 +21,8 @@ public interface MdCartMapper {
 	//카트목록
 	public List<MdCartVO> selectList(int mem_num);
 	//장바구니 상세
-	@Select("SELECT * FROM md_cart WHERE md_cart_num=#{md_cart_num}")
-	public MdCartVO selectCart(MdCartVO cart);
+	//@Select("SELECT * FROM md_cart JOIN md USING(md_num) WHERE md_cart_num=#{md_cart_num}")
+	public MdCartVO selectCart(int md_num, int mem_num);
 	//장바구니 수정(개별 상품 수량 수정)
 	public void updateCart(MdCartVO cart);
 	//장바구니 상품번호와 회원번호별 수정

@@ -2,6 +2,7 @@ package kr.spring.mdcart.vo;
 
 import java.sql.Date;
 
+import kr.spring.md.vo.MdVO;
 import kr.spring.mdorder.vo.MdOrderVO;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,10 @@ public class MdCartVO {
 	private Date cart_rdate;
 	private int md_num;
 	private int mem_num;
+	private int sub_price;
 	
 	private MdOrderVO mdOrderVO;
+	
+	private MdVO mdVO;
 
 }

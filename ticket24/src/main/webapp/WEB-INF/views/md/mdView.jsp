@@ -27,6 +27,7 @@
 				</div>
 			</div>
 			<div class="col">
+			
 				<br>
 				<p class="card-text fs-4 fw-bold">${md.md_name}</p>
 				<hr>
@@ -63,23 +64,26 @@
 					<div class="d-grid gap-2 col-8 mx-auto">
 						
 						<div class="md-detail">
-						<form id="addCart" action="/mdCart/addCart">
+						<form id="addCart" action="/mdCart/addCart" method="post">
 							<input type="hidden" name="md_num" value="${md.md_num}"
-								id="md_num"> <input type="hidden" name="md_price"
-								value="${md.md_price}" id="md_price"> <input
-								type="hidden" name="md_quantity" value="${md.md_quantity}"
+								id="md_num">
+							 <input type="hidden" name="md_price" value="${md.md_price}" id="md_price">
+							 <input type="hidden" name="md_quantity" value="${md.md_quantity}"
 								id="md_quantity">
 							<ul>
-								<li>가격 : <b><fmt:formatNumber value="${md.md_price}" />원</b></li>
+								<li class="card-text fs-2 fw-bolder"><b class="card-text fs-2 fw-bolder"><fmt:formatNumber value="${md.md_price}" />원</b></li>
 								<li>재고 : <span><fmt:formatNumber
 											value="${md.md_quantity}" /></span></li>
+											
 								<c:if test="${md.md_quantity > 0}">
 									<li><label for="order_quantity">구매수량</label> <input
 										type="number" name="order_quantity" min="1"
 										max="${md.md_quantity}" autocomplete="off" id="order_quantity"
 										class="quantity-width"></li>
-									<li><span id="sub_total">총주문 금액 : 0원</span></li>
-									<li><input type="submit" value="장바구니에 담기"></li>	
+									<li><span id="sub_total">총주문 금액 : ${md.md_price}원</span></li>
+									<li><input type="submit" class="btn btn-outline-secondary" value="장바구니에 담기"
+									></li>	
+									<li><input type="submit" class="btn btn-secondary btn-lg" value="바로구매"></li>
 								</c:if>
 								<c:if test="${md.md_quantity <= 0}">
 									<li class="align-center"><span class="sold-out">품절</span>
@@ -88,9 +92,6 @@
 							</ul>
 						</form>
 						</div>
-					
-					
-
 
 
 						<input type="submit" value="장바구니 담기"

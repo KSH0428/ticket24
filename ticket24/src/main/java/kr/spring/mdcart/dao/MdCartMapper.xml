@@ -1,63 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.mdcart.dao.MdCartMapper">
-<!-- 장바구니 넣기(등록) -->
-<insert id="insertMdCart" parameterType="mdCartVO">
-	INSERT INTO md_cart(
-		md_cart_num,
-		md_num,
-		order_quantity,
-		mem_num
-	) VALUES (
-		md_cart_seq.nextval,
-		#{md_num},
-		#{order_quantity},
-		#{mem_num}	
-	)
-</insert>
-
-<!-- 회원번호별 총구매액 -->
-<select id="getTotalByMem_num">
-	SELECT SUM(sub_tatal) FROM(
-		mem_num,
-		order_quantity * md_price sub_total 
-		FROM md_cart 
-		JOIN md USING(md_num)) 
-		WHERE mem_num=#{mem_num}
-	)
-
-</select>
-
-<!-- 장바구니 목록 -->
-<select id="selectList" parameterType="map" resultType="MdCartVO">
-	SELECT
-		   *
-		FROM md_cart
-		JOIN md USING(md_num)
-		WHERE mem_num=#{mem_num}
-		ORDER BY md_num ASC
-</select>
-
-<!-- 장바구니 상세 -->
-<select id="selectMdCart" parameterType="integer">
-		SELECT 
-		  * 
-		FROM md_cart 
-		WHERE md_num=#{md_num} AND mem_num=#{mem_num} 
-</select>
-
-<!-- 장바구니 수정 -->
-<update id="updateMdCart" parameterType="mdCartVO">
-		UPDATE md_cart SET
-		  order_quantity=#{order_quantity},
-		  WHERE md_cart_num=#{md_cart_num}
-</update>
-
-<!-- 장바구니 상품번호와 회원번호별 수정 -->
-<update id="updateCartByMd_num" parameterType="mdCartVO">
-		UPDATE md_cart SET
-		order_quantity=#{order_quantity},
-		WHERE md_num=#{md_num} AND mem_num=#{mem_num} 
-</update>
+	<resultMap type="mdCartVO" id="mdCartMap">
+		<result property="mdVO.md_name" column="md_name"/>
+		<result property="mdVO.md_price" column="md_price"/>
+	</resultMap>
+	
+	
+	<!-- 장바구니 넣기(등록) -->
+	<insert id="insertMdCart" parameterType="mdCartVO">
+		INSERT INTO md_cart(
+			md_cart_num,
+			md_num,
+			order_quantity,
+			mem_num
+		) VALUES (
+			md_cart_seq.nextval,
+			#{md_num},
+			#{order_quantity},
+			#{mem_num}	
+		)
+	</insert>
+	
+	<!-- 회원번호별 총구매액 -->
+	<select id="getTotalByMem_num">
+		SELECT SUM(sub_total) FROM(
+			select
+			mem_num,
+			order_quantity * md_price sub_total 
+			FROM md_cart 
+			JOIN md USING(md_num)) 
+			WHERE mem_num=#{mem_num}
+	</select>
+	
+	<!-- 장바구니 목록 -->
+	<select id="selectList" parameterType="map" resultMap="mdCartMap">
+		SELECT
+			   md_cart_num,
+			   order_quantity,
+			   md_name,
+			   md_price,
+			   order_quantity * md_price sub_price
+			FROM md_cart
+			JOIN md USING(md_num)
+			WHERE mem_num=#{mem_num}
+	</select>
+	
+	<!-- 장바구니 전체금액 -->
+	
+	
+	<!-- 장바구니 상세 -->
+	<select id="selectMdCart" parameterType="integer">
+			SELECT 
+			  *
+			FROM md_cart
+			WHERE md_num=#{md_num} AND mem_num=#{mem_num} 
+	</select>
+	
+	<!-- 장바구니 수정 -->
+	<update id="updateMdCart" parameterType="mdCartVO">
+			UPDATE md_cart SET
+			  order_quantity=#{order_quantity},
+			  WHERE md_cart_num=#{md_cart_num}
+	</update>
+	
+	<!-- 장바구니 상품번호와 회원번호별 수정 -->
+	<update id="updateCartByMd_num" parameterType="mdCartVO">
+			UPDATE md_cart SET
+			order_quantity=#{order_quantity},
+			WHERE md_num=#{md_num} AND mem_num=#{mem_num} 
+	</update>
 
 </mapper>

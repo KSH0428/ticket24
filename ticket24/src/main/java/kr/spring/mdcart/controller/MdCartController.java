@@ -49,21 +49,23 @@ public class MdCartController {
 	 * 장바구니 등록 
 	 * =================================
 	 */
-	@RequestMapping("/mdCart/addCart")
-	@ResponseBody
-	public void insertCart(
+	@PostMapping("/mdCart/addCart")
+	public String insertCart(
 			@RequestParam int md_num,
-			MdCartVO cartVO, HttpSession session) {
+			MdCartVO cartVO, HttpSession session, Model model, HttpServletRequest request) {
 		
 		log.debug("<<장바구니 등록 MdCartVO >> : " + cartVO);
 
 		MemberVO user = (MemberVO) (session.getAttribute("user"));
 
 		cartVO.setMem_num(user.getMem_num());
-
+		model.addAttribute("message", "장바구니 추가가 완료되었습니다");
+		model.addAttribute("url" ,request.getContextPath()+"/mdCart/cartList");
 		mdCartService.insertCart(cartVO);
 		
+		return "common/resultAlert";
 	}
+	
 
 	/*
 	 * ================================= 
@@ -72,31 +74,34 @@ public class MdCartController {
 	 */
 	@RequestMapping("/mdCart/cartList")
 	@ResponseBody
-	public Map<String, Object> getList(
-			@RequestParam int md_cart_num, 
+	public ModelAndView getList(
 			HttpSession session) {
 
-		List<MdCartVO> list = null;
-		list = mdCartService.selectList(md_cart_num);
+		MemberVO user = (MemberVO) (session.getAttribute("user"));
+		//int mem_num = (int)session.getAttribute("mem_num");
+		
+		MdVO md = (MdVO) (session.getAttribute("md"));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("md_cart_num", md_cart_num);
-		//map.put("list", list);
-
-		return map;
+		List<MdCartVO> list = mdCartService.selectList(user.getMem_num());
+		//장바구니 전체 금액 호출
+		int getTotal = mdCartService.getTotalByMem_num(user.getMem_num());
+		//장바구니 전체 금액에 따라 배송비 구분
+		//배송료(6만 원 이샹=> 무료, 미만=> 3000원)
+		int fee = getTotal >= 60000 ? 0 : 3000;
+		
+		
+		ModelAndView mav = new ModelAndView();
+		//map.put("count", list.size()); //장바구니 상품의 유무
+		map.put("getTotal", getTotal); //장바구니 전체 금액
+		map.put("fee", fee); //배송금액
+		map.put("allSum", getTotal+fee);//주문 상품 전체 금액
+		mav.setViewName("cartList"); //view(jsp)의 이름 저장
+		mav.addObject("map",map); //map 변수 저장
+		mav.addObject("list", list);
+		
+		return mav;
 }
-
-	/*
-	 * ================================= 
-	 * 회원번호별 총 구매액
-	 * =================================
-	 */
-
-	/*
-	 * ================================= 
-	 * 장바구니 상세
-	 *  =================================
-	 */
 
 	/*
 	 * ================================= 
@@ -123,7 +128,9 @@ public class MdCartController {
 	 */
 
 	/*
-	 * ================================= 장바구니 삭제 =================================
+	 * ================================= 
+	 * 장바구니 삭제 
+	 * =================================
 	 */
 
 }

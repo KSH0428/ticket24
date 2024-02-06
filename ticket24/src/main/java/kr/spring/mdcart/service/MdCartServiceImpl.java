@@ -22,11 +22,12 @@ public class MdCartServiceImpl implements MdCartService{
 	public void insertCart(MdCartVO cart) {
 		mdcartMapper.insertCart(cart);
 		
+		
 	}
 
 	@Override
 	public int getTotalByMem_num(int mem_num) {
-		return 0;
+		return mdcartMapper.getTotalByMem_num(mem_num);
 	}
 
 	@Override
@@ -34,10 +35,7 @@ public class MdCartServiceImpl implements MdCartService{
 		return mdcartMapper.selectList(mem_num);
 	}
 
-	@Override
-	public MdCartVO selectCart(MdCartVO cart) {
-		return mdcartMapper.selectCart(cart);
-	}
+	
 
 	@Override
 	public void updateCart(MdCartVO cart) {
@@ -55,6 +53,11 @@ public class MdCartServiceImpl implements MdCartService{
 	public void deleteCart(int md_cart_num) {
 		mdcartMapper.deleteCart(md_cart_num);
 		
+	}
+
+	@Override
+	public MdCartVO selectCart(int md_num, int mem_num) {
+		return mdcartMapper.selectCart(md_num, mem_num);
 	}
 
 }
