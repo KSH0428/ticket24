@@ -16,4 +16,5 @@ public class ChatMessageVO {
 	private int read_check;
 	
 	private String mem_id;
+	private int read_count;
 }

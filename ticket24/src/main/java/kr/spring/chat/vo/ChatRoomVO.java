@@ -13,4 +13,5 @@ public class ChatRoomVO {
 	
 	private String mem_id;
 	private ChatMessageVO chatMessageVO;
+	private int read_count;
 }

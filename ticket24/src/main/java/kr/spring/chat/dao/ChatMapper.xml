@@ -12,11 +12,14 @@
 	    <result property="message" column="message"/>
 	    <result property="send_date" column="send_date"/>
 	</resultMap>
-
+	
 	<select id="selectChatRoomList" parameterType="map" resultMap="chatMap">
 		SELECT m.mem_id,
 			   cm.message,
-			   cr.chatroom_num
+			   cr.chatroom_num,
+			   (SELECT COUNT(*) FROM chatmessage sub_cm
+			   WHERE sub_cm.chatroom_num = cr.chatroom_num
+          	   AND sub_cm.read_check = 1) AS read_count
 		FROM chatroom cr
 		LEFT OUTER JOIN member m ON cr.mem_num = m.mem_num
 		LEFT OUTER JOIN chatmessage cm ON cr.chatroom_num = cm.chatroom_num
@@ -25,7 +28,7 @@
 				   MAX(send_date) max_send_date 
 			FROM chatmessage GROUP BY chatroom_num)
 		latest_msg ON cm.chatroom_num = latest_msg.chatroom_num AND cm.send_date = latest_msg.max_send_date
-		ORDER BY cr.chatroom_num
+		ORDER BY cm.send_date DESC
 	</select>
 
 	<select id="selectRowCount" parameterType="map" resultType="integer">
