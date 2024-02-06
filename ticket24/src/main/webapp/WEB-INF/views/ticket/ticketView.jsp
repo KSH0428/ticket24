@@ -36,20 +36,30 @@
 		<hr size="1"width="100%">
 		<ul>
 		<li>공연명 : ${ticket.ticket_name} , 공연장소 : ${ticket.ticket_place } , 공연일 : ${ticket.ticket_date} </li>
-		<li>좌석정보 : ${ticket.ticket_seat} , 상품 특이사항 : <c:if
-									test="${ticket.ticket_special1 == 1}">재관람 티켓</c:if> <c:if
-									test="${ticket.ticket_special1 == 2}">18세 이상 입장 가능</c:if> <c:if
-									test="${ticket.ticket_special1 == 3}">할인티켓 - 학생</c:if> <c:if
-									test="${ticket.ticket_special1 == 4}">할인티켓 - 장애인</c:if><c:if
-									test="${ticket.ticket_special1 == 5}">할인티켓 - 경로자</c:if><c:if
-									test="${ticket.ticket_special1 == 6}">여성명의</c:if><c:if
-									test="${ticket.ticket_special1 == 7}">남성명의</c:if><c:if
-									test="${ticket.ticket_special1 == 8}">조기입장</c:if>,
-		좌석 특이사항 : <c:if test="${ticket.ticket_special2 == 1}">시야 제한석</c:if> <c:if
-									test="${ticket.ticket_special2 == 2}">통로석</c:if> <c:if
-									test="${ticket.ticket_special2 == 3}">스피커 옆</c:if> <c:if
-									test="${ticket.ticket_special2 == 4}">스탠딩 한정</c:if> <c:if
-									test="${ticket.ticket_special2 == 5}">가변석</c:if>										
+		<li>좌석정보 : ${ticket.ticket_seat}</li>
+		<li> 상품 특이사항 : 
+			<c:forEach var="ticket_special1" items="${ticket.f_ticket_special1}" varStatus="status">
+				<c:if test="${status.index > 0}">,</c:if>
+				<c:if test="${ticket_special1 == 1}">재관람 티켓</c:if> 
+				<c:if test="${ticket_special1 == 2}">18세 이상 입장 가능</c:if> 
+				<c:if test="${ticket_special1 == 3}">할인티켓 - 학생</c:if> 
+				<c:if test="${ticket_special1 == 4}">할인티켓 - 장애인</c:if>
+				<c:if test="${ticket_special1 == 5}">할인티켓 - 경로자</c:if>
+				<c:if test="${ticket_special1 == 6}">여성명의</c:if>
+				<c:if test="${ticket_special1 == 7}">남성명의</c:if>
+				<c:if test="${ticket_special1 == 8}">조기입장</c:if>
+			</c:forEach>
+		</li>
+		<li> 좌석 특이사항 : 
+			<c:forEach var="ticket_special2" items="${ticket.f_ticket_special2}" varStatus="status">
+			    <c:if test="${status.index > 0}">,</c:if>
+				<c:if test="${ticket_special2 == 1}">시야 제한석</c:if> 
+				<c:if test="${ticket_special2 == 2}">통로석</c:if> 
+				<c:if test="${ticket_special2 == 3}">스피커 옆</c:if> 
+				<c:if test="${ticket_special2 == 4}">스탠딩 한정</c:if> 
+				<c:if test="${ticket_special2 == 5}">가변석</c:if>	
+			</c:forEach>
+											
 		</li>
 		<li>수량 : ${ticket.ticket_quantity}장 , 가격 :  <fmt:formatNumber value="${ticket.ticket_price}"/>원 ,
 			 총 가격 : <c:set var="totalPrice" value="${ticket.ticket_quantity * ticket.ticket_price}" />
@@ -70,7 +80,7 @@
 				  fn:endsWith(ticket.ticket_filename1,'.png') ||
 				  fn:endsWith(ticket.ticket_filename1,'.PNG')}">
 		<div class="align-center">
-			<img src="${pageContext.request.contextPath}/upload/${ticket.ticket_filename2}" class="detail-img">
+			<img src="${pageContext.request.contextPath}/upload/${ticket.ticket_filename1}" class="detail-img">
 		</div>
 		</c:if>
 		<br>

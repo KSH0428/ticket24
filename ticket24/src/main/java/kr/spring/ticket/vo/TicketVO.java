@@ -36,7 +36,9 @@ public class TicketVO {
 	@NotBlank
 	private String ticket_seat;
 	private String ticket_special1;
+	private String[] f_ticket_special1;
 	private String ticket_special2;
+	private String[] f_ticket_special2;
 	private int ticket_hit;
 	private Date ticket_regdate;
 	private Date ticket_modifydate;
@@ -55,6 +57,40 @@ public class TicketVO {
 	private String mem_id;
 	private String mem_nickname;
 		
+	//form:checkbox에서 사용할 수 있도록 String -> String[]로 변환
+	public String[] getF_ticket_special1() {
+		String[] f_ticket_special1 = null;
+		if(ticket_special1!=null) f_ticket_special1 = ticket_special1.split(",");
+		return f_ticket_special1;
+	}
+	
+	public String[] getF_ticket_special2() {
+		String[] f_ticket_special2 = null;
+		if(ticket_special2!=null) f_ticket_special2 = ticket_special2.split(",");
+		return f_ticket_special2;
+	}
+	
+	//String[] -> String
+	public void setF_ticket_special1(String[] f_ticket_special1) {
+		if(f_ticket_special1!=null) {
+			this.ticket_special1 = "";
+			for(int i=0;i<f_ticket_special1.length;i++) {
+				if(i>0) this.ticket_special1 +=",";
+				this.ticket_special1 += f_ticket_special1[i];
+			}
+		}
+	}
+	
+	public void setF_ticket_special2(String[] f_ticket_special2) {
+		if(f_ticket_special2!=null) {
+			this.ticket_special2 = "";
+			for(int i=0;i<f_ticket_special2.length;i++) {
+				if(i>0) this.ticket_special2 +=",";
+				this.ticket_special2 += f_ticket_special2[i];
+			}
+		}
+	}
+	
 }
 
 

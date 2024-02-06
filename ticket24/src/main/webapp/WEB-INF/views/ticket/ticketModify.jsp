@@ -52,26 +52,25 @@
 			<form:label path="ticket_price">티켓 가격</form:label>
 			<form:input path="ticket_price" type="number" maxlength="30"/>원
 			<form:errors path="ticket_price" cssClass="error-color"/>
-		</li>
 		<li>
 			<label>상품 특이사항</label>
-			<form:radiobutton path="ticket_special1" value="1"/>재관람 티켓
-			<form:radiobutton path="ticket_special1" value="2"/>18세 이상 입장 가능
-			<form:radiobutton path="ticket_special1" value="3"/>할인티켓 - 학생
-			<form:radiobutton path="ticket_special1" value="4"/>할인티켓 - 장애인
+			<form:checkbox path="f_ticket_special1" value="1"/>재관람 티켓
+			<form:checkbox path="f_ticket_special1" value="2"/>18세 이상 입장 가능
+			<form:checkbox path="f_ticket_special1" value="3"/>할인티켓 - 학생
+			<form:checkbox path="f_ticket_special1" value="4"/>할인티켓 - 장애인
 			<br>
-			<form:radiobutton path="ticket_special1" value="5"/>할인티켓 - 경로자
-			<form:radiobutton path="ticket_special1" value="6"/>여성 명의
-			<form:radiobutton path="ticket_special1" value="7"/>남성명의
-			<form:radiobutton path="ticket_special1" value="8"/>조기입장
+			<form:checkbox path="f_ticket_special1" value="5"/>할인티켓 - 경로자
+			<form:checkbox path="f_ticket_special1" value="6"/>여성 명의
+			<form:checkbox path="f_ticket_special1" value="7"/>남성명의
+			<form:checkbox path="f_ticket_special1" value="8"/>조기입장
 			</li>
 			<li>
 			<label>좌석 특이사항</label>
-			<form:radiobutton path="ticket_special2" value="1"/>시야 제한석
-			<form:radiobutton path="ticket_special2" value="2"/>통로석
-			<form:radiobutton path="ticket_special2" value="3"/>스피커 옆
-			<form:radiobutton path="ticket_special2" value="4"/>스탠딩 한정
-			<form:radiobutton path="ticket_special2" value="5"/>가변석
+			<form:checkbox path="f_ticket_special2" value="1"/>시야 제한석
+			<form:checkbox path="f_ticket_special2" value="2"/>통로석
+			<form:checkbox path="f_ticket_special2" value="3"/>스피커 옆
+			<form:checkbox path="f_ticket_special2" value="4"/>스탠딩 한정
+			<form:checkbox path="f_ticket_special2" value="5"/>가변석
 			</li>
 				<li>
 		<li><b>내용</b></li>
@@ -98,23 +97,29 @@
 			</script>
 		</li>
 		<li>
-    <form:label path="upload">파일업로드</form:label>
+    <form:label path="upload">파일업로드1</form:label>
     <input type="file" name="upload" id="upload">
     <c:if test="${!empty ticketVO.ticket_filename1}">
         <div class="file_detail">(${ticketVO.ticket_filename1})파일이 등록되어 있습니다.
             <input type="button" value="파일삭제" class="file_del" data-filenum="1">
         </div>
     </c:if>
+    <form:label path="upload2">파일업로2</form:label>
+    <input type="file" name="upload2" id="upload2">
     <c:if test="${!empty ticketVO.ticket_filename2}">
         <div class="file_detail">(${ticketVO.ticket_filename2})파일이 등록되어 있습니다.
             <input type="button" value="파일삭제" class="file_del" data-filenum="2">
         </div>
     </c:if>
+    <form:label path="upload3">파일업로드3</form:label>
+    <input type="file" name="upload3" id="upload3">
     <c:if test="${!empty ticketVO.ticket_filename3}">
         <div class="file_detail">(${ticketVO.ticket_filename3})파일이 등록되어 있습니다.
             <input type="button" value="파일삭제" class="file_del" data-filenum="3">
         </div>
     </c:if>
+    <form:label path="upload4">파일업로드4</form:label>
+    <input type="file" name="upload4" id="upload4">
     <c:if test="${!empty ticketVO.ticket_filename4}">
         <div class="file_detail">(${ticketVO.ticket_filename4})파일이 등록되어 있습니다.
             <input type="button" value="파일삭제" class="file_del" data-filenum="4">

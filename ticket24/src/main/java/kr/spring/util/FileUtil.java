@@ -25,7 +25,7 @@ public class FileUtil {
 				request.getServletContext().getRealPath(UPLOAD_PATH);
 		//파일명 생성
 		String filename = null;
-		if(!file.isEmpty()) {
+		if(file != null && !file.isEmpty()) {
 			filename = UUID.randomUUID()+"_"+file.getOriginalFilename();
 			//원하는 경로에 파일 저장
 			file.transferTo(new File(absolutePath+"/"+filename));

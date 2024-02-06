@@ -126,16 +126,16 @@
 		<update id="updateTicket" parameterType="TicketVO">
 			UPDATE ticket SET
 			<if test="ticket_filename1 != null">
-			ticket_filename1=#{ticket_filename1}
+			ticket_filename1=#{ticket_filename1},
 			</if>
 			<if test="ticket_filename2 != null">
-			ticket_filename2=#{ticket_filename2}
+			ticket_filename2=#{ticket_filename2},
 			</if>
 			<if test="ticket_filename3 != null">
-			ticket_filename3=#{ticket_filename1}
+			ticket_filename3=#{ticket_filename3},
 			</if>
 			<if test="ticket_filename4 != null">
-			ticket_filename1=#{ticket_filename4}
+			ticket_filename1=#{ticket_filename4},
 			</if>
 			ticket_name=#{ticket_name},
 			ticket_date=#{ticket_date},

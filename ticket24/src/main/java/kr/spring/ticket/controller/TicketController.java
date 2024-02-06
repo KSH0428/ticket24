@@ -176,6 +176,8 @@ public class TicketController {
 	@GetMapping("/ticket/update")
 	public String formUpdate(@RequestParam int ticket_num,Model model) {
 		TicketVO ticketVO = ticketService.selectTicket(ticket_num);
+		ticketVO.setTemp_date(ticketVO.getTicket_date().split(" ")[0]);
+		ticketVO.setTemp_time(ticketVO.getTicket_date().split(" ")[1]);
 		
 		model.addAttribute("ticketVO",ticketVO);
 		
@@ -186,6 +188,9 @@ public class TicketController {
 	public String submitUpdate(@Valid TicketVO ticketVO,BindingResult result,
 								HttpServletRequest request, Model model) throws IllegalStateException, IOException {
 		log.debug("<<글 수정 >> : " + ticketVO);
+		
+		//날짜와 시간 합치기
+		ticketVO.setTicket_date(ticketVO.getTemp_date() + " " + ticketVO.getTemp_time());
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {

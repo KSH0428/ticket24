@@ -53,23 +53,23 @@
 		</li>
 		<li>
 			<label>상품 특이사항</label>
-			<form:radiobutton path="ticket_special1" value="1"/>재관람 티켓
-			<form:radiobutton path="ticket_special1" value="2"/>18세 이상 입장 가능
-			<form:radiobutton path="ticket_special1" value="3"/>할인티켓 - 학생
-			<form:radiobutton path="ticket_special1" value="4"/>할인티켓 - 장애인
+			<form:checkbox path="f_ticket_special1" value="1"/>재관람 티켓
+			<form:checkbox path="f_ticket_special1" value="2"/>18세 이상 입장 가능
+			<form:checkbox path="f_ticket_special1" value="3"/>할인티켓 - 학생
+			<form:checkbox path="f_ticket_special1" value="4"/>할인티켓 - 장애인
 			<br>
-			<form:radiobutton path="ticket_special1" value="5"/>할인티켓 - 경로자
-			<form:radiobutton path="ticket_special1" value="6"/>여성 명의
-			<form:radiobutton path="ticket_special1" value="7"/>남성명의
-			<form:radiobutton path="ticket_special1" value="8"/>조기입장
+			<form:checkbox path="f_ticket_special1" value="5"/>할인티켓 - 경로자
+			<form:checkbox path="f_ticket_special1" value="6"/>여성 명의
+			<form:checkbox path="f_ticket_special1" value="7"/>남성명의
+			<form:checkbox path="f_ticket_special1" value="8"/>조기입장
 			</li>
 			<li>
 			<label>좌석 특이사항</label>
-			<form:radiobutton path="ticket_special2" value="1"/>시야 제한석
-			<form:radiobutton path="ticket_special2" value="2"/>통로석
-			<form:radiobutton path="ticket_special2" value="3"/>스피커 옆
-			<form:radiobutton path="ticket_special2" value="4"/>스탠딩 한정
-			<form:radiobutton path="ticket_special2" value="5"/>가변석
+			<form:checkbox path="f_ticket_special2" value="1"/>시야 제한석
+			<form:checkbox path="f_ticket_special2" value="2"/>통로석
+			<form:checkbox path="f_ticket_special2" value="3"/>스피커 옆
+			<form:checkbox path="f_ticket_special2" value="4"/>스탠딩 한정
+			<form:checkbox path="f_ticket_special2" value="5"/>가변석
 			</li>
 			<li>
 		<li><b>내용</b></li>
