@@ -26,7 +26,9 @@ $(function() {
 	let round = [];
 	let c_round_num = [];
 	let last_seleted_c_round_num;
-    
+	//버튼 클릭 이벤트에 쓰이는 변수
+    let num;
+	
 	$.ajax({
 		url: 'concertRound',
 		type: 'post',
@@ -57,10 +59,6 @@ $(function() {
 			        ,buttonImageOnly: true 
 			        ,buttonText: "선택"              
 			        ,yearSuffix: "." 
-			        /*
-			 		,minDate:date1
-			        ,maxDate:date2
-			        */
 			        //getYear()하면 잘못된 년도가 들어가서 일단 2024년 적음
 			 		,minDate:new Date('2024',date1.getMonth(),'1')
 			        ,maxDate:new Date('2024',date2.getMonth(),getLastDayOfMonth(date2.getYear(),date2.getMonth()))
@@ -147,7 +145,7 @@ $(function() {
 		});
 		
 		//alert($('#datepicker').val());
-		let num ;
+		/* var num = 0; */
 		let count = 0;
 		for(var i=0; i<dates.length; i++){
 			if(dates[i] == $('#datepicker').val()){
@@ -156,7 +154,9 @@ $(function() {
 			}
 		}
 		
-		if(count == 2) num = 0;
+		if(count == 2){
+			num = 0;
+		}
 		
 		$('#seatsNum').text('');
 		$('#seatsNum').text(getRemainingSeats(c_round_num[num]));
@@ -222,8 +222,8 @@ $(function() {
 	//예약 팝업창
 	$('.reserve-btn').click(function(event){
 		let url="concertReservePopup?concert_num=${concert.concert_num}&c_round_num=" + last_seleted_c_round_num;
-		let width = 1000;
-		let height = 655;
+		let width = 970;
+		let height = 638;
 		let popOption = "width=" + width + ", height=" + height;
 		window.open(url,"concertPopUp", popOption);
 	});

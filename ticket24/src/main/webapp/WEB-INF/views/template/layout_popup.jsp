@@ -8,15 +8,13 @@
 <title><tiles:getAsString name="title"/></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ysw.css">
 </head>
-<body>
+<body style="margin: 0">
 <div id="popup-container">
 	<div id="popup-header">
-		<%-- <tiles:insertAttribute name="header"/> --%>
-		머리
+		<tiles:insertAttribute name="header"/>
 	</div>
 	<div id="popup-body">
-		<%-- <tiles:insertAttribute name="body"/> --%>
-		몸
+		<tiles:insertAttribute name="body"/>
 	</div>
 	<div id="popup-sidebar">
 		<tiles:insertAttribute name="sidebar"/>

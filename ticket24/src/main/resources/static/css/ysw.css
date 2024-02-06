@@ -541,8 +541,6 @@ width: 450px;
 #popup-header{
 	width: 710px;
     height: 60px;
-    
-    border: 1px;
 }
 #popup-body{
 	float: left;
@@ -554,9 +552,138 @@ width: 450px;
 #popup-sidebar{
 	float: right;
     width: 260px;
-    _width: 250px;
     height: 600px;
     margin-top: -55px;
+}
+
+/*헤더 시작*/
+.concert-header-menu{
+	margin: 0;
+    padding: 0;
+    padding-top: 8px;
+    list-style: none;
+    float: right;
+}
+.concert-header-menu li{
+	float: left;
+    height: 45px;
+    width: 158px;
+    margin-left: 18px;
+    background-color: #FFFFFF;
+   
+}
+
+.concert-header-menu-text1{
+	display: block;
+    font-size: 15px;
+    height: 18px;
+    margin-left: 10px;
+}
+.concert-header-menu-text2{
+	display: block;
+    font-size: 15px;
+    height: 18px;
+    text-align: center;
+}
+/*바디 시작*/
+.select-concert-datepicker-container{
+	width: 320px;
+    height: 365px;
+    border: 1px solid #bebebe;
+    float: left;
+    margin-bottom: 20px;
+}
+.select-concert-datepicker-container-header{
+	margin: 0;
+	padding: 4px 4px 4px 12px;
+  	background: radial-gradient(ellipse at center, #5882FA, #086A87);
+    /* border-bottom: 1px solid #bebebe; */
+    height: 17px;
+    font-weight: bold;
+    font-size: 12px;
+    color:white;
+}
+/*datepicker 가운데로 정렬*/
+.select-concert-datepicker-container .calendar{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*예약 팝업 페이지의 동그라ㅇ미 크기 조절*/
+.select-concert-datepicker-container .ui-state-active {
+	width:16px;
+}
+.select-concert-round-container{
+	width: 365px;
+    height: 365px;
+    border: 1px solid #bebebe;
+    float: left;
+    margin-left: -1px;
+}
+.select-concert-round-container-header{
+	padding: 4px 4px 4px 12px;
+  	background: radial-gradient(ellipse at center, #5882FA, #086A87);
+    /* border-bottom: 1px solid #bebebe; */
+    height: 17px;
+    font-weight: bold;
+    font-size: 12px;
+    color:white;
+}
+.select-concert-round-info{
+	padding:0;
+	font-weight: bold;
+    margin-right: 10px;
+    font-size: 11px;
+}
+#selected-Date{
+	padding: 8px 80px 8px 20px;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    color: #eb292f;
+}
+.selected-round-container{
+	width: 170px;
+    float: left;
+    margin-right: 10px;
+}
+#selected-round-list{
+	height: 140px;
+    overflow: auto;
+    overflow-x: hidden;
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    list-style: none;
+}
+.selected-remaining-seats{
+	width: 145px;
+    float: left;
+}
+#selected-remaining-seats-list{
+	border: 1px solid #dcdcdc;
+    padding: 5px;
+    height: 140px;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-bottom: 15px;
+}
+#selected-round-btn{
+	margin-bottom: 1px;
+    font-size: 12px;
+    height: 20px;
+    width: 160px;
+    border: none;
+}
+#selected-round-btn2{
+	margin-bottom: 1px;
+    font-size: 12px;
+    height: 20px;
+    width: 160px;
+    border: none;
+}
+/*유의사항*/
+.note-container{
+	clear: both;
+    border: 1px solid #dddddd;
 }
 
 /*사이드 바 시작*/
@@ -564,21 +691,18 @@ width: 450px;
 	float: right;
     width: 260px;
     height: 600px;
-    /* margin-top: -55px; */
 }
 .reserve-state-header{
 	padding: 10px;
     padding-bottom: 20px;
-    height: 88px;
+    height: 120px;
 }
 .header-img-container{
     width: 79px;
     height: 98px;
     float: left;
-    
     margin: 0;
     padding: 0;
-    
     margin-right: 15px;
 }
 .header-img-container img{
@@ -591,7 +715,7 @@ width: 450px;
 	margin-bottom: 10px;
 	display: block;
 	
-	font: bold 12px 돋움;
+	font: bold 12px;
     color: #FFFFFF;
 
 }
@@ -609,6 +733,8 @@ width: 450px;
 	letter-spacing: 0px;
     font-size: 12px;
     color: #FFFF00;
+    float: right;
+    margin-right:30px
 }
 
 .dividing-line{
@@ -651,4 +777,6 @@ width: 450px;
     color: #FFF;
 }
 /*사이드 바 끝*/
+
+
 /*팝업 끝*/
