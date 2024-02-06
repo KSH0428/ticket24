@@ -14,11 +14,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.concert.service.ConcertService;
+import kr.spring.concert.service.ConsertServiceImpl;
 import kr.spring.concert.vo.ConcertDetailVO;
 import kr.spring.concert.vo.ConcertRoundVO;
 import kr.spring.concert.vo.ConcertVO;
@@ -78,13 +80,25 @@ public class ConcertController {
 		ConcertDetailVO concert = concertService.selectConcert(concert_num);
 		List<ConcertRoundVO> round = concertService.selectRoundList(concert_num);
 		
-		//System.out.println(concert);
-		
-		//제목에 노태그 처리?
-		
-		
-		
 		return new ModelAndView("concertView","concert",concert);
+	}
+	
+	//예약 팝업창
+	@RequestMapping("/concert/concertReservePopup")
+	public String popUp(Model model, @RequestParam int concert_num, @RequestParam int c_round_num) {
+		//팝업창 tiles는 modelandview를 사용하면 안되는지?
+		//modelAttribute로 데이터를 넣어야할듯
+		
+		log.debug("<<예약 팝업창 concert_num>> : " + concert_num);
+		log.debug("<<c_round_num>> : " + c_round_num);
+		
+		ConcertVO concert = concertService.selectConcertInfo(concert_num);
+		ConcertRoundVO round = concertService.selectRound(c_round_num);
+		
+		model.addAttribute("concert", concert);
+		model.addAttribute("round", round);
+		
+		return "reserveConcertPopUp";
 	}
 
 	//---------------------------------------------------------------------------------------------------

@@ -73,8 +73,24 @@
 		WHERE c_round_num=#{c_round_num}
 	</select>
 
-
-
+	<!-- 단일 콘서트 정보 -->
+	<select id="selectConcertInfo" parameterType="integer" resultType="ConcertVO">
+		SELECT
+			concert_title,
+			period,
+			concert_hall,
+			img_poster
+		FROM concert
+		WHERE concert_num=#{concert_num}
+	</select>
+	
+	<!-- 단일 콘서트 회차 정보 -->
+	<select id="selectRound" parameterType="integer" resultType="ConcertRoundVO">
+		SELECT
+			*
+		FROM concert_round
+		WHERE c_round_num=#{c_round_num}
+	</select>
 <!-- 웹 크롤링 -->
 
 	<!-- 콘서트 목록 데이터-->

@@ -69,6 +69,16 @@ public class ConsertServiceImpl implements ConcertService{
 	public int selectC_roundRemainingSeats(int c_round_num) {
 		return concertMapper.selectC_roundRemainingSeats(c_round_num);
 	}
+
+	@Override
+	public ConcertVO selectConcertInfo(int concert_num) {
+		return concertMapper.selectConcertInfo(concert_num);
+	}
+
+	@Override
+	public ConcertRoundVO selectRound(int c_round_num) {
+		return concertMapper.selectRound(c_round_num);
+	}
 	
 	
 

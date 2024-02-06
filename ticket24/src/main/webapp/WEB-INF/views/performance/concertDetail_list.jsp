@@ -25,6 +25,7 @@ $(function() {
     let dates = [];
 	let round = [];
 	let c_round_num = [];
+	let last_seleted_c_round_num;
     
 	$.ajax({
 		url: 'concertRound',
@@ -168,6 +169,8 @@ $(function() {
 		});
 		$('#reserve-btn').prop("disabled", false);
 		
+		//현재 콘서트 회차 번호 갱신
+		last_seleted_c_round_num = c_round_num[num];
 	});
 	
 	$(document).on('click', '#concert-time-btn2', function() {
@@ -188,6 +191,9 @@ $(function() {
 		    "background-color" : '#fa2828'
 		});
 		$('#reserve-btn').prop("disabled", false);
+		
+		//현재 콘서트 회차 번호 갱신
+		last_seleted_c_round_num = c_round_num[num];
 	});
 
 	//공연 회차 좌석 정보 얻어오기
@@ -211,6 +217,16 @@ $(function() {
 		
 		return result_seat;
 	}
+	
+	
+	//예약 팝업창
+	$('.reserve-btn').click(function(event){
+		let url="concertReservePopup?concert_num=${concert.concert_num}&c_round_num=" + last_seleted_c_round_num;
+		let width = 1000;
+		let height = 655;
+		let popOption = "width=" + width + ", height=" + height;
+		window.open(url,"concertPopUp", popOption);
+	});
 });
 
 

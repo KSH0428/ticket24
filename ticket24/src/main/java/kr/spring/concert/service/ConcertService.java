@@ -21,6 +21,12 @@ public interface ConcertService {
 	
 	//콘서트 회차 좌석 정보
 	public int selectC_roundRemainingSeats(int c_round_num);
+	
+	//단일 콘서트 정보
+	public ConcertVO selectConcertInfo(int concert_num);
+	
+	//단일 콘서트 회차 정보
+	public ConcertRoundVO selectRound(int c_round_num);
 	//--------------웹 스크롤 -----------------
 
 	//콘서트 리스트

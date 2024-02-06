@@ -20,7 +20,14 @@ public interface ConcertMapper {
 	//콘서트 회차
 	public List<ConcertRoundVO> selectRoundList(int concert_num);
 	public int selectC_roundRemainingSeats(int c_round_num);
-	//--------------웹 스크롤 -----------------
+	
+	//콘서트 상세 단독
+	public ConcertVO selectConcertInfo(int concert_num);
+	
+	//콘서트 회차 단독
+	public ConcertRoundVO selectRound(int c_round_num);
+	
+	//--------------웹 크롤링 -----------------
 
 	//콘서트 리스트
 	public void insertConcert(ConcertVO concert);
