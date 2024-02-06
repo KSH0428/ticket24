@@ -216,6 +216,23 @@ $(function() {
 		
 		return result_seat;
 	}
+	
+	//클릭 이벤트 강제 발생
+	//예전에 클릭한 회차 정보를 얻어와서 팝업창에서 유지하도록 한다.
+	
+	// 특정 날짜 클릭 이벤트
+    $("#selectDateBtn").click(function(){
+        var targetDate = ${round.year} + "-" + ${round.month} + "-" + ${round.day};
+        //$("#datepicker").datepicker("setDate", targetDate);
+        $("#datepicker").datepicker("setDate", "2024-02-28").get(0).click();
+    });
+	
+	//강제 이벤트
+	 $("td:contains('" + ${round.day} + "')").click(function() {
+            alert("클릭된 요소의 텍스트는: " + $(this).text());
+            // 클릭된 요소에 대한 추가적인 처리를 여기에 작성할 수 있습니다.
+        });
+    $("#selectDateBtn").get(0).click();
 });
 
 </script>
@@ -251,4 +268,5 @@ $(function() {
 <!-- 유의사항 -->
 <div class="note-container">
 	유의사항(후순위)
+	<button id="selectDateBtn">Select Specific Date</button>
 </div>
