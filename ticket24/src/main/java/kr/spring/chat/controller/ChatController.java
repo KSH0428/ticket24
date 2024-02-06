@@ -35,24 +35,25 @@ public class ChatController {
 						HttpSession session, Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("mem_num", user.getMem_num());
-		
-		int count = chatService.selectRowCount(map);
-		
-		PageUtil page = new PageUtil(null,null,currentPage,
-				                         count,30,10,"main");
-		
-		List<ChatRoomVO> list = null;
-		if(count > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			list = chatService.selectChatRoomList(map);
+		if(user != null) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("mem_num", user.getMem_num());
+			
+			int count = chatService.selectRowCount(map);
+			
+			PageUtil page = new PageUtil(null,null,currentPage,
+					                         count,30,10,"main");
+			
+			List<ChatRoomVO> list = null;
+			if(count > 0) {
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				list = chatService.selectChatRoomList(map);
+			}
+			model.addAttribute("count", count);
+			model.addAttribute("list", list);
+			model.addAttribute("page", page.getPage());
 		}
-		model.addAttribute("count", count);
-		model.addAttribute("list", list);
-		model.addAttribute("page", page.getPage());
-		
 		return "chatMain";
 	}
 	
