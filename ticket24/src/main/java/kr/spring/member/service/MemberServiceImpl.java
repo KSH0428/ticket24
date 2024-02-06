@@ -46,9 +46,15 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO selectMemberPw(String mem_email) {
-		return memberMapper.selectMemberPw(mem_email);
+	public MemberVO selectMemberPw(String mem_id, String mem_name, String mem_email) {
+		return memberMapper.selectMemberPw(mem_id, mem_name, mem_email);
 	}
+
+	@Override
+	public MemberVO updateUserPassword(String mem_id, String mem_passwd) {
+		return memberMapper.updateUserPassword(mem_id, mem_passwd);
+	}
+
 	@Override
 	public MemberVO selectCheckMember(String mem_id) {
 		return memberMapper.selectCheckMember(mem_id);
@@ -102,6 +108,5 @@ public class MemberServiceImpl implements MemberService{
 	public int selectMemberPointSum(int mem_num) {
 		return memberMapper.selectMemberPointSum(mem_num);
 	}
-
 
 }

@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MailVO {
-	private String to;
-	private String subject;
+	private String address;
+	private String title;
 	private String message;
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,9 +12,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
+import kr.spring.member.service.SendEmailServiceImpl;
+import kr.spring.member.vo.MailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
@@ -112,6 +110,9 @@ public class MemberController {
 	/*========================
 	 * 비밀번호 찾기
 	 *=======================*/
+	@Autowired
+	private SendEmailServiceImpl sendEmailService;
+	
 	@GetMapping("/member/findPwCheck")
 	public String findPwForm() {
 		return "findPwCheck";
@@ -126,8 +127,23 @@ public class MemberController {
 		if(result.hasFieldErrors("mem_id") || result.hasFieldErrors("mem_name") || result.hasFieldErrors("mem_email")) {
 			return findPwForm();
 		}
+		
+		member = memberService.selectMemberPw(mem_id, mem_name, mem_email);
+		
+		if(member!=null && member.getMem_name().equals(mem_name)) {
+			result.reject("noAuthority");
+        }else if(member.getMem_id().equals(mem_id)) {
+        	result.reject("noAuthority");
+        }else if(member.getMem_email().equals(mem_email)) {
+        	result.reject("noAuthority");
+        }
+		
+		MailVO vo = new MailVO(); 
+		vo = sendEmailService.createMailAndChangePassword(mem_email, mem_name, mem_id);
+		
+        sendEmailService.mailSend(vo);
 	    return "findPwCheck";		
-	}
+    }
 	/*========================
 	 * 회원로그인
 	 *=======================*/
