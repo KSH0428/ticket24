@@ -76,6 +76,7 @@
 	<!-- 단일 콘서트 정보 -->
 	<select id="selectConcertInfo" parameterType="integer" resultType="ConcertVO">
 		SELECT
+			concert_num,
 			concert_title,
 			period,
 			concert_hall,

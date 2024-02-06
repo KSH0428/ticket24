@@ -7,8 +7,8 @@
 <tiles-definitions>
 	<definition name="reserveConcertPopUp" template="/WEB-INF/views/template/layout_popup.jsp">
 		<put-attribute name="title" value="콘서트 예약"/>  
-		<put-attribute name="header" value="헤더"/>  
-		<put-attribute name="body" value="바디"/>  
+		<put-attribute name="header" value="/WEB-INF/views/performance/popup_header.jsp"/>  
+		<put-attribute name="body" value="/WEB-INF/views/performance/selectConcertDay.jsp"/>  
 		<put-attribute name="sidebar" value="/WEB-INF/views/performance/reserveState.jsp"/>  
     </definition>
     <definition name="concert" extends="main">
