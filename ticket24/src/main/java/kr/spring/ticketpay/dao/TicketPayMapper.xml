@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.ticketpay.dao.TicketPayMapper">
+    
+    <!-- 티켓 결제 정보 저장 -->
+    <insert id="insertTicketPay" parameterType="ticketPayVO">
+        INSERT INTO ticket_pay (ticket_pay_num, ticket_num, ticket_pay_price, ticket_pay_name, 
+            ticket_pay_zipcode, ticket_pay_address1, ticket_pay_address2, ticket_pay_phone, 
+            ticket_pay_method, mem_num)
+        VALUES (#{ticket_pay_num}, #{ticket_num}, #{ticket_pay_price}, #{ticket_pay_name}, 
+            #{ticket_pay_zipcode}, #{ticket_pay_address1}, #{ticket_pay_address2}, #{ticket_pay_phone}, 
+            #{ticket_pay_method}, #{mem_num})
+    </insert>
+    
+    <!-- 특정 사용자의 모든 예약 내역 조회 -->
+    <select id="getReservHistory" parameterType="int" resultType="ticketVO">
+        SELECT * FROM ticket WHERE mem_num = #{mem_num}
+    </select>
+    
+</mapper>
