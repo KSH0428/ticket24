@@ -5,11 +5,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <div class="question-main">
-<h2>고객센터</h2>
+<h2 class="h2">고객센터</h2>
 <!-- 상단 시작 -->
 <ul class="nav list">
     <li class="nav-item border" style="width: 33.33%;"><a href="/faq/list" class="nav-link link-body-emphasis px-2">자주 찾는 질문</a></li>
-    <li class="nav-item border" style="width: 33.33%; background-color:#ffd98c;"><a href="/question/list" class="nav-link link-body-emphasis px-2">1:1 문의</a></li>
+    <li class="nav-item border" style="width: 33.33%; background-color:#f2f2f2;"><a href="/question/list" class="nav-link link-body-emphasis px-2">1:1 문의</a></li>
     <li class="nav-item border" style="width: 33.33%;"><a href="/chat/main" class="nav-link link-body-emphasis px-2">1:1 채팅</a></li>
 </ul>
 <!-- 상단 끝 -->
@@ -30,13 +30,15 @@
 			</li>
 		</ul>
 	</form>
-	<ul class="category">
-		<li><a href="list">전체</a></li>
-		<li><a href="list?question_category=1">상품</a></li>
-		<li><a href="list?question_category=2">주문</a></li>
-		<li><a href="list?question_category=3">배송</a></li>
-		<li><a href="list?question_category=4">기타</a></li>
-	</ul>
+	<div class="category-main">
+		<ul class="category">
+			<li class="total"><a href="list">전체</a></li>
+			<li><a href="list?question_category=1">상품</a></li>
+			<li><a href="list?question_category=2">주문</a></li>
+			<li><a href="list?question_category=3">배송</a></li>
+			<li><a href="list?question_category=4">기타</a></li>
+		</ul>
+	</div>
 	<c:if test="${!empty user}">
 	<input type="button" value="문의글 작성" onclick="location.href='write'" class="btn btn-warning float-end">
 	</c:if>
@@ -45,7 +47,7 @@
 	</c:if>
 	<c:if test="${count > 0}">
 	<table class="table">
-		<tr>
+		<tr class="table-secondary">
 			<th>카테고리</th>
 			<th width="400">제목</th>
 			<th>작성자</th>

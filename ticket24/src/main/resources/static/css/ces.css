@@ -1,18 +1,25 @@
 /*questionList*/
 .list{
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 	padding: 0;
 	list-style-type: none;
 	line-height:2rem;
 	text-align:center;
 }
+.h2{
+	text-align:center;
+	padding-bottom:20px;
+}
+.table{
+	width:90% !important;
+	margin:0 auto;
+}
 .question-list .nav-item {
 	display: inline-block;
 	text-align: center;
 	border: 1px solid #ccc;
 }
-
 .question-list .nav-link {
 	display: block;
 	padding: 10px;
@@ -33,6 +40,10 @@
 .custom-textarea{
 	height:150px;
 }
+.table tr{
+	vertical-align:middle;
+	height:40px;
+}
 .table th{
 	text-align:center;
 }
@@ -46,13 +57,20 @@
     height: 15px;
     background: url(//cdnticket.melon.co.kr/resource/image/web/common/bg_btn_barB.png) 0 0 no-repeat;
 }
+.category-main{
+	width:90%;
+	margin:0 auto;
+}
+.category{
+	padding:0;
+}
 .category li{
 	display:inline-block;
 }
 .category li > a:before {
     content: "";
     display: inline-block;
-    width: 1px;
+    width: 2px;
     height: 15px;
     background: #ddd;
     margin-right:15px;
@@ -60,7 +78,6 @@
 .category li a{
 	padding:5px;
 }
-
 .event-main {
     width:70% !important;
     margin:0 auto;
@@ -110,6 +127,7 @@
 .chat_main{
 	text-align:center;
 	margin-top:100px;
+	margin-bottom:80px;
 }
 /* 채팅방 생성
 -------------------------*/
@@ -259,7 +277,6 @@ li{
     align-items: center;
     margin-bottom: 10px;
 }
-
 #exitButton {
     padding: 8px;
     background-color: #708fb5;
@@ -268,7 +285,12 @@ li{
     border-radius: 5px;
     cursor: pointer;
 }
-
 #exitButton:hover {
     background-color: #678f7b;
+}
+
+form#search_form{
+	text-align:center;
+	padding-top:25px;
+	padding-bottom:15px;
 }

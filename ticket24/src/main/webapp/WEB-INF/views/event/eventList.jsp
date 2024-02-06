@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ces.css">
 <div class="event-main">
-	<h2 style="text-align:center;">이벤트</h2>
+	<h2 class="h2">이벤트</h2>
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
