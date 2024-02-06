@@ -35,8 +35,8 @@ public interface ChatMapper {
 	//채팅 메시지 읽기
 	public List<ChatMessageVO> selectChatDetail(Map<String,Integer> map);
 	//읽은 채팅 기록 업데이트
-	@Update("UPDATE chatmessage SET read_check=0 WHERE chat_num=#{chat_num}")
-	public void updateChatRead(int chat_num);
+	@Update("UPDATE chatmessage SET read_check=0 WHERE chatroom_num=#{chatroom_num} AND mem_num!=#{mem_num}")
+	public void updateChatRead(Map<String,Integer> map);
 	@Select("SELECT * FROM chatroom WHERE mem_num=#{mem_num}")
 	public List<ChatRoomVO> selectChatList(int mem_num);
 	

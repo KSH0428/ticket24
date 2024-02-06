@@ -54,6 +54,7 @@ public class ChatController {
 			model.addAttribute("list", list);
 			model.addAttribute("page", page.getPage());
 		}
+		
 		return "chatMain";
 	}
 	
@@ -93,6 +94,7 @@ public class ChatController {
 			Map<String,Integer> map = new HashMap<String,Integer>();
 			map.put("chatroom_num", chatroom_num);
 			map.put("mem_num", user.getMem_num());
+			
 			List<ChatMessageVO> list = chatService.selectChatDetail(map);
 			
 			mapAjax.put("result", "success");

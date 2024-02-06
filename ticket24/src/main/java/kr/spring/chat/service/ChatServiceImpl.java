@@ -48,12 +48,8 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public List<ChatMessageVO> selectChatDetail(Map<String, Integer> map) {
+		chatMapper.updateChatRead(map);
 		return chatMapper.selectChatDetail(map);
-	}
-
-	@Override
-	public void updateChatRead(int chat_num) {
-		chatMapper.updateChatRead(chat_num);
 	}
 
 	@Override

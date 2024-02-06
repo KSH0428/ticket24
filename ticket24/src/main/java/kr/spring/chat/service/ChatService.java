@@ -24,10 +24,6 @@ public interface ChatService {
 		public void insertChat(ChatMessageVO chatMessageVO);
 		//채팅 메시지 읽기
 		public List<ChatMessageVO> selectChatDetail(Map<String,Integer> map);
-		//읽은 채팅 기록 업데이트
-		@Update("UPDATE chatmessage SET read_check=0 WHERE chat_num=#{chat_num}")
-		public void updateChatRead(int chat_num);
-		
 		public List<ChatRoomVO> selectChatList(int mem_num);
 		//채팅방 삭제
 		public void deleteChatRoom(int chatroom_num);

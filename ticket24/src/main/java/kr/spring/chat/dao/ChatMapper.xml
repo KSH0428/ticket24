@@ -5,6 +5,7 @@
 	    <result property="chatroom_num" column="chatroom_num"/>
 	    <result property="mem_num" column="mem_num"/>
 	    <result property="mem_id" column="mem_id"/>
+	    <result property="read_count" column="read_count"/>
 	    <association property="chatMessageVO" resultMap="chatMessageMap"/>
 	</resultMap>
 	
@@ -19,18 +20,21 @@
 			   cr.chatroom_num,
 			   (SELECT COUNT(*) FROM chatmessage sub_cm
 			   WHERE sub_cm.chatroom_num = cr.chatroom_num
-          	   AND sub_cm.read_check = 1) AS read_count
+          	   AND sub_cm.read_check=1) AS read_count
 		FROM chatroom cr
-		LEFT OUTER JOIN member m ON cr.mem_num = m.mem_num
-		LEFT OUTER JOIN chatmessage cm ON cr.chatroom_num = cm.chatroom_num
+		LEFT OUTER JOIN member m ON cr.mem_num=m.mem_num
 		LEFT OUTER JOIN (
-			SELECT chatroom_num,
-				   MAX(send_date) max_send_date 
-			FROM chatmessage GROUP BY chatroom_num)
-		latest_msg ON cm.chatroom_num = latest_msg.chatroom_num AND cm.send_date = latest_msg.max_send_date
+			SELECT cm1.chatroom_num,
+				   cm1.message,
+				   cm1.send_date FROM chatmessage cm1
+			WHERE cm1.send_date=(
+				   SELECT MAX(cm2.send_date)
+				   FROM chatmessage cm2
+				   WHERE cm2.chatroom_num=cm1.chatroom_num)
+			) cm ON cr.chatroom_num=cm.chatroom_num
 		ORDER BY cm.send_date DESC
 	</select>
-
+	
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 	    SELECT COUNT(*) FROM chatroom
 	</select>
