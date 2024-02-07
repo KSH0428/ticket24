@@ -3,6 +3,8 @@ package kr.spring.question.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.question.vo.QuestionVO;
 
 public interface QuestionService {
@@ -18,4 +20,6 @@ public interface QuestionService {
 	public void deleteQuestion(int question_num);
 	public void deleteAnswer(int question_num);
 	public void deleteFile(int question_num);
+	public void deletePasswd(QuestionVO question);
+	public void updateStatus(int question_num);
 }

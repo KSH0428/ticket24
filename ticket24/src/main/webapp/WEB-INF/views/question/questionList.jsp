@@ -64,18 +64,33 @@
 				<c:if test="${question.question_category == 4}">기타</c:if>
 			</td>
 			<td class="align-center">
-            	<c:if test="${question.question_lock == 2}">
+            	<c:if test="${question.question_lock == 2 && user.mem_auth != 9}">
                 	<a href="checkPassword?question_num=${question.question_num}">
                 	<span><img src= "${pageContext.request.contextPath}/images/question_lock.png" width="14" height="17"></span>
                 	${question.question_title}
                 	<br>
-                	<c:if test="${question.question_renum != 0}">
-                	<span>[답변완료]</span>
+                	<c:if test="${question.question_status == 1}">
+                	<span>>> [답변완료]</span>
+                	</c:if>
+                	</a>
+                </c:if>
+                <c:if test="${question.question_lock == 2 && user.mem_auth == 9}">
+                	<a href="detail?question_num=${question.question_num}">
+                	<span><img src= "${pageContext.request.contextPath}/images/question_lock.png" width="14" height="17"></span>
+                	${question.question_title}
+                	<br>
+                	<c:if test="${question.question_status == 1}">
+                	<span>>> [답변완료]</span>
                 	</c:if>
                 	</a>
                 </c:if>
                 <c:if test="${question.question_lock == 1}">
-                    <a href="detail?question_num=${question.question_num}">${question.question_title}</a>
+                    <a href="detail?question_num=${question.question_num}">${question.question_title}
+                    <br>
+                	<c:if test="${question.question_status == 1}">
+                	<span>>> [답변완료]</span>
+                	</c:if>
+                	</a>
                 </c:if>
             </td>
 			<td class="align-center">

@@ -304,7 +304,38 @@ public class ReservController {
 	}
 	
 	//결제 내역 확인
+	@RequestMapping("/reserv/paymentDetail")
+	public String paymentDetail(int reservation_num, Model model) {
+		PaymentHallVO payment = reservService.selectPaymentHall(reservation_num);
+		
+		model.addAttribute("payment", payment);
+		
+		return "paymentDetail";
+	}
 	
+	//신청 취소
+	@GetMapping("/reserv/reservDelete")
+	public String reservDelete(int reservation_num, HttpServletRequest request) {
+		log.debug("<<delete>>");
+		//DB에 저장된 파일 정보 구하기
+		ReservHallVO db_hall = reservService.selectReservListByReservNum(reservation_num);
+		reservService.deleteReservhall(reservation_num);
+		
+		if(db_hall.getReservation_form1() != null) {
+			//파일 삭제
+			FileUtil.removeFile(request, db_hall.getReservation_form1());
+		}
+		if(db_hall.getReservation_form2() != null) {
+			//파일 삭제
+			FileUtil.removeFile(request, db_hall.getReservation_form2());
+		}
+		if(db_hall.getReservation_form3() != null) {
+			//파일 삭제
+			FileUtil.removeFile(request, db_hall.getReservation_form3());
+		}
+
+		return "redirect:/reserv/reservList";
+	}
 }
 
 

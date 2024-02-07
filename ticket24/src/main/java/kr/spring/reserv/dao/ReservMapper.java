@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -36,6 +37,15 @@ public interface ReservMapper {
 	//예약번호로 예약 내역 조회
 	@Select("SELECT * FROM reservhall WHERE reservation_num=#{reservation_num}")
 	public ReservHallVO selectReservListByReservNum(int reservation_num);
+	
+	//신청취소
+	@Delete("DELETE FROM reservhall WHERE reservation_num=#{reservation_num}")
+	public void deleteReservhall(int reservation_num);
+	@Delete("DELETE FROM reservhalldate WHERE reservation_num=#{reservation_num}")
+	public void deleteReservHallDate(int reservation_num);
+	@Delete("DELETE FROM paymenthall WHERE reservation_num=#{reservation_num}")
+	public void deletePaymenthall(int reservation_num);
+	
 	
 	//관리자
 	//전체 예약기록 조회

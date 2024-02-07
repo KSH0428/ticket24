@@ -61,6 +61,7 @@
 		(SELECT question_num,
 				mem_num,
 				question_category,
+				question_status,
 				<![CDATA[
 				REPLACE(REPLACE(question_title,'<','&lt;'),'>','&gt;') question_title,
 				]]>
@@ -110,14 +111,6 @@
 	</update>
 	
 </mapper>
-
-
-
-
-
-
-
-
 
 
 

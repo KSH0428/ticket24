@@ -34,6 +34,7 @@ public class QuestionVO {
 	private int question_level;
 	private int question_renum;
 	private int question_hit;
+	private int question_status; //0:답변미완료,1:답변완료
 	
 	private String mem_id;
 	private String mem_nickname;

@@ -92,5 +92,12 @@ public class ReservServiceImpl implements ReservService{
 		return reservMapper.selectReservSchedule();
 	}
 
+	@Override
+	public void deleteReservhall(int reservation_num) {
+		reservMapper.deletePaymenthall(reservation_num);
+		reservMapper.deleteReservHallDate(reservation_num);
+		reservMapper.deleteReservhall(reservation_num);
+	}
+
 	
 }

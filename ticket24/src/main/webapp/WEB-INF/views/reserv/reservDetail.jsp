@@ -26,8 +26,8 @@
 		</li>
 	</ul>
 	<div class="align-right">
-		<button class="btn btn-primary">신청취소</button> 
-		<button class="btn btn-primary">목록</button> 
+		<button class="btn btn-primary" onclick="location.href='/reserv/reservDelete?reservation_num=${detail.reservation_num}'">신청취소</button> 
+		<button class="btn btn-primary" onclick="location.href='/reserv/reservList'">목록</button> 
 	</div>
 </div>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>

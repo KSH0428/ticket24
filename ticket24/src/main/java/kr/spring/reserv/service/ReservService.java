@@ -23,6 +23,9 @@ public interface ReservService {
 	//예약번호로 예약 내역 조회
 	public ReservHallVO selectReservListByReservNum(int reservation_num);
 	
+	//신청취소
+	public void deleteReservhall(int reservation_num);
+	
 	//관리자
 	//전체 예약기록 조회
 	public List<ReservHallVO> selectReservListAdmin(Map<String,Object> map);
