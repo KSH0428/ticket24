@@ -776,7 +776,113 @@ width: 450px;
 	font-size: 12px;
     color: #FFF;
 }
+/* 결제 부분 */
+.reserve-state-payment{
+	padding: 10px 15px 5px 15px;
+	height: 210px;
+}
+.reserve-state-payment h3{
+	margin-top: 0px;
+	font-size: 16px;
+	color: #FFFFFF;
+}
+.reserve-state-payment ul{
+	list-style: none;
+	margin: 0px;
+	padding : 0px;
+}
+.reserve-state-payment ul li{
+	margin-bottom: 4px;
+    font-size: 11px;
+    color: #FFF;
+    height: 16px;
+}
+.reserve-state-ticket-payment-text{
+	float: left;
+    margin-right: 60px;
+    width: 60px;
+    color: #FFC314;
+}
+.reserve-state-selected-ticket-price{
+	font-size: 12px;
+    color: #FFF;
+}
+.dividing-dotted-line{
+	border-top: 1px dotted #BDBDBD;
+  	margin: 0px;
+}
+.reserve-state-payment2{
+	margin-top: 10px;
+}
+.reserve-state-payment2 ul{
+	list-style: none;
+	margin: 0px;
+	padding : 0px;
+}
+.reserve-state-payment2 ul li{
+	margin-bottom: 4px;
+    font-size: 11px;
+    color: #FFF;
+    height: 16px;
+}
+
+.total-payment{
+    display: block;
+    border: 1px solid;
+    margin: 7px 7px 0 10px;
+    padding: 5px 20px 9px 0;
+    text-align: right;
+    color: #fff;
+    font: bold 18px;
+}
+.button-area{
+	display: block;
+    border: 1px solid;
+    margin: 7px 7px 0 10px;
+    padding: 5px 20px 9px 0;
+}
+/*
+#btn-step1{
+	margin: 0;
+	border: 0 none;
+	color: white;
+	text-align: center;
+}
+#btn-step2{
+	margin: 0;
+	border: 0 none;
+	color: white;
+	text-align: center;
+}*/
 /*사이드 바 끝*/
+
+
+/*step2 좌석 선택*/
+.seat {
+    width: 30px; 
+    height: 30px;
+    margin: 10px; 
+    background-color: #ccc; 
+    display: inline-block;
+    /*모서리 둥글게*/
+    border-top-left-radius: 10px; 
+   	border-top-right-radius: 10px;
+}
+.reserve-seats-conatiner{
+	position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: 0;
+    overflow: auto;
+    text-align: center;
+}
+.reserve-seats-header{
+	border: 1px solid;
+	height: 70px;
+	margin-bottom: 70px;
+}
+
+
 
 
 /*팝업 끝*/
