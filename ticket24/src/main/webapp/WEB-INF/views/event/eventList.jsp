@@ -2,8 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ces.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <div class="event-main">
 	<h2 class="h2">이벤트</h2>
+
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -25,6 +28,7 @@
 	<c:if test="${count > 0}">
 	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 	<c:forEach var="event" items="${list}">
+	
 	  <a href="detail?event_num=${event.event_num}">
         <div class="col">
           <div class="card shadow-sm">

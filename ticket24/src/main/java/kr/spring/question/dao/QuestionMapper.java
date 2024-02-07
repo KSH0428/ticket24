@@ -30,5 +30,13 @@ public interface QuestionMapper {
 	public void deleteAnswer(int question_num);
 	@Update("UPDATE question SET question_photo='' WHERE question_num=#{question_num}")
 	public void deleteFile(int question_num);
-	//회원 글 삭제시 답변글도 같이 삭제 되나?
+	//비밀글 공개로 했을 때 비밀번호 삭제
+	@Update("UPDATE question SET question_passwd='' WHERE question_num=#{question_num}")
+	public void deletePasswd(QuestionVO question);
+	//답변 작성시 상태 업데이트
+	@Update("UPDATE question SET question_status=1 WHERE question_num=#{question_num}")
+	public void updateStatus(int question_num);
+	//답변 삭제시 상태 업데이트
+	@Update("UPDATE question SET question_status=0 WHERE question_num=#{question_num}")
+	public void deleteStatus(int question_num);
 }

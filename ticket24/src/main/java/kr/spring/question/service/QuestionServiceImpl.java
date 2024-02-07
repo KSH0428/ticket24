@@ -71,11 +71,22 @@ public class QuestionServiceImpl implements QuestionService{
 	@Override
 	public void deleteAnswer(int question_num) {
 		questionMapper.deleteAnswer(question_num);
+		questionMapper.deleteStatus(question_num);
 	}
 
 	@Override
 	public void deleteFile(int question_num) {
 		questionMapper.deleteFile(question_num);
+	}
+
+	@Override
+	public void deletePasswd(QuestionVO question) {
+		questionMapper.deletePasswd(question);
+	}
+
+	@Override
+	public void updateStatus(int question_num) {
+		questionMapper.updateStatus(question_num);
 	}
 
 }

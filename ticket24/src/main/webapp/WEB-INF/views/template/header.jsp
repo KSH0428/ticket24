@@ -3,7 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-<nav class="py-2 border-bottom text-bg-dark">
+<style>
+.menu {
+	font-size: 17px !important;
+	font-weight:bold !important;
+}
+.navbar{
+	padding-top: 0.6rem !important;
+	padding-bottom: 0 !important;
+}
+</style>
+<nav class="py-1 border-bottom text-bg-dark">
 	<div class="container d-flex flex-wrap">
 		<ul class="nav me-auto">
 			<li class="nav-item"><a href="#"
@@ -49,23 +59,27 @@
 		</ul>
 	</div>
 </nav>
-<div class="container">
-	<header class="d-flex justify-content-center py-3">
-		<span class="fs-4" style="text-align:left;"><a href="${pageContext.request.contextPath}/main/main">티켓24</a></span>
-		<ul class="nav nav-pills">
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/concert/list" class="nav-link">콘서트</a></li>
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/musical/list" class="nav-link">뮤지컬</a></li>
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/play/list" class="nav-link">연극</a></li>
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/classic/list" class="nav-link">클래식</a></li>
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/md/list" class="nav-link">MD샵</a></li>
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/ranking/list" class="nav-link">랭킹</a></li>
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/comm/list" class="nav-link">커뮤니티</a></li>
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/ticket/list" class="nav-link">티켓양도</a></li>
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/event/list" class="nav-link">이벤트</a></li>
-<!-- 검색창	<li><input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></li>
-			<li><button class="btn btn-outline-success" type="submit">Search</button></li> -->
-		</ul>
-	</header>
-</div>
-<hr size="1" width="100%">
 
+<div class="container-fluid">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0" style="padding-left:100px">
+        <a href="${pageContext.request.contextPath}/main/main" class="navbar-logo">
+          <img src="${pageContext.request.contextPath}/images/logo.jpg" width="180px" height="50px">
+        </a>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 navbar">
+        <li><a href="${pageContext.request.contextPath}/concert/list" class="nav-link px-2 menu">콘서트</a></li>
+        <li><a href="${pageContext.request.contextPath}/musical/list" class="nav-link px-2 menu">뮤지컬</a></li>
+        <li><a href="${pageContext.request.contextPath}/play/list" class="nav-link px-2 menu">연극</a></li>
+        <li><a href="${pageContext.request.contextPath}/classic/list" class="nav-link px-2 menu">클래식</a></li>
+        <li><a href="${pageContext.request.contextPath}/md/list" class="nav-link px-2 menu">MD샵</a></li>
+        <li><a href="${pageContext.request.contextPath}/comm/list" class="nav-link px-2 menu">커뮤니티</a></li>
+        <li><a href="${pageContext.request.contextPath}/ticket/list" class="nav-link px-2 menu">티켓양도</a></li>
+        <li><a href="${pageContext.request.contextPath}/event/list" class="nav-link px-2 menu">이벤트</a></li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+      </div>
+   	</header>
+</div>

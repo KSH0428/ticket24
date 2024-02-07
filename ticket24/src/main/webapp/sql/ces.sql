@@ -14,6 +14,7 @@ create table question(
  question_level number(1) not null, --1:질문,2:답변
  question_renum number, --관리자 답변 시 원글 번호를 저장하기 위함
  question_hit number(8) default 0 not null,
+ question_status number(1) default 0 not null,--0:답변미완료,1:답변완료
  constraint question_pk primary key (question_num),
  constraint question_fk foreign key (mem_num) references member(mem_num)
 );

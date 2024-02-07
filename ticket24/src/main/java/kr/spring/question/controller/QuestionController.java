@@ -97,7 +97,7 @@ public class QuestionController {
 	// 전송된 데이터 처리
 	@PostMapping("/question/adminWrite")
 	public String submitAdmin(@RequestParam int question_num,
-	                          @Valid QuestionVO questionVO, BindingResult result,
+	                          QuestionVO questionVO, BindingResult result,
 	                          HttpServletRequest request, HttpSession session, Model model) {
 	    log.debug("<<문의글 번호>> : " + question_num);
 	    log.debug("<<문의글 답변 저장>> : " + questionVO);
@@ -109,9 +109,9 @@ public class QuestionController {
 
 	    // 원글 정보 조회
 	    QuestionVO user_question = questionService.selectQuestion(question_num);
-	    MemberVO member = (MemberVO)session.getAttribute("user");
+	    MemberVO user = (MemberVO)session.getAttribute("user");
 	    
-	    questionVO.setMem_num(member.getMem_num());
+	    questionVO.setMem_num(user.getMem_num());
 	    // 답변글 식별번호를 원글 번호와 동일하게 설정
 	    questionVO.setQuestion_renum(user_question.getQuestion_num());
 	    // 답변글 레벨 2로 셋팅
@@ -120,15 +120,18 @@ public class QuestionController {
 	    questionVO.setQuestion_category(user_question.getQuestion_category());
 	    // IP 주소 설정
 	    questionVO.setQuestion_ip(request.getRemoteAddr());
+	    // 답변글 비밀글 여부는 모두 0으로 저장
+	    questionVO.setQuestion_lock(0);
 
 	    // 답변글 저장
 	    questionService.insertQuestion(questionVO);
-
+	    // 답변 상태 업데이트
+	    questionService.updateStatus(question_num);
+	    
 	    // View에 표시할 메시지
 	    model.addAttribute("message", "답변이 등록되었습니다.");
-	    model.addAttribute("url", request.getContextPath() + "/question/list");
 
-	    return "common/resultAlert";
+	    return "redirect:/question/detail?question_num=" + question_num;
 	}
 	
 	/*=====================
@@ -286,6 +289,11 @@ public class QuestionController {
 		if(questionVO.getUpload() != null && !questionVO.getUpload().isEmpty()) {
 			//수정 전 파일 삭제 처리
 			FileUtil.removeFile(request, db_question.getQuestion_photo());
+		}
+		
+		//비밀글 여부 1로 변경시 비밀번호 삭제
+		if(questionVO.getQuestion_lock() == 1) {
+			questionService.deletePasswd(questionVO);
 		}
 		
 		model.addAttribute("message", "글 수정 완료!");

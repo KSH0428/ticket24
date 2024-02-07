@@ -3,11 +3,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ces.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<div class="page-main">
+<div class="question-main">
 	<hr size="1" width="100%">
 	<h3>Q.${question.question_title}</h3>
 	<ul class="detail-info">
