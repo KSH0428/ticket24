@@ -68,35 +68,78 @@ WHERE md_num=#{md_num}
 DELETE FROM md_cart
 WHERE mem_num=?
 </delete>
+-->
 
-
-관리자 - 전체 주문 개수/검색 주문 개수
-<select id="getOrderCount">
-SELECT COUNT(*) FROM md_order
-JOIN member 
-USING(mem_num)
+<!-- 관리자 - 전체 주문 개수/검색 주문 개수 -->
+<select id="selectOrderListAdminCount" resultType="integer">
+	SELECT 
+		COUNT(*) 
+		FROM md_order
+		JOIN member 
+		USING(mem_num)
 </select>
 
-관리자 - 전체 주문 목록/검색 주문 목록
-<select id="">
-SELECT
-	* FROM
-	(SELECT a.*, 
-	rownum rnum
-	FROM (SELECT * FROM md_order
-	JOIN member USING(mem_num) sub_sql
-	ORDER BY md_order_num DESC)a) 
-	WHERE rnum >= ? AND rnum <= ?
+<!-- 관리자 - 전체 주문 목록/검색 주문 목록-->
+<select id="selectOrderListAdmin" parameterType="map" resultType="mdOrderVO">
+	SELECT
+		* 
+		FROM (SELECT
+		 a.*, 
+		rownum rnum
+		FROM (SELECT 
+			*
+		 FROM md_order
+		JOIN member USING(mem_num) sub_sql
+		ORDER BY md_order_num DESC)
+		a) 
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
 </select>
 
-사용자 - 전체 주문 개수/검색 주문 개수
-<select id="">
+<!-- 결제 완료 -->
+	<update id="updateOPayment" parameterType="mdOrderVO">
+		UPDATE md_order 
+			SET 
+				md_item_name=#{md_item_name},
+				md_order_total=#{md_order_total},
+				md_payment=1,
+				md_order_status=1,
+				md_receive_name={md_receive_name},
+				md_receive_post={md_receive_post},
+				md_receive_address1={md_receive_address1},
+				md_receive_address2={md_receive_address2},
+				md_receive_phone=#{md_receive_phone},
+				md_refund_bank=#{md_refund_bank},
+				md_refund_bnumber=#{md_refund_bnumber}
+				md_notice={md_notice},
+				md_order_regdate={md_order_regdate},
+				md_order_mdate={md_order_mdate},
+				mem_num={mem_num}
+			 WHERE md_order_num=#{md_order_num}
+	</update>
+
+
+<!-- 
+
+<insert id="insertPaymentHall" parameterType="integer">
+		 INSERT INTO paymentHall (reservation_num, reservation_price) 
+		    VALUES (#{reservation_num},
+		    	(SELECT
+					  SUM(CASE WHEN TO_CHAR(reservation_date, 'D') IN ('1', '7') THEN 400000 ELSE 300000 END)
+						FROM reservhalldate WHERE reservation_num = #{reservation_num} GROUP BY reservation_num)
+		    )
+	</insert>
+-->
+
+<!-- 사용자 - 전체 주문 개수/검색 주문 개수  -->
+<select id="getOrderCountByMem_num" parameterType="integer">
 SELECT COUNT(*) FROM md_order 
 WHERE mem_num = #{mem_num} + sub_sql
 </select>
 
-//사용자 - 전체 주문 목록/검색 주문 목록
-<select id="">
+<!--  사용자 - 전체 주문 목록/검색 주문 목록-->
+<select id="getListOrderByMem_num" resultType="mdOrderVO">
 SELECT 
 	*
 	 FROM (SELECT 
@@ -106,10 +149,14 @@ SELECT
 			* 
 		FROM md_order 
 		WHERE mem_num=#{mem_num} + sub_sql
-		ORDER BY md_order_num DESC)a)
-		WHERE rnum >= ? AND rnum <= ?"
+		ORDER BY md_order_num DESC)
+		a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
 </select>
-			
+	
+<!-- 			
 개별 상품 목록
 <select id="">
 SELECT 

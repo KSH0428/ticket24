@@ -1,14 +1,11 @@
 package kr.spring.mdcart.controller;
 
-import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +34,9 @@ public class MdCartController {
 	private MdCartService mdCartService;
 
 	/*
-	 * ============================== 자바빈(VO) 초기화 ==============================
+	 * ============================== 
+	 * 자바빈(VO) 초기화 
+	 * ==============================
 	 */
 	@ModelAttribute
 	public MdCartVO initCommand() {
@@ -108,24 +107,8 @@ public class MdCartController {
 	 * 장바구니 수정
 	 *  =================================
 	 */
-	/*
-	 * @RequestMapping("/mdCart/updateCart")
-	 * 
-	 * @ResponseBody public Map<String,String> modifyMd(MdCartVO mdCartVO,
-	 * HttpSession session, HttpServletRequest request){
-	 * log.debug("<<장바구니 수정 MdCartVO>> : " + mdCartVO);
-	 * 
-	 * Map<String,String> mapJson = new HashMap<String,String>();
-	 * 
-	 * MemberVO user = (MemberVO)session.getAttribute("user"); MdCartVO db_cart =
-	 * mdCartService.selectCart(mdCartVO.getMem_num()); if(user==null) { //로그인이 되지
-	 * 않은 경우 mapJson.put("result", "logout"); }else if(user!=null &&
-	 * user.getMem_num()==db_cart.getMem_num()) { //로그인한 회원번호와 작성자 회원번호 일치 //댓글 수정
-	 * mdCartService.updateCart(db_cart); mapJson.put("result", "success"); }else {
-	 * //로그인한 회원번호와 작성자 회원번호 불일치 mapJson.put("result", "wrongAccess"); } return
-	 * mapJson; }
-	 * 
-	 */
+	
+	 
 
 	/*
 	 * ================================= 
@@ -133,4 +116,4 @@ public class MdCartController {
 	 * =================================
 	 */
 
-}
+	  }

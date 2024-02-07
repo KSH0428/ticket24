@@ -13,8 +13,7 @@ import kr.spring.reserv.vo.PaymentHallVO;
 import kr.spring.reserv.vo.ReservHallDateVO;
 import kr.spring.reserv.vo.ReservHallVO;
 
-@Service
-@Transactional
+
 public class ReservServiceImpl implements ReservService{
 	@Autowired
 	private ReservMapper reservMapper;
