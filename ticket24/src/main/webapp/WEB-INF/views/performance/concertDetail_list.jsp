@@ -87,11 +87,15 @@ $(function() {
 			    		 
 			    		//날짜 선택 태그가 존재하는지 확인
 				    	let existingTag = $("#concert-time-btn");
+				    	let existingTag1 = $("#concert-time-btn2");
 				    	let num;
 				    	
 				    	//존재한다면 삭제
 				    	if(existingTag.length > 0){
 				    		existingTag.remove();
+				    	}
+				    	if(existingTag1.length > 0){
+				    		existingTag1.remove();
 				    	}
 			    		 	
 				    	//해당 날짜의 인덱스 구하기
@@ -135,6 +139,7 @@ $(function() {
 	}
 	
 	//회차 날짜 번호 클릭 이벤트
+	//첫 번째 버튼
 	$(document).on('click', '#concert-time-btn', function() {
 		//CSS 테두리 색깔 변경
 		$('#concert-time-btn').css({
@@ -144,8 +149,6 @@ $(function() {
 		    'border-color': '#dcdde1'
 		});
 		
-		//alert($('#datepicker').val());
-		/* var num = 0; */
 		let count = 0;
 		for(var i=0; i<dates.length; i++){
 			if(dates[i] == $('#datepicker').val()){
@@ -173,6 +176,7 @@ $(function() {
 		last_seleted_c_round_num = c_round_num[num];
 	});
 	
+	//두 번쨰 버튼
 	$(document).on('click', '#concert-time-btn2', function() {
 		//CSS 테두리 색깔 변경
 		$('#concert-time-btn2').css({
@@ -181,6 +185,14 @@ $(function() {
 		$('#concert-time-btn').css({
 		    'border-color': '#dcdde1'
 		});
+		
+		let count = 0;
+		for(var i=0; i<dates.length; i++){
+			if(dates[i] == $('#datepicker').val()){
+				num = i;
+				count++;
+			}
+		}
 		
 		$('#seatsNum').text('');
 		$('#seatsNum').text(getRemainingSeats(c_round_num[1]));

@@ -23,15 +23,15 @@
 		<ul>
 			<li>
 				<span class="reserve-state-body-text">날짜</span>
-				<span class="reserve-state-body-text2">${round.year}-${round.month}-${round.day}</span>
+				<span id="reserve-state-selected-date" class="reserve-state-body-text2">${round.year}-${round.month}-${round.day}</span>
 			</li>
 			<li>
 				<span class="reserve-state-body-text">시간</span>
-				<span class="reserve-state-body-text2">${round.concert_time}</span>
+				<span id="reserve-state-selected-time" class="reserve-state-body-text2">${round.concert_time}</span>
 			</li>
 			<li>
 				<span class="reserve-state-body-text">남은 좌석</span>
-				<span class="reserve-state-body-text2">${round.total_seat}석</span>
+				<span id="reserve-state-remainging-seats" class="reserve-state-body-text2">${round.total_seat}석</span>
 			</li>
 		</ul>
 	</div>

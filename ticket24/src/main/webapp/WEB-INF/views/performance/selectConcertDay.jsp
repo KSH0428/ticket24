@@ -38,12 +38,14 @@ $(function() {
 			        ,changeYear: false 
 			        ,changeMonth: false                
 			        ,showOn: "both" 
-			        ,buttonImageOnly: true 
+			        ,buttonImageOnly: false
 			        ,buttonText: "선택"              
 			        ,yearSuffix: "." 
 			        //getYear()하면 잘못된 년도가 들어가서 일단 2024년 적음
 			 		,minDate:new Date('2024',date1.getMonth(),'1')
 			        ,maxDate:new Date('2024',date2.getMonth(),getLastDayOfMonth(date2.getYear(),date2.getMonth()))
+			 		//설정한 값으로 기본 날짜를 선택
+			 		,defaultDate: ${round.year} + "-" + ${round.month} + "-" + ${round.day}
 			        //달력 달 약자
 			        ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 			    	//달력 달
@@ -62,11 +64,13 @@ $(function() {
 			              return [true, ''];
 			            }
 			            return [false, ''];
+			            
+			            
 			          }
-			    	
+			    		
+			         //날짜 선택하면 발생하는 이벤트
 			    	 ,onSelect : function(dateString){
 			    		$('#datepicker').val(dateString);
-			    		
 			    		
 			    		//날짜 선택 태그가 존재하는지 확인
 				    	let existingTag = $("#selected-Date");
@@ -109,9 +113,15 @@ $(function() {
 	    					$('#selected-round-btn span').append(round[num]);
 				    	}
 				    		
+				    	/* onselect 끝 */
 				    }
+			    	 
+			    	 
 			     });
-					
+			 
+			 //datepicker가 로드 된 후 해당 버튼을 클릭
+			 //기본 셋팅을 해준다.
+			 $('#selectDateBtn').click();
 		},
 		error:function(){
 			alert('통신 오류');
@@ -148,11 +158,21 @@ $(function() {
 			}
 		}
 		
-		if(count == 2) num = 0;
+		if(count == 2) {
+			/* alert("같은 날짜"); */
+			num = 0;
+		}
 		
 		$('#seatsNum').text('');
 		$('#seatsNum').text(getRemainingSeats(c_round_num[num]));
 		
+		//상태창에 갱신된 정보 반영하기
+		//날짜
+		$("#reserve-state-selected-date").text($("#selected-Date").text());
+		//시간
+		$("#reserve-state-selected-time").text($("#selected-round-btn").text());
+		//좌석수
+    	$("#reserve-state-remainging-seats").text($("#seatsNum").text());
 		
 		/* 버튼 활성화 */
 		/*
@@ -182,6 +202,13 @@ $(function() {
 		$('#seatsNum').text('');
 		$('#seatsNum').text(getRemainingSeats(c_round_num[1]));
 		
+		//상태창에 갱신된 정보 반영하기
+		//날짜
+		$("#reserve-state-selected-date").text($("#selected-Date").text());
+		//시간
+		$("#reserve-state-selected-time").text($("#selected-round-btn2").text());
+		//좌석수
+    	$("#reserve-state-remainging-seats").text($("#seatsNum").text());
 		
 		/* 버튼 활성화 */
 		/*
@@ -217,24 +244,22 @@ $(function() {
 		return result_seat;
 	}
 	
-	//클릭 이벤트 강제 발생
 	//예전에 클릭한 회차 정보를 얻어와서 팝업창에서 유지하도록 한다.
-	
 	// 특정 날짜 클릭 이벤트
-    $("#selectDateBtn").click(function(){
-        var targetDate = ${round.year} + "-" + ${round.month} + "-" + ${round.day};
-        //$("#datepicker").datepicker("setDate", targetDate);
-        $("#datepicker").datepicker("setDate", "2024-02-28").get(0).click();
+    $("#selectDateBtn").on('click',function(){
+    	
+    	const str = "${round.concert_time}";
+        //활성화된 datepicker의 날짜를 클릭
+        $(".ui-state-active").click();
+        //선택된 회차를
+        if($("#selected-round-btn span").text() == str){
+        	$("#selected-round-btn").click();      	
+        }else if($("#selected-round-btn2 span").text() == str){
+        	$("#selected-round-btn2").click();
+        }
     });
-	
-	//강제 이벤트
-	 $("td:contains('" + ${round.day} + "')").click(function() {
-            alert("클릭된 요소의 텍스트는: " + $(this).text());
-            // 클릭된 요소에 대한 추가적인 처리를 여기에 작성할 수 있습니다.
-        });
-    $("#selectDateBtn").get(0).click();
-});
 
+});
 </script>
 
 <!-- datepicker 영역 -->
@@ -268,5 +293,5 @@ $(function() {
 <!-- 유의사항 -->
 <div class="note-container">
 	유의사항(후순위)
-	<button id="selectDateBtn">Select Specific Date</button>
+	<button style="display:none;" id="selectDateBtn">업로드 버튼</button>
 </div>
