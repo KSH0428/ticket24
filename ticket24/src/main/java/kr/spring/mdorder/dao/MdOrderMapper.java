@@ -2,11 +2,13 @@ package kr.spring.mdorder.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.mdorder.vo.MdOrderDetailVO;
 import kr.spring.mdorder.vo.MdOrderVO;
 
+@Mapper 
 public interface MdOrderMapper {
 
 	//주문(결제)등록
