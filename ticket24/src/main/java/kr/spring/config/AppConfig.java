@@ -54,7 +54,7 @@ public class AppConfig implements WebMvcConfigurer, WebSocketConfigurer{
 		        .addPathPatterns("/ticket/write")
 		        .addPathPatterns("/ticket/update")
 		        .addPathPatterns("/ticket/delete")
-		        .addPathPatterns("/ticketpay/write")
+		        .addPathPatterns("/ticketPay/write")
 				.addPathPatterns("/question/write")
 				.addPathPatterns("/question/update")
 				.addPathPatterns("/question/delete")
