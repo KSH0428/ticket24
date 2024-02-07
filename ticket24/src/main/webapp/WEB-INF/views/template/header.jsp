@@ -64,7 +64,7 @@
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <div class="col-md-3 mb-2 mb-md-0" style="padding-left:100px">
         <a href="${pageContext.request.contextPath}/main/main" class="navbar-logo">
-          <img src="${pageContext.request.contextPath}/images/logo.jpg" width="180px" height="50px">
+          <img src="${pageContext.request.contextPath}/images/logo2.jpg" width="180px" height="50px">
         </a>
       </div>
 
@@ -83,3 +83,4 @@
       </div>
    	</header>
 </div>
+
