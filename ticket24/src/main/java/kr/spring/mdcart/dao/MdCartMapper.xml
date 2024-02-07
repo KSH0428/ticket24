@@ -42,7 +42,7 @@
 			   md_price,
 			   order_quantity * md_price sub_price
 			FROM md_cart
-			JOIN md USING(md_num)
+			JOIN md USING(md_num) 
 			WHERE mem_num=#{mem_num}
 	</select>
 	
@@ -50,12 +50,12 @@
 	
 	
 	<!-- 장바구니 상세 -->
-	<select id="selectMdCart" parameterType="integer">
+	<!-- <select id="selectMdCart" parameterType="integer">
 			SELECT 
 			  *
 			FROM md_cart
 			WHERE md_num=#{md_num} AND mem_num=#{mem_num} 
-	</select>
+	</select> -->
 	
 	<!-- 장바구니 수정 -->
 	<update id="updateMdCart" parameterType="mdCartVO">
