@@ -5,12 +5,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 .menu {
-	font-size: 17px !important;
-	font-weight:bold !important;
+	font-size: 17px!important;
+	font-weight:bold!important;
+	margin:0 5px;
 }
 .navbar{
-	padding-top: 0.6rem !important;
-	padding-bottom: 0 !important;
+	padding-top: 1rem!important;
+	padding-bottom: 0!important;
 }
 </style>
 <nav class="py-1 border-bottom text-bg-dark">
@@ -60,14 +61,14 @@
 	</div>
 </nav>
 
-<div class="container-fluid">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <div class="col-md-3 mb-2 mb-md-0" style="padding-left:100px">
-        <a href="${pageContext.request.contextPath}/main/main" class="navbar-logo">
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="${pageContext.request.contextPath}/main/main">
           <img src="${pageContext.request.contextPath}/images/logo2.jpg" width="180px" height="50px">
         </a>
       </div>
-
+     <div class="col-6">
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 navbar">
         <li><a href="${pageContext.request.contextPath}/concert/list" class="nav-link px-2 menu">콘서트</a></li>
         <li><a href="${pageContext.request.contextPath}/musical/list" class="nav-link px-2 menu">뮤지컬</a></li>
@@ -78,9 +79,9 @@
         <li><a href="${pageContext.request.contextPath}/ticket/list" class="nav-link px-2 menu">티켓양도</a></li>
         <li><a href="${pageContext.request.contextPath}/event/list" class="nav-link px-2 menu">이벤트</a></li>
       </ul>
-
-      <div class="col-md-3 text-end">
-      </div>
+	</div>
+	<div class="col-md-3"></div>
    	</header>
 </div>
+<hr size="1" width="100%">
 
