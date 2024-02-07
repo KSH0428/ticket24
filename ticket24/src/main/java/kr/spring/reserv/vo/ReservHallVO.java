@@ -3,6 +3,10 @@ package kr.spring.reserv.vo;
 import java.sql.Date;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
@@ -21,10 +25,15 @@ public class ReservHallVO {
 	private int reservation_status;
 	private Date reservation_regdate;
 	private Date reservation_modifydate;
+	@NotBlank
 	private String reservation_name;
+	@NotBlank
+	@Email
 	private String reservation_email;
+	@NotBlank
 	private String reservation_phone;
 	
+	@NotEmpty
 	private MultipartFile[] upload;
 	private List<Date> reservation_date;
 }

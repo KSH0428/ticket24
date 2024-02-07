@@ -87,5 +87,10 @@ public class ReservServiceImpl implements ReservService{
 		reservMapper.updateReservStatus(paymentHallVO.getReservation_num(), 3);
 	}
 
+	@Override
+	public List<ReservHallDateVO> selectReservSchedule() {
+		return reservMapper.selectReservSchedule();
+	}
+
 	
 }

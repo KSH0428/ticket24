@@ -119,7 +119,11 @@ $('#reservList').addClass('active');
 var IMP = window.IMP;
 IMP.init('imp06364606');
 function requestPay() {
-    IMP.request_pay({
+	<!-- 유효성 검사 시작 -->    
+	<!-- 유효성 검사 끝 -->    
+	
+	//결제시작
+	IMP.request_pay({
       pg: "html5_inicis",
       pay_method: $('input[type="radio"]:checked').attr('id'),
       merchant_uid: 'ticket_hall'+new Date().getTime(),   // 주문번호
@@ -130,19 +134,33 @@ function requestPay() {
       buyer_tel: $('#reservation_phone').val(),
     }, function (rsp) { // callback
     	 if (rsp.success) {
-   		     payment();
+    		 paymentVerify(rsp);
+    		 payment(rsp)
    		} else {
    		      var msg = '결제에 실패하였습니다.';
    		      msg += '에러내용 : ' + rsp.error_msg;
    		      alert(msg);
    		}
     });
+    //결제완료
  }
- function payment(){
+ function paymentVerify(rsp){
+	 $.ajax({
+         type: 'POST',
+         url: '/verify/' + rsp.imp_uid
+      }).done(function(data) {
+          if(rsp.paid_amount === data.response.amount){
+              
+          } else {
+              alert("결제 실패");
+          }
+      });
+ }
+ function payment(rsp){
 	$.ajax({
 		url:'../reserv/updatePayment',
 		type:'post',
-		data:{reservation_num:${payment.reservation_num},payment_name:$('#reservation_name').val(),payment_phone:$('#reservation_phone').val(),payment_email:$('#reservation_email').val(),payment_method:$('input[type="radio"]:checked').attr('id')},
+		data:{reservation_num:${payment.reservation_num},payment_name:rsp.buyer_name,payment_phone:rsp.buyer_tel,payment_email:rsp.buyer_email,payment_method:rsp.pay_method,merchant_uid:rsp.merchant_uid,imp_uid:rsp.imp_uid,paid_at:rsp.paid_at},
 		dataType:'json',
 		success:function(param){
 			if(param.result=='success'){

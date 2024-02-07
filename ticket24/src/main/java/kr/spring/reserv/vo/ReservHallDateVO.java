@@ -13,4 +13,6 @@ import lombok.ToString;
 public class ReservHallDateVO {
 	private int reservation_num;
 	private Date reservation_date;
+	
+	private String reservation_name;
 }

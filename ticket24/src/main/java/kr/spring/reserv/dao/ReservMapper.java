@@ -54,4 +54,9 @@ public interface ReservMapper {
 	public PaymentHallVO selectPaymentHall(int reservation_num);
 	//결제완료
 	public void updatePayment(PaymentHallVO paymentHallVO);
+	
+	//full calendar 일정 조회
+	public List<ReservHallDateVO> selectReservSchedule ();
+	
+	
 }

@@ -65,12 +65,19 @@
 	<update id="updatePayment" parameterType="paymentHallVO">
 		UPDATE paymenthall 
 			SET 
-				payment_date=SYSDATE,
+				payment_date=#{payment_date},
 				payment_name=#{payment_name},
 				payment_phone=#{payment_phone},
 				payment_email=#{payment_email},
 				payment_status=1,
-				payment_method=#{payment_method}
+				payment_method=#{payment_method},
+				imp_uid=#{imp_uid},
+				merchant_uid=#{merchant_uid}
 			 WHERE reservation_num=#{reservation_num}
 	</update>
+	
+	<!-- full calendar 일정 불러오기 -->
+	<select id="selectReservSchedule" resultType="reservHallDateVO">
+		SELECT reservation_name, reservation_date, reservation_num FROM reservhalldate LEFT OUTER JOIN reservhall USING(reservation_num) WHERE reservation_status=3 ORDER BY reservation_date
+	</select>
 </mapper>

@@ -53,11 +53,11 @@ public class ReservController {
 	}
 	
 	@PostMapping("/reserv/list")
-	public String reservDate(@RequestParam List<Date> dateArray,Model model){
+	public String reservDate(@RequestParam List<Date> reservation_date,Model model){
 		
 		
-		log.debug("<<reservForm으로 가는 reservation_date>> : "+ dateArray);
-	    model.addAttribute("reservation_date", dateArray);
+		log.debug("<<reservForm으로 가는 reservation_date>> : "+ reservation_date);
+	    model.addAttribute("reservation_date", reservation_date);
 	    return "reservForm";
 	}
 	
@@ -66,6 +66,11 @@ public class ReservController {
 			HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException{
 		log.debug("<<대관 예약 reservVO>> : " + reservHallVO);
 		log.debug("<<대관 예약 reservdate>> : " + reservHallVO.getReservation_date());
+		
+		if(result.hasErrors()) {
+			model.addAttribute("reservation_date", reservHallVO.getReservation_date());
+			return "reservForm";
+		}
 		
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		reservHallVO.setMem_num(member.getMem_num());
@@ -194,6 +199,12 @@ public class ReservController {
 			list = reservService.selectReservListAdmin(map);
 		}
 		
+		for(ReservHallVO reserv : list) {
+			List<Date> date = new ArrayList<>();
+			date = reservService.selectReservDateList(reserv.getReservation_num());
+			reserv.setReservation_date(date);
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("reservListAdmin");
 		mav.addObject("count", count);
@@ -291,6 +302,9 @@ public class ReservController {
 		
 		return "reservSchedule";
 	}
+	
+	//결제 내역 확인
+	
 }
 
 

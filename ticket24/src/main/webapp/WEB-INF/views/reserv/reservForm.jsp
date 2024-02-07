@@ -28,7 +28,7 @@ input[type="file"] {
 	<div class="row">
 	<div class="col" style="margin-left: 20px; margin-top: 20px;">
 		<c:forEach var="date" items="${reservation_date}">
-			<input type="hidden" name="reservation_date" value="${date}"/>
+			<form:hidden path="reservation_date" value="${date}"/>
 		</c:forEach>
 			<div class="row mb-3">
 				<form:label  class="col-form-label form-col" path="reservation_name">단체명</form:label>
@@ -73,7 +73,9 @@ input[type="file"] {
 				</table>
 		</div>
 		</div>
-		<input type="submit" class="btn btn-primary" value="예약">
+		<div class="row align-center">
+			<input type="submit" class="btn btn-primary" value="예약">
+		</div>
 	</form:form>
 	
 </div>
@@ -81,7 +83,6 @@ input[type="file"] {
 <script type="text/javascript">
 $(function(){
 	$('#reserv').addClass('active');
-	var fileInput = document.getElementById('upload');
 	let cnt = 0;
 	//초기 파일 업로드 생성
 	createFile();
@@ -121,6 +122,18 @@ $(function(){
 		$('#uploadList').append(output);
 		cnt + 1;
 	}
+	
+	$('#reservation_form').submit(function(){
+		let upload = $('[name="upload"]');
+		if(upload.val().length<1){
+			alert('신청서를 등록해주세요');
+			return false;
+		}
+		if(upload.length>3){
+			alert('신청서는 최대 3개만 등록할 수 있습니다.');
+			return false;
+		}
+	});
 });
 </script>
 

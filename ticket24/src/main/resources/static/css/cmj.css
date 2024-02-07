@@ -4,7 +4,6 @@
 -------------------------*/
 	
 #main{
-	width:1400px;
 	margin:0 auto;
 	font-size:10pt;
 	font-family:"맑은 고딕";
@@ -39,12 +38,14 @@ a:hover{
 -------------------------*/
 #page_nav{
 	float:left;
-	width:13%;
+	width:15%;
 	height:330px;
 }
 #page_body{
-	width:75%;
+	width:73%;
 	float:left;
+	margin-left: 40px;
+	min-height: 900px;
 }
 .page_clear{
 	clear:both;
@@ -203,6 +204,8 @@ input[type="checkbox"]{
 .side-bar ul{
 	margin:0;
 	padding:0;
+	font-size: 18px;
+	border: 1px solid lightgray;
 }
 .side-bar ul li{
 	padding:5px 10px 5px 10px;
@@ -432,12 +435,12 @@ form#mre_form{
 	min-height: 630px;
 	position: relative;
 }
-#reservation_form input[type="submit"]{
-	width: 200px;
+#reservation_form input[type="submit"] {
+    width: 200px;
     font-size: 30px;
     vertical-align: bottom;
-    position: absolute;
-    bottom: 30px;
+    position: relative;
+    top: 30px;
     left: 50%;
     transform: translateX(-47%);
 }
@@ -520,11 +523,50 @@ hr{
 	margin-left: 7px;
 	margin-right: 10px;
 }
-
-
-
-
-
+a{
+	color:black;
+}
+.fc .fc-highlight{
+	background: none;
+}
+.fc .fc-daygrid-day-top {
+    border-bottom: 1px solid lightgray;
+}
+.fc-h-event .fc-event-title-container {
+	height: 25px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+.file-list{
+	margin-top: 30px;
+}
+.file-list ul{
+	margin-top: 15px;
+	background-color: #f2f2f2;
+	border: none;
+}
+.file-list ul li{
+	border: 1px solid white;
+	padding: 6px 10px 10px 15px;
+	font-weight: bold;
+	font-size: 15px;
+}
+.file-list ul li i{
+	font-size: 30px;
+	color: #1e4d3c;
+}
+.side-bar ul .ul-label{
+	padding:10px 0 10px 0;
+	font-size: 28px;
+	color: #faf4d9;
+	background-color: #4a4944;
+	font-weight: bold;
+	text-align: center;
+	
+}
+.side-bar ul i{
+	font-size: 10px;
+}
 
 
 

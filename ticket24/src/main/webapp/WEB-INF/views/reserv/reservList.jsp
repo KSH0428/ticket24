@@ -17,11 +17,11 @@
 				</table>
 			</div>
 			<div class="row submit_box">
-			<form method="post" action="/reserv/list" style="height:250px; padding-top: 25px;border: 1px solid;">
+			<form method="post" action="/reserv/list" id="date_form" style="height:250px; padding-top: 25px;border: 1px solid;">
 				<p class="gray-font">평일 : <span id="weekday">0</span>일</p>
 				<p class="gray-font">주말 : <span id="weekend">0</span>일</p>
 				<p>합계 : <span id="result">0</span>원</p>
-				<input type="hidden" name="dateArray" id="dateArray" >
+				<input type="hidden" name="reservation_date" id="dateArray" >
 				<div class="d-grid gap-2 mt-4" style="padding:0 30px 0 30px;">
 					<input class="btn btn-primary" type="submit" value="신청하기">
 				</div>
@@ -43,6 +43,14 @@ $('#reserv').addClass('active');
 	let dateArray = [];
 	
 	appendDate();
+	
+	$('#date_form').submit(function(){
+		if($('#dateArray').val()==null||$('#dateArray').val()==''){
+			alert('날짜를 선택해주세요');
+			return false;
+		}
+	});
+	
 	function appendDate(){
 	dateSelector.flatpickr({
 		local : 'ko',
@@ -132,6 +140,9 @@ $('#reserv').addClass('active');
 		dateArray2 = '';
 		$('#dateArray').val(dateArray);
 		$('#date-table').empty();
+		$('#result').html('0');
+		$('#weekday').html('0');
+		$('#weekend').html('0');
 		appendDate();
 	});
 	function sumResult(){
