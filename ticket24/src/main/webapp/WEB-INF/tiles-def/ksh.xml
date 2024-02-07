@@ -23,7 +23,6 @@
     	<put-attribute name="css" value="/WEB-INF/views/comm/commCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/comm/commModify.jsp"/>
     </definition>
-    
         <definition name="ticketList" extends="main">
     	<put-attribute name="title" value="티켓양도 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/ticket/ticketList.jsp"/>                                           
@@ -41,7 +40,11 @@
     	<put-attribute name="title" value="티켓양도글 수정"/>
     	<put-attribute name="css" value="/WEB-INF/views/ticket/ticketCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/ticket/ticketModify.jsp"/>
-    </definition>    
+    </definition>
+          <definition name="ticketList" extends="main">
+    	<put-attribute name="title" value="티켓양도 예약 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/ticketPay/ticketPayList.jsp"/>                                           
+    </definition>   
 </tiles-definitions>
 
 

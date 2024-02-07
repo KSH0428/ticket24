@@ -34,12 +34,12 @@ public class TicketPayController {
 		return new TicketPayVO();
 	}
 	//등록 폼 호출
-	@GetMapping("/ticketpay/write")
+	@GetMapping("/ticketPay/write")
 	public String form() {
-		return "ticketPayWrite";
+		return "ticketPay/ticketPayWrite";
 	}
 	//전송된 데이터 처리
-	@PostMapping("/ticketpay/write")
+	@PostMapping("/ticketPay/write")
 	public String submit(@Valid TicketPayVO ticketPayVO, BindingResult result,
 						 HttpServletRequest request,
 						 HttpSession session, Model model) throws IllegalStateException, IOException {
@@ -60,7 +60,7 @@ public class TicketPayController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "정보등록이 완료되었습니다.");
-		model.addAttribute("url",request.getContextPath()+"/ticketpay/list");
+		model.addAttribute("url",request.getContextPath()+"/ticketPay/list");
 		
 		return "common/resultAlert";
 	}

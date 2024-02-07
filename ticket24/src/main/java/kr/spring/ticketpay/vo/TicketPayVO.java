@@ -1,5 +1,7 @@
 package kr.spring.ticketpay.vo;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,13 +12,16 @@ import lombok.ToString;
 public class TicketPayVO {
 	private int ticket_pay_num;
 	private int ticket_num;
-	private int ticket_pay_price;
+	@NotBlank
 	private String ticket_pay_name;
+	@NotBlank
 	private String ticket_pay_zipcode;
+	@NotBlank
 	private String ticket_pay_address1;
+	@NotBlank
 	private String ticket_pay_address2;
+	@NotBlank
 	private String ticket_pay_phone;
-	private int ticket_pay_method;
 	private int mem_num;
 	
 }
