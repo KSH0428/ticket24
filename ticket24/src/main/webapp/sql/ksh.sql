@@ -59,6 +59,7 @@ create table ticket(
  ticket_filename2 varchar2(200),
  ticket_filename3 varchar2(200),
  ticket_filename4 varchar2(200),
+ ticket_account varchar2(200) not null,
  ticket_status number(1) not null,
  constraint ticket_pk primary key(ticket_num),
  constraint ticket_fk foreign key(mem_num) references member(mem_num)

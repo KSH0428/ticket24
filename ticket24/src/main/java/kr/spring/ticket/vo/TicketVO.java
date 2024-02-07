@@ -52,6 +52,8 @@ public class TicketVO {
 	private String ticket_filename2;
 	private String ticket_filename3;
 	private String ticket_filename4;
+	@NotBlank
+	private String ticket_account;
 	private int ticket_status;
 	
 	private String mem_id;

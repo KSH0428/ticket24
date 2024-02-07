@@ -20,6 +20,7 @@
 			ticket_filename2,
 			ticket_filename3,
 			ticket_filename4,
+			ticket_account,
 			ticket_status)
 		VALUES (
 			ticket_seq.nextval,
@@ -38,6 +39,7 @@
 			#{ticket_filename2,jdbcType=VARCHAR},
 			#{ticket_filename3,jdbcType=VARCHAR},
 			#{ticket_filename4,jdbcType=VARCHAR},
+			#{ticket_account},
 			#{ticket_status})
 	</insert>
 	
@@ -146,6 +148,7 @@
 			ticket_special1=#{ticket_special1},
 			ticket_special2=#{ticket_special2},
 			ticket_content=#{ticket_content},
+			ticket_account=#{ticket_account},
 			ticket_status=#{ticket_status},
 			ticket_modifydate=SYSDATE
 			WHERE ticket_num=#{ticket_num}		

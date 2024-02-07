@@ -52,6 +52,12 @@
 			<form:label path="ticket_price">티켓 가격</form:label>
 			<form:input path="ticket_price" type="number" maxlength="30"/>원
 			<form:errors path="ticket_price" cssClass="error-color"/>
+		</li>
+		<li>
+			<form:label path="ticket_account">계좌 번호</form:label>
+			<form:input path="ticket_account"/>
+			<form:errors path="ticket_account" cssClass="error-color"/>
+		</li>
 		<li>
 			<label>상품 특이사항</label>
 			<form:checkbox path="f_ticket_special1" value="1"/>재관람 티켓

@@ -52,6 +52,11 @@
 			<form:errors path="ticket_price" cssClass="error-color"/>
 		</li>
 		<li>
+			<form:label path="ticket_account">계좌 번호</form:label>
+			<form:input path="ticket_account"/>
+			<form:errors path="ticket_account" cssClass="error-color"/>
+		</li>
+		<li>
 			<label>상품 특이사항</label>
 			<form:checkbox path="f_ticket_special1" value="1"/>재관람 티켓
 			<form:checkbox path="f_ticket_special1" value="2"/>18세 이상 입장 가능

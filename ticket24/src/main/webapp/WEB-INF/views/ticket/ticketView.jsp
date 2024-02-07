@@ -37,7 +37,7 @@
 		<ul>
 		<li>공연명 : ${ticket.ticket_name} , 공연장소 : ${ticket.ticket_place } , 공연일 : ${ticket.ticket_date} </li>
 		<li>좌석정보 : ${ticket.ticket_seat}</li>
-		<li> 상품 특이사항 : 
+				<li> 상품 특이사항 : 
 			<c:forEach var="ticket_special1" items="${ticket.f_ticket_special1}" varStatus="status">
 				<c:if test="${status.index > 0}">,</c:if>
 				<c:if test="${ticket_special1 == 1}">재관람 티켓</c:if> 
