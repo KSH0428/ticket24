@@ -11,6 +11,7 @@ public interface MdOrderMapper {
 
 	//주문(결제)등록
 	public void insertOrder(MdOrderVO order, List<MdOrderDetailVO> orderDetailList);
+	public void insertOrderDetail(MdOrderVO order, List<MdOrderDetailVO> orderDetailList);
 	
 	//주문(결제) 조회
 	@Select("SELECT * FROM md_order WHERE md_order_num=#{md_order_num}")
