@@ -262,36 +262,66 @@ $(function() {
 });
 </script>
 
-<!-- datepicker 영역 -->
-<div class="select-concert-datepicker-container">
-	<div class="select-concert-datepicker-container-header">관람일 선택</div>
-	<div id="datepicker" class="calendar"></div>
-</div>
-<!-- 회차 선택 -->
-<div class="select-concert-round-container">
-	<div class="select-concert-round-container-header">회차선택</div>
-	<div style="padding: 30px 20px;">
-		<div id="select-concert-round-text" style="margin-bottom: 30px;">
-			<span class="select-concert-round-info">선택날짜</span>
-			<!-- 선택한 날짜를 화면에 표시 -->
-			<!-- <span id="selected-Date"></span> -->
-		</div>
-		<div class="selected-round-container">
-			<div class="select-concert-round-info">회차선택</div>
-			<ul id="selected-round-list">
-				<!-- 해당 회차 추가 -->
-			</ul>
-		</div>
-		<div class="selected-remaining-seats">
-			<div class="select-concert-round-info">잔여석</div>
-			<ul id="selected-remaining-seats-list">
-				<span id="seatsNum"></span>
-			</ul>
+<!-- 관람일/회차 선택 -->
+<div id="step1">
+	<!-- datepicker 영역 -->
+	<div class="select-concert-datepicker-container">
+		<div class="select-concert-datepicker-container-header">관람일 선택</div>
+		<div id="datepicker" class="calendar"></div>
+	</div>
+	<!-- 회차 선택 -->
+	<div class="select-concert-round-container">
+		<div class="select-concert-round-container-header">회차선택</div>
+		<div style="padding: 30px 20px;">
+			<div id="select-concert-round-text" style="margin-bottom: 30px;">
+				<span class="select-concert-round-info">선택날짜</span>
+				<!-- 선택한 날짜를 화면에 표시 -->
+				<!-- <span id="selected-Date"></span> -->
+			</div>
+			<div class="selected-round-container">
+				<div class="select-concert-round-info">회차선택</div>
+				<ul id="selected-round-list">
+					<!-- 해당 회차 추가 -->
+				</ul>
+			</div>
+			<div class="selected-remaining-seats">
+				<div class="select-concert-round-info">잔여석</div>
+				<ul id="selected-remaining-seats-list">
+					<span id="seatsNum"></span>
+				</ul>
+			</div>
 		</div>
 	</div>
+	<!-- 유의사항 -->
+	<div class="note-container">
+		유의사항(후순위)
+		<button style="display:none;" id="selectDateBtn">업로드 버튼</button>
+	</div>
 </div>
-<!-- 유의사항 -->
-<div class="note-container">
-	유의사항(후순위)
-	<button style="display:none;" id="selectDateBtn">업로드 버튼</button>
+
+<!-- 좌석 선택 -->
+<script>
+    $(function() {
+      createSeats(5, 10);
+    });
+
+    // 좌석을 만드는 함수
+    function createSeats(rows, cols) {
+      var seatLayout = $("#seatLayout");
+      for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
+          var seat = $("<div>").addClass("seat");
+          seatLayout.append(seat);
+        }
+        seatLayout.append("<br>"); // 줄바꿈
+      }
+    }
+  </script>
+<div id="step2" style="display:none;">
+	<div class="reserve-seats-conatiner">
+		<div class="reserve-seats-header">
+			현재 선택한 좌석의 번호가 뜬다.
+		</div>
+		<div id="seatLayout"></div>
+	</div>
 </div>
