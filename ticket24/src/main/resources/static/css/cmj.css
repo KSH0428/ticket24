@@ -547,7 +547,7 @@ a{
 }
 .file-list ul li{
 	border: 1px solid white;
-	padding: 6px 10px 10px 15px;
+	padding: 6px 10px 10px 5px;
 	font-weight: bold;
 	font-size: 15px;
 }
@@ -566,6 +566,9 @@ a{
 }
 .side-bar ul i{
 	font-size: 10px;
+}
+.side-bar ul li a{
+	margin-left: 10px;
 }
 
 

@@ -13,7 +13,8 @@ import kr.spring.reserv.vo.PaymentHallVO;
 import kr.spring.reserv.vo.ReservHallDateVO;
 import kr.spring.reserv.vo.ReservHallVO;
 
-
+@Service
+@Transactional
 public class ReservServiceImpl implements ReservService{
 	@Autowired
 	private ReservMapper reservMapper;
@@ -89,6 +90,13 @@ public class ReservServiceImpl implements ReservService{
 	@Override
 	public List<ReservHallDateVO> selectReservSchedule() {
 		return reservMapper.selectReservSchedule();
+	}
+
+	@Override
+	public void deleteReservhall(int reservation_num) {
+		reservMapper.deletePaymenthall(reservation_num);
+		reservMapper.deleteReservHallDate(reservation_num);
+		reservMapper.deleteReservhall(reservation_num);
 	}
 
 	
