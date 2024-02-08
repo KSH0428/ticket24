@@ -24,24 +24,26 @@ public class MemberVO {
 	private String mem_id;
 	private String mem_nickname;
 	private int mem_auth; //0:탈퇴회원,1:실버,2:골드,3:플래티넘,9:관리자
+	private int mem_auth_status; //0:이메일미인증, 1:이메일인증
+	private String mem_auth_key; //이메일인증을 위한 인증키
 	private String mem_auto; //자동로그인
+	
 	private String mem_au_id;
 	@NotBlank
 	private String mem_name;
 	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")
 	private String mem_passwd;
-	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")
 	private String mem_ckpasswd; //비밀번호 일치 확인
 	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")
 	private String mem_newpasswd; //변경할 비밀번호
 	@Pattern(regexp="^[A-Za-z0-9]{6,12}$")
 	private String mem_confirmpasswd; //변경할 비밀번호 확인
-	@NotBlank
 	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$")
 	private String mem_phone;
 	@Email
 	@NotBlank
 	private String mem_email;
+	private String mem_ckemail; //회원가입시 메일 인증
 	@Size(min=5, max=5)
 	private String mem_zipcode;
 	@NotBlank

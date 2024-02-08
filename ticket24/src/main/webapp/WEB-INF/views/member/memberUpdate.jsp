@@ -4,7 +4,7 @@
 <!-- 내용 시작 -->
 <div class="page-main">
 		<h1 class="align-center">회원 정보 수정</h1>
-		<input type="button" value="마이페이지" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/member/myPage'">
+		<input type="button" value="돌아가기" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/member/myPage'">
 		<form:form action="update" id="member_update" modelAttribute="memberVO">
 		<form:hidden path="mem_num"/>
 		<form:errors element="div" cssClass="error-color"/>	

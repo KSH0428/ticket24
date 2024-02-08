@@ -59,4 +59,85 @@ $(function(){
 			return false;
 		}
 	});//end of submit
+	
+    // 비밀번호 확인 필드 값이 변경될 때마다 일치 여부를 확인
+ 	$('#mem_passwd, #mem_ckpasswd').keyup(function() {
+        // 입력된 비밀번호와 비밀번호 확인 값 가져오기
+        let password = $('#mem_passwd').val();
+        let confirmPassword = $('#mem_ckpasswd').val();
+        
+        // 비밀번호와 비밀번호 확인 값이 다를 경우
+        if (password !== confirmPassword) {
+            // 비밀번호 확인 메시지 표시
+            $('#checkText').text('비밀번호가 일치하지 않습니다.').css('color','red');
+        } else {
+            // 일치할 경우 메시지 초기화
+            $('#checkText').text('');
+        }
+    });
+
+	$('#mem_phone').on('input', function() {
+            let phoneNumber = $(this).val().replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
+            let formattedPhoneNumber = formatPhoneNumber(phoneNumber); // 휴대폰 번호 형식에 맞게 포맷팅
+            
+            $(this).val(formattedPhoneNumber); // 입력란에 포맷팅된 번호 적용
+        });
+
+    // 휴대폰 번호 포맷팅 함수
+    function formatPhoneNumber(phoneNumber) {
+        let formattedPhoneNumber = '';
+
+        if (phoneNumber.length === 10) { // 0101234567 형식
+            formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+        } else if (phoneNumber.length === 11) { // 010-1234-5678 형식
+            formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+        } else { // 그 외의 경우
+            formattedPhoneNumber = phoneNumber;
+        }
+
+        return formattedPhoneNumber;
+    }
+
+	//이메일 인증
+	$('#emailBtn').click(function() {
+		$.ajax({
+			type : 'post',
+			url : 'memberRegister',
+			data : {
+				'mem_email' : $mem_email.val()
+			},
+			success : function(data){
+				alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+				console.log("data : "+data);
+				chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt);
+			}
+		})
+	})
+	
+	// 이메일 인증번호 체크 함수
+	function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
+		$memailconfirm.on("keyup", function(){
+			if (data != $memailconfirm.val()) { //
+				emconfirmchk = false;
+				$memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+				$("#emconfirmchk").css({
+					"color" : "#FA3E3E",
+					"font-weight" : "bold",
+					"font-size" : "10px"
+
+				})
+				//console.log("중복아이디");
+			} else { // 아니면 중복아님
+				emconfirmchk = true;
+				$memailconfirmTxt.html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+
+				$("#emconfirmchk").css({
+					"color" : "#0D6EFD",
+					"font-weight" : "bold",
+					"font-size" : "10px"
+
+				})
+			}
+		})
+	}
 });

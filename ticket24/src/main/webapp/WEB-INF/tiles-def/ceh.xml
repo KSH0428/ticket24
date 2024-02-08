@@ -64,4 +64,29 @@
 		<put-attribute name="title" value="마이페이지공연"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberConcert.jsp"/>
 	</definition>
+	
+	<!-- adminPage -->
+	<definition name="adminPage" template="/WEB-INF/views/template/layout_mypage.jsp">
+    	<put-attribute name="title" value="adminPage"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/template/nav_adminpage.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/admin/adminView.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
+    
+   <definition name="adminUpdate" extends="adminPage">
+		<put-attribute name="title" value="관리자 정보수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/adminUpdate.jsp"/>
+	</definition>
+	
+	<definition name="adminPasswdUpdate" extends="adminPage">
+		<put-attribute name="title" value="관리자 비밀번호 변경"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/adminUpdatePasswd.jsp"/>
+	</definition>
+	
+	<definition name="adminPointList" extends="adminPage">
+		<put-attribute name="title" value="포인트 리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/adminPointList.jsp"/>
+	</definition>
+	
 </tiles-definitions>

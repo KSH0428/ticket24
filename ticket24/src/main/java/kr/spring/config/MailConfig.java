@@ -1,4 +1,4 @@
-package kr.spring.config;
+	package kr.spring.config;
 
 import java.util.Properties;
 

@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
-import kr.spring.member.service.SendEmailServiceImpl;
-import kr.spring.member.vo.MailVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
@@ -37,6 +35,10 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+//	private SendEmailServiceImpl sendEmailService;
+	
 	/*==========================
 	 * 자바빈(VO) 초기화
 	 *=========================*/
@@ -67,10 +69,9 @@ public class MemberController {
 			
 			return form();
 		}
-		
 		//회원가입
 		memberService.insertMember(memberVO);
-		
+
 		model.addAttribute("accessTitle", "회원가입");
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
 		model.addAttribute("accessUrl", request.getContextPath()+"/main/main");
@@ -109,10 +110,7 @@ public class MemberController {
 	
 	/*========================
 	 * 비밀번호 찾기
-	 *=======================*/
-	@Autowired
-	private SendEmailServiceImpl sendEmailService;
-	
+	 *=======================*/	
 	@GetMapping("/member/findPwCheck")
 	public String findPwForm() {
 		return "findPwCheck";
@@ -149,8 +147,8 @@ public class MemberController {
         	return findPwForm();
         }
 
-		MailVO vo = sendEmailService.createMailAndChangePassword(mem_email, mem_name, mem_id);
-        sendEmailService.mailSend(vo);
+		//MailVO vo = sendEmailService.createMailAndChangePassword(mem_email, mem_name, mem_id);
+       // sendEmailService.mailSend(vo);
         
         model.addAttribute("accessTitle", "비밀번호 찾기");
 		model.addAttribute("accessMsg", "이메일로 임시비밀번호를 발송해드렸습니다. <br> 로그인 후 비밀번호를 변경해주세요.");

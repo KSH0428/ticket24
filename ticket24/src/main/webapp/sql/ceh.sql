@@ -3,6 +3,7 @@ create table member(
  mem_id varchar2(12) unique not null,
  mem_nickname varchar2(30),
  mem_auth number(1) default 1 not null, --0:탈퇴회원,1:실버,2:골드,3:플래티넘,9:관리자
+ mem_auth_status number(1) default 0 not null, --0:이메일미인증, 1:이메일인증
  constraint member_pk primary key (mem_num)
  );
 

@@ -1,81 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ceh.css">
 <!-- 내용 시작 -->
-<body>
-	<div>
-		<form:form action="register" id="member_register" modelAttribute="memberVO">
-			<form:errors element="div" cssClass="error-color"/>	
-			<h2>회원가입</h2>
-			<p>티켓24에 오신 것을 환영합니다!</p><br>
-			<ul>
-				<li>
-					<form:label path="mem_id">아이디 *</form:label>
-					<form:input path="mem_id" placeholder="영문,숫자만 6~12자" autocomplete="off"/>
-					<input type="button" id="confirmId" value="ID중복체크" class="register-btn">
-					<span id="message_id"></span>
-					
-				</li>
-				<li>
-					<form:label path="mem_name">이름 *</form:label>
-					<form:input path="mem_name"/>
-					<form:errors path="mem_name" cssClass="error-color"/>
-				</li>
-				<li>
-					<form:label path="mem_nickname">닉네임</form:label>
-					<form:input path="mem_nickname"/>
-				</li>
-				<li>
-					<form:label path="mem_passwd">비밀번호 *</form:label>
-					<form:password path="mem_passwd" id="mem_passwd" placeholder="영문,숫자만 6~12자"/>
-					<form:errors path="mem_passwd" cssClass="error-color"/>
-				</li>
-				<li>
-					<form:label path="mem_ckpasswd">비밀번호 확인 *</form:label>
-					<form:password path="mem_ckpasswd" id="mem_ckpasswd" placeholder="입력한 비밀번호를 다시 입력해주세요."/>
-					<span id="checkText"></span>
-				</li>
-				<li>
-					<form:label path="mem_phone">핸드폰 번호 *</form:label>
-					<form:input path="mem_phone"/>
-					<form:errors path="mem_phone" cssClass="error-color"/>
-				</li>
-				<li>
-					<form:label path="mem_email">이메일 *</form:label>
-					<form:input path="mem_email"/>
-					<input type="button" value="이메일 인증" id="emailBtn" class="register-btn">
-					<form:errors path="mem_email" cssClass="error-color"/>
-				</li>
-				<li>
-					<form:label path="mem_ckemail">이메일 인증 번호</form:label>
-					<form:input path="mem_ckemail" placeholder="이메일로 받은 인증번호 입력"/>
-					<form:errors path="mem_ckemail" cssClass="error-color"/>
-				</li>
-				<li>
-					<form:label path="mem_zipcode">우편번호 *</form:label>
-					<form:input path="mem_zipcode"/>
-					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="register-btn">
-					<form:errors path="mem_zipcode" cssClass="error-color"/>
-				</li>
-				<li>
-					<form:label path="mem_address1">주소 *</form:label>
-					<form:input path="mem_address1"/>
-					<form:errors path="mem_address1" cssClass="error-color"/>
-				</li>
-				<li>
-					<form:label path="mem_address2">상세주소 *</form:label>
-					<form:input path="mem_address2"/>
-					<form:errors path="mem_address2" cssClass="error-color"/>
-				</li>
-			</ul>
-			<div class="button-container">
-				<form:button class="register-btn" id="registerBtn">회원 가입</form:button>
-				<input type="button" value="메인 페이지" class="register-btn" onclick="location.href='${pageContext.request.contextPath}/main/main'">
-			</div>
-		</form:form>
-	</div>
-</body>
+<div class="page-main">
+		<h1 class="align-center">관리자 정보 수정</h1>
+		<input type="button" value="돌아가기" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/admin/adminPage'">
+		<form:form action="update" id="admin_update" modelAttribute="memberVO">
+		<form:hidden path="mem_num"/>
+		<form:errors element="div" cssClass="error-color"/>	
+		<ul>
+			<li>
+				<form:label path="mem_id">아이디</form:label>
+				<form:input path="mem_id" readonly="true"/>
+			</li>
+			<li>
+				<form:label path="mem_name">이름</form:label>
+				<form:input path="mem_name" readonly="true"/>
+			</li>
+			<li>
+				<form:label path="mem_nickname">닉네임</form:label>
+				<form:input path="mem_nickname"/>
+			</li>
+			<li>
+				<form:label path="mem_phone">전화번호</form:label>
+				<form:input path="mem_phone"/>
+				<form:errors path="mem_phone" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="mem_email">이메일</form:label>
+				<form:input path="mem_email"/>
+				<form:errors path="mem_email" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="mem_zipcode">우편번호</form:label>
+				<form:input path="mem_zipcode"/>
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="default-btn">
+				<form:errors path="mem_zipcode" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="mem_address1">주소</form:label>
+				<form:input path="mem_address1"/>
+				<form:errors path="mem_address1" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="mem_address2">상세주소</form:label>
+				<form:input path="mem_address2"/>
+				<form:errors path="mem_address2" cssClass="error-color"/>
+			</li>
+		</ul>
+		<div class="align-center">
+			<form:button class="default-btn">회원 정보 수정</form:button>
+		</div>
+	</form:form>
+</div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member.register.js"></script>
 <!-- 우편번호 검색 시작 -->

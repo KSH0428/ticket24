@@ -11,7 +11,7 @@
 				<li><a href="${pageContext.request.contextPath}/reserv/list">공연 예약 내역</a></li>
 			</ul>
 		</li>
-		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">공연장</a></li>
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/reserv/reservList">공연장</a></li>
 		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">MD</a>
 			<ul class="sub-menu">
 				<li><a href="${pageContext.request.contextPath}/reserv/list">주문 내역</a></li>

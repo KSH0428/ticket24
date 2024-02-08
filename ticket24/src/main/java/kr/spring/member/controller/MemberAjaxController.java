@@ -47,7 +47,6 @@ public class MemberAjaxController {
 		}
 		return mapAjax;
 	}
-	
 	/*==========================
 	 * 프로필 사진 업데이트
 	 *=========================*/
