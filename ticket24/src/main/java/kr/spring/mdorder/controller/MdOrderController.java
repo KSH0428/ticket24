@@ -1,10 +1,12 @@
 package kr.spring.mdorder.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +36,46 @@ public class MdOrderController {
 		return new MdOrderVO();
 	}
 	
+	 @RequestMapping("/mdOrder/orderView")
+	  public String orderView(HttpSession session, HttpServletRequest request, 
+			  HttpServletResponse response,
+			  MdOrderVO mdOrderVO, Model model,int md_order_total) throws Exception{
+		  List<MdOrderVO> orderList = new ArrayList<>(); 
+		 // for(int i=0; i < (mdOrderVO.getMd_order_num()).length; i++){
+				  
+				//  .getItem_no()).length; i++) {
+			
+			  MdOrderVO VO = new MdOrderVO ();
+			  //VO.setMd_item_name(mdOrderVO.getMd_item_name()[i]);
+			  
+			  
+			 // VO.setOrder_item_option(orderItemVO.getItem_option()[i]);
+			 // VO.setOrder_item_price(orderItemVO.getItem_price()[i]);
+			 // VO.setOrder_option_no(orderItemVO.getOption_no()[i]);
+			 // VO.setOrder_item_no(orderItemVO.getItem_no()[i]);
+			 // VO.setOrder_select_vol(orderItemVO.getSelect_vol()[i]);
+			  orderList.add(VO);
+
+		 // }
+	/*
+	 * model.addAttribute("order", orderList); model.addAttribute("md_order_total",
+	 * md_order_total);
+	 * 
+	 * if(session.getAttribute("member") != null) { MemberVO memberVO = (MemberVO)
+	 * session.getAttribute("member"); } return "/mdOrder/orderView"; }
+	 */
+	
+	
+	
 	//정상적인 주문
 	//장바구니에 담겨있는 상품정보 반환
 	//주문 상품의 대표 상품명 생성
 	//개별 상품정보 담기
 	//주문정보 담기
-	@RequestMapping("/mdOrder/mdOrderPayment")
-	public String orderInsert(MdOrderVO mdOrderVO, MdOrderDetailVO mdOrderDetailVO) {
-		/*
+	/*
+	 * @RequestMapping("/mdOrder/mdOrderPayment") public String
+	 * orderInsert(MdOrderVO mdOrderVO, MdOrderDetailVO mdOrderDetailVO) {
+	 */	/*
 		   logger.info("orderVOtest="+merchant_uid);
 			  String ckid = RandomStringUtils.randomNumeric(8);
 			  int orderedNo = Integer.parseInt(ckid);
