@@ -48,22 +48,24 @@
 	<c:if test="${count > 0}">
 	<table class="table">
 		<tr class="table-secondary">
-			<th>카테고리</th>
-			<th width="400">제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
+			<th width="70">번호</th>
+			<th width="120">카테고리</th>
+			<th>제목</th>
+			<th width="120">작성자</th>
+			<th width="120">작성일</th>
+			<th width="75">조회수</th>
 		</tr>
-		<c:forEach var="question" items="${list}">
+		<c:forEach var="question" items="${list}" varStatus="loop">
 		<c:if test="${question.question_level == 1}">
 		<tr>
+			<td>${loop.index + 1}</td>
 			<td class="align-center">
 				<c:if test="${question.question_category == 1}">상품</c:if>
 				<c:if test="${question.question_category == 2}">주문</c:if>
 				<c:if test="${question.question_category == 3}">배송</c:if>
 				<c:if test="${question.question_category == 4}">기타</c:if>
 			</td>
-			<td class="align-center">
+			<td style="text-align:left;padding-left:100px;">
             	<c:if test="${question.question_lock == 2 && user.mem_auth != 9}">
                 	<a href="checkPassword?question_num=${question.question_num}">
                 	<span><img src= "${pageContext.request.contextPath}/images/question_lock.png" width="14" height="17"></span>

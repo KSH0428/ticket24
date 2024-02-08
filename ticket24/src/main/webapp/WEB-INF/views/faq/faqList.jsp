@@ -16,12 +16,14 @@
 <!-- 상단 끝 -->
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
-			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
+			<li class="text1">
+				자주 찾는 질문 검색
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" onclick="location.href='list'">
+				<input type="search" name="keyword" id="keyword" class="form-control" value="${param.keyword}" autocomplete="off">
+			</li>
+			<li>
+				<input type="submit" value="찾기" class="btn btn-secondary sbtn">
 			</li>
 		</ul>
 	</form>
@@ -38,9 +40,10 @@
 	</div>
 	<table class="table">
 		<tr class="table-secondary">
-			<th>번호</th>
-			<th>카테고리</th>
-			<th colspan="2">질문</th>
+			<th width="70">번호</th>
+			<th width="120">카테고리</th>
+			<th class="title1">질문</th>
+			<th width="120"></th>
 		</tr>
 		<c:if test="${count > 0}">
 		<c:forEach var="faq" items="${list}" varStatus="loop">
@@ -52,19 +55,20 @@
 				<c:if test="${faq.faq_category == 3}">기타</c:if>
 			</td>
 			<c:if test="${user.mem_auth != 9}">
-			<td colspan="2">
+			<td class="title2">
 				<a href="#" class="faq-title" data-toggle="faq-content-${loop.index}">${faq.faq_title}</a>
-				<div class="faq-content" id="faq-content-${loop.index}" style="display:none;"><span></span>${faq.faq_content}</div>
+				<div class="faq-content" id="faq-content-${loop.index}" style="display:none;"><br><b>[답변]</b>${faq.faq_content}</div>
 			</td>
+			<td></td>
 			</c:if>
 			<c:if test="${user.mem_auth == 9}">
-			<td>
+			<td class="title2">
 				<a href="#" class="faq-title" data-toggle="faq-content-${loop.index}">${faq.faq_title}</a>
-				<div class="faq-content" id="faq-content-${loop.index}" style="display:none;"><span></span>${faq.faq_content}</div>
+				<div class="faq-content" id="faq-content-${loop.index}" style="display:none;"><br><b>[답변]</b>${faq.faq_content}</div>
 			</td>
 			<td style="text-align:right;">
-				<input type="button" value="수정" onclick="location.href='update?faq_num=${faq.faq_num}'">
-				<input type="button" value="삭제" id="delete_btn">
+				<input type="button" value="수정" class="btn btn-outline-secondary btn-sm" onclick="location.href='update?faq_num=${faq.faq_num}'">
+				<input type="button" value="삭제" id="delete_btn" class="btn btn-outline-secondary btn-sm">
 				<script type="text/javascript">
 					let delete_btn = document.getElementById('delete_btn');
 					delete_btn.onclick=function(){

@@ -15,6 +15,14 @@
 	width:90% !important;
 	margin:0 auto;
 }
+.title1{
+	text-align:left !important;
+	padding-left:250px !important;
+}
+.title2{
+	text-align:left !important;
+	padding-left:60px !important;
+}
 .question-list .nav-item {
 	display: inline-block;
 	text-align: center;
@@ -50,6 +58,7 @@
 
 .table td {
 	text-align: center;
+	height:57px;
 }
 .faq-content span {
     display: block;
@@ -295,4 +304,36 @@ form#search_form{
 	padding-top:25px;
 	padding-bottom:15px;
 }
-
+ul.search li {
+    margin: 0 0 9px 0;
+    padding: 0;
+    display: inline-block !important;
+    padding-right:5px;
+}
+ul.search {
+    width: 800px;
+    list-style: none;
+    padding: 15px 0;
+    margin: 0 auto;
+}
+.form-control{
+	width:320px !important;
+}
+.text1{
+	font-size:13pt;
+	padding-right:15px !important;
+}
+.sbtn{
+	height:37.6px;
+	margin-bottom:0.4rem;
+}
+.qa{
+	width:70px;
+	margin-left:60px;
+	margin-bottom:5px;
+}
+.answer{
+	width:100% !important;
+	border:none !important;
+	margin-left:45px;
+}
