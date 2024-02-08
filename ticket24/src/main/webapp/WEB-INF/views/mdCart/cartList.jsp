@@ -25,7 +25,7 @@
 				<c:forEach var="mdCart" items="${list}">
 					<tbody class="table-group-divider">
 						<tr>
-							<td class="align-center">
+							<td>
 								<div class="form-check d-flex justify-content-center">
 									<input class="form-check-input" type="checkbox" value=""
 										id="flexCheckDefault"> <label class="form-check-label"

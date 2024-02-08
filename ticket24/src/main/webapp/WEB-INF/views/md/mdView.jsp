@@ -27,78 +27,85 @@
 				</div>
 			</div>
 			<div class="col">
-			
+
 				<br>
 				<p class="card-text fs-4 fw-bold">${md.md_name}</p>
 				<hr>
-				<span> <span class="card-text fs-2 fw-bolder">${md.md_price}</span>
-					<span class="card-text fs-2 fw-bolder">원</span>
-				</span> <br> <br>
-				<div class="card text-bg-light mb-3 border-0" style="width: 40rem;">
-					<div class="card-body">
-						<div>
-							<span class="font-monospace text-dark fw-bold">택배</span> <span>3,000원
-								(60,000원 이상 주문시 무료)</span>
-						</div>
-						<div>
-							<span class="font-monospace text-dark fw-bold">원산지</span> <span>기타</span>
-						</div>
-						<div>
-							<span class="font-monospace text-dark fw-bold">혜택</span> <span>무이자
-								할부</span>
+				<form id="addCart" action="/mdCart/addCart" method="post">
+					<input type="hidden" name="md_num" value="${md.md_num}" id="md_num">
+					<input type="hidden" name="md_price" value="${md.md_price}"
+						id="md_price"> <input type="hidden" name="md_quantity"
+						value="${md.md_quantity}" id="md_quantity">
+					<div>
+						<b class="card-text fs-2"> <fmt:formatNumber
+								value="${md.md_price}" />원
+						</b>
+					</div>
+					<br> <br>
+					<div class="card text-bg-light mb-3 border-0" style="width: 40rem;">
+						<div class="card-body">
+							<div>
+								<span class="font-monospace text-dark fw-bold">택배</span> <span>3,000원
+									(60,000원 이상 주문시 무료)</span>
+							</div>
+							<div>
+								<span class="font-monospace text-dark fw-bold">원산지</span> <span>기타</span>
+							</div>
+							<div>
+								<span class="font-monospace text-dark fw-bold">혜택</span> <span>무이자
+									할부</span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<br>
-				<p class="text-center">수량 선택 버튼 구현 예정</p>
-				<br>
-				<div>
-					<span class="text-start">총 상품금액</span> <span class="float-end">${md.md_price}원</span>
-				</div>
-				<div>
-					<strong class="text-start fs-4">총 할인금액</strong> <strong
-						class="float-end fs-4">${md.md_price}원</strong>
-				</div>
-				<br>
-				<div>
-					<div class="d-grid gap-2 col-8 mx-auto">
-						
-						<div class="md-detail">
-						<form id="addCart" action="/mdCart/addCart" method="post">
-							<input type="hidden" name="md_num" value="${md.md_num}"
-								id="md_num">
-							 <input type="hidden" name="md_price" value="${md.md_price}" id="md_price">
-							 <input type="hidden" name="md_quantity" value="${md.md_quantity}"
-								id="md_quantity">
-							<ul>
-								<li class="card-text fs-2 fw-bolder"><b class="card-text fs-2 fw-bolder"><fmt:formatNumber value="${md.md_price}" />원</b></li>
-								<li>재고 : <span><fmt:formatNumber
-											value="${md.md_quantity}" /></span></li>
-											
-								<c:if test="${md.md_quantity > 0}">
-									<li><label for="order_quantity">구매수량</label> <input
-										type="number" name="order_quantity" min="1"
-										max="${md.md_quantity}" autocomplete="off" id="order_quantity"
-										class="quantity-width"></li>
-									<li><span id="sub_total">총주문 금액 : ${md.md_price}원</span></li>
-									<li><input type="submit" class="btn btn-outline-secondary" value="장바구니에 담기"
-									></li>	
-									<li><input type="submit" class="btn btn-secondary btn-lg" value="바로구매"></li>
-								</c:if>
-								<c:if test="${md.md_quantity <= 0}">
-									<li class="align-center"><span class="sold-out">품절</span>
-									</li>
-								</c:if>
-							</ul>
-						</form>
+					<br>
+					<div>
+						<div class="card text-bg-white mb-3 text-outline-bg-dark"
+							style="width: 40rem;">
+							<div class="card-body">
+								<span> <span>재고 <span class="fw-bold text-primary"><fmt:formatNumber
+												value="${md.md_quantity}" /> </span></span> <c:if
+										test="${md.md_quantity > 0}">
+										<span class="float-end"> <label for="order_quantity">구매수량</label>
+											<input type="number" name="order_quantity" min="1"
+											max="${md.md_quantity}" autocomplete="off"
+											id="order_quantity" class="quantity-width">
+										</span></span>
+							</div>
 						</div>
-
-
-						<input type="submit" value="장바구니 담기"
-							class="btn btn-outline-secondary"
-							onclick="location.href='#">
-						<button class="btn btn-secondary btn-lg" type="button">바로구매</button>
 					</div>
+					<br>
+					<div>
+						<span> <span class="text-start" id="sub_total">총
+								상품금액</span> <b class="float-end"><fmt:formatNumber
+									value="${md.md_price}" /> <span>원</span></b>
+						</span>
+					</div>
+					<div>
+						<span class="fs-4"> <span class="text-start" id="sub_total">총
+								상품금액</span> <b class="float-end"><fmt:formatNumber
+									value="${md.md_price}" /> <span>원</span></b>
+						</span>
+					</div>
+					<br>
+					<br>
+					<div class="container text-center">
+						<div class="row row-cols-2">
+							<input type="submit" value="장바구니 담기"
+								class="btn btn-outline-secondary btn-lg col"> 
+							<input type="submit" value="바로구매" class="btn btn-secondary btn-lg col" 
+								onclick="location.href='${pageContext.request.contextPath}/mdOrder/mdOrderPayment'">
+						</div>
+					</div>
+					</c:if>
+					<c:if test="${md.md_quantity <= 0}">
+						<li class="align-center"><span class="sold-out">품절</span></li>
+					</c:if>
+				</form>
+				<br>
+				<div>
+
+				<input type="submit" value="바로구매" class="btn btn-secondary btn-lg col" 
+								onclick="location.href='${pageContext.request.contextPath}/mdOrder/mdOrderPayment'">
 
 					<br> <br> <br>
 				</div>
@@ -167,12 +174,113 @@
 								등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수 있습니다.</li>
 							<li>공개 게시판이므로 전화번호, 메일 주소 등 고객님의 소중한 개인정보는 절대 남기지 말아주세요.</li>
 						</ul>
-						<hr>
-						<p>
-							<img
-								src="${pageContext.request.contextPath}/image_upload/img6.jpg"
-								style="width: 300px; height: 300px;">
-						</p>
+						<hr><br>
+						<div>
+							<div class="accordion" id="accordionPanelsStayOpenExample">
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button"
+											data-bs-toggle="collapse"
+											data-bs-target="#panelsStayOpen-collapseOne"
+											aria-expanded="true"
+											aria-controls="panelsStayOpen-collapseOne">
+											Accordion Item #1</button>
+									</h2>
+									<div id="panelsStayOpen-collapseOne"
+										class="accordion-collapse collapse show">
+										<div class="accordion-body">
+											<strong>This is the first item's accordion body.</strong> It
+											is shown by default, until the collapse plugin adds the
+											appropriate classes that we use to style each element. These
+											classes control the overall appearance, as well as the
+											showing and hiding via CSS transitions. You can modify any of
+											this with custom CSS or overriding our default variables.
+											It's also worth noting that just about any HTML can go within
+											the
+											<code>.accordion-body</code>
+											, though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse"
+											data-bs-target="#panelsStayOpen-collapseTwo"
+											aria-expanded="false"
+											aria-controls="panelsStayOpen-collapseTwo">
+											Accordion Item #2</button>
+									</h2>
+									<div id="panelsStayOpen-collapseTwo"
+										class="accordion-collapse collapse">
+										<div class="accordion-body">
+											<strong>This is the second item's accordion body.</strong> It
+											is hidden by default, until the collapse plugin adds the
+											appropriate classes that we use to style each element. These
+											classes control the overall appearance, as well as the
+											showing and hiding via CSS transitions. You can modify any of
+											this with custom CSS or overriding our default variables.
+											It's also worth noting that just about any HTML can go within
+											the
+											<code>.accordion-body</code>
+											, though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse"
+											data-bs-target="#panelsStayOpen-collapseThree"
+											aria-expanded="false"
+											aria-controls="panelsStayOpen-collapseThree">
+											Accordion Item #3</button>
+									</h2>
+									<div id="panelsStayOpen-collapseThree"
+										class="accordion-collapse collapse">
+										<div class="accordion-body">
+											<strong>This is the third item's accordion body.</strong> It
+											is hidden by default, until the collapse plugin adds the
+											appropriate classes that we use to style each element. These
+											classes control the overall appearance, as well as the
+											showing and hiding via CSS transitions. You can modify any of
+											this with custom CSS or overriding our default variables.
+											It's also worth noting that just about any HTML can go within
+											the
+											<code>.accordion-body</code>
+											, though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse"
+											data-bs-target="#panelsStayOpen-collapseThree"
+											aria-expanded="false"
+											aria-controls="panelsStayOpen-collapseThree">
+											Accordion Item #3</button>
+									</h2>
+									<div id="panelsStayOpen-collapseThree"
+										class="accordion-collapse collapse">
+										<div class="accordion-body">
+											<strong>This is the third item's accordion body.</strong> It
+											is hidden by default, until the collapse plugin adds the
+											appropriate classes that we use to style each element. These
+											classes control the overall appearance, as well as the
+											showing and hiding via CSS transitions. You can modify any of
+											this with custom CSS or overriding our default variables.
+											It's also worth noting that just about any HTML can go within
+											the
+											<code>.accordion-body</code>
+											, though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								
+								<br> <br> <br>
+							</div>
+						</div>
 
 
 						<br> <br> <br>
@@ -271,9 +379,7 @@
 										</ul></td>
 								</tr>
 							</table>
-							<br>
-							<br>
-							<br>
+							<br> <br> <br>
 						</div>
 					</div>
 				</div>

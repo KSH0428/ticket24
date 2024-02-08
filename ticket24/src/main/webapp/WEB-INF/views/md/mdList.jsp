@@ -40,7 +40,7 @@
        			// 이미지 클릭 이벤트에 함수 할당
         		document.getElementById("search-btn").addEventListener("click", submitForm);
    			</script> -->
-				<input type="submit" value="검색">
+				<input type="submit" value="검색" class="btn btn-dark">
 			</li>
 		</ul>
 		<div class="align-right">
@@ -87,7 +87,7 @@
 	  </div>
 	</div>
 	</c:forEach>
-	</div>	
+	</div>
 	</div>
 	
 	<br><br><br>

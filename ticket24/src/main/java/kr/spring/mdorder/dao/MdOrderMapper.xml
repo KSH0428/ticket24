@@ -155,6 +155,15 @@ SELECT
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 </select>
+
+<!-- 사용자 - 주문취소 -->	
+<update id="deleteOrder" parameterType="mdOrderVO">
+UPDATE md_order set 
+	md_order_status=5,
+	md_order_mdate=SYSDATE 
+ 	WHERE md_order_num=#{md_order_num}
+</update>		 
+
 	
 <!-- 			
 개별 상품 목록
@@ -205,13 +214,6 @@ UPDATE md_order SET
 				sql = "UPDATE zitem SET quantity=quantity+? WHERE item_num=?";
 			
 			 
-사용자 - 주문취소	
-<update id="">
-UPDATE md_order set 
-	md_order_status=5,
-	md_order_mdate=SYSDATE 
- 	WHERE md_order_num=#{md_order_num}
-</update>		 
 
 			
 //주문번호에 해당하는 상품정보 구하기

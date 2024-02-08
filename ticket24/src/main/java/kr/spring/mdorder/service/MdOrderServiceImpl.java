@@ -25,26 +25,29 @@ public class MdOrderServiceImpl implements MdOrderService{
 
 	@Override
 	public MdOrderVO selectPorder(int md_order_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return mdOrderMapper.selectPorder(md_order_num);
 	}
 
 	@Override
 	public void updateOPayment(MdOrderVO mdOrderVO) {
-		// TODO Auto-generated method stub
+		mdOrderMapper.updateOPayment(mdOrderVO);
 		
 	}
 
 	@Override
 	public int getOrderCountByMem_num(String keyfield, String keyword, int mem_num) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mdOrderMapper.getOrderCountByMem_num(keyfield, keyword, mem_num);
 	}
 
 	@Override
 	public List<MdOrderVO> getListOrderByMem_num(int start, int end, String keyfield, String keyword, int mem_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return mdOrderMapper.getListOrderByMem_num(start, end, keyfield, keyword, mem_num);
+	}
+
+	@Override
+	public void updateOrderCancel(int md_order_num) {
+		mdOrderMapper.updateOrderCancel(md_order_num);
+		
 	}
 
 }

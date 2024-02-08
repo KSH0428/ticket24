@@ -2,6 +2,7 @@ package kr.spring.mdorder.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -28,7 +29,9 @@ public interface MdOrderMapper {
 	//사용자 - 전체 주문 목록/검색 주문 목록
 	public List<MdOrderVO> getListOrderByMem_num(int start, int end, String keyfield, String keyword, int mem_num);
 	
-	
+	//사용자 - 주문취소 
+	@Delete("DELETE FROM md_order WHERE md_order_num=#{md_order_num}")
+	public void updateOrderCancel(int md_order_num);
 	
 	/*
 	 * //관리자 - 전체 주문 개수/검색 주문 개수 
@@ -58,8 +61,7 @@ public interface MdOrderMapper {
 	 * //관리자 - 배송상태 수정 
 	 * public void updateOrderStatus(MdOrderVO order);
 	 * 
-	 * //사용자 - 주문취소 
-	 * public void updateOrderCancel(int md_order_num);
+	 * 
 	 * 
 	 */
 	

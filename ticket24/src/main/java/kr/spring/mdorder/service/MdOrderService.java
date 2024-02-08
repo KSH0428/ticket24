@@ -2,6 +2,8 @@ package kr.spring.mdorder.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+
 import kr.spring.mdorder.vo.MdOrderDetailVO;
 import kr.spring.mdorder.vo.MdOrderVO;
 
@@ -22,4 +24,7 @@ public interface MdOrderService {
 		//사용자 - 전체 주문 목록/검색 주문 목록
 		public List<MdOrderVO> getListOrderByMem_num(int start, int end, String keyfield, String keyword, int mem_num);
 		
+		//사용자 - 주문취소 
+		public void updateOrderCancel(int md_order_num);
+
 }
