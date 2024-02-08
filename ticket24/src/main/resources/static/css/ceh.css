@@ -8,33 +8,33 @@
 }
 
 li {
-  list-style: none;
+	list-style: none;
 }
 
 .main {
-  width: 100%;
-  margin: 100px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	width: 100%;
+	margin: 100px 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .login {
-  width: 25%;
-  height: 500px;
-  background: white;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+	width: 25%;
+	height: 500px;
+	background: white;
+	border-radius: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .login h2 {
-  color: black;
-  font-size: 2em;
-  margin-bottom: 2.5rem;
+	color: black;
+	font-size: 2em;
+	margin-bottom: 2.5rem;
 }
 
 .floating-label{
@@ -78,7 +78,7 @@ li {
 	border: 0;
 	outline: none;
 	border-radius: 40px;
-	background: linear-gradient(to left, rgb(0, 0, 0), rgb(0, 0, 0));
+	background: linear-gradient(to left, rgb(0, 0, 10), rgb(0, 0, 0));
 	color: white;
 	font-size: 1em;
 	letter-spacing: 1.5px;
@@ -136,7 +136,7 @@ li {
 }
 
 #member_register input[id="mem_id"]{
-	width:242px;
+	width:243px;
 }
 
 #member_register input[id="mem_email"]{
@@ -170,17 +170,147 @@ li {
  	border:1px solid #404040;
 }
 
+/* 아이디 찾기, 비밀번호 찾기
+-------------------------*/
+.findIdForm, .findPwCheck{
+	width: 100%;
+	height: 100%;
+	background: white;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	padding: 50px 0px;
+}
+
+.findIdForm h2, .findPwCheck h2{
+	color: black;
+	font-size: 2em;
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.findIdForm p, .findPwCheck p{
+	text-align: center;
+	margin-bottom: 6px;
+}
+.findIdForm ul, .findPwCheck ul{
+	padding-left: 650px;
+	margin-top: 20px;
+}
+
+.findIdForm li, .findPwCheck li{
+	margin-bottom: 10px;
+	margin-right: 40px;
+}
+
+.findIdForm label, .findPwCheck label {
+    margin-right: -40px; /* 라벨 오른쪽 마진 조정 */
+}
+.findIdForm input[id="mem_name"], .findIdForm input[id="mem_email"],
+.findPwCheck input[id="mem_id"], .findPwCheck input[id="mem_name"], .findPwCheck input[id="mem_email"]{
+	width:300px;
+}
+
+.findIdForm label[id="mem_name"]{
+	padding-right:-50px;
+}
+
+.findIdForm .idf-btn, .findIdForm input[type="button"],
+.findPwCheck .idf-btn, .findPwCheck input[type="button"]{
+	padding:5px 20px;
+	border:1px solid black;
+	border-radius:2px;
+	color: white;
+	background-color: black;
+	font-weight:bold;
+	cursor:pointer;
+	font-size: 0.9em;
+	margin-top: 10px;
+	border-radius: 20px;
+}
+
+.findIdForm .idf-btn:hover, 
+.findIdForm input[type="button"]:hover,
+.findPwCheck .idf-btn:hover, 
+.findPwCheck input[type="button"]:hover{
+ 	background-color: #404040;
+ 	border:1px solid #404040;
+ 	border-radius: 20px;
+}
+
+.findId {
+	width: 25%;
+	height: 200px;
+	background: white;
+	border-radius: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.findId .idf-btn{
+	padding:5px 20px;
+	border:1px solid black;
+	border-radius:2px;
+	color: white;
+	background-color: black;
+	font-weight:bold;
+	cursor:pointer;
+	font-size: 0.9em;
+	margin-top: 10px;
+	border-radius: 20px;
+}
+
+.findId .idf-btn:hover{
+	background-color: #404040;
+ 	border:1px solid #404040;
+ 	border-radius: 20px;
+}
 /* MY페이지 사이드바
 -------------------------*/
-.side-navbar{
-	width:150px;
+.side-bar > ul > li {
+  position: relative;
 }
-.side-bar h1{
+/* 1차 메뉴의 항목이 마우스 인식 시에 2차 메뉴 등장 */
+.side-bar > ul > li:hover > ul {
+  display: block;
+  position: absolute;
+  top: 0;         /* 2차 메뉴의 상단을 1차 메뉴의 상단에 고정 */
+  left: 50%;     /* 2차 메뉴를 1차 메뉴의 너비만큼 이동 */
+  width: 80%;    /* 1차 메뉴의 너비를 상속 */
+}
+
+.side-bar h3{
 	text-align:center;
+	font-weight: bold;
 }
+.side-bar ul{
+	font-weight: bold;
+	font-size: 16px;
+	padding-bottom: 20px;
+	padding-left:40px;
+	position: absolute;
+}
+.sub-menu li{
+	font-size: 13px;
+	width:200px;
+	padding-bottom: 5px;
+	margin-left: 30px;
+}
+.sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
 .main-menu{
-	line-height:2;
+	line-height:3;
 	position:relative;
+	padding-left:10px;
 }
 .main-menu .sub-menu{
 	position:absolute;
@@ -192,10 +322,9 @@ li {
 }
 .main-menu:hover{
 	color:white;
+	border-bottom: 1px;
 }
-.main-menu .sub-menu>li:hover{
-	background-color:white;
-}
+
 /* MY페이지 회원정보창
 -------------------------*/
 .memberinfo{

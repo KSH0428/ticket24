@@ -30,6 +30,11 @@
     	<put-attribute name="title" value="비밀번호찾기"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/findPwCheck.jsp"/>                                           
     </definition>
+    
+    <definition name="findPwResult" extends="main">
+    	<put-attribute name="title" value="비밀번호찾기결과"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/findPwResult.jsp"/>                                           
+    </definition>
 
     <!-- myPage -->
     <definition name="myPage" template="/WEB-INF/views/template/layout_mypage.jsp">
