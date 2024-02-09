@@ -5,21 +5,61 @@
 <mapper namespace="kr.spring.ticketpay.dao.TicketPayMapper">
     
     <!-- 티켓 결제 정보 저장 -->
-    <insert id="insertTicketPay" parameterType="ticketPayVO">
-        INSERT INTO ticket_pay (ticket_pay_num, ticket_num, ticket_pay_price, ticket_pay_name, 
-            ticket_pay_zipcode, ticket_pay_address1, ticket_pay_address2, ticket_pay_phone, 
-            ticket_pay_method, mem_num)
-        VALUES (#{ticket_pay_num}, #{ticket_num}, #{ticket_pay_price}, #{ticket_pay_name}, 
-            #{ticket_pay_zipcode}, #{ticket_pay_address1}, #{ticket_pay_address2}, #{ticket_pay_phone}, 
-            #{ticket_pay_method}, #{mem_num})
-    </insert>
-    
-    <!-- 특정 사용자의 모든 예약 내역 조회 -->
-    <select id="getReservHistory" parameterType="int" resultType="ticketVO">
-        SELECT * FROM ticket WHERE mem_num = #{mem_num}
-    </select>
-    
-    
-    
-    
+  <insert id="insertTicketPay" parameterType="ticketPayVO">
+    INSERT INTO ticket_pay (ticket_pay_num, ticket_num, ticket_pay_name, 
+        ticket_pay_zipcode, ticket_pay_address1, ticket_pay_address2, ticket_pay_phone, mem_num)
+    VALUES (ticket_pay_seq.nextval, #{ticket_num}, #{ticket_pay_name}, 
+        #{ticket_pay_zipcode}, #{ticket_pay_address1}, #{ticket_pay_address2}, #{ticket_pay_phone}, #{mem_num})
+</insert>
+	
+	<!-- sql 태그외 include 태그를 이용해 SQL문 재사용 -->
+	<!-- 검색 -->
+		<sql id="ticketPaySearch">
+				<if test="keyword != null and keyword != ''">
+					<if test="keyfield == 1"> 
+						AND ticket_name LIKE '%' || #{keyword} || '%'
+					</if>
+					<if test="keyfield == 2">
+						AND ticket_content LIKE '%' || #{keyword} || '%'
+					</if>
+					<if test="keyfield == 3">
+						AND (ticket_name LIKE '%' || #{keyword} || '%' OR
+						ticket_content LIKE '%' || #{keyword} || '%')
+					</if>
+				</if>
+				<if test="ticket_category != null and ticket_category != ''">
+					ticket_category = #{ticket_category}
+				</if>
+		</sql>
+<!-- 예약내역 목록의 총개수/검색 개수 --> 
+<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT 
+		COUNT(*) 
+		FROM ticket_pay a JOIN ticket b ON a.ticket_num=b.ticket_num JOIN member m ON b.mem_num=m.mem_num WHERE a.mem_num=#{mem_num}
+		<include refid="ticketPaySearch"></include>
+</select>
+<!-- 특정 사용자의 모든 예약 내역 조회 -->
+<select id="selelectReservList" parameterType="map" resultType="ticketVO">
+	SELECT * FROM (
+    SELECT a.*, 
+    rownum rnum FROM (
+        SELECT 
+            b.ticket_num,
+            b.ticket_category,
+            <![CDATA[
+			REPLACE(REPLACE(b.ticket_name, '<', '&lt;'),'>','&gt;') b.ticket_name, 
+			]]>
+        FROM 
+            ticket_pay a 
+            JOIN ticket b ON a.ticket_num = b.ticket_num 
+            JOIN member m ON b.mem_num = m.mem_num 
+            <include refid="ticketPaySearch"></include>
+        WHERE 
+            a.mem_num = #{mem_num}
+    ) a
+)
+<![CDATA[
+	WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>
+</select>
 </mapper>

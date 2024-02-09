@@ -67,7 +67,7 @@
 		</ul>
 		<div class="align-right">
     	 <c:if test="${!empty user && user.mem_num != ticket.mem_num}">
-    	<input type="button" value="결제하기" onclick="location.href='${pageContext.request.contextPath}/ticketPay/write'">
+    	<input type="button" value="결제하기" onclick="location.href='${pageContext.request.contextPath}/ticketPay/write?ticket_num=${ticket.ticket_num}'">
     	</c:if>
     	</div>
 		<hr size="1"width="100%">

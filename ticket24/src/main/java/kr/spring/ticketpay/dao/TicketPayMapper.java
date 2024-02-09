@@ -1,6 +1,7 @@
 package kr.spring.ticketpay.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,8 +12,10 @@ import kr.spring.ticketpay.vo.TicketPayVO;
 public interface TicketPayMapper {
 	// 티켓 결제 정보 등록
     public void insertTicketPay(TicketPayVO ticketPay);
+    //예약 내역 개수
+    public int selectRowCount(Map<String,Object> map);
     // 예약 내역 조회
-    public List<TicketVO> getReservHistory(int mem_num);
+    public List<TicketPayVO> selelectReservList(Map<String,Object> map);
     
     
 }

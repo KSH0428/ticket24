@@ -74,7 +74,7 @@ create table ticket_zzim(
  constraint ticket_zzim_fk2 foreign key (mem_num) references member(mem_num)
 );
 
---티켓 결제
+--티켓 예약
 create table ticket_pay(
  ticket_pay_num number not null,
  ticket_num number not null,
@@ -85,7 +85,8 @@ create table ticket_pay(
  ticket_pay_phone varchar2(15) not null,
  mem_num number not null,
  constraint ticket_pay_pk primary key(ticket_pay_num),
- constraint mem_num_fk foreign key (mem_num) references member(mem_num)
+ constraint ticket_pay_fk1 foreign key(ticket_num) references ticket(ticket_num),
+ constraint ticket_pay_fk2 foreign key (mem_num) references member(mem_num)
  
 );
 create sequence ticket_pay_seq;
