@@ -24,11 +24,16 @@ public class TicketPayServiceImpl implements TicketPayService {
 
 	@Override
 	public List<TicketPayVO> selectReservList(Map<String, Object> map) {
-		return ticketPayMapper.selelectReservList(map);
+		return ticketPayMapper.selectReservList(map);
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
 		return ticketPayMapper.selectRowCount(map);
+	}
+
+	@Override
+	public TicketPayVO selectTicketPay(int ticket_num) {
+		return ticketPayMapper.selectTicketPay(ticket_num);
 	}
 }

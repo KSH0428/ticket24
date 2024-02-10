@@ -4,8 +4,7 @@
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<link rel="stylesheet" href="/css/layout.css">
 <div class="page-main">
 	<h2>정보 입력</h2>
 	<form:form action="write" modelAttribute="ticketPayVO" id="register_form" enctype="multipart/form-data">

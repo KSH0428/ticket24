@@ -7,6 +7,7 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<link rel="stylesheet" href="/css/ksh.css">
 <div class="page-main">
 	<h2>티켓 양도 글 수정</h2>
 	<form:form action="update" modelAttribute="ticketVO" id="update_form" enctype="multipart/form-data">

@@ -6,6 +6,7 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<link rel="stylesheet" href="/css/ksh.css">
 <div class="page-main">
 	<h2>글쓰기</h2>
 	<form:form action="write" modelAttribute="ticketVO" id="register_form" enctype="multipart/form-data">

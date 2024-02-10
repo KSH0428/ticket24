@@ -15,7 +15,9 @@ public interface TicketPayMapper {
     //예약 내역 개수
     public int selectRowCount(Map<String,Object> map);
     // 예약 내역 조회
-    public List<TicketPayVO> selelectReservList(Map<String,Object> map);
+    public List<TicketPayVO> selectReservList(Map<String,Object> map);
+    //예약 내역 상세
+    public TicketPayVO selectTicketPay(int ticket_num);
     
     
 }

@@ -25,7 +25,7 @@
 	<select id="order" name="order">
 			<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 			<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
-			</select>
+	</select>
 	<c:if test="${!empty user}">
 			<input type="button" value="글쓰기" onclick="location.href='write'">
 			</c:if>
@@ -43,26 +43,26 @@
 			</c:if>
 			<c:if test="${count > 0}">
 			<table class="striped-table">
-				<tr>
-					<th>번호</th>
-					<th>카테고리</th>
-					<th width="200">공연명</th>
-					<th>공연장소</th>
-					<th>공연일</th>
-					<th>좌석정보</th>
-					<th>보유여부</th>
-					<th>수량</th>
-					<th>가격</th>
+				<tr class="align-center" >
+    			<th>번호</th>
+    			<th>카테고리</th>
+   				<th>공연명</th>
+    			<th>공연장소</th>
+    			<th>공연일</th>
+    			<th>좌석정보</th>
+    			<th>보유여부</th>
+    			<th>수량</th>
+    			<th>가격</th>
 				</tr>
 				<c:forEach var="ticket" items="${list}">
 					<tr>
-						<td class="align-center">${ticket.ticket_num}</td>
+						<td class="align-center" >${ticket.ticket_num}</td>
 						<td class="align-center"><c:if
 									test="${ticket.ticket_category == 1}">뮤지컬</c:if> <c:if
 									test="${ticket.ticket_category == 2}">공연</c:if> <c:if
 									test="${ticket.ticket_category == 3}">콘서트</c:if> <c:if
 									test="${ticket.ticket_category == 4}">클래식</c:if></td>
-					<td><a href="detail?ticket_num=${ticket.ticket_num}">${ticket.ticket_name}</a></td>
+					<td class="align-center" ><a href="detail?ticket_num=${ticket.ticket_num}">${ticket.ticket_name}</a></td>
 					<td class="align-center">${ticket.ticket_place}</td>
 					<td class="align-center">${ticket.ticket_date}</td>
 					<td class="align-center">${ticket.ticket_seat}</td>

@@ -45,7 +45,16 @@
 		<put-attribute name="title" value="정보 등록" />
 		<put-attribute name="css" value="/WEB-INF/views/ticketPay/ticketPayCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticketPay/ticketPayWrite.jsp"/>
-	</definition>  
+	</definition>
+	<definition name="ticketPay" extends="main">
+		<put-attribute name="title" value="예약 목록" />
+		<put-attribute name="css" value="/WEB-INF/views/ticketPay/ticketPayCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/ticketPay/ticketPayList.jsp"/>
+	</definition>
+	<definition name="ticketPayView" extends="main">
+    	<put-attribute name="title" value="예약 상세"/>
+    	<put-attribute name="body" value="/WEB-INF/views/ticketPay/ticketPayView.jsp"/>
+    </definition> 
 </tiles-definitions>
 
 

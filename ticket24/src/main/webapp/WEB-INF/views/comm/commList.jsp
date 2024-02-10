@@ -4,7 +4,7 @@
 <!-- 내용 시작 -->
 <div class="page-main">
 	<h2>게시판 목록</h2>
-	<form action="list" id="searh_form" method="get">
+		<form action="list" id="search_form" method="get">
 	<ul class="search">
 			<li>
 			<select name="keyfield" id="keyfield">
@@ -20,9 +20,9 @@
 		<li>
 			<input type="submit" value="찾기">
 			<input type="button" value="목록" onclick="location.href='list'">
-		</li>
-		</ul>						
-		<div class="align-right">
+		</li>		
+	</ul>
+			<div class="align-right">
 		<select id="order" name="order">
 			<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 			<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
@@ -47,7 +47,7 @@
 			</c:if>
 			<c:if test="${count > 0}">
 				<table class="striped-table">
-					<tr>
+					<tr class="align-center" >
 						<th>번호</th>
 						<th>카테고리</th>
 						<th width="400">제목</th>
@@ -65,7 +65,7 @@
 									test="${comm.comm_category == 3}">공연</c:if> <c:if
 									test="${comm.comm_category == 4}">콘서트</c:if> <c:if
 									test="${comm.comm_category == 5}">클래식</c:if></td>
-							<td><a href="detail?comm_num=${comm.comm_num}">${comm.comm_title}(${comm.re_cnt})</a></td>
+							<td class="align-center" ><a href="detail?comm_num=${comm.comm_num}">${comm.comm_title}(${comm.re_cnt})</a></td>
 							<td class="align-center"><c:if
 									test="${empty comm.mem_nickname}">${comm.mem_id}</c:if> <c:if
 									test="${!empty comm.mem_nickname}">${comm.mem_nickname}</c:if>

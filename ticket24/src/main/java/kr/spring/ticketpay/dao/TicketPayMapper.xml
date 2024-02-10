@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="kr.spring.ticketpay.dao.TicketPayMapper">
     
     <!-- 티켓 결제 정보 저장 -->
@@ -10,9 +10,9 @@
         ticket_pay_zipcode, ticket_pay_address1, ticket_pay_address2, ticket_pay_phone, mem_num)
     VALUES (ticket_pay_seq.nextval, #{ticket_num}, #{ticket_pay_name}, 
         #{ticket_pay_zipcode}, #{ticket_pay_address1}, #{ticket_pay_address2}, #{ticket_pay_phone}, #{mem_num})
-</insert>
+</insert><!-- sql 태그외 include 태그를 이용해 SQL문 재사용 -->
 	
-	<!-- sql 태그외 include 태그를 이용해 SQL문 재사용 -->
+	
 	<!-- 검색 -->
 		<sql id="ticketPaySearch">
 				<if test="keyword != null and keyword != ''">
@@ -31,35 +31,52 @@
 					ticket_category = #{ticket_category}
 				</if>
 		</sql>
-<!-- 예약내역 목록의 총개수/검색 개수 --> 
-<select id="selectRowCount" parameterType="map" resultType="integer">
+	<!-- 예약내역 목록의 총개수/검색 개수 --> 
+	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT 
 		COUNT(*) 
 		FROM ticket_pay a JOIN ticket b ON a.ticket_num=b.ticket_num JOIN member m ON b.mem_num=m.mem_num WHERE a.mem_num=#{mem_num}
 		<include refid="ticketPaySearch"></include>
-</select>
-<!-- 특정 사용자의 모든 예약 내역 조회 -->
-<select id="selelectReservList" parameterType="map" resultType="ticketVO">
-	SELECT * FROM (
-    SELECT a.*, 
-    rownum rnum FROM (
-        SELECT 
-            b.ticket_num,
-            b.ticket_category,
-            <![CDATA[
-			REPLACE(REPLACE(b.ticket_name, '<', '&lt;'),'>','&gt;') b.ticket_name, 
-			]]>
-        FROM 
-            ticket_pay a 
-            JOIN ticket b ON a.ticket_num = b.ticket_num 
-            JOIN member m ON b.mem_num = m.mem_num 
-            <include refid="ticketPaySearch"></include>
-        WHERE 
-            a.mem_num = #{mem_num}
-    ) a
-)
-<![CDATA[
-	WHERE rnum >= #{start} AND rnum <= #{end}
-	]]>
-</select>
+	</select>
+	<!-- 특정 사용자의 모든 예약 내역 조회 -->
+	<select id="selectReservList" parameterType="map" resultType="ticketPayVO">
+		SELECT * FROM (
+    	SELECT a.*, 
+    	rownum rnum FROM (
+        	SELECT 
+            	b.ticket_num,
+           	 b.ticket_category,
+            	<![CDATA[
+				REPLACE(REPLACE(ticket_name, '<', '&lt;'),'>','&gt;') b.ticket_name, 
+				]]>
+       	 FROM 
+           	 ticket_pay a 
+            	JOIN ticket b ON a.ticket_num = b.ticket_num 
+            	JOIN member m ON b.mem_num = m.mem_num 
+           	 <include refid="ticketPaySearch"></include>
+        	WHERE 
+            	a.mem_num = #{mem_num}
+    	) a
+	)
+	<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select> 
+	<!-- 예약 내역 상세 -->
+	<select id="selectTicketPay" parameterType="integer">
+		SELECT
+    	t.*,
+    	tp.ticket_pay_name,
+    	tp.ticket_pay_zipcode,
+    	tp.ticket_pay_address1,
+    	tp.ticket_pay_address2,
+    	tp.ticket_pay_phone
+		FROM
+    	ticket t
+		JOIN
+    	ticket_pay tp ON t.ticket_num = tp.ticket_num
+		WHERE
+   		t.ticket_num = #{ticket_num};
+		
+	</select>
 </mapper>
