@@ -70,7 +70,7 @@
     		<fmt:formatNumber value="${totalPrice}" pattern="###,###"/>원</li>
 		</ul>
 		<div class="align-right">
-		 <c:if test="${!empty user && user.mem_num != ticket.mem_num && ticket.ticket_status!=2}">	
+		<c:if test="${!empty user && user.mem_num != ticket.mem_num && ticket.ticket_status!=2}">	
     		<input type="button" value="결제하기" 
     		onclick="location.href='${pageContext.request.contextPath}/ticketPay/write?ticket_num=${ticket.ticket_num}'">
     	</c:if>
@@ -124,7 +124,12 @@
 			<img src="${pageContext.request.contextPath}/upload/${ticket.ticket_filename4}" class="detail-img">
 		</div>
 		</c:if>
+		<c:if test="${not empty ticket.ticket_filename1 
+                  or not empty ticket.ticket_filename2 
+                  or not empty ticket.ticket_filename3 
+                  or not empty ticket.ticket_filename4}">
 		<hr size="1"width="100%">
+		</c:if>
 		<div class="detail-content">
 			${ticket.ticket_content}
 		</div>
