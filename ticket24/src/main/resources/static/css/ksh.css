@@ -49,5 +49,11 @@ input[type="radio"] {
     font-size: 20px; /* 원하는 크기로 설정 */
 }
 
+.detail-img {
+    margin-bottom: 20px; /* 원하는 간격 값으로 조절 가능 */
+}
 
+.detail-img {
+    margin-bottom: 20px; /* 원하는 간격 값으로 조절 가능 */
+}
 

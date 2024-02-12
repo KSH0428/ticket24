@@ -6,6 +6,7 @@
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
+<link rel="stylesheet" href="/css/ksh.css">
 <div class="page-main">
 	<h2>${ticket.ticket_name}</h2>
 	<ul class="detail-info">
@@ -37,6 +38,7 @@
 		<ul>
 		<li>공연명 : ${ticket.ticket_name} , 공연장소 : ${ticket.ticket_place } , 공연일 : ${ticket.ticket_date} </li>
 		<li>좌석정보 : ${ticket.ticket_seat}</li>
+		<c:if test="${! empty ticket.f_ticket_special1}">
 				<li> 상품 특이사항 : 
 			<c:forEach var="ticket_special1" items="${ticket.f_ticket_special1}" varStatus="status">
 				<c:if test="${status.index > 0}">,</c:if>
@@ -50,6 +52,8 @@
 				<c:if test="${ticket_special1 == 8}">조기입장</c:if>
 			</c:forEach>
 		</li>
+		</c:if>
+		<c:if test="${! empty ticket.f_ticket_special2}">
 		<li> 좌석 특이사항 : 
 			<c:forEach var="ticket_special2" items="${ticket.f_ticket_special2}" varStatus="status">
 			    <c:if test="${status.index > 0}">,</c:if>
@@ -58,16 +62,17 @@
 				<c:if test="${ticket_special2 == 3}">스피커 옆</c:if> 
 				<c:if test="${ticket_special2 == 4}">스탠딩 한정</c:if> 
 				<c:if test="${ticket_special2 == 5}">가변석</c:if>	
-			</c:forEach>
-											
+			</c:forEach>									
 		</li>
+		</c:if>
 		<li>수량 : ${ticket.ticket_quantity}장 , 가격 :  <fmt:formatNumber value="${ticket.ticket_price}"/>원 ,
 			 총 가격 : <c:set var="totalPrice" value="${ticket.ticket_quantity * ticket.ticket_price}" />
     		<fmt:formatNumber value="${totalPrice}" pattern="###,###"/>원</li>
 		</ul>
 		<div class="align-right">
-    	 <c:if test="${!empty user && user.mem_num != ticket.mem_num}">
-    	<input type="button" value="결제하기" onclick="location.href='${pageContext.request.contextPath}/ticketPay/write?ticket_num=${ticket.ticket_num}'">
+		 <c:if test="${!empty user && user.mem_num != ticket.mem_num && ticket.ticket_status!=2}">	
+    		<input type="button" value="결제하기" 
+    		onclick="location.href='${pageContext.request.contextPath}/ticketPay/write?ticket_num=${ticket.ticket_num}'">
     	</c:if>
     	</div>
 		<hr size="1"width="100%">
@@ -83,7 +88,6 @@
 			<img src="${pageContext.request.contextPath}/upload/${ticket.ticket_filename1}" class="detail-img">
 		</div>
 		</c:if>
-		<br>
 		<c:if test="${fn:endsWith(ticket.ticket_filename2,'.jpg') ||
 				  fn:endsWith(ticket.ticket_filename2,'.JPG') ||					
 				  fn:endsWith(ticket.ticket_filename2,'.jpeg') ||
@@ -96,7 +100,6 @@
 			<img src="${pageContext.request.contextPath}/upload/${ticket.ticket_filename2}" class="detail-img">
 		</div>
 		</c:if>
-		<br>
 		<c:if test="${fn:endsWith(ticket.ticket_filename3,'.jpg') ||
 				  fn:endsWith(ticket.ticket_filename3,'.JPG') ||					
 				  fn:endsWith(ticket.ticket_filename3,'.jpeg') ||
@@ -109,7 +112,6 @@
 			<img src="${pageContext.request.contextPath}/upload/${ticket.ticket_filename3}" class="detail-img">
 		</div>
 		</c:if>
-		<br>
 		<c:if test="${fn:endsWith(ticket.ticket_filename4,'.jpg') ||
 				  fn:endsWith(ticket.ticket_filename4,'.JPG') ||					
 				  fn:endsWith(ticket.ticket_filename4,'.jpeg') ||
