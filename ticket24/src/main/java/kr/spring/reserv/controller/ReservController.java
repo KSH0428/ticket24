@@ -336,6 +336,31 @@ public class ReservController {
 
 		return "redirect:/reserv/reservList";
 	}
+	
+	@RequestMapping("/reserv/reservMain")
+	public String reservMain() {
+		return "reservMain";
+	}
+	
+	@RequestMapping("/reserv/sideFile")
+	public ModelAndView downloadSideFile(@RequestParam String filename,
+			                     HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		//파일을 절대경로에서 읽어들여 byte[]로 변환
+		byte[] downloadFile = null;
+		downloadFile = FileUtil.getBytes(request.getServletContext().getRealPath("/upload")+"/"+filename);
+		mav.addObject("filename", filename);
+		
+		mav.addObject("downloadFile", downloadFile);
+		
+		mav.setViewName("downloadView");
+		
+		
+	
+		return mav;
+	}
+	
 }
 
 

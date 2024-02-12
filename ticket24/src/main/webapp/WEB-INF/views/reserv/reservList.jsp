@@ -1,29 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 시작 -->
-<div class="container">
+<div>
 	<h2>날짜 선택</h2>
 	<hr size="1" width="100%">
 	<div class="row" style="margin-top: 30px;">
+		
 		<div class="col">
+			<div style="background: #ffc107;color: white;width:500px;text-align: center;"><h2>대관일자 선택</h2></div>
 			<div class="ds"></div>
 		</div>
-		<div class="vr vrline" style="padding-right:0;padding-left:0;"></div>
-		<div class=" col">
-			<div class="row date_box">
-			<div style="margin-bottom: 20px;">선택 날짜 <button class="btn btn-primary" id="clear_button" style="height: 43px;">초기화</button> </div>
-				<table id="date-table"style="height: 250px;">
+		<div class=" col" style="margin-left: 15px;">
+			<div class="row date_box" style="margin-bottom: 44px;">
+			<div style="margin-bottom: 20px;">선택 날짜 <button class="btn btn-warning" id="clear_button" style="height: 43px;">초기화</button> </div>
+				<table class="striped-table2" id="date-table" style="height: 250px;">
 				</table>
 			</div>
 			<div class="row submit_box">
-			<form method="post" action="/reserv/list" id="date_form" style="height:250px; padding-top: 25px;border: 1px solid;">
+			<form method="post" action="/reserv/list" id="date_form" style="height:250px; padding-top: 25px;">
 				<p class="gray-font">평일 : <span id="weekday">0</span>일</p>
 				<p class="gray-font">주말 : <span id="weekend">0</span>일</p>
 				<p>합계 : <span id="result">0</span>원</p>
 				<input type="hidden" name="reservation_date" id="dateArray" >
 				<div class="d-grid gap-2 mt-4" style="padding:0 30px 0 30px;">
-					<input class="btn btn-primary" type="submit" value="신청하기">
+					<input class="btn btn-warning" type="submit" value="신청하기">
 				</div>
 				
 			</form>

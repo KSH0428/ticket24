@@ -71,25 +71,25 @@
 			</div>
 			<div class="payment-method">
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="payment_method" id="card">
+				  <input class="form-check-input payment-check" type="radio" name="payment_method" id="card">
 				  <label class="form-check-label" for="card">
 				    신용카드
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="payment_method" id="trans">
+				  <input class="form-check-input payment-check" type="radio" name="payment_method" id="trans">
 				  <label class="form-check-label" for="trans">
 				    실시간계좌이체
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="payment_method" id="vbank">
+				  <input class="form-check-input payment-check" type="radio" name="payment_method" id="vbank">
 				  <label class="form-check-label" for="vbank">
 				    가상계좌
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="payment_method" id="phone" >
+				  <input class="form-check-input payment-check" type="radio" name="payment_method" id="phone" >
 				  <label class="form-check-label" for="phone">
 				    휴대폰소액결제
 				  </label>
@@ -104,7 +104,7 @@
 			    구매조건 확인 및 결제진행에 동의
 			  </label>
 				<div class="d-grid gap-2 mt-4">
-				  <button class="btn btn-primary" type="button" id="payment" onclick="requestPay()">결제하기</button>
+				  <button class="btn btn-warning" type="button" id="payment">결제하기</button>
 				</div>
 			</div>
 		</div>
@@ -115,12 +115,33 @@
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script type="text/javascript">
 $('#reservList').addClass('active');
+<!-- 유효성 검사 시작 -->
+$(document).ready(function(){
+    $("#payment").click(function(){
+    	let isChecked = false;
+        isChecked = $(".payment-check:checked").length > 0;
+        if (!isChecked) {
+            alert("적어도 하나의 결제 방법을 선택해주세요.");
+            return;
+        }
+        isChecked = $("#purchase_consent:checked").length > 0;
+        if (!isChecked) {
+            alert("구매조건 확인 및 결제진행에 동의해주세요.");
+            return;
+        }
+        
+        requestPay();
+    });
+    
+});	
+
+<!-- 유효성 검사 끝 -->   
+
+
 /* 결제 시작 */
 var IMP = window.IMP;
 IMP.init('imp06364606');
 function requestPay() {
-	<!-- 유효성 검사 시작 -->    
-	<!-- 유효성 검사 끝 -->    
 	
 	//결제시작
 	IMP.request_pay({

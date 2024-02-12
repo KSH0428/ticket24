@@ -21,7 +21,7 @@ input[type="file"] {
 }
 </style>
 
-<div>
+<div class="container" >
 	<h2>예약 정보</h2>
 	<hr size="1" width="100%">
 	<form:form action="reservation" id="reservation_form" enctype="multipart/form-data" modelAttribute="reservHallVO">
@@ -54,10 +54,15 @@ input[type="file"] {
 				<form:errors path="reservation_email" cssClass="error-color"/>
 				</div>
 			</div>
+			<div>
+				<label >진행 상황 수신 방법</label><br>
+				<input type="checkbox" name="receive"> <span style="font-size: 15px">문자</span>
+				<input type="checkbox" name="receive"> <span style="font-size: 15px">이메일</span>
+			</div>
 			<div class="row mb-3">
-				<label class="form-col col-form-label">신청서</label>
+				<div style="width: 67%;float: left;"><label style="width: 100%;" class="form-col col-form-label">신청서 <span style="font-size: 15px;color: gray">*최대 3개만 등록할 수 있습니다.</span></label></div><div style="float:left;width: 30%" id="uploadSpace"></div>
 				<div class="col-sm-9">
-				<div id="uploadSpace"></div><br>
+				<br>
 				<div id="uploadList"></div>
 				</div>
 			</div>
@@ -66,7 +71,7 @@ input[type="file"] {
 		<div class="col date_box"  style=" min-height:400px;">
 		<div>선택 날짜</div>
 			<hr size="1" width="100%">
-				<table id="date-table"style="height: 400px;">
+				<table id="date-table" class="striped-table2" style="height: 400px; display: table;">
 				<c:forEach var="reservation_date" items="${reservation_date}">
 				<tr><td>${reservation_date}</td></tr>
 				</c:forEach>
@@ -74,7 +79,7 @@ input[type="file"] {
 		</div>
 		</div>
 		<div class="row align-center">
-			<input type="submit" class="btn btn-primary" value="예약">
+			<input type="submit" class="btn btn-warning" value="예약">
 		</div>
 	</form:form>
 	
@@ -90,7 +95,7 @@ $(function(){
 	//업로드 버튼 생성
 	function createFile() {
 		let output = '';
-		output += '<label class="file-label btn btn-primary" for="upload'+cnt+'">파일업로드</label>'
+		output += '<label class="file-label btn btn-warning" for="upload'+cnt+'">파일업로드</label>'
 		output += '<input type="file" name="upload" class="upload" id="upload'+cnt+'">'
 		$('#uploadSpace').append(output);
 		cnt++
@@ -133,6 +138,11 @@ $(function(){
 			alert('신청서는 최대 3개만 등록할 수 있습니다.');
 			return false;
 		}
+		var isAtLeastOneChecked = $("input[name='receive']:checked").length > 0;
+        if (!isAtLeastOneChecked) {
+            alert("하나 이상의 수신 방법을 선택해주세요.");
+            return false; // 넘어가지 않음
+        }
 	});
 });
 </script>

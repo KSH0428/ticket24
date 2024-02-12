@@ -60,6 +60,10 @@
     	<put-attribute name="title" value="대관일정"/>
     	<put-attribute name="body" value="/WEB-INF/views/reserv/reservSchedule.jsp"/>                                           
     </definition>
+    <definition name="reservMain" extends="reservation">
+    	<put-attribute name="title" value="시설소개"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserv/reservMain.jsp"/>                                           
+    </definition>
     
 </tiles-definitions>
 

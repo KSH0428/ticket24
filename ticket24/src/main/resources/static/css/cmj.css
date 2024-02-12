@@ -2,24 +2,23 @@
 
 /* 전체 레이아웃
 -------------------------*/
-	
 #main{
+	width:100%;
 	margin:0 auto;
 	font-size:10pt;
 	font-family:"맑은 고딕";
-	margin-bottom: 20px;
 }
 #main_header{
 	margin-bottom:10px;
 	padding:0 10px 0 0;
 }
 #main_body{
+	width:1300px;
 	padding:5px 5px 30px 5px;
 	min-height:500px;
 }
 #main_footer{
-	background-color:yellow;
-	margin-top: 40px;
+	display:block;
 }
 a:link{
 	text-decoration:none;
@@ -33,16 +32,156 @@ a:hover{
 	text-decoration:none;
 	color:#999999;
 }
+.bnr-bottom-wrap {
+    width: 100%;
+    background: #f6f6f6;
+}
+.bnr-bottom {
+    width: 1200px;
+    display: table;
+    margin: 0 auto;
+}
+.bnr-bottom .bnr-bottom-01 {
+    padding-left: 120px;
+    background: url(http://tkfile.yes24.com/imgNew/common/ico-bnr-bottom01.png)no-repeat 20px center;
+    position: relative;
+}
+.bnr-bottom > div {
+    width: 50%;
+    height: 120px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.bnr-bottom > div p {
+    font-size: 16px;
+    color: #333;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+    position: relative;
+    font-family: 'Noto Sans KR', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+}
+.bnr-bottom > div p:after {
+    content: "";
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #46c2b5;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.bnr-bottom > div span {
+    font-size: 13px;
+    color: #666;
+}
+.bnr-bottom .bnr-bottom-01:after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 80px;
+    background: #ddd;
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+.bnr-bottom .bnr-bottom-02 {
+    padding-left: 140px;
+    background: url(http://tkfile.yes24.com/imgNew/common/ico-bnr-bottom02.png)no-repeat 40px center;
+}
+div.cont {
+    width: 1200px;
+    margin: 0 auto;
+}
+.footer-menu {
+    border-bottom: 1px solid #f6f6f6;
+    height: 70px;
+    position: relative;
+}
+.footer-menu > a:first-child {
+    padding-left: 0;
+}
+.footer-menu > a {
+    display: inline-block;
+    line-height: 78px;
+    font-size: 15px;
+    color: #333;
+    padding: 0 16px;
+    position: relative;
+}
+.fb {
+    font-weight: bold !important;
+}
+.footer-menu .family {
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+    top: 21px;
+    right: 0;
+    border: 1px solid #999;
+    width: 168px;
+    height: 28px;
+    background: #fff;
+}
+.footer-txt {
+    position: relative;
+    height: 165px;
+}
+.footxt {
+    position: absolute;
+    top: 22px;
+    left: 221px;
+}
+.footxt p {
+    font-size: 15px;
+    color: #333;
+    line-height: 23px;
+    margin-bottom: 5px;
+}
+.footxt p.gray {
+    color: #999;
+    font-size: 13px;
+}
+.footxt p.gray a {
+    font-size: 13px;
+    color: #333;
+    padding-right: 10px;
+    background: url(http://tkfile.yes24.com/imgNew/common/f-arrow.png)no-repeat right center;
+    margin-left: 15px;
+}
+.txt_d {
+    text-decoration: underline !important;
+}
+.foo-right {
+    position: absolute;
+    top: 30px;
+    right: -6px;
+    width: 225px;
+    font-size: 12px;
+}
+.foo-right .mark a {
+    font-size: 12px;
+    color: #333;
+    padding-right: 10px;
+    background: url(http://tkfile.yes24.com/imgNew/common/f-arrow.png)no-repeat right center;
+    margin-left: 45px;
+    vertical-align: middle;
+}
+.foo-right p.fservice {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+    line-height: 18px;
+}
 
 /* 좌측 메뉴 레이아웃(Admin,MyPage)
 -------------------------*/
 #page_nav{
 	float:left;
-	width:15%;
+	width:17%;
 	height:330px;
 }
 #page_body{
-	width:73%;
+	width:79%;
 	float:left;
 	margin-left: 40px;
 	min-height: 900px;
@@ -93,6 +232,7 @@ a:hover{
 .align-right{
 	text-align:right;
 	margin-top:100px;
+	margin-bottom: 30px;
 }
 /* 상단 메뉴
 -------------------------*/
@@ -118,9 +258,6 @@ form ul li label{
 input{
 	margin-top:4px;
 	padding:5px;
-}
-input[type="text"],input[type="password"],input[type="email"]{
-	width:350px;
 }
 input[type="checkbox"]{
 	margin:11px 0 10px 0;
@@ -415,7 +552,10 @@ form#mre_form{
 }
 #date-table td {
   text-align: center;
-  width: 500px;
+}
+#date-table tr {
+	display: table;
+	width:100%;
 }
 
 .scrollable {
@@ -428,6 +568,8 @@ form#mre_form{
 	text-align: center;
 	font-size: 25px;
 	vertical-align: middle;
+	border: 1px solid #ccc; /* 테두리 추가 */
+    border-radius: 5px; /* 테두리 모서리를 둥글게 */
 }
 #reservation_form{
 	padding: 30px;
@@ -470,6 +612,7 @@ hr{
 }
 .detail_ul{
 	font-size: 25px;
+	margin-top: 20px; 
 }
 .detail_ul li{
 	margin-bottom: 15px;
@@ -569,6 +712,97 @@ a{
 }
 .side-bar ul li a{
 	margin-left: 10px;
+}
+
+
+.detail_container {
+    display: flex;
+    justify-content: space-between; /* 좌우 여백 유지 */
+    padding: 20px; /* 좌우 여백 추가 */
+}
+
+.detail_left,
+.detail_right {
+    flex-basis: 48%; /* 좌우 각각의 너비 조절 */
+    padding: 20px; /* 내용과 테두리 사이 여백 */
+    border: 1px solid #ccc; /* 테두리 추가 */
+    border-radius: 5px; /* 테두리 모서리를 둥글게 */
+    background-color: #f9f9f9; /* 배경색 추가 */
+}
+
+.detail_left {
+    margin-right: 20px; /* 우측 요소와의 간격 조절 */
+}
+
+
+.notice {
+	margin: 20px auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+table.striped-table2 td{
+	border-bottom:1px solid rgba(0,0,0,.1);
+}
+table.striped-table2 tr:nth-child(odd){
+	background-color:rgb(250,250,247);
+}
+
+.nav-item{
+	font-size: 15px;
+}
+
+
+
+/* 갤러리-시설소개 */
+.gallery_box{border-top:2px solid #454545; *zoom:1; letter-spacing:-1px}
+.gallery_box:after{display:block; content:""; clear:both}
+.gallery_box img,.gallery_box .gallery_text_box{float:left}
+.gallery_box .gallery_01{margin-top:20px}
+.gallery_box .gallery_01 img{width:200px; height:150px;}
+.gallery_box .gallery_text_box{width:510px;}
+.gallery_box .gallery_text_box li{padding:20px 0 0 20px; font-size:14px; font-weight:normal;}
+.gallery_box .gallery_text_box li:first-child{padding-top:30px}
+
+/* 탭안의 컨텐츠 타이틀 */
+.tab_cont {padding-top:60px;}
+.tab_h3tit{background:none; padding-left:0; padding-bottom:15px; margin-top:0; height:auto; font-size:16px; font-weight:bold; color:#222; line-height:1 }
+/*#content .tab_cont .h3tit{background:url(/kepco/indi/art/img/com/bul_h3.gif) 0 5px no-repeat; height:auto; margin-top:30px; padding-left:10px; padding-bottom:12px; font-size:14px; font-weight:bold; color:#222; line-height:1;} art의 h3영향*/
+
+
+/* 시설소개 - 무대설비 */
+.gallery_box.type02{border-top:2px solid #454545; letter-spacing:-1px}
+.gallery_box.type02 .gallery_text_box li{padding-top:0; font-size:12px;}
+.bul_list_inline{letter-spacing:-1px}
+.bul_list_inline li{display:inline-block; padding-left:10px; padding-right:10px}
+.tbl_consection .tbl_grid{border-top:1px solid #c9c9c9}
+
+
+/* 표테이블 */
+.tbl_grid{border-top:2px solid #454545;}
+.tbl_grid .rule_alignC{text-align:center;background:#b9b9b9;border-left:1px dotted #b9b9b9;border-right:1px dotted #b9b9b9}
+.tbl_grid .rule_alignL{text-align:left;border-left:1px dotted #b9b9b9;border-right:1px dotted #b9b9b9}
+.tbl_grid table{width:100%; border-bottom:1px solid #c9c9c9;}
+.tbl_grid table thead th{background:#6d6d6d; line-height:43px; font-size:14px; color:#fff; border-left:1px solid #f1f1f1;}
+.tbl_grid table tbody th,
+.tbl_grid table tbody td{border-bottom:1px dotted #b9b9b9; text-align:left; padding:11px 0 11px 20px;}
+.tbl_grid table tbody th{color:#222; background:#f9f9f9; font-weight:normal;}
+.tbl_grid table tbody td img{vertical-align:middle;}
+.tbl_grid a{color:#297ee9; text-decoration:underline;}
+.tbl_grid.type02{border:0;}
+.tbl_grid.type02 table tbody th,
+.tbl_grid.type02 table tbody td{text-align:center; padding:11px 0;}
+.tbl_grid.type02 table .colBg{background:#f9f9f9;}
+.tbl_grid.type02 table td.price_won{text-align:right ; padding-right:10px;}
+.tbl_grid.type02 table td.alignL{text-align:left; padding-left:20px;}
+
+.h3tit {
+    padding-left: 10px;
+    margin: 28px 0 10px;
+    font-size: 14px;
+    color: #222;
+    line-height: 1;
+    font-weight: bold;
 }
 
 

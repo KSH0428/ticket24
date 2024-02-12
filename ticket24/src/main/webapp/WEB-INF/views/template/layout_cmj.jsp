@@ -15,10 +15,10 @@
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
-	<div id="main_banner">
+	<div id="main_banner container">
 		<tiles:insertAttribute name="banner"/>
 	</div>
-	<div class="side-height">
+	<div class="side-height container">
 		<div id="page_nav">
 			<tiles:insertAttribute name="nav"/>
 		</div>
