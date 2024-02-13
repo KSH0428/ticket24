@@ -50,7 +50,7 @@ $(function(){
 	});//end of keydown
 	
 	//submit 이벤트 발생시 아이디 중복 체크 여부 확인
-	$('#member_register').submit(function(){
+	$('#member_register').submit(function(event){
 		if(checkId == 0){
 			$('#message_id').css('color','red').text('아이디 중복 체크 필수');
 			if($('#mem_id').val().trim()==''){
@@ -58,6 +58,10 @@ $(function(){
 			}
 			return false;
 		}
+		if($('#mem_ckemail').val() !== code) {
+        $('#mail-check-warn').text('인증번호가 일치하지 않습니다.').css('color','red');
+        event.preventDefault(); // 폼 제출을 막음
+        }
 	});//end of submit
 	
     // 비밀번호 확인 필드 값이 변경될 때마다 일치 여부를 확인
@@ -72,7 +76,7 @@ $(function(){
             $('#checkText').text('비밀번호가 일치하지 않습니다.').css('color','red');
         } else {
             // 일치할 경우 메시지 초기화
-            $('#checkText').text('');
+            $('#checkText').text('비밀번호 일치').css('color','green');
         }
     });
 
@@ -100,7 +104,6 @@ $(function(){
 	
 	$('#emailBtn').click(function() {
 	    let email = $('#mem_email').val(); // 이메일 주소값 얻어오기
-	    console.log('완성된 이메일 : ' + email); // 이메일 오는지 확인
 	    let checkInput = $('#mem_ckemail'); // 인증번호 입력하는곳 
 		
 		if($('#mem_email').val().trim()==''){
@@ -113,7 +116,6 @@ $(function(){
 	        type : 'get',
 	        url : 'mailCheck?mem_email=' + email, // URL에 직접 이메일 주소를 추가
 	        success : function (data) {
-	            console.log("data : " +  data);
 	            checkInput.attr('disabled',false);
 	            code = data;
 	            alert('인증번호가 전송되었습니다. 이메일을 확인해주세요.');
@@ -132,7 +134,6 @@ $(function(){
 			$('#mail-check-warn').text('인증번호가 일치합니다.').css('color','green');
 	    } else {
 			$('#mail-check-warn').text('인증번호가 일치하지 않습니다.').css('color','red');
-	    }
+		}
     });
-	
 });
