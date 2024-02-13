@@ -78,7 +78,7 @@
 			</c:forEach>									
 		</li>
 		</c:if>
-		<li>수량 : ${ticket.ticket_quantity}장 , 가격 :  <fmt:formatNumber value="${ticket.ticket_price}"/>원 ,
+		<li>수량 : ${ticket.ticket_quantity}장 , 가격 : <fmt:formatNumber value="${ticket.ticket_price}"/>원 ,
 			 총 가격 : <c:set var="totalPrice" value="${ticket.ticket_quantity * ticket.ticket_price}" />
     		<fmt:formatNumber value="${totalPrice}" pattern="###,###"/>원</li>
 		</ul>

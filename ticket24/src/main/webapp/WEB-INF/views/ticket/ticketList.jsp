@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 내용 시작 -->
 <div class="page-main">
 	<h2>티켓양도 목록</h2>
@@ -71,7 +72,7 @@
 							test="${ticket.ticket_status == 1}">보유중</c:if> <c:if
 							test="${ticket.ticket_status == 2}">판매 완료</c:if>
 					<td class="align-center">${ticket.ticket_quantity}장</td>
-					<td class="align-center">${ticket.ticket_price}원</td>
+					<td class="align-center"><fmt:formatNumber value="${ticket.ticket_price}"/>원</td>
 					</tr>
 				</c:forEach>
 			</table>
