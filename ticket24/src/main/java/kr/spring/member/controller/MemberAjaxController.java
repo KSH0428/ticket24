@@ -55,7 +55,7 @@ public class MemberAjaxController {
 	}
 	
 	/*==========================
-	 * 이메일 인증
+	 * 회원가입 이메일 인증
 	 *=========================*/
 	@GetMapping("/member/mailCheck")
 	@ResponseBody

@@ -367,7 +367,7 @@ li {
 	width:700px;
 	height:400px;
 	border: 1px solid rgba(0, 0, 0, 0.2);
-	padding:50px;
+	padding: 60px 60px 100px 60px;
 	position:relative;
 	margin:0 auto;
 	margin-top:50px;
@@ -394,9 +394,10 @@ li {
 	margin-top:20px;	
 }
 .mypage-button{
-	margin:0 auto;
 	clear:both;
 	text-align: center;
+	position: relative;
+	top: -40px; 
 }
 
 /* MY페이지 포인트 리스트

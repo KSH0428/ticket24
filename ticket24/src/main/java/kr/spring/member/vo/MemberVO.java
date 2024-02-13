@@ -43,6 +43,7 @@ public class MemberVO {
 	@Email
 	@NotBlank
 	private String mem_email;
+	@NotBlank
 	private String mem_ckemail; //회원가입시 메일 인증
 	@Size(min=5, max=5)
 	private String mem_zipcode;

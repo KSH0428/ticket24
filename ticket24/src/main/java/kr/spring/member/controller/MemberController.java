@@ -32,7 +32,11 @@ import kr.spring.member.service.SendEmailService;
 import kr.spring.reserv.service.ReservService;
 import kr.spring.member.vo.MailVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.question.vo.QuestionVO;
 import kr.spring.reserv.vo.ReservHallVO;
+import kr.spring.ticket.vo.TicketVO;
+import kr.spring.ticketpay.service.TicketPayService;
+import kr.spring.ticketpay.vo.TicketPayVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
@@ -49,6 +53,9 @@ public class MemberController {
 	
 	@Autowired
 	private ReservService reservService;
+	
+	@Autowired
+	private TicketPayService ticketPayService;
 	
 	/*==========================
 	 * 자바빈(VO) 초기화
@@ -86,7 +93,7 @@ public class MemberController {
 
 		model.addAttribute("accessTitle", "회원가입");
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
-		model.addAttribute("accessUrl", request.getContextPath()+"/main/main");
+		model.addAttribute("accessUrl", request.getContextPath()+"/concert/list");
 		
 		return "common/resultView";
 	}
@@ -227,7 +234,7 @@ public class MemberController {
 				log.debug("<<mem_au_id>>" + member.getMem_au_id());
 				
 				if(member.getMem_auth() == 9) {//관리자는 관리자 메인으로 이동
-					//======추후 수정======//
+					//======추후 수정======//  
 					return "redirect:/concert/list";
 				}else {//일반 사용자는 사용자 메인으로 이동
 					return "redirect:/concert/list";
@@ -488,6 +495,7 @@ public class MemberController {
 		
 		log.debug("<<있나? lisw : " + list_write);
 		log.debug("<<있나? lisf : " + list_fav);
+		
 		return "memberComm";
 	}
 	/*========================
@@ -569,7 +577,79 @@ public class MemberController {
 	/*========================
 	 * 마이페이지 양도티켓 결제 내역
 	 *=======================*/
+	@RequestMapping("member/memberTicket")
+	public ModelAndView ticketprocess (@RequestParam(value="pageNum",defaultValue="1")int currentPage,
+			@RequestParam(value="order",defaultValue="1") int order,String keyfield, String keyword,HttpSession session) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num());
+		
+		//전체/검색 레코드 수
+		int count = ticketPayService.selectRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list");
+		
+		List<TicketPayVO> list = null;
+
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = ticketPayService.selectReservList(map);
+			log.debug("<<list>> : " + list);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memberTicket");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	/*========================
+	 * 마이페이지 1:1 문의
+	 *=======================*/
+	@RequestMapping("/member/memberQuestion")
+	public ModelAndView process(
+						@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+						@RequestParam(defaultValue="0") int question_category, 
+						String keyfield, String keyword, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("question_category", question_category);
+		map.put("mem_num", user.getMem_num());
+		
+		//전체/검색 레코드수
+		int count = memberService.selectQuestionRowCount(map);
+		log.debug("<<count>> : " + count);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count, 20, 10, "list");
+		
+		List<QuestionVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectQuestionList(map);
+		}
 	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memberQuestion");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
 	/*========================
 	 * 회원 탈퇴
 	 *=======================*/

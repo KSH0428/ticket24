@@ -21,8 +21,8 @@
 					<li><a href="${pageContext.request.contextPath}/member/memberFav">좋아요한 게시글</a></li>
 				</ul>
 			</li>
-			<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">티켓양도</a></li>
-			<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">1:1 문의</a></li>
+			<li class="main-menu"><a href="${pageContext.request.contextPath}/member/memberTicket">티켓양도</a></li>
+			<li class="main-menu"><a href="${pageContext.request.contextPath}/member/memberQuestion">1:1 문의</a></li>
 		</ul>
 	</div>
 </body>

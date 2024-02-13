@@ -18,17 +18,17 @@ spring:
       max-lifetime: 1800000 #커넥션 풀에서 살아있을 수 있는 커넥션의 최대 수명시간 1,800초(30분)
       
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: "zewtlr78@gmail.com"
-    password: "vrbyjjfrexkmylwv"
-    properties:
-      mail:
-        smtp:
-        auth: true
-        timeout: 5000
-        starttls:
-          enable: true
+   host: smtp.gmail.com
+   port: 587
+   username: 
+   password: 
+   properties:
+    mail:
+     smtp:
+      auth: true
+      timeout: 5000
+      starttls:
+       enable: true
 
   messages: #메시지
     basename: messages.ceh,messages.ysw,messages.ces,messages.cmj,messages.hjh,messages.ksh
