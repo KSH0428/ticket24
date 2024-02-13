@@ -24,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.ticket.service.TicketService;
 import kr.spring.ticket.vo.TicketVO;
+import kr.spring.ticketpay.service.TicketPayService;
+import kr.spring.ticketpay.vo.TicketPayVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
@@ -34,6 +36,8 @@ import lombok.extern.slf4j.Slf4j;
 public class TicketController {
 	@Autowired
 	private TicketService ticketService;
+	@Autowired
+	private TicketPayService ticketPayService;
 	
 	/*=======================================
 	 * 게시판 글 등록
@@ -130,8 +134,19 @@ public class TicketController {
 		TicketVO ticket = ticketService.selectTicket(ticket_num);
 		//제목에 태그를 허용하지 않음
 		ticket.setTicket_name(StringUtil.useNoHtml(ticket.getTicket_name()));
-								//타일스 설정명,   속성명,    속성값
-		return new ModelAndView("ticketView", "ticket", ticket);
+		
+		TicketPayVO ticketPay = ticketPayService.reservTicketPay(ticket.getTicket_num());
+		
+		ModelAndView  mav = new ModelAndView();
+		mav.setViewName("ticketView");
+		mav.addObject("ticket", ticket);
+		if(ticketPay!=null) {
+			mav.addObject("ticketRerv", "yes");
+		}else {
+			mav.addObject("ticketRerv", "no");
+		}
+		
+		return mav;
 	}
 	/*=======================================
 	 * 파일 다운로드

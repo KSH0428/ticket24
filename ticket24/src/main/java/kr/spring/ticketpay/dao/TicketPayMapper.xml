@@ -79,6 +79,14 @@
 		FROM ticket
 		WHERE
    		ticket_num = #{ticket_num}
-		
-	</select>
+   		</select>
+   		
+   	 <!-- 티켓 번호 반환 (결제하기 숨기기용) -->
+   	 <select id="reservTicketPay" parameterType="integer" resultType="ticketPayVO">
+   	 	SELECT 
+   	 		*
+   	 	FROM ticket_pay
+   	 	WHERE
+   	 	ticket_num = #{ticket_num}
+   	 </select>
 </mapper>

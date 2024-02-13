@@ -37,4 +37,9 @@ public class TicketPayServiceImpl implements TicketPayService {
 	public TicketVO selectTicketPay(int ticket_num) {
 		return ticketPayMapper.selectTicketPay(ticket_num);
 	}
+
+	@Override
+	public TicketPayVO reservTicketPay(int ticket_num) {
+		return ticketPayMapper.reservTicketPay(ticket_num);
+	}
 }

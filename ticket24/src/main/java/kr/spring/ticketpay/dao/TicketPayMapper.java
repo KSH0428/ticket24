@@ -19,6 +19,8 @@ public interface TicketPayMapper {
     //예약 내역 상세
     public TicketVO selectTicketPay(int ticket_num);
     
+    // 티켓 번호 반환 (결제하기 숨기기)
+    public TicketPayVO reservTicketPay(int ticket_num);
     
 }
 

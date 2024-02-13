@@ -83,7 +83,7 @@
     		<fmt:formatNumber value="${totalPrice}" pattern="###,###"/>원</li>
 		</ul>
 		<div class="align-right">
-		<c:if test="${!empty user && user.mem_num != ticket.mem_num && ticket.ticket_status!=2}">	
+		<c:if test="${!empty user && user.mem_num != ticket.mem_num && ticket.ticket_status!=2 && ticketRerv == 'no'}">
     		<input type="button" value="결제하기" 
     		onclick="location.href='${pageContext.request.contextPath}/ticketPay/write?ticket_num=${ticket.ticket_num}'">
     	</c:if>
