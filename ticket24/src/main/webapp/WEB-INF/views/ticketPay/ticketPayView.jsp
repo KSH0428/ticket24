@@ -6,6 +6,7 @@
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
+<link rel="stylesheet" href="/css/ksh.css">
 <div class="page-main">
 <h2>${ticket.ticket_name}</h2>
 		<hr size="1"width="100%">
@@ -47,6 +48,7 @@
 		<hr size="1"width="100%">
 		<div class="center">
     <input type="button" value="목록" onclick="location.href='/ticketPay/list'">
+    <input type="button" value="홈으로" onclick="location.href='/main/main'">
 </div>
 		
 </div>

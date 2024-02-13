@@ -57,3 +57,7 @@ input[type="radio"] {
     margin-bottom: 20px; /* 원하는 간격 값으로 조절 가능 */
 }
 
+.center {
+ 	text-align: right;
+}
+
