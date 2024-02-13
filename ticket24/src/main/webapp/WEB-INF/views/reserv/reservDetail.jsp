@@ -32,7 +32,7 @@
 	                <c:if test="${detail.reservation_status==0}">신청완료</c:if>
 	                <c:if test="${detail.reservation_status==1}">심사대기</c:if>
 	                <c:if test="${detail.reservation_status==2}">결제대기 <button onclick="location.href='reservPayment?reservation_num=${detail.reservation_num}'">결제</button> </c:if>
-	                <c:if test="${detail.reservation_status==3}">결제완료 <button onclick="paymentDetail()" >결제완료</button></c:if>
+	                <c:if test="${detail.reservation_status==3}">결제완료 <button onclick="paymentDetail()" >결제확인</button></c:if>
 	                <c:if test="${detail.reservation_status==4}">신청취소</c:if>
 	            </li>
 	        </ul>
