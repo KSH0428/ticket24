@@ -149,7 +149,7 @@ function requestPay() {
       pay_method: $('input[type="radio"]:checked').attr('id'),
       merchant_uid: 'ticket_hall'+new Date().getTime(),   // 주문번호
       name: "TICKET24 아트센터",
-      amount: 100,                         // 숫자 타입
+      amount: ${payment.reservation_price},                         // 숫자 타입
       buyer_email: $('#reservation_email').val(),
       buyer_name: $('#reservation_name').val(),
       buyer_tel: $('#reservation_phone').val(),
