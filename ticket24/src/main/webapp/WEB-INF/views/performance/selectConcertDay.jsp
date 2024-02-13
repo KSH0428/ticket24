@@ -3,13 +3,14 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script>
+let last_seleted_c_round_num;
 $(function() {
 	//Ajax로 공연 회차 정보 가져오기
 	
     let dates = [];
 	let round = [];
 	let c_round_num = [];
-	let last_seleted_c_round_num;
+	
     
 	$.ajax({
 		url: 'concertRound',
@@ -184,6 +185,9 @@ $(function() {
 		*/
 		//현재 콘서트 회차 번호 갱신
 		last_seleted_c_round_num = c_round_num[num];
+		
+		//회차 번호 저장하기
+		$('#lastRoundNum').val(last_seleted_c_round_num);
 	});
 	
 	$(document).on('click', '#selected-round-btn2', function() {
@@ -201,6 +205,7 @@ $(function() {
 		
 		$('#seatsNum').text('');
 		$('#seatsNum').text(getRemainingSeats(c_round_num[1]));
+		
 		
 		//상태창에 갱신된 정보 반영하기
 		//날짜
@@ -220,6 +225,9 @@ $(function() {
 		*/
 		//현재 콘서트 회차 번호 갱신
 		last_seleted_c_round_num = c_round_num[num];
+		
+		//회차 번호 저장하기
+		$('#lastRoundNum').val(last_seleted_c_round_num);
 	});
 	
 	//공연 회차 좌석 정보 얻어오기
@@ -257,9 +265,15 @@ $(function() {
         }else if($("#selected-round-btn2 span").text() == str){
         	$("#selected-round-btn2").click();
         }
+        //step2의 좌석함수 갱신된 회차 정보를 쓰기 위해서
+        createSeats(6, 10);
     });
-
+	
 });
+
+
+
+
 </script>
 
 <!-- 관람일/회차 선택 -->
@@ -294,34 +308,163 @@ $(function() {
 	</div>
 	<!-- 유의사항 -->
 	<div class="note-container">
-		유의사항(후순위)
+		<div class="note-container-header">유의사항</div>
+		<div class="note-container-content">
+			<ul style="list-style:none;">
+				<li>- 안내되어 있는 잔여석은 결제 진행 중인 좌석을 포함하고 있어 예매 가능 좌석과 다를 수 있습니다.</li>
+				<li>- 할인은 자동선택 되지 않으니, <u>적용 받고자 하는 할인이 있는 경우 직접 선택</u>해주시기 바랍니다.</li>
+				<li>- 예매 취소 시  <u>예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.</u></li>
+				<li>- 예매 취소 시점에 따라 취소수수료가 부과될 수 있습니다. 예매 후 취소마감시간과 함께 취소수수료를 꼭 확인해주시기 바랍니다.</li>
+				<li>- 1인당 <u>최대 2매</u> 예매 가능합니다.</li>
+			</ul>
+		</div>
 		<button style="display:none;" id="selectDateBtn">업로드 버튼</button>
 	</div>
+	
+	
 </div>
 
-<!-- 좌석 선택 -->
-<script>
-    $(function() {
-      createSeats(5, 10);
-    });
+<!-- =========================================================================== -->
+<!-- step2 좌석 선택 -->
 
-    // 좌석을 만드는 함수
-    function createSeats(rows, cols) {
-      var seatLayout = $("#seatLayout");
-      for (var i = 0; i < rows; i++) {
-        for (var j = 0; j < cols; j++) {
-          var seat = $("<div>").addClass("seat");
-          seatLayout.append(seat);
-        }
-        seatLayout.append("<br>"); // 줄바꿈
-      }
-    }
-  </script>
+<script>
+
+
+let seat_count = 0;
+//좌석을 만드는 함수
+function createSeats(rows, cols) {
+  var seatLayout = $("#seatLayout");
+  /* alert(last_seleted_c_round_num); */
+  
+  $.ajax({
+  		url: 'concertSeatListInfo',
+  		type: 'post',
+  		data: {
+  			concert_num:${concert.concert_num},
+  			c_round_num:last_seleted_c_round_num
+  		},
+  		success:function(param){
+  			for(let i = 0; i<param.length; i++){
+  				console.log(param[i].seat_num);
+  			}
+  		},
+  		error:function(){
+			alert('통신 오류!!');
+		}
+	  });
+  
+  for (var i = 0; i < rows; i++) {
+	  for (var j = 0; j < cols; j++) {
+    	let seat;
+    	if(j==0){
+    		seat = $("<div>").addClass("rowOfSeats").append(i+1);
+    		//seat = $("<div>").addClass("rowOfSeats");
+    		seatLayout.append(seat);
+    	}
+    	
+    	if(i<2){
+    		if(j<3-i||j>6+i){
+    			//공간을 차지하지만, 실제론 안보여지는 빈 좌석이다.
+    			//seat = $("<div>").addClass("seat").addClass("seat-empty");
+    			seat = $("<div>").addClass("seat seat-empty");
+    		}else{
+    			//seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count));
+    			seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count)).append(seat_count);
+    		}
+    	}else{
+    		//seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count));
+    		seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count)).append(seat_count);
+    	}
+      seatLayout.append(seat);
+     }
+	 
+	 seat = $("<div>").addClass("rowOfSeats").append(i+1);
+		 seatLayout.append(seat)
+     seatLayout.append("<br>"); // 줄바꿈
+  }
+}
+//좌석 함수 끝
+
+
+
+</script>
 <div id="step2" style="display:none;">
 	<div class="reserve-seats-conatiner">
 		<div class="reserve-seats-header">
-			현재 선택한 좌석의 번호가 뜬다.
+			STAGE
 		</div>
 		<div id="seatLayout"></div>
 	</div>
+</div>
+<script>
+	//카운트를 위한 클로저 생성
+	let count=0;
+	
+	{
+		let x = 0;
+		count = function(y) { // globalFunc 함수는 클로저다.
+		    return x = x + y;
+		  }
+	}
+	
+	//좌석을 클릭했을 경우(동적 이벤트) seat-empty는 제외
+	$(document).on('click', '.seat', function(){
+		//한 번 체크된 상태라면
+		if ($(this).hasClass("checked")) {
+			$(this).removeClass("checked");
+			let inValue = $(this).attr("id");
+			//id를 추출 후 아이디 넣음
+			let seat_num = inValue.substring(4);
+			$(this).text(seat_num);
+
+			
+			//테두리 효과 없앰
+			$(this).css({
+				'border' : 'none',
+				'margin' : '10px'
+			});
+			count(-1);
+			
+			if($('.reserve-state-selected-tickets-detail-1').text() == seat_num){
+				$('.reserve-state-selected-tickets-detail-1').remove();
+			}else if($('.reserve-state-selected-tickets-detail-2').text() == seat_num){
+				$('.reserve-state-selected-tickets-detail-2').remove();
+			}
+
+		}else {
+			//처음 선택하는 경우
+			//최대 매수는 2장
+			if(count(0)==2){
+				alert('최대 매수는 2장입니다.');
+			}else {
+				//텍스트 지우고 체크 표시
+				$(this).text("").addClass("checked");
+				$(this).css({
+					'border' : '2px solid',
+					'border-color' : 'black',
+					//인근 요소들에 영향을 끼치지 않기 위해 기존 10에서 9로 낮춤
+					'margin' : '8px'
+				});
+				count(1);
+				
+				if($('#reserve-state-selected-tickets-detail span').hasClass("reserve-state-selected-tickets-detail-1")) {
+					$('#reserve-state-selected-tickets-detail').append("<span class='reserve-state-selected-tickets-detail-2'>"+$(this).attr("id").substring(4)+"</span>");
+				}else {
+					$('#reserve-state-selected-tickets-detail').append("<span class='reserve-state-selected-tickets-detail-1'>"+$(this).attr("id").substring(4)+"</span>");
+				}
+			}
+		}
+		/* console.log(count(0)); */
+		//상태창에 선택 좌석 수, 좌석 정보 추가
+		$('#reserve-state-selected-tickets').text(count(0) + ' 매');
+		
+		
+		
+	});
+
+</script>
+
+<!-- =========================================================================== -->
+<!-- step3 가격/할인 -->
+<div id="step3" style="display:none;">
 </div>

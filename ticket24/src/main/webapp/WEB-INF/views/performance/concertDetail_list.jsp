@@ -234,8 +234,8 @@ $(function() {
 	//예약 팝업창
 	$('.reserve-btn').click(function(event){
 		let url="concertReservePopup?concert_num=${concert.concert_num}&c_round_num=" + last_seleted_c_round_num;
-		let width = 970;
-		let height = 638;
+		let width = 979;
+		let height = 644;
 		let popOption = "width=" + width + ", height=" + height;
 		window.open(url,"concertPopUp", popOption);
 	});

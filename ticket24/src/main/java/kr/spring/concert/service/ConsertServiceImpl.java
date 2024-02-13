@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.concert.dao.ConcertMapper;
 import kr.spring.concert.vo.ConcertDetailVO;
 import kr.spring.concert.vo.ConcertRoundVO;
+import kr.spring.concert.vo.ConcertSeatVO;
 import kr.spring.concert.vo.ConcertVO;
 
 @Service
@@ -39,7 +40,10 @@ public class ConsertServiceImpl implements ConcertService{
 
 	}
 
-
+	@Override
+	public void initializeSeat(int i, int num, int round_num) {
+		concertMapper.initializeSeat(i, num, round_num);
+	}
 
 	//-------------------------------
 	// 웹 크롤링 끝
@@ -79,6 +83,13 @@ public class ConsertServiceImpl implements ConcertService{
 	public ConcertRoundVO selectRound(int c_round_num) {
 		return concertMapper.selectRound(c_round_num);
 	}
+
+	@Override
+	public List<ConcertSeatVO> selectSeatsList(int concert_num, int c_round_num) {
+		return concertMapper.selectSeatsList(concert_num, c_round_num);
+	}
+
+
 	
 	
 

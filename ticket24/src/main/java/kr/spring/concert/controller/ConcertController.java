@@ -296,9 +296,7 @@ public class ConcertController {
 			System.out.println("-----------------------------");
 			*/
 			
-
-			concert_round(concert.getC_round_1(), num);
-			concert_round(concert.getC_round_2(), num);
+			
 
 
 			//소개 이미지
@@ -322,6 +320,12 @@ public class ConcertController {
 
 
 			concertService.insertConcertDetail(concert);
+			
+			//콘서트 회차 번호
+			int count = 1;
+			
+			concert_round(concert.getC_round_1(), num, count++);
+			concert_round(concert.getC_round_2(), num, count++);
 
 			//드라이버 종료
 			driver.quit();
@@ -331,7 +335,7 @@ public class ConcertController {
 
 	}
 	
-	private void concert_round(String src, int num) {
+	private void concert_round(String src, int num, int round_num) {
 		
 		System.out.println("num : " + num + ", " + src);
 		System.out.println("---------------------------");
@@ -369,16 +373,10 @@ public class ConcertController {
 				
 				concertService.insertConcertRound(round);
 				
-				/*
-				System.out.print("year : ");
-				System.out.print(year);
-				System.out.print(", ");
-				System.out.print("month : ");
-				System.out.print(month);
-				System.out.print(", ");
-				System.out.print("day : ");
-				System.out.println(day);
-				*/
+				for(int i = 1; i <= 50; i++) {
+					//넘겨야 하는 값 : 좌석번호, 콘서트 번호, 콘서트 회차 번호
+					concertService.initializeSeat(i,num,round_num);
+				}
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
