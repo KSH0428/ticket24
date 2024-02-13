@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내용 시작 -->
 <div class="page-main">
-	<h2>티켓양도 목록</h2>
+	<h2>티켓양도 예약목록</h2>
 	<form action="list" id="search_form" method="get">
 	<ul class="search">
 	<li>
@@ -41,7 +41,7 @@
 						<c:if test="${ticket.ticketVO.ticket_category == 3}">콘서트</c:if> 
 						<c:if test="${ticket.ticketVO.ticket_category == 4}">클래식</c:if>
 					</td>
-					<td><a href="detail?ticket_num=${ticketPay.ticket_num}">${ticket.ticketVO.ticket_name}</a></td>		
+					<td><a href="detail?ticket_num=${ticket.ticket_num}">${ticket.ticketVO.ticket_name}</a></td>		
 				</tr>			
 				</c:forEach>
 			</table>

@@ -28,6 +28,7 @@
 	</select>
 	<c:if test="${!empty user}">
 			<input type="button" value="글쓰기" onclick="location.href='write'">
+			<input type="button" value="구매내역" onclick="location.href='/ticketPay/list'">
 			</c:if>
 		</div>
 	</form>

@@ -6,6 +6,13 @@
     <resultMap type="ticketPayVO" id="ticketPayMap">
     	<result property="ticketVO.ticket_category" column="ticket_category"/>
     	<result property="ticketVO.ticket_name" column="ticket_name"/>
+    	<result property="ticketVO.ticket_place" column="ticket_place"/>
+    	<result property="ticketVO.ticket_date" column="ticket_date"/>
+    	<result property="ticketVO.ticket_special1" column="ticket_special1"/>
+    	<result property="ticketVO.ticket_special2" column="ticket_special2"/>
+    	<result property="ticketVO.ticket_price" column="ticket_price"/>
+    	<result property="ticketVO.ticket_quantity" column="ticket_quantity"/>
+    	<result property="ticketVO.ticket_seat" column="ticket_seat"/>
     </resultMap>
     
     
@@ -50,6 +57,7 @@
 	    	rownum rnum FROM (
 	        	SELECT 
 	            	a.ticket_pay_num,
+	            	a.ticket_num,
 	           	 	b.ticket_category,
 	            	<![CDATA[
 					REPLACE(REPLACE(b.ticket_name, '<', '&lt;'),'>','&gt;') ticket_name 
@@ -65,20 +73,12 @@
 		]]>
 	</select> 
 	<!-- 예약 내역 상세 -->
-	<select id="selectTicketPay" parameterType="integer">
+	<select id="selectTicketPay" parameterType="integer" resultType="ticketVO">
 		SELECT
-    	t.*,
-    	tp.ticket_pay_name,
-    	tp.ticket_pay_zipcode,
-    	tp.ticket_pay_address1,
-    	tp.ticket_pay_address2,
-    	tp.ticket_pay_phone
-		FROM
-    	ticket t
-		JOIN
-    	ticket_pay tp ON t.ticket_num = tp.ticket_num
+    	  *
+		FROM ticket
 		WHERE
-   		t.ticket_num = #{ticket_num};
+   		ticket_num = #{ticket_num}
 		
 	</select>
 </mapper>

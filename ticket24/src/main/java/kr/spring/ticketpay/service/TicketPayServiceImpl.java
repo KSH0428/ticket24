@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.ticket.vo.TicketVO;
 import kr.spring.ticketpay.dao.TicketPayMapper;
 import kr.spring.ticketpay.vo.TicketPayVO;
 
@@ -33,7 +34,7 @@ public class TicketPayServiceImpl implements TicketPayService {
 	}
 
 	@Override
-	public TicketPayVO selectTicketPay(int ticket_num) {
+	public TicketVO selectTicketPay(int ticket_num) {
 		return ticketPayMapper.selectTicketPay(ticket_num);
 	}
 }

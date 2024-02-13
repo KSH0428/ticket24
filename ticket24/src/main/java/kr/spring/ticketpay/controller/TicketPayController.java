@@ -106,5 +106,20 @@ public class TicketPayController {
 		
 		return mav;
 	}
+	/*=======================================
+	 * 게시판 글 상세
+	 *======================================*/
+	@RequestMapping("/ticketPay/detail")
+	public ModelAndView process(@RequestParam int ticket_num) {
+		log.debug("<<예약 상세 ticket_num>> : " + ticket_num);
+		
+		 TicketVO ticket = ticketPayService.selectTicketPay(ticket_num);
+		
+		//제목에 태그를 허용하지 않음
+		ticket.setTicket_name(StringUtil.useNoHtml(ticket.getTicket_name()));
+		
+		//타일스 설정명,   속성명,    속성값
+		return new ModelAndView("ticketPayView", "ticket", ticket);
+	}
 
 }
