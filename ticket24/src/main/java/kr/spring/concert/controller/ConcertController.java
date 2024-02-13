@@ -32,6 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 public class ConcertController {
 	@Autowired
 	private ConcertService concertService;
+	
+	static int round_count = 0;
 
 	//콘서트 목록
 	@RequestMapping("/concert/list")
@@ -322,10 +324,9 @@ public class ConcertController {
 			concertService.insertConcertDetail(concert);
 			
 			//콘서트 회차 번호
-			int count = 1;
 			
-			concert_round(concert.getC_round_1(), num, count++);
-			concert_round(concert.getC_round_2(), num, count++);
+			concert_round(concert.getC_round_1(), num);
+			concert_round(concert.getC_round_2(), num);
 
 			//드라이버 종료
 			driver.quit();
@@ -335,7 +336,7 @@ public class ConcertController {
 
 	}
 	
-	private void concert_round(String src, int num, int round_num) {
+	private void concert_round(String src, int num) {
 		
 		System.out.println("num : " + num + ", " + src);
 		System.out.println("---------------------------");
@@ -373,9 +374,11 @@ public class ConcertController {
 				
 				concertService.insertConcertRound(round);
 				
+				++round_count;
+				
 				for(int i = 1; i <= 50; i++) {
 					//넘겨야 하는 값 : 좌석번호, 콘서트 번호, 콘서트 회차 번호
-					concertService.initializeSeat(i,num,round_num);
+					concertService.initializeSeat(i,num,round_count);
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();

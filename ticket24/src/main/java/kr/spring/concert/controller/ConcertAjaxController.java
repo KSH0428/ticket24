@@ -44,8 +44,10 @@ public class ConcertAjaxController {
 	@RequestMapping("/concert/concertSeatListInfo")
 	@ResponseBody
 	public List<ConcertSeatVO> getConsertSeatinfo(int concert_num, int c_round_num){
-		List<ConcertSeatVO> seatInfo = concertService.selectSeatsList(1, 1);
+		List<ConcertSeatVO> seatInfo = concertService.selectSeatsList(concert_num, c_round_num);
 		log.debug("<<콘서트 해당 회차 좌석 정보 가져오기>");
+		log.debug("concert_num : " + concert_num + ", c_round_num : " + c_round_num);
+		System.out.println(seatInfo.size());
 		
 		return seatInfo;
 	}

@@ -267,6 +267,7 @@ $(function() {
         }
         //step2의 좌석함수 갱신된 회차 정보를 쓰기 위해서
         createSeats(6, 10);
+        
     });
 	
 });
@@ -351,11 +352,18 @@ function createSeats(rows, cols) {
   		},
   		success:function(param){
   			seatArray= param;
+  			
+  			for(let i = 0; i < seatArray.length; i++){
+  				console.log(seatArray[i]);
+  			}
+  			
   		},
   		error:function(){
 			alert('통신 오류!!');
 		}
 	  });
+  
+  seat_count = 0;
   
   for (var i = 0; i < rows; i++) {
 	  for (var j = 0; j < cols; j++) {
@@ -373,14 +381,14 @@ function createSeats(rows, cols) {
     			seat = $("<div>").addClass("seat seat-empty");
     		}else{
     			//seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count));
-    			if(seatArray[seat_count++].status==0)
+    			if(seatArray[seat_count++].status == 0)
     				seat = $("<div>").addClass("seat seat-available").attr('id', 'seat' + (seat_count)).append(seat_count);
     			else
     				seat = $("<div>").addClass("seat seat-occupied").attr('id', 'seat' + (seat_count));
     		}
     	}else{
     		//seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count));
-    		if(seatArray[seat_count++].status==0)
+    		if(seatArray[seat_count++].status == 0)
 				seat = $("<div>").addClass("seat seat-available").attr('id', 'seat' + (seat_count)).append(seat_count);
 			else
 				seat = $("<div>").addClass("seat seat-occupied").attr('id', 'seat' + (seat_count));
