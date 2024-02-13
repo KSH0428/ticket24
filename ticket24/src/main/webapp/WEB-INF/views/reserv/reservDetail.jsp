@@ -32,7 +32,7 @@
 	                <c:if test="${detail.reservation_status==0}">신청완료</c:if>
 	                <c:if test="${detail.reservation_status==1}">심사대기</c:if>
 	                <c:if test="${detail.reservation_status==2}">결제대기 <button onclick="location.href='reservPayment?reservation_num=${detail.reservation_num}'">결제</button> </c:if>
-	                <c:if test="${detail.reservation_status==3}">결제완료 <button disabled="disabled" >결제완료</button></c:if>
+	                <c:if test="${detail.reservation_status==3}">결제완료 <button onclick="paymentDetail()" >결제완료</button></c:if>
 	                <c:if test="${detail.reservation_status==4}">신청취소</c:if>
 	            </li>
 	        </ul>
@@ -110,6 +110,25 @@ function requestPay() {
 			alert('결제 오류 : 문의처에 문의해주세요.');
 		}
 	});
+ }
+ function paymentDetail(){
+	// 화면의 너비와 높이를 가져옵니다.
+    var screenWidth = window.screen.width;
+    var screenHeight = window.screen.height;
+
+    // 새 창의 너비와 높이를 설정합니다.
+    var windowWidth = 800;
+    var windowHeight = 400;
+
+    // 창이 화면 중앙에 위치하도록 좌표를 계산합니다.
+    var left = (screenWidth - windowWidth) / 2;
+    var top = (screenHeight - windowHeight) / 2;
+
+    // 창의 속성을 설정합니다.
+    var windowFeatures = "width=" + windowWidth + ",height=" + windowHeight + ",top=" + top + ",left=" + left + ",resizable=no";
+
+    // 새 창을 엽니다.
+    window.open('paymentDetail?reservation_num=${detail.reservation_num}', '_blank', windowFeatures);
  }
 /* 결제 끝 */
 </script>

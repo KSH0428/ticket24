@@ -32,6 +32,10 @@ a:hover{
 	text-decoration:none;
 	color:#999999;
 }
+#calendar a{
+	color: black;
+	text-decoration: none;
+}
 .bnr-bottom-wrap {
     width: 100%;
     background: #f6f6f6;

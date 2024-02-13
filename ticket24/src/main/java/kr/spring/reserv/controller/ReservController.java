@@ -310,7 +310,7 @@ public class ReservController {
 		
 		model.addAttribute("payment", payment);
 		
-		return "paymentDetail";
+		return "/reserv/paymentDetail";
 	}
 	
 	//신청 취소

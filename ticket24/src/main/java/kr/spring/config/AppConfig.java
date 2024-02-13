@@ -70,7 +70,9 @@ public class AppConfig implements WebMvcConfigurer, WebSocketConfigurer{
 				.addPathPatterns("/chat/deleteChat")
 				.addPathPatterns("/event/write")
 				.addPathPatterns("/event/update")
-				.addPathPatterns("/event/delete");
+				.addPathPatterns("/event/delete")
+				.addPathPatterns("/reserv/list")
+				.addPathPatterns("/reserv/reservList");
 	} 
 	
 	@Bean

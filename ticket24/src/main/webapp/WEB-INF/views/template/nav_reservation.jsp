@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- reservation 메뉴 시작 -->
 <div class="side-bar">
 	<ul class="nav nav-underline flex-column side-bar-menu">
@@ -16,9 +17,11 @@
 	  <li class="nav-item">
 	    <a class="nav-link" id="reservList" href="reservList"><i class="bi bi-suit-diamond-fill"></i> 예약확인</a>
 	  </li>
+	  <c:if test="${!empty user && user.mem_auth == 9}">
 	  <li class="nav-item">
 	    <a class="nav-link" id="reservListAdmin" href="reservListAdmin"><i class="bi bi-suit-diamond-fill"></i> [관리자]예약목록</a>
 	  </li>
+	  </c:if>
 	</ul>
 	<div class="file-list">
 		<span style="font-weight: bold;font-size: 20px;">Download</span><br>
