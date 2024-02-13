@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import kr.spring.comm.vo.CommVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.question.vo.QuestionVO;
+import kr.spring.ticket.vo.TicketVO;
 
 @Mapper
 public interface MemberMapper {
@@ -75,6 +76,9 @@ public interface MemberMapper {
 	public int selectFavRowCount(Map<String,Object> map);
 	//마이페이지 좋아요한 글
 	public List<CommVO> selectAllFavList(Map<String,Object> map);
+	//마이페이지 티켓 양도 내역
+	public List<TicketVO> selectTicketList(Map<String,Object> map);
+	public int selectTicketRowCount(Map<String,Object> map);
 	//마이페이지 1:1문의
 	public int selectQuestionRowCount(Map<String,Object> map);
 	public List<QuestionVO> selectQuestionList(Map<String,Object> map);

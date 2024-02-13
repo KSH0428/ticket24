@@ -11,6 +11,7 @@ import kr.spring.comm.vo.CommVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.question.vo.QuestionVO;
+import kr.spring.ticket.vo.TicketVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -138,6 +139,16 @@ public class MemberServiceImpl implements MemberService{
 	public int selectFavRowCount(Map<String,Object> map) {
 		return memberMapper.selectFavRowCount(map);
 	}
+	
+	@Override
+	public List<TicketVO> selectTicketList(Map<String, Object> map) {
+		return memberMapper.selectTicketList(map);
+	}
+
+	@Override
+	public int selectTicketRowCount(Map<String, Object> map) {
+		return memberMapper.selectTicketRowCount(map);
+	}
 
 	@Override
 	public List<CommVO> selectAllFavList(Map<String,Object> map) {
@@ -154,4 +165,5 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.selectQuestionList(map);
 	}
 
+	
 }

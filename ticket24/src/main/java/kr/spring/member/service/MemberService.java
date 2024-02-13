@@ -6,6 +6,7 @@ import java.util.Map;
 import kr.spring.comm.vo.CommVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.question.vo.QuestionVO;
+import kr.spring.ticket.vo.TicketVO;
 
 public interface MemberService {
 	//회원관리 - 사용자
@@ -29,6 +30,8 @@ public interface MemberService {
 	public List<CommVO> selectAllWriteList(Map<String,Object> map);
 	public int selectFavRowCount(Map<String,Object> map);
 	public List<CommVO> selectAllFavList(Map<String,Object> map);
+	public List<TicketVO> selectTicketList(Map<String,Object> map);
+	public int selectTicketRowCount(Map<String,Object> map);
 	public int selectQuestionRowCount(Map<String,Object> map);
 	public List<QuestionVO> selectQuestionList(Map<String,Object> map);
 	//회원 포인트 조회

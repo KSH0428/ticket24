@@ -85,6 +85,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/memberFav.jsp"/>
 	</definition>
 	
+	<definition name="memberTicket" extends="myPage">
+		<put-attribute name="title" value="1:1문의"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberTicket.jsp"/>
+	</definition>
+	
 	<definition name="memberQuestion" extends="myPage">
 		<put-attribute name="title" value="1:1문의"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberQuestion.jsp"/>

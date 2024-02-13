@@ -289,7 +289,7 @@
 		<include refid="questionSearch"></include>
 	</select>
 	
-	<!-- 문의글 전체 목록/검색 목록 -->
+	<!-- 내가 작성한 문의글 전체 목록/검색 목록 -->
 	<select id="selectQuestionList" parameterType="map" resultType="questionVO">
 		SELECT * FROM
 		(SELECT a.*, rownum rnum FROM
@@ -313,4 +313,74 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+
+	<!-- 검색 -->
+		<sql id="ticketSearch">
+				<if test="keyword != null and keyword != ''">
+					<if test="keyfield == 1"> 
+						AND ticket_name LIKE '%' || #{keyword} || '%'
+					</if>
+					<if test="keyfield == 2">
+						AND ticket_content LIKE '%' || #{keyword} || '%'
+					</if>
+					<if test="keyfield == 3">
+						AND ticket_name LIKE '%' || #{keyword} || '%' OR
+						ticket_content LIKE '%' || #{keyword} || '%'
+					</if>
+				</if>
+				<if test="ticket_category != null and ticket_category != ''">
+					ticket_category = #{ticket_category}
+				</if>
+		</sql>
+		
+		<sql id="ticketOrder">
+		<if test="order == 1">
+			ORDER BY ticket_num DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY ticket_hit DESC
+		</if>
+		</sql>
+		
+		<!-- 사용자의 티켓양도 목록의 총개수/검색 개수 -->
+		<select id="selectTicketRowCount" parameterType="map" resultType="integer">
+			SELECT 
+			  COUNT(*)
+			  FROM ticket JOIN member USING(mem_num) WHERE mem_num=#{mem_num}
+			  <include refid="ticketSearch"></include>
+		</select>
+		
+		<!-- 티켓양도글 전체 목록/검색 목록 -->
+		<select id="selectTicketList" parameterType="map" resultType="ticketVO">
+			SELECT
+			  *
+			FROM (SELECT
+					a.*,
+					rownum rnum
+					FROM(SELECT
+							ticket_num,
+							ticket_category,
+							<![CDATA[
+				 			REPLACE(REPLACE(ticket_name, '<', '&lt;'),'>','&gt;') ticket_name, 
+				 			]]>
+				 			ticket_place,
+				 			ticket_date,
+				 			ticket_regdate,
+				 			ticket_seat,
+				 			ticket_status,
+				 			ticket_quantity,
+				 			ticket_price,
+				 			ticket_hit,
+				 			mem_num,
+				 			mem_id,
+				 			mem_nickname
+				 		FROM ticket
+				 		JOIN member USING(mem_num)
+				 		WHERE mem_num=#{mem_num}
+				 		<include refid="ticketSearch"></include>
+				 		<include refid="ticketOrder"></include>)a)
+				 		<![CDATA[
+			   			WHERE rnum >= #{start} AND rnum <= #{end}
+			   			]]>
+		</select>
 </mapper>
