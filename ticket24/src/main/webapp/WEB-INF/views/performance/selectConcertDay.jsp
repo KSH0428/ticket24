@@ -336,17 +336,21 @@ function createSeats(rows, cols) {
   var seatLayout = $("#seatLayout");
   /* alert(last_seleted_c_round_num); */
   
+  //좌석 예약 정보를 배열로 받는다.
+  let seatArray;
+  
   $.ajax({
   		url: 'concertSeatListInfo',
   		type: 'post',
+  		//return 값을 이용하기 위해선 ajax를 비동기로 바꿔야 한다.
+		async: false,
+		dataType: 'json',
   		data: {
   			concert_num:${concert.concert_num},
   			c_round_num:last_seleted_c_round_num
   		},
   		success:function(param){
-  			for(let i = 0; i<param.length; i++){
-  				console.log(param[i].seat_num);
-  			}
+  			seatArray= param;
   		},
   		error:function(){
 			alert('통신 오류!!');
@@ -369,13 +373,24 @@ function createSeats(rows, cols) {
     			seat = $("<div>").addClass("seat seat-empty");
     		}else{
     			//seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count));
-    			seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count)).append(seat_count);
+    			if(seatArray[seat_count++].status==0)
+    				seat = $("<div>").addClass("seat seat-available").attr('id', 'seat' + (seat_count)).append(seat_count);
+    			else
+    				seat = $("<div>").addClass("seat seat-occupied").attr('id', 'seat' + (seat_count));
     		}
     	}else{
     		//seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count));
-    		seat = $("<div>").addClass("seat").attr('id', 'seat' + (++seat_count)).append(seat_count);
+    		if(seatArray[seat_count++].status==0)
+				seat = $("<div>").addClass("seat seat-available").attr('id', 'seat' + (seat_count)).append(seat_count);
+			else
+				seat = $("<div>").addClass("seat seat-occupied").attr('id', 'seat' + (seat_count));
     	}
       seatLayout.append(seat);
+      
+      $('.seat-occupied').css({
+          "background-color": "#828282"
+      });
+      
      }
 	 
 	 seat = $("<div>").addClass("rowOfSeats").append(i+1);
@@ -408,7 +423,7 @@ function createSeats(rows, cols) {
 	}
 	
 	//좌석을 클릭했을 경우(동적 이벤트) seat-empty는 제외
-	$(document).on('click', '.seat', function(){
+	$(document).on('click', '.seat-available', function(){
 		//한 번 체크된 상태라면
 		if ($(this).hasClass("checked")) {
 			$(this).removeClass("checked");
