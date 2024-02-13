@@ -228,7 +228,7 @@ public class MemberController {
 				log.debug("<<mem_au_id>>" + member.getMem_au_id());
 				
 				if(member.getMem_auth() == 9) {//관리자는 관리자 메인으로 이동
-					//======추후 수정======//
+					//======추후 수정======//  
 					return "redirect:/concert/list";
 				}else {//일반 사용자는 사용자 메인으로 이동
 					return "redirect:/concert/list";

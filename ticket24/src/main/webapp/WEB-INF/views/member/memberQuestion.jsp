@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <div class="question-main">
-<h2 class="h2">문의한 1:1 목록</h2>
+<h5>나의 1:1 문의내역</h5>
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -19,17 +19,17 @@
 			</li>
 			<li>
 				<input type="submit" value="찾기" class="btn btn-secondary sbtn">
-				<input type="button" value="목록" onclick="location.href='list'" class="btn btn-secondary sbtn">
+				<input type="button" value="목록" onclick="location.href='memberQuestion'" class="btn btn-secondary sbtn">
 			</li>
 		</ul>
 	</form>
 	<div class="category-main">
 		<ul class="category">
-			<li class="total"><a href="list">전체</a></li>
-			<li><a href="list?question_category=1">상품</a></li>
-			<li><a href="list?question_category=2">주문</a></li>
-			<li><a href="list?question_category=3">배송</a></li>
-			<li><a href="list?question_category=4">기타</a></li>
+			<li class="total"><a href="memberQuestion">전체</a></li>
+			<li><a href="memberQuestion?question_category=1">상품</a></li>
+			<li><a href="memberQuestion?question_category=2">주문</a></li>
+			<li><a href="memberQuestion?question_category=3">배송</a></li>
+			<li><a href="memberQuestion?question_category=4">기타</a></li>
 		</ul>
 		<c:if test="${!empty user}">
 		<input type="button" value="문의글 작성" onclick="location.href='write'" class="btn btn-warning float-end" style="width:95px;font-size:11pt;padding:0;">

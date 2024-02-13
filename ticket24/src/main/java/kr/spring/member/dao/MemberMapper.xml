@@ -283,9 +283,9 @@
 			</if>
 	</sql>
 	
-	<!-- 문의글 총개수/검색 개수 -->
+	<!-- 내가 작성한 문의글 총개수/검색 개수 -->
 	<select id="selectQuestionRowCount" parameterType="map" resultType="integer">
-		SELECT COUNT(*) FROM question JOIN member USING(mem_num)
+		SELECT COUNT(*) FROM question JOIN member USING(mem_num) WHERE mem_num=#{mem_num}
 		<include refid="questionSearch"></include>
 	</select>
 	
