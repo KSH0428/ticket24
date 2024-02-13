@@ -11,9 +11,8 @@
 				<li><a href="${pageContext.request.contextPath}/reserv/list">공연 예약 내역</a></li>
 			</ul>
 		</li>
-		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">공연장 대관 관리</a></li>
+		<li class="main-menu"><a href="${pageContext.request.contextPath}/reserv/adminReserv">공연장 대관 관리</a></li>
 		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">MD 관리</a></li>
-		<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">포인트 관리</a></li>
 	</ul>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>

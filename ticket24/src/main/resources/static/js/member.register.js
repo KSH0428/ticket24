@@ -97,47 +97,49 @@ $(function(){
 
         return formattedPhoneNumber;
     }
-
-	//이메일 인증
-	$('#emailBtn').click(function() {
-		$.ajax({
-			type : 'post',
-			url : 'memberRegister',
-			data : {
-				'mem_email' : $mem_email.val()
-			},
-			success : function(data){
-				alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
-				console.log("data : "+data);
-				chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt);
-			}
-		})
-	})
 	
-	// 이메일 인증번호 체크 함수
-	function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
-		$memailconfirm.on("keyup", function(){
-			if (data != $memailconfirm.val()) { //
-				emconfirmchk = false;
-				$memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
-				$("#emconfirmchk").css({
-					"color" : "#FA3E3E",
-					"font-weight" : "bold",
-					"font-size" : "10px"
-
-				})
-				//console.log("중복아이디");
-			} else { // 아니면 중복아님
-				emconfirmchk = true;
-				$memailconfirmTxt.html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
-
-				$("#emconfirmchk").css({
-					"color" : "#0D6EFD",
-					"font-weight" : "bold",
-					"font-size" : "10px"
-
-				})
+	$('#emailBtn').click(function() {
+    const email = $('#mem_email').val(); // 이메일 주소값 얻어오기!
+    console.log('완성된 이메일 : ' + email); // 이메일 오는지 확인
+    const checkInput = $('#mem_ckemail'); // 인증번호 입력하는곳 
+		
+	    $.ajax({
+	        type : 'get',
+	        url : 'mailCheck?mem_email=' + email, // URL에 직접 이메일 주소를 추가
+	        success : function (data) {
+	            console.log("data : " +  data);
+	            checkInput.attr('disabled',false);
+	            code = data;
+	            alert('인증번호가 전송되었습니다. 이메일을 확인해주세요.');
+			},
+			error:function(){
+				alert('네트워크 오류 발생')
 			}
-		})
-	}
+	    }); // end ajax
+	}); // end send email
+	
+	// 인증번호 비교 
+	// blur -> focus가 벗어나는 경우 발생
+	$('#mem_ckemail').blur(function () {
+	    const inputCode = $(this).val();
+	    const $resultMsg = $('#mail-check-warn');
+	    const $emailBtn = $('#emailBtn');
+	    const $mem_email = $('#mem_email');
+	    
+	    if (inputCode === code) {
+	        $resultMsg.html('인증번호가 일치합니다.');
+	        $resultMsg.css('color', 'green');
+	        $emailBtn.attr('disabled', true);
+	        $mem_email.attr('readonly', true);
+	        $mem_email.attr('onFocus', 'this.initialSelect = this.selectedIndex');
+	        $mem_email.attr('onChange', 'this.selectedIndex = this.initialSelect');
+	    } else {
+	        $resultMsg.html('인증번호가 불일치합니다.');
+	        $resultMsg.css('color', 'red');
+	        $emailBtn.attr('disabled', false); // 인증번호가 일치하지 않으면 회원가입 버튼 활성화
+	        $mem_email.removeAttr('readonly'); // 인증번호가 일치하지 않으면 이메일 입력 필드 수정 가능하도록
+	        $mem_email.removeAttr('onFocus');
+	        $mem_email.removeAttr('onChange');
+	    }
+	});
 });

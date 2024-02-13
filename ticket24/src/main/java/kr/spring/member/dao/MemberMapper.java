@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.comm.vo.CommVO;
 import kr.spring.member.vo.MemberVO;
 
 @Mapper
@@ -59,6 +60,20 @@ public interface MemberMapper {
 	//회원 포인트 조회
 	public List<MemberVO> selectPointList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
+
+	//마이페이지 커뮤니티 조회(내가 작성한 글)
+	@Select("SELECT * FROM comm JOIN member USING(mem_num) WHERE mem_num=#{mem_num} ORDER BY comm_regdate DESC")
+	public List<CommVO> selectWriteList(int mem_num);
+	//마이페이지 커뮤니티 조회(좋아요한 글)
+	public List<CommVO> selectFavList(int mem_num);
+	//마이페이지 내가 작성한 글 개수/검색 글 개수
+	public int selectWriteRowCount(Map<String,Object> map);
+	//마이페이지 내가 작성한 글
+	public List<CommVO> selectAllWriteList(Map<String,Object> map);
+	//마이페이지 좋아요한 글 개수/검색 글 개수
+	public int selectFavRowCount(Map<String,Object> map);
+	//마이페이지 좋아요한 글
+	public List<CommVO> selectAllFavList(Map<String,Object> map);
 	
 	//회원 탈퇴
 	@Update("UPDATE member SET mem_auth=0 WHERE mem_num=#{mem_num}")

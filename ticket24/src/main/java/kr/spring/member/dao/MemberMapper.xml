@@ -131,4 +131,140 @@
 		   	WHERE rnum >= #{start} AND rnum <= #{end}
 		   	]]>
 	</select>
+	
+	<!-- sql 태그외 include 태그를 이용해 SQL문 재사용 -->
+	<sql id="commSearch">
+	    <where>
+	        <if test="keyword != null and keyword != ''">
+	            <choose>
+	                <when test="keyfield == 1">
+	                    AND comm_title LIKE '%' || #{keyword} || '%'
+	                </when>
+	                <when test="keyfield == 2">
+	                    AND (mem_id LIKE '%' || #{keyword} || '%' OR
+	                    mem_nickname LIKE '%' || #{keyword} || '%')
+	                </when>
+	                <when test="keyfield == 3">
+	                    AND comm_content LIKE '%' || #{keyword} || '%'
+	                </when>
+	                <when test="keyfield == 4">
+	                    AND (comm_title LIKE '%' || #{keyword} || '%' OR
+	                    comm_content LIKE '%' || #{keyword} || '%')
+	                </when>
+	            </choose>
+	        </if>
+	        <if test="comm_category != null and comm_category != ''">
+	            AND comm_category = #{comm_category}
+	        </if>
+	    </where>
+	</sql>
+	
+	<sql id="commOrder">
+		<if test="order == 1">
+			ORDER BY comm_num DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY comm_hit DESC
+		</if>
+		<if test="order == 3">
+			ORDER BY fav_cnt DESC NULLS LAST
+		</if>
+		<if test="order == 4">
+			ORDER BY re_cnt DESC NULLS LAST
+		</if>
+	</sql>	
+	
+	<!-- 사용자가 작성한 글 개수/검색 글 개수 -->
+	<select id="selectWriteRowCount" parameterType="map" resultType="integer">
+		SELECT
+		 COUNT(*)
+		FROM comm JOIN member USING(mem_num) WHERE mem_num=#{mem_num}
+		<include refid="commSearch"></include>
+	</select>
+	
+	<!-- 사용자가 작성한 글 전체 목록 -->
+	<select id="selectAllWriteList" parameterType="map" resultType="commVO">
+		SELECT
+		  *
+		FROM (SELECT
+				a.*,
+				rownum rnum
+				FROM(SELECT
+				 		comm_num,
+				 		<![CDATA[
+				 		REPLACE(REPLACE(comm_title, '<', '&lt;'),'>','&gt;') comm_title, 
+				 		]]>
+				 		comm_hit,
+				 		comm_regdate,
+				 		comm_category,
+				 		mem_num,
+				 		mem_id,
+				 		mem_nickname,
+				 		re_cnt,
+				 		fav_cnt
+				 	FROM comm
+				 	LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, comm_num FROM comm_reply GROUP BY comm_num) USING (comm_num)
+				 	LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, comm_num FROM comm_fav GROUP BY comm_num) USING(comm_num)
+			   		JOIN member USING(mem_num)
+			   		WHERE mem_num = #{mem_num}
+			   		<include refid="commSearch"></include>
+			   		<include refid="commOrder"></include>)a)
+			   	<![CDATA[
+			   	WHERE rnum >= #{start} AND rnum <= #{end}
+			   	]]>
+	</select>
+	
+	<!-- 사용자가 좋아요한 글 목록 -->
+	<select id="selectFavList" parameterType="list">
+		SELECT c.comm_num, c.comm_category, c.comm_title, m.mem_id, m.mem_nickname, c.comm_regdate
+		FROM comm c
+		INNER JOIN comm_fav cf ON c.comm_num = cf.comm_num
+		INNER JOIN member m ON c.mem_num = m.mem_num
+		WHERE cf.mem_num = #{mem_num}
+	</select>
+	
+	<!-- 사용자가 좋아요한 글 개수/검색 글 개수 -->
+	<select id="selectFavRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*)
+		FROM comm c
+		INNER JOIN comm_fav cf ON c.comm_num = cf.comm_num
+		INNER JOIN member m ON c.mem_num = m.mem_num
+		WHERE cf.mem_num = #{mem_num}
+		<include refid="commSearch"></include>
+	</select>
+	
+	<!-- 사용자가 좋아요한 글 전체 목록 -->
+	<select id="selectAllFavList" parameterType="map" resultType="commVO">
+		SELECT
+		    *
+		FROM (
+		    SELECT
+		        a.*,
+		        rownum rnum
+		    FROM (
+		        SELECT
+		            c.comm_num,
+		            <![CDATA[
+			 		REPLACE(REPLACE(comm_title, '<', '&lt;'),'>','&gt;') comm_title, 
+			 		]]>
+		            c.comm_hit,
+		            c.comm_regdate,
+		            c.comm_category,
+		            m.mem_num,
+		            m.mem_id,
+		            m.mem_nickname,
+		            re_cnt,
+		            fav_cnt
+		        FROM comm c
+		        LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, comm_num FROM comm_reply GROUP BY comm_num) re ON c.comm_num = re.comm_num
+		        LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, comm_num FROM comm_fav GROUP BY comm_num) fav ON c.comm_num = fav.comm_num
+		        INNER JOIN comm_fav cf ON c.comm_num = cf.comm_num
+		        INNER JOIN member m ON c.mem_num = m.mem_num
+		        WHERE cf.mem_num = #{mem_num}
+		        <include refid="commSearch"></include>
+		   		<include refid="commOrder"></include>)a)
+		   	<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+			]]>
+	</select>
 </mapper>

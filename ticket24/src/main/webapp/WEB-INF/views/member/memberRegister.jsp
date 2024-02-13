@@ -51,6 +51,7 @@
 					<form:label path="mem_ckemail">이메일 인증 번호</form:label>
 					<form:input path="mem_ckemail" placeholder="이메일로 받은 인증번호 입력"/>
 					<form:errors path="mem_ckemail" cssClass="error-color"/>
+					<span id="mail-check-warn"></span>
 				</li>
 				<li>
 					<form:label path="mem_zipcode">우편번호 *</form:label>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.comm.vo.CommVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
@@ -110,6 +111,36 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int selectMemberPointSum(int mem_num) {
 		return memberMapper.selectMemberPointSum(mem_num);
+	}
+
+	@Override
+	public List<CommVO> selectWriteList(int mem_num) {
+		return memberMapper.selectWriteList(mem_num);
+	}
+
+	@Override
+	public List<CommVO> selectFavList(int mem_num) {
+		return memberMapper.selectFavList(mem_num);
+	}
+
+	@Override
+	public int selectWriteRowCount(Map<String, Object> map) {
+		return memberMapper.selectWriteRowCount(map);
+	}
+
+	@Override
+	public List<CommVO> selectAllWriteList(Map<String,Object> map) {
+		return memberMapper.selectAllWriteList(map);
+	}
+
+	@Override
+	public int selectFavRowCount(Map<String,Object> map) {
+		return memberMapper.selectFavRowCount(map);
+	}
+
+	@Override
+	public List<CommVO> selectAllFavList(Map<String,Object> map) {
+		return memberMapper.selectAllFavList(map);
 	}
 
 }

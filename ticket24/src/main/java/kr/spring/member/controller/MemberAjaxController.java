@@ -8,11 +8,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
+import kr.spring.member.service.SendEmailService;
+import kr.spring.member.vo.MailVO;
 import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberAjaxController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private SendEmailService sendEmailService;
 	
 	/*==========================
 	 * 아이디 중복 체크
@@ -47,6 +53,24 @@ public class MemberAjaxController {
 		}
 		return mapAjax;
 	}
+	
+	/*==========================
+	 * 이메일 인증
+	 *=========================*/
+	@GetMapping("/member/mailCheck")
+	@ResponseBody
+	public String mailCheck(String mem_email) {
+	    System.out.println("이메일 인증 요청이 들어옴!");
+	    System.out.println("이메일 인증 이메일 : " + mem_email);
+
+	    String str = sendEmailService.getTempPassword(); // 랜덤한 인증번호 생성
+
+	    MailVO vo = sendEmailService.createMailconfirmEmail(mem_email, str); // 인증번호를 이메일 서비스에 전달
+	    sendEmailService.mailSend(vo); // 이메일 발송
+
+	    return str; // 생성된 인증번호를 반환하여 클라이언트에게 전송
+	}
+	
 	/*==========================
 	 * 프로필 사진 업데이트
 	 *=========================*/

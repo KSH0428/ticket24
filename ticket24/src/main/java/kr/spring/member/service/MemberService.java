@@ -3,9 +3,7 @@ package kr.spring.member.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
+import kr.spring.comm.vo.CommVO;
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -24,6 +22,12 @@ public interface MemberService {
 	public void deleteMemeber_detail(MemberVO member);
 	public MemberVO selectMemberPoint(int mem_num);
 	public int selectMemberPointSum(int mem_num);
+	public List<CommVO> selectWriteList(int mem_num);
+	public List<CommVO> selectFavList(int mem_num);
+	public int selectWriteRowCount(Map<String,Object> map);
+	public List<CommVO> selectAllWriteList(Map<String,Object> map);
+	public int selectFavRowCount(Map<String,Object> map);
+	public List<CommVO> selectAllFavList(Map<String,Object> map);
 	//회원 포인트 조회
 	public List<MemberVO> selectPointList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);

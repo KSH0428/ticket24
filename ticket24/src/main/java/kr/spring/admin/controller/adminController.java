@@ -1,6 +1,10 @@
 package kr.spring.admin.controller;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,10 +20,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
-
+import kr.spring.reserv.service.ReservService;
+import kr.spring.reserv.vo.ReservHallVO;
+import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,6 +34,9 @@ import lombok.extern.slf4j.Slf4j;
 public class adminController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ReservService reservService;
 	/*==========================
 	 * 자바빈(VO) 초기화
 	 *=========================*/
@@ -56,7 +66,39 @@ public class adminController {
 		
 		return "adminPage";
 	}
-	
+	/*========================
+	 * 관리자페이지 공연장 대관 관리
+	 *=======================*/
+	@RequestMapping("/reserv/adminReserv")
+	public ModelAndView reservListAdmin(@RequestParam(value="pageNum", defaultValue = "1") int currentPage) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int count = reservService.selectReservListAdminCount();
+		
+		PageUtil page = new PageUtil(currentPage, count, 20, 10, "reservListAdmin");
+		
+		List<ReservHallVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = reservService.selectReservListAdmin(map);
+		}
+		
+		for(ReservHallVO reserv : list) {
+			List<Date> date = new ArrayList<>();
+			date = reservService.selectReservDateList(reserv.getReservation_num());
+			reserv.setReservation_date(date);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("reservListAdmin");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
 	/*========================
 	 * 회원 정보 수정
 	 *=======================*/

@@ -65,9 +65,24 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/memberWithdraw.jsp"/>
 	</definition>
 	
-	<definition name="memberConcert" extends="myPage">
-		<put-attribute name="title" value="마이페이지공연"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/memberConcert.jsp"/>
+	<definition name="memberReserv" extends="myPage">
+		<put-attribute name="title" value="마이페이지공연대관"/>
+		<put-attribute name="body" value="/WEB-INF/views/reserv/reservListUser.jsp"/>
+	</definition>
+	
+	<definition name="memberComm" extends="myPage">
+		<put-attribute name="title" value="마이페이지커뮤니티"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberComm.jsp"/>
+	</definition>
+	
+	<definition name="memberWrite" extends="myPage">
+		<put-attribute name="title" value="마이페이지내가작성한글"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberWrite.jsp"/>
+	</definition>
+	
+	<definition name="memberFav" extends="myPage">
+		<put-attribute name="title" value="마이페이지좋아요한글"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberFav.jsp"/>
 	</definition>
 	
 	<!-- adminPage -->
@@ -78,6 +93,11 @@
     	<put-attribute name="body" value="/WEB-INF/views/admin/adminView.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
     </definition>
+    
+    <definition name="adminReserv" extends="adminPage">
+		<put-attribute name="title" value="관리자 정보수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/reserv/reservListAdmin.jsp"/>
+	</definition>
     
    <definition name="adminUpdate" extends="adminPage">
 		<put-attribute name="title" value="관리자 정보수정"/>

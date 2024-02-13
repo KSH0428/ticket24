@@ -19,6 +19,7 @@ public class SendEmailServiceImpl implements SendEmailService{
     private JavaMailSender mailSender;
     private static final String FROM_ADDRESS = "zewntlr78@gmail.com";
 
+    //비밀번호 찾기 이메일 발송
     public MailVO createMailAndChangePassword(String mem_email, String mem_name, String mem_id){
         
     	String str = getTempPassword();
@@ -64,5 +65,15 @@ public class SendEmailServiceImpl implements SendEmailService{
 
         mailSender.send(message);
     }
- 
+    
+    //회원가입 이메일 인증
+    public MailVO createMailconfirmEmail(String mem_email, String code){
+        MailVO vo = new MailVO();
+        vo.setAddress(mem_email);
+        vo.setTitle("<티켓24> 회원가입 인증 메일 입니다.");
+        vo.setMessage("안녕하세요. 티켓24입니다. 입력하실 인증번호는 "  + code + " 입니다.");
+
+        log.debug("<<이메일 발송 진입확인>>");
+        return vo;
+    }
 }

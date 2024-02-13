@@ -1,5 +1,7 @@
 package kr.spring.member.controller;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +25,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.comm.service.CommService;
+import kr.spring.comm.vo.CommVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.service.SendEmailService;
+import kr.spring.reserv.service.ReservService;
 import kr.spring.member.vo.MailVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.reserv.vo.ReservHallVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
@@ -40,6 +46,9 @@ public class MemberController {
 	
 	@Autowired
 	private SendEmailService sendEmailService;
+	
+	@Autowired
+	private ReservService reservService;
 	
 	/*==========================
 	 * 자바빈(VO) 초기화
@@ -71,6 +80,7 @@ public class MemberController {
 			
 			return form();
 		}
+
 		//회원가입
 		memberService.insertMember(memberVO);
 
@@ -436,12 +446,129 @@ public class MemberController {
 		return "common/resultAlert";
 	}
 	/*========================
-	 * 마이페이지 공연
+	 * 마이페이지 찜한 공연
 	 *=======================*/
-	@RequestMapping("/member/memberConcert")
-	public String mpConcert() {
-		return "memberConcert";
+	
+	/*========================
+	 * 마이페이지 공연 예약 내역
+	 *=======================*/
+	
+	/*========================
+	 * 마이페이지 공연장 대관
+	 *=======================*/
+	@RequestMapping("reserv/reservListUser")
+	public String userReservList(HttpSession session, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		List<ReservHallVO> list = new ArrayList<ReservHallVO>();
+		list = reservService.selectReservList(user.getMem_num());
+		
+		for(ReservHallVO reserv : list) {
+			List<Date> date = new ArrayList<>();
+			date = reservService.selectReservDateList(reserv.getReservation_num());
+			reserv.setReservation_date(date);
+		}
+		
+		model.addAttribute("list", list);
+		
+		return "memberReserv";
 	}
+	/*========================
+	 * 마이페이지 커뮤니티
+	 *=======================*/
+	@RequestMapping("member/memberComm")
+	public String memberWrite(HttpSession session, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		List<CommVO> list_write = new ArrayList<CommVO>();
+		List<CommVO> list_fav = new ArrayList<CommVO>();
+		list_write = memberService.selectWriteList(user.getMem_num());
+		list_fav = memberService.selectFavList(user.getMem_num());
+		
+		model.addAttribute("list_write", list_write);
+		model.addAttribute("list_fav", list_fav);
+		
+		log.debug("<<있나? lisw : " + list_write);
+		log.debug("<<있나? lisf : " + list_fav);
+		return "memberComm";
+	}
+	/*========================
+	 * 마이페이지 작성한 게시글
+	 *=======================*/
+	@RequestMapping("/member/memberWrite")
+	public ModelAndView writeprocess(@RequestParam(value="pageNum",defaultValue="1")int currentPage,
+			                   @RequestParam(value="order",defaultValue="1") int order,
+			                   @RequestParam(value="comm_category",defaultValue="") String comm_category,
+			                   String keyfield, String keyword, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("comm_category", comm_category);
+		map.put("mem_num", user.getMem_num());
+		
+		//전체/검색 레코드 수
+		int count = memberService.selectWriteRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order+"&comm_category="+comm_category);
+		
+		List<CommVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectAllWriteList(map);	
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memberWrite");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	/*========================
+	 * 마이페이지 좋아요 게시글
+	 *=======================*/
+	@RequestMapping("/member/memberFav")
+	public ModelAndView favprocess(@RequestParam(value="pageNum",defaultValue="1")int currentPage,
+			                   @RequestParam(value="order",defaultValue="1") int order,
+			                   @RequestParam(value="comm_category",defaultValue="") String comm_category,
+			                   String keyfield, String keyword, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("comm_category", comm_category);
+		map.put("mem_num", user.getMem_num());
+		
+		//전체/검색 레코드 수
+		int count = memberService.selectFavRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order+"&comm_category="+comm_category);
+		
+		List<CommVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectAllFavList(map);	
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memberFav");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
+	/*========================
+	 * 마이페이지 양도티켓 결제 내역
+	 *=======================*/
 	
 	/*========================
 	 * 회원 탈퇴
