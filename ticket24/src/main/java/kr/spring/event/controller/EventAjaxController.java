@@ -64,24 +64,30 @@ public class EventAjaxController {
 		Map<String,String> mapJson = new HashMap<String, String>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		int count = eventService.countReply(eventReplyVO.getEvent_num(), user.getMem_num());
+		
 		if(user == null) {
 			mapJson.put("result", "logout");
 		}else {
-			eventReplyVO.setMem_num(user.getMem_num());
-			eventReplyVO.setEvent_reip(request.getRemoteAddr());
-			//댓글 등록
-			eventService.insertReply(eventReplyVO);
+			if(count > 0) {
+				mapJson.put("result", "notEmpty");
+			}else {
+				eventReplyVO.setMem_num(user.getMem_num());
+				eventReplyVO.setEvent_reip(request.getRemoteAddr());
+				//댓글 등록
+				eventService.insertReply(eventReplyVO);
+				
+				//이벤트 적립금액 불러오기
+				EventVO event = eventService.selectEvent(eventReplyVO.getEvent_num());
+				//적립금 적립
+				user.setEvent_num(eventReplyVO.getEvent_num());
+				user.setPt_amount(event.getEvent_point());
+				eventService.insertPoint(user);
+				
+				mapJson.put("result", "success");
+			}
 			
-			//이벤트 적립금액 불러오기
-			EventVO event = eventService.selectEvent(eventReplyVO.getEvent_num());
-			//적립금 적립
-			user.setEvent_num(eventReplyVO.getEvent_num());
-			user.setPt_amount(event.getEvent_point());
-			eventService.insertPoint(user);
-			
-			mapJson.put("result", "success");
 		}
-		
 		return mapJson;
 	}
 	

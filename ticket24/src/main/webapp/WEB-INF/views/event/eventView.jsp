@@ -18,13 +18,10 @@
 	</div>
 	<br><br>
 	<hr size="1" width="100%">
-	<div class="event_list">
-		<input type="button" value="목록" onclick="location.href='list'">
-	</div>
 	<div class="buttons">
 	<c:if test="${user.mem_auth == 9}">
-		<input type="button" value="수정" onclick="location.href='update?event_num=${event.event_num}'">
-		<input type="button" value="삭제" id="delete_btn">
+		<input type="button" value="수정" class="btn btn-outline-secondary lbtn1" onclick="location.href='update?event_num=${event.event_num}'">
+		<input type="button" value="삭제" class="btn btn-outline-secondary lbtn1" id="delete_btn">
 		<script type="text/javascript">
 			let delete_btn = document.getElementById('delete_btn');
 			delete_btn.onclick=function(){
@@ -35,6 +32,9 @@
 			};
 		</script>
 	</c:if>
+	</div>
+	<div class="event_list">
+		<input type="button" value="목록" onclick="location.href='list'" class="btn btn-secondary lbtn2">
 	</div>
 	<div id="reply_div">
 		<span class="re-title">댓글</span>

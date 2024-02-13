@@ -54,6 +54,7 @@
 }
 .table th{
 	text-align:center;
+	vertical-align:middle;
 }
 
 .table td {
@@ -94,7 +95,7 @@
 }
 .card{
 	margin:20px;
-	width:280px;
+	width:300px !important;
 	height:225px;
 }
 .box_tit {
@@ -131,7 +132,8 @@
 	margin-top:30px;
 }
 .event_list{
-	margin-top:30px;
+	margin-top:0px;
+	margin-bottom:40px;
 	text-align:center;
 }
 .chat_main{
@@ -296,7 +298,7 @@ li{
     cursor: pointer;
 }
 #exitButton:hover {
-    background-color: #678f7b;
+    background-color: #abbede;
 }
 
 form#search_form{
@@ -318,14 +320,16 @@ ul.search {
 }
 .form-control{
 	width:320px !important;
+	height:35px !important;
 }
 .text1{
 	font-size:13pt;
 	padding-right:15px !important;
 }
 .sbtn{
-	height:37.6px;
+	height:35px;
 	margin-bottom:0.4rem;
+	font-size:11pt !important;
 }
 .qa{
 	width:70px;
@@ -336,4 +340,47 @@ ul.search {
 	width:100% !important;
 	border:none !important;
 	margin-left:45px;
+}
+.form-select{
+	height:35px !important;
+}
+.fc{
+	width:250px !important;
+	height:35px !important;
+}
+.fc2{
+	width:300px !important;
+	height:35px !important;
+}
+.qh2{
+	font-size:22.5pt !important;
+	text-align:center;
+	margin: 15px 0;
+}
+.td1{
+	text-align:left !important;
+	height:50px !important;
+	padding-top: 16px !important;
+	padding-left: 20px !important;
+}
+.th1{
+	text-align:left;
+	height:50px !important;
+	padding-top: 16px !important;
+	padding-left: 20px !important;
+}
+.lbtn1{
+	width:50px;
+	height:30px;
+	font-size:10pt !important;
+}
+.lbtn2{
+	width:65px;
+	height:35px;
+	font-size:11pt !important;
+}
+.lbtn3{
+	width:100px;
+	height:35px;
+	font-size:11pt !important;
 }

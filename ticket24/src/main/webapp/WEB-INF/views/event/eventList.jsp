@@ -5,21 +5,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <div class="event-main">
-	<h2 class="h2">이벤트</h2>
-
-	<form action="list" id="search_form" method="get">
-		<ul class="search">
+	<h2 class="h2" style="padding:0;">이벤트</h2>
+	<form action="list" id="search_form" method="get" style="padding-bottom:0;">
+		<ul class="search" style="padding:0;">
 			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
+				<input type="search" name="keyword" id="keyword" class="form-control fc2" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" onclick="location.href='list'">
+				<input type="submit" value="찾기" class="btn btn-secondary sbtn">
+				<input type="button" value="목록" onclick="location.href='list'" class="btn btn-secondary sbtn">
 			</li>
 		</ul>
 	</form>
 	<c:if test="${user.mem_auth == 9}">
-	<input type="button" value="이벤트 등록" onclick="location.href='write'" class="btn btn-warning float-end">
+	<input type="button" value="이벤트 등록" onclick="location.href='write'" class="btn btn-warning float-end" style="width:94px;font-size:11pt;padding:0;margin-right:25px;">
 	</c:if>
 	<br><br><br>
 	<c:if test="${count == 0}">

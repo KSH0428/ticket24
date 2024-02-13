@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -44,6 +45,10 @@ public interface EventMapper {
 	//부모글 지울때 딸려있는 자식 데이터도 삭제해야됨
 	@Delete("DELETE FROM event_reply WHERE event_num=#event_num")
 	public void deleteReplyByEventNum(int event_num);
+	//이벤트 참여 횟수 제한
+	@Select("SELECT COUNT(*) FROM event_reply WHERE event_num=#{event_num} AND mem_num=#{mem_num}")
+	public int countReply(@Param("event_num") int event_num, 
+								   @Param("mem_num") int mem_num);
 	
 	//적립금 적립
 	public void insertPoint(MemberVO member);

@@ -35,7 +35,7 @@
 			<li><a href="list?faq_category=3">기타</a></li>
 		</ul>
 		<c:if test="${user.mem_auth == 9}">
-		<input type="button" value="질문 등록" onclick="location.href='write'" class="btn btn-warning float-end">
+		<input type="button" value="질문 등록" onclick="location.href='write'" class="btn btn-warning float-end" style="width:78px;font-size:11pt;padding:0;">
 		</c:if>
 	</div>
 	<table class="table">

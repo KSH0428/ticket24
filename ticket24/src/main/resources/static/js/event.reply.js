@@ -51,8 +51,8 @@ $(function(){
 					
 					//로그인한 회원번호와 댓글 작성자가 같으면 수정, 삭제 버튼 활성화
 					if(param.user_num == item.mem_num){
-						output += ' <input type="button" data-num="'+ item.event_renum +'" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-num="'+ item.event_renum +'" value="삭제" class="delete-btn">';
+						output += ' <input type="button" data-num="'+ item.event_renum +'" value="수정" class="modify-btn btn btn-outline-secondary lbtn1">';
+						output += ' <input type="button" data-num="'+ item.event_renum +'" value="삭제" class="delete-btn btn btn-outline-secondary lbtn1">';
 					}
 					
 					output += '<hr size="1" noshade>';
@@ -101,6 +101,9 @@ $(function(){
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인해야 작성할 수 있습니다.');
+				}else if(param.result == 'notEmpty'){
+					alert('이미 참여한 이벤트 입니다.');
+					initForm();
 				}else if(param.result == 'success'){
 					initForm(); //폼 초기화
 					//댓글 작성이 성공하면 새로 삽입한 글을 포함해서 첫번째 페이지의 게시글들을 다시 호출

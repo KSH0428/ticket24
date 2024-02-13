@@ -17,6 +17,7 @@
 	<select id="selectChatRoomList" parameterType="map" resultMap="chatMap">
 		SELECT m.mem_id,
 			   cm.message,
+			   cm.send_date,
 			   cr.chatroom_num,
 			   (SELECT COUNT(*) FROM chatmessage sub_cm
 			   WHERE sub_cm.chatroom_num = cr.chatroom_num

@@ -24,18 +24,19 @@
 		<div class="result-display">표시할 채팅방이 없습니다.</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<table class="striped-table">
+		<table class="table table-group-divider" style="width:600px!important;margin-top:50px;">
 			<c:forEach var="chat" items="${list}">
 			<tr>
-				<td style="text-align:left;">
-					<a href="chatDetail?chatroom_num=${chat.chatroom_num}">
-						<b>${chat.mem_id}</b>
-						<span>${fn:substring(chat.chatMessageVO.message,0,45)}</span>
-					</a>
-					<b>${chat.read_count}</b>
+				<td style="text-align:left;font-size:11.5pt;" width="150">
+					<b>${chat.mem_id}</b>
 				</td>
 				<td>
+					<a href="chatDetail?chatroom_num=${chat.chatroom_num}">
+						<span>${fn:substring(chat.chatMessageVO.message,0,45)}</span>
+					</a>
 				</td>
+				<td width="90">${fn:substring(chat.chatMessageVO.send_date,0,10)}</td>
+				<td width="35" style="font-size:12.5pt;color:#f08c0a;"><b>${chat.read_count}</b></td>
 			</tr>
 			</c:forEach>
 		</table>

@@ -16,17 +16,17 @@
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
-				<select name="keyfield" id="keyfield">
+				<select name="keyfield" id="keyfield" class="form-select">
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>닉네임+ID</option>
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
+				<input type="search" name="keyword" id="keyword" class="form-control fc" value="${param.keyword}">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-				<input type="button" value="목록" onclick="location.href='list'">
+				<input type="submit" value="찾기" class="btn btn-secondary sbtn">
+				<input type="button" value="목록" onclick="location.href='list'" class="btn btn-secondary sbtn">
 			</li>
 		</ul>
 	</form>
@@ -39,7 +39,7 @@
 			<li><a href="list?question_category=4">기타</a></li>
 		</ul>
 		<c:if test="${!empty user}">
-		<input type="button" value="문의글 작성" onclick="location.href='write'" class="btn btn-warning float-end">
+		<input type="button" value="문의글 작성" onclick="location.href='write'" class="btn btn-warning float-end" style="width:95px;font-size:11pt;padding:0;">
 		</c:if>
 	</div>
 	<c:if test="${count == 0}">

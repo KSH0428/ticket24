@@ -93,5 +93,9 @@ public class EventServiceImpl implements EventService{
 	public void insertPoint(MemberVO member) {
 		eventMapper.insertPoint(member);
 	}
-	
+
+	@Override
+	public int countReply(int event_num, int mem_num) {
+		return eventMapper.countReply(event_num, mem_num);
+	}
 }

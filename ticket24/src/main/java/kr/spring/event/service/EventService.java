@@ -3,9 +3,7 @@ package kr.spring.event.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Param;
 
 import kr.spring.event.vo.EventReplyVO;
 import kr.spring.event.vo.EventVO;
@@ -28,6 +26,8 @@ public interface EventService {
 	public void insertReply(EventReplyVO eventReply);
 	public void updateReply(EventReplyVO eventReply);
 	public void deleteReply(int event_renum);
+	public int countReply(@Param("event_num") int event_num, 
+			   			  @Param("mem_num") int mem_num);
 	//이벤트 적립
 	public void insertPoint(MemberVO member);
 }

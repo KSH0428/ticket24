@@ -6,24 +6,24 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <div class="question-main">
-<h2 class="h2">1:1문의</h2><br>
+<h2 class="qh2">1:1 문의글</h2>
 	<img src="${pageContext.request.contextPath}/images/question.jpg" class="qa">
 	<table class="table table-bordered">
 		<tbody class="table-group-divider">
 		<tr>
-			<th class="active">제목</th>
-			<td colspan="3">${question.question_title}</td>
+			<th class="active th1">제목</th>
+			<td colspan="3" class="td1">${question.question_title}</td>
 		</tr>
 		<tr>
-			<th class="active">작성자</th>
-			<td colspan="3">
+			<th class="active th1">작성자</th>
+			<td colspan="3" class="td1">
 			<c:if test="${empty question.mem_nickname}">${question.mem_id}</c:if>
 			<c:if test="${!empty question.mem_nickname}">${question.mem_nickname}</c:if>
 			</td>
 		</tr>
 		<tr>
-			<th class="active">날짜</th>
-			<td>
+			<th class="active th1">날짜</th>
+			<td class="td1">
 			<c:if test="${!empty question.question_modifydate}">
 			최근 수정일 : ${question.question_modifydate}
 			</c:if>
@@ -31,8 +31,8 @@
 			작성일 : ${question.question_regdate}
 			</c:if>
 			</td>
-			<th class="active">조회수</th>
-			<td>${question.question_hit}</td>
+			<th class="active th1">조회수</th>
+			<td class="td1">${question.question_hit}</td>
 		</tr>
 		<tr>
 			<td colspan="4">
@@ -48,13 +48,13 @@
 				<img src="${pageContext.request.contextPath}/upload/${question.question_photo}" class="detail-img" height="300">
 			</div>
 			</c:if>
-			<div class="detail-content" style="height:250px;">
+			<div class="detail-content" style="height:300px;">
 				${question.question_content}
 			</div>
 			<div class="align-right">
 				<c:if test="${!empty user && user.mem_num  == question.mem_num}">
-				<input type="button" value="수정" onclick="location.href='update?question_num=${question.question_num}'">
-				<input type="button" value="삭제" id="delete_btn">
+				<input type="button" class="btn btn-outline-secondary lbtn1" value="수정" onclick="location.href='update?question_num=${question.question_num}'">
+				<input type="button" class="btn btn-outline-secondary lbtn1" value="삭제" id="delete_btn">
 				<script type="text/javascript">
 					let delete_btn = document.getElementById('delete_btn');
 					delete_btn.onclick=function(){
@@ -72,7 +72,7 @@
 	</table>
 	<div class="align-center">
 		<c:if test="${!empty user && user.mem_auth == 9 && question.mem_auth != 9 && empty answer}">
-		<input type="button" value="답변 작성" onclick="location.href='adminWrite?question_num=${question.question_num}'">
+		<input type="button" value="답변 작성" class="btn btn-outline-secondary lbtn3" onclick="location.href='adminWrite?question_num=${question.question_num}'">
 		</c:if>
 	</div>
 	<br><br><br>
@@ -81,17 +81,17 @@
 	<table class="table table-bordered">
 		<tbody class="table-group-divider">
 		<tr>
-			<th class="active">제목</th>
-			<td colspan="3">${answer.question_title}</td>
+			<th class="active th1">제목</th>
+			<td colspan="3" class="td1">${answer.question_title}</td>
 		</tr>
 		<tr>
-			<th class="active">작성자</th>
-			<td>
+			<th class="active th1">작성자</th>
+			<td class="td1">
 			<c:if test="${empty answer.mem_nickname}">${answer.mem_id}</c:if>
 			<c:if test="${!empty answer.mem_nickname}">${answer.mem_nickname}</c:if>
 			</td>
-			<th class="active">날짜</th>
-			<td>
+			<th class="active th1">날짜</th>
+			<td class="td1">
 			<c:if test="${!empty answer.question_modifydate}">
 			최근 수정일 : ${answer.question_modifydate}
 			</c:if>
@@ -102,13 +102,13 @@
 		</tr>
 		<tr>
 			<td colspan="4">
-			<div class="detail-content" style="height:250px;">
+			<div class="detail-content" style="height:300px;">
 				${answer.question_content}
 			</div>
 			<div class="align-right">
 				<c:if test="${!empty user && user.mem_num  == answer.mem_num}">
-				<input type="button" value="수정" onclick="location.href='adminUpdate?question_num=${answer.question_num}'">
-				<input type="button" value="삭제" id="delete_btn_answer">
+				<input type="button" value="수정" class="btn btn-outline-secondary lbtn1" onclick="location.href='adminUpdate?question_num=${answer.question_num}'">
+				<input type="button" value="삭제" class="btn btn-outline-secondary lbtn1" id="delete_btn_answer">
 				<script type="text/javascript">
 					let delete_btn_answer = document.getElementById('delete_btn_answer');
 					delete_btn_answer.onclick=function(){
@@ -125,8 +125,8 @@
 		</tbody>
 	</table>
 	</c:if>
-		<div class="align-right">
-		<input type="button" value="목록" onclick="location.href='list'">
+		<div class="align-center">
+		<input type="button" value="목록" class="btn btn-secondary lbtn2" onclick="location.href='list'">
 	</div>	
 </div>
 
