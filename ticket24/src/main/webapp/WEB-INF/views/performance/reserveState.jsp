@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script>
 $(function() {
 	$(document).on('click', '#btn-next-step1', function() {
@@ -115,6 +116,65 @@ $(function() {
 		});
 	});
 });
+/* 결제 시작 */
+var IMP = window.IMP;
+IMP.init('imp06364606');
+function requestPay() {
+	
+	//결제시작
+	IMP.request_pay({
+      pg: "html5_inicis",
+      pay_method: 'card',
+      merchant_uid: 'ticket_hall'+new Date().getTime(),   // 주문번호
+      name: "TICKET24 아트센터",
+      amount: 100,                         // 숫자 타입
+      /* buyer_email: $('#reservation_email').val(),
+      buyer_name: $('#reservation_name').val(),
+      buyer_tel: $('#reservation_phone').val(), */
+    }, function (rsp) { // callback
+    	 if (rsp.success) {
+    		 paymentVerify(rsp);
+   		} else {
+   		      var msg = '결제에 실패하였습니다.';
+   		      msg += '에러내용 : ' + rsp.error_msg;
+   		      alert(msg);
+   		}
+    });
+    //결제완료
+ }
+ function paymentVerify(rsp){
+	 $.ajax({
+         type: 'POST',
+         url: '/verify/' + rsp.imp_uid
+      }).done(function(data) {
+          if(rsp.paid_amount === data.response.amount){
+              alert('결제 성공')
+          } else {
+              alert("결제 실패");
+          }
+      });
+ }
+ /* function payment(rsp){
+	$.ajax({
+		url:'../reserv/updatePayment',
+		type:'post',
+		data:{reservation_num:1,payment_name:rsp.buyer_name,payment_phone:rsp.buyer_tel,payment_email:rsp.buyer_email,payment_method:rsp.pay_method,merchant_uid:rsp.merchant_uid,imp_uid:rsp.imp_uid,paid_at:rsp.paid_at},
+		dataType:'json',
+		success:function(param){
+			if(param.result=='success'){
+				 var msg = '결제가 완료되었습니다.';
+	   		     alert(msg);
+	   		     location.href = 'reservDetail?reservation_num=${payment.reservation_num}'
+			}else{
+				alert('결제 오류 : 문의처에 문의해주세요.');
+			}
+		},
+		error:function(){
+			alert('결제 오류 : 문의처에 문의해주세요.');
+		}
+	});
+ } */
+/* 결제 끝 */
 </script>
 
 <div class="reserve-state-container">
@@ -167,13 +227,13 @@ $(function() {
 	<div class="reserve-state-payment">
 		<h3>결제내역</h3>
 		<ul>
-			<li>
+	<!-- 		<li>
 				<span class="reserve-state-ticket-payment-text">금액</span>
 				<span class="reserve-state-selected-ticket-price">0</span>				
-			</li>
+			</li> -->
 			<li>
 				<span class="reserve-state-ticket-payment-text">총 금액</span>
-				<span class="reserve-state-selected-ticket-price">0</span>				
+				<span id="reserve-state-total-price" class="reserve-state-selected-ticket-price">0</span>				
 			</li>
 		</ul>
 		
@@ -203,7 +263,7 @@ $(function() {
 	</div>
 	<div id="btn-step3" class="button-area" style="display:none;">
 		<button id="btn-prev-step3">이전 단계</button>
-		<button id="btn-next-step3">다음 단계</button>
+		<button id="btn-next-step3" onclick="requestPay()">다음 단계</button>
 	</div>
 </div>
 	

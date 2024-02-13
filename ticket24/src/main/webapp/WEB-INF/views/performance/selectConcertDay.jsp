@@ -352,11 +352,6 @@ function createSeats(rows, cols) {
   		},
   		success:function(param){
   			seatArray= param;
-  			
-  			for(let i = 0; i < seatArray.length; i++){
-  				console.log(seatArray[i]);
-  			}
-  			
   		},
   		error:function(){
 			alert('통신 오류!!');
@@ -439,7 +434,10 @@ function createSeats(rows, cols) {
 			//id를 추출 후 아이디 넣음
 			let seat_num = inValue.substring(4);
 			$(this).text(seat_num);
-
+			
+			//가격 등급
+			let price1, price2;
+			let grade1, grade2;
 			
 			//테두리 효과 없앰
 			$(this).css({
@@ -450,8 +448,24 @@ function createSeats(rows, cols) {
 			
 			if($('.reserve-state-selected-tickets-detail-1').text() == seat_num){
 				$('.reserve-state-selected-tickets-detail-1').remove();
+				//사이드바에 금액 반영
+				let total_price = parseInt($('#reserve-state-total-price').text()) - parseInt($('#tickets-2-price').text());
+				$('#reserve-state-total-price').text('').text(total_price);
+				
+				//step 3
+				$('.selected-ticket-container-body #tickets-2-seatNum, #tickets-2-grade, #tickets-2-price, #tickets-2-amount').remove();
+				$('.selected-ticket-container-body br').remove();
 			}else if($('.reserve-state-selected-tickets-detail-2').text() == seat_num){
 				$('.reserve-state-selected-tickets-detail-2').remove();
+				//사이드바에 금액 반영
+				let total_price = parseInt($('#reserve-state-total-price').text()) - parseInt($('#tickets-1-price').text());
+				$('#reserve-state-total-price').text('').text(total_price);
+				
+				//step 3
+				$('.selected-ticket-container-body #tickets-1-seatNum, #tickets-1-grade, #tickets-1-price, #tickets-1-amount').remove();
+				$('.selected-ticket-container-body br').remove();
+
+				
 			}
 
 		}else {
@@ -471,9 +485,58 @@ function createSeats(rows, cols) {
 				count(1);
 				
 				if($('#reserve-state-selected-tickets-detail span').hasClass("reserve-state-selected-tickets-detail-1")) {
-					$('#reserve-state-selected-tickets-detail').append("<span class='reserve-state-selected-tickets-detail-2'>"+$(this).attr("id").substring(4)+"</span>");
+					let seatNum_2 = $(this).attr("id").substring(4);
+					$('#reserve-state-selected-tickets-detail').append("<span class='reserve-state-selected-tickets-detail-2'>"+seatNum_2+"</span>");
+					//step3
+					$('.selected-ticket-container-body').append("<li id='tickets-2-seatNum'>"+seatNum_2+"</li>");
+					
+					if(0<seatNum_2&&seatNum_2<5){
+						price2 = 90000;
+						grade2 = "VIP석";
+					}else if(5<=seatNum_2&&seatNum_2<11){
+						price2 = 80000;
+						grade2 = "S석";
+					}else if(11<=seatNum_2&&seatNum_2<31){
+						price2 = 70000;
+						grade2 = "A석";
+					}else if(31<=seatNum_2&&seatNum_2<51){
+						price2 = 60000;
+						grade2 = "일반석";
+					}
+					//사이드바에 금액 반영
+					let total_price = parseInt($('#reserve-state-total-price').text()) + parseInt(price2);
+					$('#reserve-state-total-price').text('').text(total_price);
+					
+					$('.selected-ticket-container-body').append("<li id='tickets-2-grade'>"+grade2+"</li>");
+					$('.selected-ticket-container-body').append("<li id='tickets-2-price'>"+price2+"</li>");
+					$('.selected-ticket-container-body').append("<li id='tickets-2-amount'>"+1+"</li>");
+					
 				}else {
-					$('#reserve-state-selected-tickets-detail').append("<span class='reserve-state-selected-tickets-detail-1'>"+$(this).attr("id").substring(4)+"</span>");
+					let seatNum_1 = $(this).attr("id").substring(4);
+					$('#reserve-state-selected-tickets-detail').append("<span class='reserve-state-selected-tickets-detail-1'>"+seatNum_1+"</span>");
+					//step3
+					$('.selected-ticket-container-body').append("<li id='tickets-1-seatNum'>"+seatNum_1+"</li>");
+					
+					if(0<seatNum_1&&seatNum_1<5){
+						price1 = 90000;
+						grade1 = "VIP석";
+					}else if(5<=seatNum_1&&seatNum_1<11){
+						price1 = 80000;
+						grade1 = "S석";
+					}else if(11<=seatNum_1&&seatNum_1<31){
+						price1 = 70000;
+						grade1 = "A석";
+					}else if(31<=seatNum_1&&seatNum_1<51){
+						price1 = 60000;
+						grade1 = "일반석";
+					}
+					//사이드바에 금액 반영
+					let total_price = parseInt($('#reserve-state-total-price').text()) + parseInt(price1);
+					$('#reserve-state-total-price').text('').text(total_price);
+					
+					$('.selected-ticket-container-body').append("<li id='tickets-1-grade'>"+grade1+"</li>");
+					$('.selected-ticket-container-body').append("<li id='tickets-1-price'>"+price1+"</li>");
+					$('.selected-ticket-container-body').append("<li id='tickets-1-amount'>"+1+"</li>").append("<br>");
 				}
 			}
 		}
@@ -489,5 +552,21 @@ function createSeats(rows, cols) {
 
 <!-- =========================================================================== -->
 <!-- step3 가격/할인 -->
+<script>
+
+</script>
 <div id="step3" style="display:none;">
+	<div class="step3-container">
+		<div class="select-concert-round-container-header">선택내역</div>
+		<div class="selected-ticket-container">
+			<ul class="selected-ticket-container-header">
+				<li>좌석 번호</li>
+				<li>등급</li>
+				<li>가격</li>
+				<li>매수</li>
+			</ul>
+			<ul class="selected-ticket-container-body">
+			</ul>
+		</div>
+	</div>
 </div>
