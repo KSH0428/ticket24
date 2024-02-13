@@ -28,8 +28,8 @@
 		</li>
 	</ul>
 	<div class="align-right">
-		<button class="btn btn-primary">신청취소</button> 
-		<button class="btn btn-primary">목록</button> 
+		<button class="btn btn-warning">신청취소</button> 
+		<button class="btn btn-secondary">목록</button> 
 	</div>
 </div>
 <script>

@@ -14,21 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MainController {
 	@RequestMapping("/")
 	public String init(HttpSession session) {
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		//관리자로 로그인하면 관리자 메인으로 이동 처리
-		if(user!=null && user.getMem_auth() == 9) {
-			return "redirect:/main/admin";
-		}
-		return "redirect:/main/main";
+		return "redirect:/concert/list";
 	}
 	
-	@RequestMapping("/main/main")
-	public String main(Model model) {
-		
-		log.debug("<<메인 실행>>");
-		
-		return "main";//타일스 설정명
-	}
 }
 
 

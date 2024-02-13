@@ -15,7 +15,7 @@
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
-	<div id="main_banner container">
+	<div id="main_banner container" style="margin-bottom: 50px;">
 		<tiles:insertAttribute name="banner"/>
 	</div>
 	<div class="side-height container">
