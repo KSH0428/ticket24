@@ -29,6 +29,11 @@ width: 450px;
   height : 405px;
   margin-right: 25px;
 }
+.image2 {
+  width: 430px;
+  height : 602px;
+  margin-right: 10px;
+}
 /*swiper 끝*/
 
 /*공연 검색 시작*/
@@ -973,12 +978,12 @@ width: 450px;
 	height:40px;
 	/* margin-left:120px; */
 	/* background-color:#c0c0c0; */
-	background-color:#6495ed;
+	background-color:rgb(250, 40, 40);
 	color:white;
 	font-size:17px;
 	font-weight: bold;
 	border: 1px solid;
-	border-color: #7b68ee;
+	border-color: #DC6089;
 }
 
 /*사이드 바 끝*/

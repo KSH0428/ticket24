@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.classic.dao.ClassicMapper">
+	<sql id="concertSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					<!-- concert_title LIKE '%' || #{keyword} || '%' -->
+					<!-- 정규 표현식으로 표현. 3번째 인수 i는 대소문자 포함 -->
+					REGEXP_LIKE (concert_title, '|' || #{keyword} || '|', 'i')
+				</if>
+				<if test="keyfield == 2">
+					<!-- casting LIKE '%' || #{keyword} || '%' -->
+					<!-- 정규 표현식으로 표현. 3번째 인수 i는 대소문자 포함 -->
+					REGEXP_LIKE (casting, '|' || #{keyword} || '|', 'i')
+				</if>
+			</if>
+		</where>
+	</sql>
+	<!-- 콘서트 총 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM classic
+	</select>
+	
+	<!-- 콘서트 전체 목록 -->
+	<select id="selectList" parameterType="map" resultType="classicVO">
+		SELECT
+			*
+		FROM (SELECT
+			a.*,
+			rownum rnum
+		FROM (SELECT
+				classic_num,
+				classic_title,
+				period,
+				classic_hall,
+				monopoly,
+				img_poster
+			FROM classic
+			ORDER BY classic_num ASC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]> 		
+	</select>
+<!-- 클래식 목록 데이터 -->
+	<insert id="insertClassic" parameterType="classicVO">
+		INSERT INTO classic (
+			classic_num,
+			classic_title,
+			period,
+			classic_hall,
+			monopoly,
+			img_poster
+			)
+		VALUES (
+			classic_seq.nextval,
+			#{classic_title},
+			#{period},
+			#{classic_hall},
+			#{monopoly},
+			#{img_poster}
+		)
+	</insert>
+</mapper>
+

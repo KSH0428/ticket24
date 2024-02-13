@@ -263,7 +263,7 @@ function requestPay() {
 	</div>
 	<div id="btn-step3" class="button-area" style="display:none;">
 		<button id="btn-prev-step3">이전 단계</button>
-		<button id="btn-next-step3" onclick="requestPay()">다음 단계</button>
+		<button id="btn-next-step3" onclick="requestPay()">결제하기</button>
 	</div>
 </div>
 	

@@ -11,8 +11,8 @@ import kr.spring.concert.vo.ConcertSeatVO;
 import kr.spring.concert.vo.ConcertVO;
 
 public interface ConcertService {
+	
 	//콘서트 
-
 	public int selectRowCount(Map<String,Object> map);
 	public List<ConcertVO> selectList(Map<String,Object> map);
 	

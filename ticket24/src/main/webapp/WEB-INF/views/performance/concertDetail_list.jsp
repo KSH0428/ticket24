@@ -295,7 +295,7 @@ $(function() {
 				</ul>
 			</div>
 			<div class="concert-price-info">
-				<div>가격 미정</div>
+				<!-- <div>가격 미정</div> -->
 			</div>
 		</div>
 	</div>
