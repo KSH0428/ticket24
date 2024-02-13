@@ -9,7 +9,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 
-<h2 style="text-align:center;">이벤트 등록</h2>
+<h2 style="text-align:center;">이벤트 수정</h2>
 <div class="question-main">
     <form:form action="/event/update" modelAttribute="eventVO" enctype="multipart/form-data" class="question-form">
         <form:errors element="div" cssClass="error-color"/>

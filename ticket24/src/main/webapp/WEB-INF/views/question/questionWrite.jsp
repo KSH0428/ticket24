@@ -82,7 +82,7 @@
         
 		<div class="row mb-3">
             <div class="col-md-2">
-                <label for="question_category" class="form-label">카테고리</label>
+                <label for="question_lock" class="form-label">비밀글 여부</label>
             </div>
             <div class="col-md-10">
 			    <div class="form-check form-check-inline">
