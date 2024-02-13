@@ -26,14 +26,27 @@
 			조회 : ${ticket.ticket_hit}
 	</li>
 	</ul>
-			<c:if test="${!empty ticket.ticket_filename1}">
-		<ul>
-			<li>첨부파일1 : <a href="file?ticket_num=${ticket.ticket_num}&file_num=1">${ticket.ticket_filename1}</a></li>
-			<li>첨부파일2 : <a href="file?ticket_num=${ticket.ticket_num}&file_num=2">${ticket.ticket_filename2}</a></li>
-			<li>첨부파일3 : <a href="file?ticket_num=${ticket.ticket_num}&file_num=3">${ticket.ticket_filename3}</a></li>
-			<li>첨부파일4 : <a href="file?ticket_num=${ticket.ticket_num}&file_num=4">${ticket.ticket_filename4}</a></li>
-		</ul>
-		</c:if>
+			<c:choose>
+    <c:when test="${!empty ticket.ticket_filename1 || !empty ticket.ticket_filename2 || !empty ticket.ticket_filename3 || !empty ticket.ticket_filename4}">
+        <ul>
+            <c:if test="${!empty ticket.ticket_filename1}">
+                <li>첨부파일1 : <a href="file?ticket_num=${ticket.ticket_num}&file_num=1">${ticket.ticket_filename1}</a></li>
+            </c:if>
+            <c:if test="${!empty ticket.ticket_filename2}">
+                <li>첨부파일2 : <a href="file?ticket_num=${ticket.ticket_num}&file_num=2">${ticket.ticket_filename2}</a></li>
+            </c:if>
+            <c:if test="${!empty ticket.ticket_filename3}">
+                <li>첨부파일3 : <a href="file?ticket_num=${ticket.ticket_num}&file_num=3">${ticket.ticket_filename3}</a></li>
+            </c:if>
+            <c:if test="${!empty ticket.ticket_filename4}">
+                <li>첨부파일4 : <a href="file?ticket_num=${ticket.ticket_num}&file_num=4">${ticket.ticket_filename4}</a></li>
+            </c:if>
+        </ul>
+    </c:when>
+    <c:otherwise>
+        <!-- No attachments -->
+    </c:otherwise>
+</c:choose>
 		<hr size="1"width="100%">
 		<ul>
 		<li>공연명 : ${ticket.ticket_name} , 공연장소 : ${ticket.ticket_place } , 공연일 : ${ticket.ticket_date} </li>
