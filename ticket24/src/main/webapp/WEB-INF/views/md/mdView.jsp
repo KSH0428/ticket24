@@ -149,13 +149,8 @@
 							</div>
 						</div>
 						<hr>
-						<p>
-							<img
-								src="${pageContext.request.contextPath}/image_upload/img6.jpg"
-								style="width: 300px; height: 300px;">
-						</p>
-						<p>*리뷰 포토만 모아볼 수 있게 구현하기</p>
-						<input type="button" value="리뷰목록 "
+						
+						<input type="button" value="리뷰목록 바로가기 "
 							class="btn btn-outline-secondary btn-sm"
 							onclick="location.href='/mdReview/reviewList'"> <br>
 						<br> <br>

@@ -57,6 +57,7 @@
 		               mem_num,
 		               mem_id,
 		               mem_nickname,
+		               md_filename,
 		               fav_cnt
 		            FROM md_review 
 		            LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, md_review_num FROM md_review_fav GROUP BY md_review_num) USING(md_review_num)

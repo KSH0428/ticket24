@@ -7,7 +7,8 @@
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col">
-				<h2>리뷰</h2>
+				<br><br>
+				<h2 class="fw-bold">전체 리뷰</h2>
 				<form action="reviewList" id="search_form" method="get">
 					<div class="align-right">
 						<select id="order" name="order">
@@ -30,7 +31,7 @@
 				<c:if test="${count > 0}">
 					<br>
 					<br>
-
+				
 					<c:forEach var="mdReview" items="${list}">
 						<div class="accordion">
 							<div class="accordion-item">
@@ -46,22 +47,25 @@
 								<div class="accordion-collapse collapse show">
 									<div class="accordion-body">
 										<div>
-											<span class="align-center fw-bold"> <c:if
-													test="${empty mdReview.mem_nickname}">${mdReview.mem_id}</c:if>
-												<c:if test="${!empty mdReview.mem_nickname}">${mdReview.mem_nickname}</c:if>
+											<span class="align-center fw-bold"> 
+											<c:if test="${empty mdReview.mem_nickname}">${mdReview.mem_id}</c:if>
+											<c:if test="${!empty mdReview.mem_nickname}">${mdReview.mem_nickname}</c:if>
 											</span> <span class="float-end">${mdReview.md_regdate}</span>
 										</div>
 										<br> ${mdReview.md_content} <br>
 										<br> <img
 											src="${pageContext.request.contextPath}/upload/${mdReview.md_filename}"
 											class="detail-img"> <br>
-										<br> <span> <span class="float-end">이 리뷰가
-												도움이 되었나요? ${mdReview.fav_cnt}</span>
+										<br>
+										<span> <span class="float-end">이 리뷰가
+												도움이 되었나요? 
 												 <%-- 좋아요 --%> 
-												 <span> <img id="output_fav" data-num="${mdReview.md_review_num}"
+												<img id="output_fav" data-num="${mdReview.md_review_num}"
 												src="${pageContext.request.contextPath}/images/fav01.gif"
-												width="40"> <span id="output_fcount"></span>
-										</span>
+												width="40"> <span id="output_fcount">
+												${mdReview.fav_cnt}
+												</span>
+											</span>
 										</span>
 										<input type="button" value="수정"
 										class="btn btn-outline-secondary"
@@ -82,7 +86,7 @@
 		</div>
 	</div>
 </div>
-
+<br><br><br><br>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">

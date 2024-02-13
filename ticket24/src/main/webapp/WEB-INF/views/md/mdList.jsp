@@ -9,8 +9,10 @@
 	<br><br>
 	<h2 class="align-center fw-bolder">MD Shop</h2>
 	<div class="align-right">
+	<c:if test="${!empty user && user.mem_auth == 9}">
 	  <input type="button" value="MD 등록" class="btn btn-outline-secondary"
 	  			onclick="location.href='${pageContext.request.contextPath}/md/regMd'">
+	</c:if>
 	  <input type="button" value="MD 구매내역 확인" 
 	  			class="btn btn-outline-secondary" onclick="location.href='#'">
 	</div> 
@@ -71,12 +73,14 @@
 	    		onclick="location.href=location.href='detail?md_num=${md.md_num}'">
 	    </div>
 	  </div>
+	  <c:if test="${!empty user && user.mem_auth == 9}">
 	  <div class="card-body d-grid d-md-flex justify-content-md-end">
 	    <input type="button" value="MD수정" class="btn btn-outline-primary btn-sm me-md-2" 
 	    		onclick="location.href=location.href='update?md_num=${md.md_num}'">
 		<input type="button" value="MD삭제" class="btn btn-outline-primary btn-sm" 
 				onclick="location.href='delete?md_num=${md.md_num}'">
 	  </div>
+	  </c:if>
 	  </div>
 	</div>
 	</c:forEach>

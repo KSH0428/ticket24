@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.qos.logback.classic.Logger;
+import kr.spring.mdcart.vo.MdCartVO;
 import kr.spring.mdorder.service.MdOrderService;
 import kr.spring.mdorder.vo.MdOrderDetailVO;
 import kr.spring.mdorder.vo.MdOrderVO;
@@ -37,11 +38,9 @@ public class MdOrderController {
 	}
 	
 	 @RequestMapping("/mdOrder/orderView")
-	  public String orderView(HttpSession session, HttpServletRequest request, 
-			  HttpServletResponse response,
-			  MdOrderVO mdOrderVO, Model model,int md_order_total) throws Exception{
+	  public String orderView(int md_cart_num, Model model) throws Exception{
 		  List<MdOrderVO> orderList = new ArrayList<>(); 
-		 // for(int i=0; i < (mdOrderVO.getMd_order_num()).length; i++){
+		 //for(int i=0; i < (MdCartVO.getMd_cart_num()).length; i++){
 				  
 				//  .getItem_no()).length; i++) {
 			

@@ -49,9 +49,9 @@
 							<td class="align-center">
 								<div class="d-grid gap-2 col-6 mx-auto">
 									<button class="btn btn-secondary btn-sm text-light"
-										type="button" onclick="location.href='#'">주문</button>
+										type="button" onclick="location.href='/mdOrder/orderView?md_cart_num=${mdCart.md_cart_num}'">주문</button>
 									<input type="button" value="삭제" class="btn default-btn btn-light btn-outline-dark btn-sm"
-			  							onclick="location.href=location.href='/mdCart/deleteCart?md_cart_num=${MdCartVO.md_cart_num}'">	
+			  							onclick="location.href=location.href='/mdCart/deleteCart?md_cart_num=${mdCart.md_cart_num}'">	
 									
 								</div>
 							</td>
@@ -77,7 +77,7 @@
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 					<span class="fs-5 fw-bold">선택한 상품</span>
 					<button class="btn btn-dark me-md-2" type="button" 
-					 onclick="location.href='#'">주문하기</button>
+					 onclick="location.href='location.href='/mdOrder/mdOrderPayment'">주문하기</button>
 					<button class="btn btn-outline-dark" type="button"
 					onclick="location.href='#'">삭제</button>
 				</div>

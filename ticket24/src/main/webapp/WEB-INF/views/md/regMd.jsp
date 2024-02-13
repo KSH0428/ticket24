@@ -31,12 +31,10 @@
 				placeholder="수량"> <label for="md_quantity">수량</label>
 			</li>
 			<li class="form-floating mb-3">
-				<label for="upload1">상품사진(썸네일)</label>
-		        <input type="file" name="upload1" id="upload1" class="form-control"/>
+				<input type="file" name="upload1" id="upload1" class="form-control"/>
 			</li>
 			<li class="form-floating mb-3">
-				<label for="upload2">상품사진(상세페이지)</label>
-		        <input type="file" name="upload2" id="upload2" class="form-control"/>
+				<input type="file" name="upload2" id="upload2" class="form-control"/>
 			</li>
 			<li class="form-floating mb-3">
 				<input type="text" name="md_detail" id="md_detail" maxlength="12"
@@ -47,7 +45,7 @@
 		</ul>
 		<div class="align-center">
 			<button class="btn default-btn btn-dark" type="submit">등록</button>
-			<input type="button" value="홈으로" class="btn default-btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/main/main'">
+			<input type="button" value="홈으로" class="btn default-btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/md/list'">
 		</div>
 	</form>
 	<br><br><br><br><br><br>

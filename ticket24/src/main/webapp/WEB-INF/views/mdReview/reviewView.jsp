@@ -32,16 +32,13 @@
 				  fn:endsWith(mdReview.md_filename,'.png') ||
 				  fn:endsWith(mdReview.md_filename,'.PNG')}">
 		<div class="align-center">
-			<img src="${pageContext.request.contextPath}/upload/${mdReview.md_filename}" class="detail-img">
+			<img src="${pageContext.request.contextPath}/upload/${mdReview.md_filename}" 
+			class="detail-img" style="width: 100px; height: 100px;">	
+			
 		</div>
 		</c:if>
 		<div class="detail-content">
 			${md.md_content}
-		</div>
-		<%-- 좋아요 --%>
-		<div>
-		<img id="output_fav" data-num="${mdReview.md_review_num}" src="${pageContext.request.contextPath}/images/fav01.gif" width="40">
-		<span id="output_fcount"></span>
-		</div>
+	
 </div>
 <!-- 내용 끝 -->
