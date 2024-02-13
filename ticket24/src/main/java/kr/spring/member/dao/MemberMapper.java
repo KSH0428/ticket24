@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.comm.vo.CommVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.question.vo.QuestionVO;
 
 @Mapper
 public interface MemberMapper {
@@ -74,6 +75,9 @@ public interface MemberMapper {
 	public int selectFavRowCount(Map<String,Object> map);
 	//마이페이지 좋아요한 글
 	public List<CommVO> selectAllFavList(Map<String,Object> map);
+	//마이페이지 1:1문의
+	public int selectQuestionRowCount(Map<String,Object> map);
+	public List<QuestionVO> selectQuestionList(Map<String,Object> map);
 	
 	//회원 탈퇴
 	@Update("UPDATE member SET mem_auth=0 WHERE mem_num=#{mem_num}")

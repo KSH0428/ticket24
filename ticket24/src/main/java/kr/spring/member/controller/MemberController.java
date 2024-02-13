@@ -32,6 +32,7 @@ import kr.spring.member.service.SendEmailService;
 import kr.spring.reserv.service.ReservService;
 import kr.spring.member.vo.MailVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.question.vo.QuestionVO;
 import kr.spring.reserv.vo.ReservHallVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
@@ -569,7 +570,44 @@ public class MemberController {
 	/*========================
 	 * 마이페이지 양도티켓 결제 내역
 	 *=======================*/
+	/*========================
+	 * 마이페이지 1:1 문의
+	 *=======================*/
+	@RequestMapping("/member/memberQuestion")
+	public ModelAndView process(
+						@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+						@RequestParam(defaultValue="0") int question_category, 
+						String keyfield, String keyword, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("question_category", question_category);
+		map.put("mem_num", user.getMem_num());
+		
+		//전체/검색 레코드수
+		int count = memberService.selectQuestionRowCount(map);
+		log.debug("<<count>> : " + count);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count, 20, 10, "list");
+		
+		List<QuestionVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectQuestionList(map);
+		}
 	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memberQuestion");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
+	}
 	/*========================
 	 * 회원 탈퇴
 	 *=======================*/

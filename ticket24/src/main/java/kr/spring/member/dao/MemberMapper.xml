@@ -265,4 +265,52 @@
 			WHERE rnum >= #{start} AND rnum <= #{end}
 			]]>
 	</select>
+	
+	<!-- 작성자 nick_name/ID + 제목으로 검색 -->
+	<sql id="questionSearch">
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					AND question_title LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					AND mem_id LIKE '%' || #{keyword} || '%' OR
+					mem_nickname LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+			<!-- 상품/주문/배송/기타 카테고리로 조회 -->
+			<if test="question_category != null and question_category != 0">
+				AND question_category = #{question_category}
+			</if>
+	</sql>
+	
+	<!-- 문의글 총개수/검색 개수 -->
+	<select id="selectQuestionRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM question JOIN member USING(mem_num)
+		<include refid="questionSearch"></include>
+	</select>
+	
+	<!-- 문의글 전체 목록/검색 목록 -->
+	<select id="selectQuestionList" parameterType="map" resultType="questionVO">
+		SELECT * FROM
+		(SELECT a.*, rownum rnum FROM
+		(SELECT question_num,
+				mem_num,
+				question_category,
+				question_status,
+				<![CDATA[
+				REPLACE(REPLACE(question_title,'<','&lt;'),'>','&gt;') question_title,
+				]]>
+				question_hit,
+				question_regdate,
+				mem_id,
+				mem_nickname,
+				question_level,
+				question_lock
+			FROM question JOIN member USING(mem_num)
+			WHERE mem_num=#{mem_num}
+			<include refid="questionSearch"></include>)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
 </mapper>

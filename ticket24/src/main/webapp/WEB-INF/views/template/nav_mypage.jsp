@@ -22,7 +22,7 @@
 				</ul>
 			</li>
 			<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">티켓양도</a></li>
-			<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">1:1 문의</a></li>
+			<li class="main-menu"><a href="${pageContext.request.contextPath}/member/memberQuestion">1:1 문의</a></li>
 		</ul>
 	</div>
 </body>

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.comm.vo.CommVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.question.vo.QuestionVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -141,6 +142,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<CommVO> selectAllFavList(Map<String,Object> map) {
 		return memberMapper.selectAllFavList(map);
+	}
+
+	@Override
+	public int selectQuestionRowCount(Map<String, Object> map) {
+		return memberMapper.selectQuestionRowCount(map);
+	}
+
+	@Override
+	public List<QuestionVO> selectQuestionList(Map<String, Object> map) {
+		return memberMapper.selectQuestionList(map);
 	}
 
 }
