@@ -48,7 +48,7 @@
 		<hr size="1"width="100%">
 		<div class="center">
     <input type="button" value="목록" onclick="location.href='/ticketPay/list'">
-    <input type="button" value="홈으로" onclick="location.href='/main/main'">
+    <input type="button" value="홈으로" onclick="location.href='/concert/list'">
 </div>
 		
 </div>
