@@ -87,7 +87,7 @@ public class MemberController {
 
 		model.addAttribute("accessTitle", "회원가입");
 		model.addAttribute("accessMsg", "회원가입이 완료되었습니다.");
-		model.addAttribute("accessUrl", request.getContextPath()+"/main/main");
+		model.addAttribute("accessUrl", request.getContextPath()+"/concert/list");
 		
 		return "common/resultView";
 	}
