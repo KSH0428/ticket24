@@ -1,16 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-<jsp:include page="/WEB-INF/views/template/header.jsp"/>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
-<!-- 내용 시작 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ces.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
-
+<!-- 내용 시작 -->
 
 <div class="page-main">
 	<div class="container">
@@ -28,7 +24,8 @@
 	<form:form action="reviewWrite" modelAttribute="mdReviewVO" id="register_form"
 	                                      enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
-		<ul>
+		
+		<ul >
 			<li class="list-style: none;">
 				<form:label path="md_title">제목</form:label>
 				<form:input path="md_title"/>
@@ -36,7 +33,7 @@
 			</li>
 			<li><b>내용</b></li>
 			<li>
-				<form:textarea path="md_content"/>
+				<form:textarea path="md_content" class="form-control"/>
 				<form:errors path="md_content" cssClass="error-color"/>
 				<script>
 					function MyCustomUploadAdapterPlugin(editor){

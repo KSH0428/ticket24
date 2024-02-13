@@ -41,7 +41,7 @@
 								max="${mdCart.order_quantity}" autocomplete="off"
 								id="order_quantity" class="quantity-width">
 								<button class="btn btn-secondary btn-sm text-light"
-									type="button" onclick="location.href='#'">변경</button>
+									type="button" onclick="location.href='/mdCart/updateCart?order_quantity=${mdCart.order_quantity}'">변경</button>
 								</div>	
 							</td>
 							<td class="align-center">${mdCart.mdVO.md_price}</td>

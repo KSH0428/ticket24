@@ -121,13 +121,9 @@ public class MdCartController {
 			mdCartService.updateCart(vo);
 		}
 		
-		
-		
 		return "redirect:/mdCart/cartList";
 	}
 	
-	 
-
 	/*
 	 * ================================= 
 	 * 장바구니 삭제 
@@ -138,7 +134,6 @@ public class MdCartController {
 		mdCartService.deleteCart(md_cart_num);
 		return "redirect:/mdCart/cartList";
 	}
-	
 	
 
 	  }

@@ -75,7 +75,7 @@
 					<br>
 					<div>
 						<span> <span class="text-start" id="sub_total">총
-								상품금액</span> <b class="float-end"> <fmt:formatNumber
+								할인금액</span> <b class="float-end"> <fmt:formatNumber
 									value="${md.md_price}" /> <span>원</span></b>
 						</span>
 					</div>
@@ -101,11 +101,6 @@
 				</form>
 				<br>
 				<div>
-
-					<input type="submit" value="바로구매"
-						class="btn btn-secondary btn-lg col"
-						onclick="location.href='${pageContext.request.contextPath}/mdOrder/mdOrderPayment'">
-
 					<br> <br> <br>
 				</div>
 			</div>
