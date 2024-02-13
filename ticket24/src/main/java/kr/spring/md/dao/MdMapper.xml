@@ -100,12 +100,15 @@
 		  md_name=#{md_name},
 		  md_price=#{md_price},
 		  md_quantity=#{md_quantity},
+		 <if test="md_photo1 != null">	
 		  md_photo1=#{md_photo1},
+		  </if>
+		  <if test="md_photo2 != null">
 		  md_photo2=#{md_photo2},
+		  </if>
 		  md_detail=#{md_detail},
 		  md_mdate=SYSDATE
 		WHERE md_num=#{md_num}
-		
 	</update>
 	
 

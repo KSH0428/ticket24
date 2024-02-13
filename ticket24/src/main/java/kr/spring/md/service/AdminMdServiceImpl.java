@@ -40,14 +40,12 @@ public class AdminMdServiceImpl implements AdminMdService{
 
 	@Override
 	public void deleteMd(int md_num) {
-		mdMapper.deleteMd(md_num);
-		
+		mdMapper.deleteMd(md_num);	
 	}
 
 	@Override
 	public void deleteFile(int md_num) {
-		
-		
+		mdMapper.deleteFile(md_num);
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.md.vo.MdVO;
 
@@ -26,7 +27,7 @@ public interface MdMapper {
 	@Delete("DELETE FROM md WHERE md_num=#{md_num}")
 	public void deleteMd(int md_num);
 	//상품 이미지 수정
-	//@Update("UPDATE md SET photo1='',photo2='' WHERE md_num=#{md_num}")
+	@Update("UPDATE md SET photo1='',photo2='' WHERE md_num=#{md_num}")
 	public void deleteFile(int md_num);
 
 }

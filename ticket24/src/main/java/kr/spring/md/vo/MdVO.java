@@ -2,6 +2,8 @@ package kr.spring.md.vo;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +16,8 @@ public class MdVO {
 	private String md_name;
 	private int md_price;
 	private int md_quantity;
+	private MultipartFile upload1;
+	private MultipartFile upload2;
 	private String md_photo1;
 	private String md_photo2;
 	private String md_detail;

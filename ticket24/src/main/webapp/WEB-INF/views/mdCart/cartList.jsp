@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <!-- 내용 시작 -->
@@ -37,7 +38,7 @@
 								<div class="d-grid gap-2 col-6 mx-auto">
 								${mdCart.order_quantity} 
 								<input type="number" name="order_quantity" min="1"
-								max="${mdCart.mdVO.md_quantity}" autocomplete="off"
+								max="${mdCart.order_quantity}" autocomplete="off"
 								id="order_quantity" class="quantity-width">
 								<button class="btn btn-secondary btn-sm text-light"
 									type="button" onclick="location.href='#'">변경</button>
@@ -64,7 +65,7 @@
 						<div class="d-flex justify-content-end">
 							<span class="fs-6 text-end text-dark">▶총 주문 금액 : </span>
 							<span class="fs-6 text-end text-danger"> (상품금액) ${map.getTotal}원 + (배송비) ${map.fee}원 = 총 지불 금액 :
-							${map.allSum}</span>
+							<fmt:formatNumber value="${map.allSum}"/><span>원</span></span>
 						<br>	
 						</div>
 						<br>
@@ -73,9 +74,9 @@
 				
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 					<span class="fs-5 fw-bold">선택한 상품</span>
-					<button class="btn btn-primary me-md-2" type="button" 
+					<button class="btn btn-dark me-md-2" type="button" 
 					 onclick="location.href='#'">주문하기</button>
-					<button class="btn btn-outline-primary" type="button"
+					<button class="btn btn-outline-dark" type="button"
 					onclick="location.href='#'">삭제</button>
 				</div>
 		</div>

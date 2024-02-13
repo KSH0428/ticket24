@@ -9,9 +9,10 @@
 <div class="content-main">
 			<div class="container d-flex justify-content-center">
 				<div class="col-8 col8md-4">
-	<h2>상품 등록</h2>
-	<form id="regMd_form" accept-charset="UTF-8" role="form" action="regMd" method="post">
-		<!-- 상품표시여부, 상품명, 가격, 수량, 상품사진1, 상품사진2, 상품설명 -->
+				<br><br>
+	<h2 class="fw-bold">상품 등록</h2>
+	<br><br>
+	<form id="regMd_form" accept-charset="UTF-8" role="form" action="regMd" method="post" enctype="multipart/form-data">
 		<ul>
 		 	<li class="form-floating mb-3">
 				<input type="text" name="md_name" id="md_name" maxlength="12"
@@ -30,16 +31,13 @@
 				placeholder="수량"> <label for="md_quantity">수량</label>
 			</li>
 			<li class="form-floating mb-3">
-				<input type="text" name="md_photo1" id="md_photo1" maxlength="12"
-				class="input-check form-control rounded-3 bg-body-tertiary border-0"
-				placeholder="상품사진(썸네일)"> <label for="md_photo1">상품사진(썸네일)</label>
-				<input type="button" value="파일 첨부" class="default-btn">
+				<label for="upload1">상품사진(썸네일)</label>
+		        <input type="file" name="upload1" id="upload1" class="form-control"/>
+				
 			</li>
 			<li class="form-floating mb-3">
-				<input type="text" name="md_photo2" id="md_photo2" maxlength="12"
-				class="input-check form-control rounded-3 bg-body-tertiary border-0"
-				placeholder="상품사진(상세페이지)"> <label for="md_photo2">상품사진(상세페이지)</label>
-				<input type="button" value="파일 첨부" class="default-btn">
+				<label for="upload2">상품사진(상세페이지)</label>
+		        <input type="file" name="upload2" id="upload2" class="form-control"/>
 			</li>
 			<li class="form-floating mb-3">
 				<input type="text" name="md_detail" id="md_detail" maxlength="12"
@@ -49,10 +47,11 @@
 			
 		</ul>
 		<div class="align-center">
-			<button class="default-btn" type="submit">등록</button>
-			<input type="button" value="홈으로" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/main/main'">
+			<button class="btn default-btn btn-dark" type="submit">등록</button>
+			<input type="button" value="홈으로" class="btn default-btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/main/main'">
 		</div>
 	</form>
+	<br><br><br><br><br><br>
 	</div>
 	</div>
 	</div>

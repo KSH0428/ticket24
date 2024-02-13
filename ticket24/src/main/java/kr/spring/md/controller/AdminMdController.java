@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import ch.qos.logback.core.util.FileUtil;
 import kr.spring.md.service.AdminMdService;
 import kr.spring.md.service.MdService;
 import kr.spring.md.vo.MdVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PageUtil;
+import kr.spring.util.FileUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,10 +55,15 @@ public class AdminMdController {
 				return "insertMd";//타일스 설정명
 			}
 			
-			//전송된 상품 데이터 처리
+			//전송된 데이터 처리
 			@PostMapping("/md/regMd")
-			public String submit(MdVO mdVO, BindingResult result, Model model,
-					                                           HttpServletRequest request) {
+			public String submit( MdVO mdVO, BindingResult result, Model model,
+					            HttpServletRequest request, HttpSession session) throws IllegalStateException, IOException {
+				
+				
+				mdVO.setMd_photo1(FileUtil.createFile(request, mdVO.getUpload1()));
+				mdVO.setMd_photo2(FileUtil.createFile(request, mdVO.getUpload2()));
+				
 				//상품등록
 				adminMdService.insertMd(mdVO);
 				

@@ -15,11 +15,10 @@
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col">
-				<div class="card" style="height: 37rem;">
+				<div class="card border-white" style="height: 37rem;">
 					<div class="card-body text-center">
-						<img
-							src="${pageContext.request.contextPath}/image_upload/img6.jpg"
-							class="card-img-center" style="width: 300px; height: 300px;">
+						<img src="${pageContext.request.contextPath}/upload/${md.md_photo2}" 
+						class="card-img-top" style="width: 400px; height: 400px;">        
 					</div>
 					<br> <br> <br>
 					<div class="text-sm-end text-secondary">상품 번호:
@@ -37,8 +36,8 @@
 						id="md_price"> <input type="hidden" name="md_quantity"
 						value="${md.md_quantity}" id="md_quantity">
 					<div>
-						<b class="card-text fs-2"> <fmt:formatNumber
-								value="${md.md_price}" />원
+						<b class="card-text fs-2">
+						 <fmt:formatNumber value="${md.md_price}" />원
 						</b>
 					</div>
 					<br> <br>
@@ -76,8 +75,8 @@
 					<br>
 					<div>
 						<span> <span class="text-start" id="sub_total">총
-								상품금액</span> <b class="float-end"><fmt:formatNumber
-									value="${md.md_price}" /> <span>원</span></b>
+								상품금액</span> <b class="float-end">
+								<fmt:formatNumber value="${md.md_price}" /> <span>원</span></b>
 						</span>
 					</div>
 					<div>
@@ -90,8 +89,8 @@
 					<div class="container text-center">
 						<div class="row row-cols-2">
 							<input type="submit" value="장바구니 담기"
-								class="btn btn-outline-secondary btn-lg col"> <input
-								type="submit" value="바로구매" class="btn btn-secondary btn-lg col"
+								class="btn btn-outline-dark btn-lg col"> <input
+								type="submit" value="바로구매" class="btn btn-dark btn-lg col"
 								onclick="location.href='${pageContext.request.contextPath}/mdOrder/mdOrderPayment'">
 						</div>
 					</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 <!-- 내용 시작 -->
@@ -27,19 +28,13 @@
 			</li>
 			<li>
 				<input type="search" name="keyword" id="keyword"
-				                                  value="${param.keyword}">
+				                                  value="${param.keyword}" placeholder="검색어 입력">
+				
+				<!-- <input type="text" class="search-bar" name="keyword" id="keyword" value="${param.keyword}"
+				 placeholder="검색어 입력">  -->
+  			
 			</li>
 			<li>
-				<!-- <img class="search-btn" id="search-btn" 
-					src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-					<script>
-        		function submitForm() {
-           		 document.getElementById("search_form").submit();
-       			}
-
-       			// 이미지 클릭 이벤트에 함수 할당
-        		document.getElementById("search-btn").addEventListener("click", submitForm);
-   			</script> -->
 				<input type="submit" value="검색" class="btn btn-dark">
 			</li>
 		</ul>
@@ -51,6 +46,34 @@
 			</select>
 		</div>
 	</form>
+	
+	
+	<!-- 검색 부분 시작 -->
+	<form action="list" id="search_form" method="get">
+		<div class="search">
+			<select name="keyfield" id="keyfield">
+				<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>상품번호</option>
+				<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>상품명</option>
+			</select>
+			
+  			<input type="text" class="search-bar" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어 입력">
+  			<img class="search-btn" id="search-btn" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+ 			
+ 			<!-- 이미지 클릭하면 submit 이벤트 발생 -->
+  			<script>
+        		function submitForm() {
+           		 document.getElementById("search_form").submit();
+       			}
+
+       			// 이미지 클릭 이벤트에 함수 할당
+        		document.getElementById("search-btn").addEventListener("click", submitForm);
+   			</script>
+		</div>
+		
+	</form>
+<!-- 검색 부분 끝 -->
+	
+	
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 상품이 없습니다.</div>
 	</c:if>
@@ -61,16 +84,16 @@
 	<div class="container overflow-hidden">
 	<div class="row gy-5 justify-content-md-center">
 	<c:forEach var="md" items="${list}">
-	<div class="card" style="width: 18rem;">
+	<div class="card border-white" style="width: 18rem;">
 	<div class="p-3">
 	<p class="card-text fs-6">no.${md.md_num}</p>	
-	  <img src="${pageContext.request.contextPath}/image_upload/img6.jpg" class="card-img-top" alt="...">
+	  <img src="${pageContext.request.contextPath}/upload/${md.md_photo1}" class="bd-placeholder-img card-img-top" width="100%" height="170">        
 	  <div class="card-body">
 	  	<br>
 	    <p class="card-text fs-6">${md.md_name}</p>
 	    <span>
-	    <span class="card-text text-danger fs-5">${md.md_price}</span>
-	    <span>원</span>
+	    <span class="card-text text-danger fs-5"> 
+	    <fmt:formatNumber value="${md.md_price}" />원</span> 
 	    </span>
 	    <br><br>
 	    <div class="d-grid">

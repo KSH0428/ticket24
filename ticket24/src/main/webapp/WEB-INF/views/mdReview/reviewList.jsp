@@ -7,7 +7,7 @@
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col">
-				<h2>리뷰목록</h2>
+				<h2>리뷰</h2>
 				<form action="reviewList" id="search_form" method="get">
 					<div class="align-right">
 						<select id="order" name="order">
@@ -19,7 +19,7 @@
 								<c:if test="${param.order == 3}">selected</c:if>>좋아요낮은순</option>
 						</select>
 						<c:if test="${!empty user}">
-							<input type="button" value="리뷰작성"
+							<input type="button" value="리뷰작성" class="btn btn-dark btn-lg"
 								onclick="location.href='/mdReview/reviewWrite'">
 						</c:if>
 					</div>
