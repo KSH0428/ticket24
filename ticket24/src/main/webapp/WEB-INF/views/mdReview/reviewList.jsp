@@ -57,22 +57,21 @@
 											src="${pageContext.request.contextPath}/upload/${mdReview.md_filename}"
 											class="detail-img"> <br>
 										<br>
-										<span> <span class="float-end">이 리뷰가
+										<div> <span class="float-end">이 리뷰가
 												도움이 되었나요? 
 												 <%-- 좋아요 --%> 
+												 <span>
 												<img id="output_fav" data-num="${mdReview.md_review_num}"
-												src="${pageContext.request.contextPath}/images/fav01.gif"
-												width="40"> <span id="output_fcount">
-												${mdReview.fav_cnt}
+												src="${pageContext.request.contextPath}/images/fav01.gif" width="40">
+												<span id="output_fcount">${mdReview.fav_cnt}</span>
 												</span>
 											</span>
-										</span>
-										<input type="button" value="수정"
+										</div>
+										<input type="button" value="수정" class="btn btn-outline-secondary"
+										 onclick="location.href='/mdReview/update?md_review_num=${md_review_num}'">
+										<input type="button" value="삭제"
 										class="btn btn-outline-secondary"
-										onclick="location.href='${pageContext.request.contextPath}/mdReview/update'">
-													<input type="button" value="삭제"
-										class="btn btn-outline-secondary"
-										onclick="location.href='${pageContext.request.contextPath}/mdReview/delete'">	
+										onclick="location.href='/mdReview/delete?md_review_num=${md_review_num}'">	
 									</div>
 								</div>
 							</div>

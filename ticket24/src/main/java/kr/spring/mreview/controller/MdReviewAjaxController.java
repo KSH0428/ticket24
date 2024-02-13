@@ -59,7 +59,6 @@ public class MdReviewAjaxController {
 	@RequestMapping("/mdReview/getFav")
 	@ResponseBody
 	public Map<String,Object> getFav(MdReviewFavVO fav, HttpSession session){
-		log.debug("<<게시판 좋아요 MdReviewFavVO>> : " + fav);
 		
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user");

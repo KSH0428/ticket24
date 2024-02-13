@@ -83,38 +83,37 @@ public class MdReviewController {
 	 * 리뷰 목록
 	 *=================================*/
 	@RequestMapping("/mdReview/reviewList") 
-	public ModelAndView process(
+	public ModelAndView process(HttpSession session, 
 			@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-			@RequestParam(value="order",defaultValue="1") int order, String keyfield,
-			String keyword) {
+			@RequestParam(value="order",defaultValue="1") int order, 
+			String keyfield, String keyword) {
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("keyfield", keyfield); 
 			map.put("keyword", keyword);
 
 			//전체/검색 레코드수 
 			int count = mdReviewService.selectRowCount(map);
-			log.debug("<<count>> : " + count);
-
+			
 			PageUtil page = new PageUtil(keyfield,keyword,currentPage,
-					count,20,10,"list","&order="+order);
+					count,10,10,"list","&order="+order);
 
 			List<MdReviewVO> list = null; 
 			if(count > 0) { map.put("order", order);
 							map.put("start",page.getStartRow()); 
 							map.put("end", page.getEndRow());
-
-			list = mdReviewService.selectList(map); }
+							list = mdReviewService.selectList(map);
+			}
 			
-
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			
 			ModelAndView mav = new ModelAndView(); 
 			mav.setViewName("reviewList");
 			mav.addObject("count", count); 
 			mav.addObject("list", list);
 			mav.addObject("page", page.getPage());
-
+			
+			  
 			return mav; 
-			
-			
 	}
 
 
@@ -131,7 +130,10 @@ public class MdReviewController {
 	  MdReviewVO review = mdReviewService.selectMdReview(md_review_num); 
 	  //제목에 태그를 허용하지 않음
 	  review.setMd_title(StringUtil.useNoHtml(review.getMd_title())); 
+	  //내용에 태그를 허용하지 않음
+	  review.setMd_content(StringUtil.useNoHtml(review.getMd_content())); 
 
+	  
 	  return new ModelAndView("reviewView","review",review); 
 	  }
 	 
@@ -154,8 +156,7 @@ public class MdReviewController {
 			BindingResult result,
 			HttpServletRequest request,
 			Model model) throws IllegalStateException, IOException {
-		log.debug("<<리뷰 수정>> : " + mdReviewVO);
-
+		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			//title 또는 content가 입력되지 않아 유효성 체크에 걸리면
@@ -166,7 +167,6 @@ public class MdReviewController {
 		}
 
 		//DB에 저장된 파일 정보 구하기
-		
 		  MdReviewVO db_review = mdReviewService.selectMdReview(
 		  mdReviewVO.getMd_review_num());
 		 

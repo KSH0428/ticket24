@@ -18,11 +18,6 @@ public class MdReviewServiceImpl implements MdReviewService{
 	private MdReviewMapper mdReviewMapper;
 
 	@Override
-	public List<MdReviewVO> selectList(Map<String, Object> map) {
-		return mdReviewMapper.selectList(map);
-	}
-
-	@Override
 	public int selectRowCount(Map<String, Object> map) {
 		return mdReviewMapper.selectRowCount(map);
 	}
@@ -77,6 +72,10 @@ public class MdReviewServiceImpl implements MdReviewService{
 		mdReviewMapper.deleteFav(reviewFav);
 	}
 
+	@Override
+	public List<MdReviewVO> selectList(Map<String, Object> map) {
+		return mdReviewMapper.selectList(map);
+	}
 
 	
 }

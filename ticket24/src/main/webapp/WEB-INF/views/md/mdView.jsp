@@ -149,7 +149,6 @@
 							class="btn btn-outline-secondary btn-sm"
 							onclick="location.href='/mdReview/reviewList'"> <br>
 						<br> <br>
-
 						<hr>
 						<br> <br>
 						<h4 id="scrollspyHeading3" class="fw-bold">상품 문의</h4>

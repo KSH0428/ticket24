@@ -3,9 +3,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ces.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
+<jsp:include page="/WEB-INF/views/template/header.jsp"/>
 <!-- 내용 시작 -->
 
 <div class="page-main">
@@ -24,15 +23,15 @@
 	<form:form action="reviewWrite" modelAttribute="mdReviewVO" id="register_form"
 	                                      enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
-		
+		<br>
 		<ul >
 			<li class="list-style: none;">
 				<form:label path="md_title">제목</form:label>
 				<form:input path="md_title"/>
 				<form:errors path="md_title" cssClass="error-color"/>
 			</li>
-			<li><b>내용</b></li>
 			<li>
+				<form:label path="md_content">내용</form:label>
 				<form:textarea path="md_content" class="form-control"/>
 				<form:errors path="md_content" cssClass="error-color"/>
 				<script>
@@ -55,18 +54,19 @@
 				</script>
 			</li>
 			</ul>
+			<br>
 			<hr><br>
 		<ul>	
 			<li>
 				<form:label path="upload">파일업로드</form:label>
-				<input type="file" name="upload" id="upload">
+				<input type="file" name="upload" id="upload" class="btn btn-dark">
 			</li>
 		</ul>
 		
 		<br><hr>
 		<div class="align-center">
-			<form:button>리뷰 등록</form:button>
-			<input type="button" value="목록" onclick="location.href='reviewList'">
+			<form:button class="btn btn-dark">리뷰 등록</form:button>
+			<input type="button" value="목록"  class="btn btn-dark"onclick="location.href='reviewList'">
 		</div>	
 </form:form>
 </div>
