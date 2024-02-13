@@ -11,10 +11,7 @@
 	<div class="align-right">
 	  <input type="button" value="MD 등록" class="btn btn-outline-secondary"
 	  			onclick="location.href='${pageContext.request.contextPath}/md/regMd'">
-		<input type="button" value="장바구니" 
-	  			class="btn btn-outline-secondary" 
-	  			onclick="location.href='${pageContext.request.contextPath}/mdCart/cartList'">	  
-	  	<input type="button" value="MD 구매내역 확인" 
+	  <input type="button" value="MD 구매내역 확인" 
 	  			class="btn btn-outline-secondary" onclick="location.href='#'">
 	</div> 
 	<br><hr><br><br>

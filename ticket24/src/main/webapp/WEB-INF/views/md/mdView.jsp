@@ -17,8 +17,7 @@
 			<div class="col">
 				<div class="card border-white" style="height: 37rem;">
 					<div class="card-body text-center">
-						<img
-							src="${pageContext.request.contextPath}/upload/${md.md_photo2}"
+						<img src="${pageContext.request.contextPath}/upload/${md.md_photo2}"
 							class="card-img-top" style="width: 400px; height: 400px;">
 					</div>
 					<br> <br> <br>
@@ -90,8 +89,8 @@
 					<div class="container text-center">
 						<div class="row row-cols-2">
 							<input type="submit" value="장바구니 담기"
-								class="btn btn-outline-dark btn-lg col"> <input
-								type="submit" value="바로구매" class="btn btn-dark btn-lg col"
+								class="btn btn-outline-dark btn-lg col"> 
+							<input type="submit" value="바로구매" class="btn btn-dark btn-lg col"
 								onclick="location.href='${pageContext.request.contextPath}/mdOrder/mdOrderPayment'">
 						</div>
 					</div>

@@ -3,6 +3,7 @@ package kr.spring.mdcart.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +58,9 @@ public class MdCartServiceImpl implements MdCartService{
 
 	@Override
 	public MdCartVO selectCart(int md_num, int mem_num) {
+		//Map<String,Object> map = new HashedMap<String, Object>();
+		//map.put("md_num", md_num);
+		//map.put("mem_num", mem_num);
 		return mdcartMapper.selectCart(md_num, mem_num);
 	}
 

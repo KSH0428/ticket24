@@ -65,6 +65,7 @@
 				<input type="file" name="upload" id="upload">
 			</li>
 		</ul>
+		
 		<br><hr>
 		<div class="align-center">
 			<form:button>리뷰 등록</form:button>

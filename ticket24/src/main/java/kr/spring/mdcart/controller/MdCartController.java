@@ -104,9 +104,27 @@ public class MdCartController {
 
 	/*
 	 * ================================= 
-	 * 장바구니 수정
+	 * 장바구니 수정(수량 변경)
 	 *  =================================
 	 */
+	@RequestMapping("/mdCart/updateCart")
+	public String update(
+				@RequestParam int[] order_quantity,
+				@RequestParam int[] md_num, HttpSession session) {
+		String mem_num = (String) session.getAttribute("mem_num");
+		//레코드의 갯수 만큼 반복문 실행
+		for(int i=0; i<md_num.length;i++) {
+			MdCartVO vo = new MdCartVO();
+			vo.setMem_num(i);
+			vo.setOrder_quantity(i);
+			vo.setMd_num(i);
+			mdCartService.updateCart(vo);
+		}
+		
+		
+		
+		return "redirect:/mdCart/cartList";
+	}
 	
 	 
 
@@ -115,5 +133,12 @@ public class MdCartController {
 	 * 장바구니 삭제 
 	 * =================================
 	 */
+	@RequestMapping("/mdCart/deleteCart")
+	public String delete(@RequestParam int md_cart_num) {
+		mdCartService.deleteCart(md_cart_num);
+		return "redirect:/mdCart/cartList";
+	}
+	
+	
 
 	  }

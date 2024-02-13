@@ -22,7 +22,7 @@
 				</c:if>
 			</li>
 		</ul>
-		<hr size="1"width="100%">
+		<hr size="1" width="100%">
 		<c:if test="${fn:endsWith(mdReview.md_filename,'.jpg') ||
 				  fn:endsWith(mdReview.md_filename,'.JPG') ||					
 				  fn:endsWith(mdReview.md_filename,'.jpeg') ||

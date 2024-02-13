@@ -50,12 +50,14 @@
 								<div class="d-grid gap-2 col-6 mx-auto">
 									<button class="btn btn-secondary btn-sm text-light"
 										type="button" onclick="location.href='#'">주문</button>
-									<button class="btn btn-light btn-outline-dark btn-sm"
-										type="button" onclick="location.href='#'">삭제</button>
+									<input type="button" value="삭제" class="btn default-btn btn-light btn-outline-dark btn-sm"
+			  							onclick="location.href=location.href='/mdCart/deleteCart?md_cart_num=${MdCartVO.md_cart_num}'">	
+									
 								</div>
 							</td>
 						</tr>
 				</c:forEach>
+				
 				</tbody>
 			</table>
 			

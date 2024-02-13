@@ -46,9 +46,6 @@
 			WHERE mem_num=#{mem_num}
 	</select>
 	
-	<!-- 장바구니 전체금액 -->
-	
-	
 	<!-- 장바구니 상세 -->
 	<!-- <select id="selectMdCart" parameterType="integer">
 			SELECT 
@@ -61,8 +58,15 @@
 	<update id="updateMdCart" parameterType="mdCartVO">
 			UPDATE md_cart SET
 			  order_quantity=#{order_quantity},
-			  WHERE md_cart_num=#{md_cart_num}
+			  WHERE mem_num=#{mem_num} AND md_cart_num=#{md_cart_num}
 	</update>
+	
+	<!-- 장바구니에 동일한 상품 레코드 확인 -->
+	<select id="countCart" parameterType="integer">
+		SELECT COUNT(*)
+		FROM md_cart
+		WHERE mem_num = #{mem_num} AND md_num=#{md_num}
+	</select>
 	
 	<!-- 장바구니 상품번호와 회원번호별 수정 -->
 	<update id="updateCartByMd_num" parameterType="mdCartVO">
@@ -70,5 +74,14 @@
 			order_quantity=#{order_quantity},
 			WHERE md_num=#{md_num} AND mem_num=#{mem_num} 
 	</update>
+
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteMdCart" parameterType="integer">
+		DELETE FROM md_cart
+		WHERE md_cart_num=#{md_cart_num}
+	</delete>
+		
+
+
 
 </mapper>

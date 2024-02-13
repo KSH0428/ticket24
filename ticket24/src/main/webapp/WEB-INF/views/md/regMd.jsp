@@ -33,7 +33,6 @@
 			<li class="form-floating mb-3">
 				<label for="upload1">상품사진(썸네일)</label>
 		        <input type="file" name="upload1" id="upload1" class="form-control"/>
-				
 			</li>
 			<li class="form-floating mb-3">
 				<label for="upload2">상품사진(상세페이지)</label>

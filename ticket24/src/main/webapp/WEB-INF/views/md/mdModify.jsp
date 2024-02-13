@@ -59,7 +59,7 @@
 		</ul>
 		<br><br>
 		<div class="align-center">
-			<button class="default-btn" type="button">수정</button>
+			<button class="default-btn" type="submit">수정</button>
 			<input type="button" value="MD삭제" class="default-btn"
 			   onclick="location.href=location.href='delete?md_num=${MdVO.md_num}'">
 		</div>	
