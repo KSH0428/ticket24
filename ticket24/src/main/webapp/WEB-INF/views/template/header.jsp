@@ -17,8 +17,6 @@
 <nav class="py-1 border-bottom text-bg-dark">
 	<div class="container d-flex flex-wrap">
 		<ul class="nav me-auto">
-			<li class="nav-item"><a href="#"
-				class="nav-link link-body-emphasis px-2 text-white">공지사항</a></li>
 			<li class="nav-item"><a href="${pageContext.request.contextPath}/faq/list"
 				class="nav-link link-body-emphasis px-2 text-white">고객센터</a></li>
 			<li class="nav-item"><a href="${pageContext.request.contextPath}/reserv/reservMain"
