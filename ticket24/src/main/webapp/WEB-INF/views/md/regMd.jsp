@@ -15,7 +15,7 @@
 	<form id="regMd_form" accept-charset="UTF-8" role="form" action="regMd" method="post" enctype="multipart/form-data">
 		<ul>
 		 	<li class="form-floating mb-3">
-				<input type="text" name="md_name" id="md_name" maxlength="12"
+				<input type="text" name="md_name" id="md_name" 
 				class="input-check form-control rounded-3 bg-body-tertiary border-0"
 				placeholder="상품명"> <label for="md_name">상품명</label>
 			</li>
@@ -37,7 +37,7 @@
 				<input type="file" name="upload2" id="upload2" class="form-control"/>
 			</li>
 			<li class="form-floating mb-3">
-				<input type="text" name="md_detail" id="md_detail" maxlength="12"
+				<input type="text" name="md_detail" id="md_detail" 
 				class="input-check form-control rounded-3 bg-body-tertiary border-0"
 				placeholder="상품설명"> <label for="md_detail">상품설명</label>
 			</li>

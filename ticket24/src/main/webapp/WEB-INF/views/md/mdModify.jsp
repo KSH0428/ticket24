@@ -14,56 +14,49 @@
 			<div class="container d-flex justify-content-center">
 				<div class="col-8 col8md-4">
 	<br><br><br>
-	<h2>MD상품수정</h2>
+	<h2 class="fw-bold">MD상품수정</h2>
 	<br>
 	<form id="update_form" accept-charset="UTF-8"
 			 role="form" action="update" method="post">
 		<input type="hidden" name="md_num" value="${mdVO.md_num}">	 
 		<!-- 상품표시여부, 상품명, 가격, 수량, 상품사진1, 상품사진2, 상품설명 -->
 		<ul>
-		 	<li class="form-floating mb-3">
-				<input type="text" name="md_name" id="md_name" maxlength="12" value="${mdVO.md_name}"
+		 	<li class="form-floating mb-3" style="list-style:none;">
+				<input type="text" name="md_name" id="md_name" value="${mdVO.md_name}"
 				class="input-check form-control rounded-3 bg-body-tertiary border-0"
 				placeholder="상품명"> <label for="md_name">상품명</label>
 			</li>
 		 
-			<li class="form-floating mb-3">
-				<input type="text" name="md_price" id="md_price" maxlength="12" value="${mdVO.md_price}"
+			<li class="form-floating mb-3" style="list-style:none;">
+				<input type="text" name="md_price" id="md_price" value="${mdVO.md_price}"
 				class="input-check form-control rounded-3 bg-body-tertiary border-0"
 				placeholder="가격"> <label for="md_name">가격(숫자만 입력)</label>
 			</li>
-			<li class="form-floating mb-3">
+			<li class="form-floating mb-3" style="list-style:none;">
 				<input type="text" name="md_quantity" id="md_quantity" maxlength="12" value="${mdVO.md_quantity}"
 				class="input-check form-control rounded-3 bg-body-tertiary border-0"
 				placeholder="수량"> <label for="md_quantity">수량</label>
 			</li>
-			<li class="form-floating mb-3">
-				<input type="text" name="md_photo1" id="md_photo1" maxlength="12" value="${mdVO.md_photo1}"
-				class="input-check form-control rounded-3 bg-body-tertiary border-0"
-				placeholder="상품사진(썸네일)"> <label for="md_photo1">상품사진(썸네일)</label>
-				<input type="button" value="파일 첨부" class="default-btn">
+			<li class="form-floating mb-3" style="list-style:none;">
+				<input type="file" name="upload1" id="upload1" class="form-control"/>
 			</li>
-			<li class="form-floating mb-3">
-				<input type="text" name="md_photo2" id="md_photo2" maxlength="12" value="${mdVO.md_photo2}"
-				class="input-check form-control rounded-3 bg-body-tertiary border-0"
-				placeholder="상품사진(상세페이지)"> <label for="md_photo2">상품사진(상세페이지)</label>
-				<input type="button" value="파일 첨부" class="default-btn">
+			<li class="form-floating mb-3" style="list-style:none;">
+				<input type="file" name="upload2" id="upload2" class="form-control"/>
 			</li>
-			<li class="form-floating mb-3">
-				<input type="text" name="md_detail" id="md_detail" maxlength="12" value="${mdVO.md_detail}"
+			<li class="form-floating mb-3" style="list-style:none;">
+				<input type="text" name="md_detail" id="md_detail" value="${mdVO.md_detail}"
 				class="input-check form-control rounded-3 bg-body-tertiary border-0"
 				placeholder="상품설명"> <label for="md_detail">상품설명</label>
 			</li>
-			
-
 		</ul>
 		<br><br>
 		<div class="align-center">
-			<button class="default-btn" type="submit">수정</button>
-			<input type="button" value="MD삭제" class="default-btn"
+			<button class="btn default-btn btn-dark" type="submit">수정</button>
+			<input type="button" value="MD삭제" class="btn default-btn btn-dark"
 			   onclick="location.href=location.href='delete?md_num=${MdVO.md_num}'">
 		</div>	
 	</form>
+	<br><br><br><br>
 	</div>
 	</div>
 	</div>

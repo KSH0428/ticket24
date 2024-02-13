@@ -69,7 +69,7 @@ public class AdminMdController {
 				
 				model.addAttribute("accessTitle", "상품 등록");
 				model.addAttribute("accessMsg", "상품 등록이 완료되었습니다.");
-				model.addAttribute("accessUrl", request.getContextPath()+"/main/main");
+				model.addAttribute("accessUrl", request.getContextPath()+"/md/list");
 				
 				return "common/resultView";
 			}
