@@ -52,8 +52,8 @@
 			[<span class="user_name">${user.mem_id}</span>]
 			</c:if>
 			<c:if test="${!empty user}">
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/zzim/list"
-				class="nav-link link-body-emphasis px-2 text-white">장바구니/찜</a></li>
+			<li class="nav-item"><a href="${pageContext.request.contextPath}/mdCart/cartList"
+				class="nav-link link-body-emphasis px-2 text-white">장바구니</a></li>
 			<li class="nav-item"><a href="${pageContext.request.contextPath}/member/logout"
 				class="nav-link link-body-emphasis px-2 text-white">로그아웃</a></li>
 			</c:if>

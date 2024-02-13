@@ -47,33 +47,6 @@
 		</div>
 	</form>
 	
-	
-	<!-- 검색 부분 시작 -->
-	<form action="list" id="search_form" method="get">
-		<div class="search">
-			<select name="keyfield" id="keyfield">
-				<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>상품번호</option>
-				<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>상품명</option>
-			</select>
-			
-  			<input type="text" class="search-bar" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어 입력">
-  			<img class="search-btn" id="search-btn" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
- 			
- 			<!-- 이미지 클릭하면 submit 이벤트 발생 -->
-  			<script>
-        		function submitForm() {
-           		 document.getElementById("search_form").submit();
-       			}
-
-       			// 이미지 클릭 이벤트에 함수 할당
-        		document.getElementById("search-btn").addEventListener("click", submitForm);
-   			</script>
-		</div>
-		
-	</form>
-<!-- 검색 부분 끝 -->
-	
-	
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 상품이 없습니다.</div>
 	</c:if>
