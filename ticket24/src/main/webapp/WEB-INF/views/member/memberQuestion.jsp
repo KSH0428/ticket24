@@ -6,7 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <div class="question-main">
 <h5>나의 1:1 문의내역</h5>
-	<form action="list" id="search_form" method="get">
+	<form action="memberQuestion" id="search_form" method="get">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield" class="form-select">
@@ -31,9 +31,6 @@
 			<li><a href="memberQuestion?question_category=3">배송</a></li>
 			<li><a href="memberQuestion?question_category=4">기타</a></li>
 		</ul>
-		<c:if test="${!empty user}">
-		<input type="button" value="문의글 작성" onclick="location.href='write'" class="btn btn-warning float-end" style="width:95px;font-size:11pt;padding:0;">
-		</c:if>
 	</div>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
