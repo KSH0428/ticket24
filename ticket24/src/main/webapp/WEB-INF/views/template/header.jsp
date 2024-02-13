@@ -37,8 +37,6 @@
 				                               width="25" height="25" class="my-photo">
 			</c:if>
 			<c:if test="${!empty user && user.mem_auth == 9}">
-			<li class="nav-item"><a href="${pageContext.request.contextPath}/admin/adminPage"
-				class="nav-link link-body-emphasis px-2 text-white">관리자</a></li>
 			<li class="nav-item">
 			<img src="${pageContext.request.contextPath}/member/photoView" 
 				                               width="25" height="25" class="my-photo">

@@ -133,7 +133,7 @@ li {
 
 /* 회원가입, 정보 수정
 -------------------------*/
-#member_register, #member_update, #member_UpdatePasswd{
+#member_register, #member_update, #member_UpdatePasswd, #member_withdraw{
 	width:900px;
 	padding:50px;
 	margin:0 auto;
@@ -143,7 +143,7 @@ li {
  	border-radius: 20px;
 }
 
-#member_register h2, #member_UpdatePasswd h2{
+#member_register h2, #member_UpdatePasswd h2, #member_withdraw h2{
   color: black;
   font-size: 2em;
   margin-bottom: 2rem;
@@ -162,7 +162,7 @@ li {
 	text-align: center;
 }
 
-#member_register li, #member_update li, #member_UpdatePasswd li{
+#member_register li, #member_update li, #member_UpdatePasswd li, #member_withdraw li{
 	margin-bottom: 10px;
 }
 
@@ -204,7 +204,7 @@ li {
  	border:1px solid #404040;
 }
 
-/* 아이디 찾기, 비밀번호 찾기
+/* 아이디 찾기, 비밀번호 찾기, 회원탈퇴
 -------------------------*/
 .findIdForm, .findPwCheck{
 	width: 100%;
@@ -238,7 +238,7 @@ li {
 	margin-right: 40px;
 }
 
-.findIdForm label, .findPwCheck label {
+.findIdForm label, .findPwCheck label{
     margin-right: -40px; /* 라벨 오른쪽 마진 조정 */
 }
 .findIdForm input[id="mem_name"], .findIdForm input[id="mem_email"],
@@ -246,7 +246,7 @@ li {
 	width:300px;
 }
 
-.findIdForm label[id="mem_name"]{
+.findIdForm label[id="mem_name"] {
 	padding-right:-50px;
 }
 
@@ -391,18 +391,19 @@ li {
 	float: left;
 }
 .memberinfo input[type="button"]{
-	margin-top:20px;
+	margin-top:20px;	
 }
 .mypage-button{
 	margin:0 auto;
 	clear:both;
 	text-align: center;
 }
+
 /* MY페이지 포인트 리스트
 -------------------------*/
 /* 기본 테이블 스타일 */
 .table-main{
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
 }
 
@@ -421,14 +422,11 @@ li {
   color: white;
 }
 
-th[width="400"] {
-  width: 400px; /* 너비가 400px인 th 요소에 대한 추가 스타일 지정 */
-}
-
 /* 테이블 데이터 셀 스타일 */
 .table-main td {
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 
 /* 마우스 호버 시 행 배경색 스타일 */

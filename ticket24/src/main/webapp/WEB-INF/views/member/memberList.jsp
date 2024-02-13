@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내용 시작 -->
 <div class="page-main">
-	<h2>내가 작성한 게시글</h2>
+	<h5>내가 작성한 게시글</h5>
 		<form action="memberList" id="search_form" method="get">
 	<ul class="search">
 			<li>
@@ -46,7 +46,7 @@
 				<div class="result-display">표시할 게시물이 없습니다.</div>
 			</c:if>
 			<c:if test="${count > 0}">
-				<table class="table-main">
+				<table class="striped-table">
 					<tr class="align-center" >
 						<th>번호</th>
 						<th>카테고리</th>

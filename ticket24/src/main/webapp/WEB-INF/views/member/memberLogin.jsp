@@ -30,7 +30,7 @@
 			<div class="button-container">
 				<input type="button" value="아이디 찾기" onclick="location.href='findIdCheck'">
 				<input type="button" value="비밀번호 찾기" onclick="location.href='findPwCheck'">
-				<input type="button" value="메인으로" onclick="location.href='${pageContext.request.contextPath}/main/main'">
+				<input type="button" value="메인으로" onclick="location.href='${pageContext.request.contextPath}/concert/list'">
 			</div>
 		</div>
 	</div>

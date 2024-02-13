@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내용 시작 -->
 <div class="page-main">
-	<h2>좋아요한 게시글</h2>
+	<h5>좋아요한 게시글</h5>
 		<form action="memberFav" id="search_form" method="get">
 	<ul class="search">
 			<li>

@@ -3,15 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ceh.css">
 <!-- 시작 -->
 <div>
-	<h5>공연장 대관 예약 목록</h5>
-	<hr size="1" width="100%">
+	<h5 style="margin-bottom:50px;">공연장 대관 예약 목록</h5>
 	<c:if test="${empty list}">
 		예약목록이 없습니다.
 	</c:if>
 	<c:if test="${!empty list}">
-		<table class="table-main">
+		<table class="table-main" style="width:90%;">
 			<tr>
 				<th>신청일</th>
 				<th>신청인</th>
@@ -22,7 +22,7 @@
 			<tr>
 				<td>${list.reservation_regdate}</td>
 				<td>
-				<a href="reservDetail?reservation_num=${list.reservation_num}">${list.reservation_name}</a></td>
+				<a href="${pageContext.request.contextPath}/reserv/reservDetail?reservation_num=${list.reservation_num}">${list.reservation_name}</a></td>
 				<td>
 				<c:if test="${fn:length(list.reservation_date)==1}"><fmt:formatDate value="${list.reservation_date[0]}" pattern="yyyy-MM-dd"/></c:if>
 				<c:if test="${fn:length(list.reservation_date)>1}">

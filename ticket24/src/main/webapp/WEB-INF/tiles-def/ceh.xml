@@ -67,7 +67,7 @@
 	
 	<definition name="memberReserv" extends="myPage">
 		<put-attribute name="title" value="마이페이지공연대관"/>
-		<put-attribute name="body" value="/WEB-INF/views/reserv/reservListUser.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberReserv.jsp"/>
 	</definition>
 	
 	<definition name="memberComm" extends="myPage">

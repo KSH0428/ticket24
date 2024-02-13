@@ -39,7 +39,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="mypage-button">
+	<div class="mypage-button" style="margin-bottom:100px;">
 		<input type="button" value="회원 정보 수정" class="member-btn" onclick="location.href='update?mem_num=${member.mem_num}'">
 		<input type="button" value="비밀번호 변경" class="member-btn" onclick="location.href='passwdUpdate?mem_num=${member.mem_num}'">
 	</div>
