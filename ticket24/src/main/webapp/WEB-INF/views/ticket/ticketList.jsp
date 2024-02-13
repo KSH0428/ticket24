@@ -43,7 +43,7 @@
 			</c:if>
 			<c:if test="${count > 0}">
 			<table class="striped-table">
-				<tr class="align-center" >
+				<tr class="align-center">
     			<th>번호</th>
     			<th>카테고리</th>
    				<th>공연명</th>

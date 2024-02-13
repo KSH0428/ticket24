@@ -25,6 +25,7 @@ import kr.spring.ticket.vo.TicketVO;
 import kr.spring.ticketpay.service.TicketPayService;
 import kr.spring.ticketpay.vo.TicketPayVO;
 import kr.spring.util.PageUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -72,10 +73,14 @@ public class TicketPayController {
 	 *======================================*/
 	@RequestMapping("/ticketPay/list")
 	public ModelAndView process (@RequestParam(value="pageNum",defaultValue="1")int currentPage,
-			@RequestParam(value="order",defaultValue="1") int order,String keyfield, String keyword) {
+			@RequestParam(value="order",defaultValue="1") int order,String keyfield, String keyword,HttpSession session) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num());
 		
 		//전체/검색 레코드 수
 		int count = ticketPayService.selectRowCount(map);
@@ -90,15 +95,16 @@ public class TicketPayController {
 			map.put("end", page.getEndRow());
 			
 			list = ticketPayService.selectReservList(map);
+			log.debug("<<list>> : " + list);
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("ticketReservList");
+		mav.setViewName("ticketPayList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
 		
 		return mav;
-
 	}
+
 }

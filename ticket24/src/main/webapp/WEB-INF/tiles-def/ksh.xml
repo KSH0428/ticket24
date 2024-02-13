@@ -46,7 +46,7 @@
 		<put-attribute name="css" value="/WEB-INF/views/ticketPay/ticketPayCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticketPay/ticketPayWrite.jsp"/>
 	</definition>
-	<definition name="ticketPay" extends="main">
+	<definition name="ticketPayList" extends="main">
 		<put-attribute name="title" value="예약 목록" />
 		<put-attribute name="css" value="/WEB-INF/views/ticketPay/ticketPayCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticketPay/ticketPayList.jsp"/>

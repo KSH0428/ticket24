@@ -27,19 +27,22 @@
 			</c:if>
 			<c:if test="${count > 0}">
 			<table class="striped-table">
-				<tr>
+				<tr class="align-center" >
 					<th>번호</th>
 					<th>카테고리</th>
 					<th>공연명</th>
 				</tr>
 				<c:forEach var="ticket" items="${list}">
-					<td class="align-center">${ticket.ticket_num}</td>
-					<td class="align-center"><c:if
-						test="${ticket.ticket_category == 1}">뮤지컬</c:if> <c:if
-						test="${ticket.ticket_category == 2}">공연</c:if> <c:if
-						test="${ticket.ticket_category == 3}">콘서트</c:if> <c:if
-						test="${ticket.ticket_category == 4}">클래식</c:if></td>
-				<td><a href="detail?ticket_num=${ticketPay.ticket_num}">${ticket.ticket_name}</a></td>					
+				<tr class="align-center" >
+					<td class="align-center">${ticket.ticket_pay_num}</td>
+					<td class="align-center">
+						<c:if test="${ticket.ticketVO.ticket_category == 1}">뮤지컬</c:if> 
+						<c:if test="${ticket.ticketVO.ticket_category == 2}">공연</c:if> 
+						<c:if test="${ticket.ticketVO.ticket_category == 3}">콘서트</c:if> 
+						<c:if test="${ticket.ticketVO.ticket_category == 4}">클래식</c:if>
+					</td>
+					<td><a href="detail?ticket_num=${ticketPay.ticket_num}">${ticket.ticketVO.ticket_name}</a></td>		
+				</tr>			
 				</c:forEach>
 			</table>
 			<div class="align-center">${page}</div>

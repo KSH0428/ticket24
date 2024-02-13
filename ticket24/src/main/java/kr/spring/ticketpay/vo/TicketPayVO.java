@@ -2,6 +2,7 @@ package kr.spring.ticketpay.vo;
 
 import javax.validation.constraints.NotBlank;
 
+import kr.spring.ticket.vo.TicketVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,5 +24,7 @@ public class TicketPayVO {
 	@NotBlank
 	private String ticket_pay_phone;
 	private int mem_num;
+	
+	private TicketVO ticketVO;
 	
 }

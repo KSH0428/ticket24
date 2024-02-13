@@ -3,6 +3,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.spring.ticketpay.dao.TicketPayMapper">
+    <resultMap type="ticketPayVO" id="ticketPayMap">
+    	<result property="ticketVO.ticket_category" column="ticket_category"/>
+    	<result property="ticketVO.ticket_name" column="ticket_name"/>
+    </resultMap>
+    
     
     <!-- 티켓 결제 정보 저장 -->
   <insert id="insertTicketPay" parameterType="ticketPayVO">
@@ -39,25 +44,22 @@
 		<include refid="ticketPaySearch"></include>
 	</select>
 	<!-- 특정 사용자의 모든 예약 내역 조회 -->
-	<select id="selectReservList" parameterType="map" resultType="ticketPayVO">
+	<select id="selectReservList" parameterType="map" resultMap="ticketPayMap">
 		SELECT * FROM (
-    	SELECT a.*, 
-    	rownum rnum FROM (
-        	SELECT 
-            	b.ticket_num,
-           	 b.ticket_category,
-            	<![CDATA[
-				REPLACE(REPLACE(ticket_name, '<', '&lt;'),'>','&gt;') b.ticket_name, 
-				]]>
-       	 FROM 
-           	 ticket_pay a 
-            	JOIN ticket b ON a.ticket_num = b.ticket_num 
-            	JOIN member m ON b.mem_num = m.mem_num 
-           	 <include refid="ticketPaySearch"></include>
-        	WHERE 
-            	a.mem_num = #{mem_num}
-    	) a
-	)
+	    	SELECT a.*, 
+	    	rownum rnum FROM (
+	        	SELECT 
+	            	a.ticket_pay_num,
+	           	 	b.ticket_category,
+	            	<![CDATA[
+					REPLACE(REPLACE(b.ticket_name, '<', '&lt;'),'>','&gt;') ticket_name 
+					]]>
+		       	 FROM ticket_pay a 
+		         JOIN ticket b ON a.ticket_num = b.ticket_num 
+		         JOIN member m ON a.mem_num = m.mem_num 
+		         WHERE a.mem_num=#{mem_num}
+		         <include refid="ticketPaySearch"></include>
+		         ORDER BY a.ticket_pay_num DESC)a)
 	<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
