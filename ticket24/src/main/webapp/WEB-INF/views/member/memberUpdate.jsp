@@ -1,56 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ceh.css">
 <!-- 내용 시작 -->
-<div class="page-main">
-		<h1 class="align-center">회원 정보 수정</h1>
-		<input type="button" value="돌아가기" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/member/myPage'">
-		<form:form action="update" id="member_update" modelAttribute="memberVO">
+<div class="main">
+	<form:form action="update" id="member_update" modelAttribute="memberVO">
 		<form:hidden path="mem_num"/>
 		<form:errors element="div" cssClass="error-color"/>	
-		<ul>
-			<li>
-				<form:label path="mem_id">아이디</form:label>
-				<form:input path="mem_id" readonly="true"/>
-			</li>
-			<li>
-				<form:label path="mem_name">이름</form:label>
-				<form:input path="mem_name" readonly="true"/>
-			</li>
-			<li>
-				<form:label path="mem_nickname">닉네임</form:label>
-				<form:input path="mem_nickname"/>
-			</li>
-			<li>
-				<form:label path="mem_phone">전화번호</form:label>
-				<form:input path="mem_phone"/>
-				<form:errors path="mem_phone" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="mem_email">이메일</form:label>
-				<form:input path="mem_email"/>
-				<form:errors path="mem_email" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="mem_zipcode">우편번호</form:label>
-				<form:input path="mem_zipcode"/>
-				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="default-btn">
-				<form:errors path="mem_zipcode" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="mem_address1">주소</form:label>
-				<form:input path="mem_address1"/>
-				<form:errors path="mem_address1" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="mem_address2">상세주소</form:label>
-				<form:input path="mem_address2"/>
-				<form:errors path="mem_address2" cssClass="error-color"/>
-			</li>
-		</ul>
+			<div style="display: flex; align-items: center; margin-bottom:40px;">
+				<h2>회원 정보 수정</h2>
+				<input type="button" value="돌아가기" style="margin-left:-70px;" class="member-btn" onclick="location.href='${pageContext.request.contextPath}/member/myPage'">
+			</div>
+			<div style="margin-left:100px;">	
+				<ul>
+					<li>
+						<form:label path="mem_id">아이디</form:label>
+						<form:input path="mem_id" readonly="true"/>
+					</li>
+					<li>
+						<form:label path="mem_name">이름</form:label>
+						<form:input path="mem_name" readonly="true"/>
+					</li>
+					<li>
+						<form:label path="mem_nickname">닉네임</form:label>
+						<form:input path="mem_nickname"/>
+					</li>
+					<li>
+						<form:label path="mem_phone">전화번호</form:label>
+						<form:input path="mem_phone"/>
+						<form:errors path="mem_phone" cssClass="error-color"/>
+					</li>
+					<li>
+						<form:label path="mem_email">이메일</form:label>
+						<form:input path="mem_email" readonly="true"/>
+					</li>
+					<li>
+						<form:label path="mem_zipcode">우편번호</form:label>
+						<form:input path="mem_zipcode"/>
+						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="member-btn">
+						<form:errors path="mem_zipcode" cssClass="error-color"/>
+					</li>
+					<li>
+						<form:label path="mem_address1">주소</form:label>
+						<form:input path="mem_address1"/>
+						<form:errors path="mem_address1" cssClass="error-color"/>
+					</li>
+					<li>
+						<form:label path="mem_address2">상세주소</form:label>
+						<form:input path="mem_address2"/>
+						<form:errors path="mem_address2" cssClass="error-color"/>
+					</li>
+				</ul>
+			</div>
 		<div class="align-center">
-			<form:button class="default-btn">회원 정보 수정</form:button>
-			<input type="button" value="회원 탈퇴" class="default-btn" onclick="location.href='withdraw?mem_num=${memberVO.mem_num}'">
+			<form:button class="member-btn">회원 정보 수정</form:button>
+			<input type="button" value="회원 탈퇴" class="member-btn" onclick="location.href='withdraw?mem_num=${memberVO.mem_num}'">
 		</div>
 	</form:form>
 </div>

@@ -5,35 +5,38 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member.profile.js"></script>
 <!-- 내용 시작 -->
 <div class="page-main">
-	<h2>포인트 목록</h2>
-	<div class="memberinfo">
-		<ul>
-			<li>
-				<img src="${pageContext.request.contextPath}/member/photoView" width="200" height="200" class="my-photo">
-			</li>
-		</ul>
-		<ul>
-			<li>
-				'${member.mem_name}'님은 <c:if test="${member.mem_auth == 1}">'실버' 등급입니다.</c:if>
-									    <c:if test="${member.mem_auth == 2}">'골드' 등급입니다.</c:if>
-									    <c:if test="${member.mem_auth == 3}">'플래티넘' 등급입니다.</c:if>
-									    <c:if test="${member.mem_auth == 9}">'관리자' 입니다.</c:if>
-			</li>
-			<li>
-				<br>적립금 : <fmt:formatNumber value="${all_point}" pattern="#,###" /> 원
-			</li>
-		</ul>
+	<div class="memberinfo" style="padding-top:100px; margin-bottom:80px;">
+		<div class="member-photo">
+			<ul>
+				<li>
+					<img src="${pageContext.request.contextPath}/member/photoView" width="200" height="200" class="my-photo">
+				</li>
+			</ul>
+		</div>
+		<div class="member-point">
+			<ul>
+				<li>
+					'${member.mem_name}'님은 <c:if test="${member.mem_auth == 1}">'실버' 등급입니다.</c:if>
+										    <c:if test="${member.mem_auth == 2}">'골드' 등급입니다.</c:if>
+										    <c:if test="${member.mem_auth == 3}">'플래티넘' 등급입니다.</c:if>
+										    <c:if test="${member.mem_auth == 9}">'관리자' 입니다.</c:if>
+				</li>
+				<li>
+					<br>적립금 : <fmt:formatNumber value="${all_point}" pattern="#,###" /> 원
+				</li>
+			</ul>
+		</div>
 	</div>
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table class="striped-table">
+	<table class="table-main">
 		<tr>
-			<th>적립/사용 일자</th>
-			<th width="400">적립/사용</th>
-			<th>내용</th>
-			<th>총 적립금</th>
+			<th class="align-center">적립/사용 일자</th>
+			<th class="align-center" width="400">적립/사용</th>
+			<th class="align-center">내용</th>
+			<th class="align-center">총 적립금</th>
 		</tr>
 		<c:forEach var="point" items="${list}">
 		<tr>

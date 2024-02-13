@@ -71,8 +71,8 @@
 				</li>
 			</ul>
 			<div class="button-container">
-				<form:button class="register-btn" id="registerBtn">회원 가입</form:button>
-				<input type="button" value="메인 페이지" class="register-btn" onclick="location.href='${pageContext.request.contextPath}/main/main'">
+				<form:button class="member-btn" id="registerBtn">회원 가입</form:button>
+				<input type="button" value="메인 페이지" class="member-btn" onclick="location.href='${pageContext.request.contextPath}/main/main'">
 			</div>
 		</form:form>
 	</div>

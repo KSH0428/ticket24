@@ -4,7 +4,7 @@
 <!-- 내용 시작 -->
 <div class="page-main">
 	<h2>내가 작성한 게시글</h2>
-		<form action="memberWrite" id="search_form" method="get">
+		<form action="memberList" id="search_form" method="get">
 	<ul class="search">
 			<li>
 			<select name="keyfield" id="keyfield">
@@ -19,7 +19,7 @@
 		</li>
 		<li>
 			<input type="submit" value="찾기">
-			<input type="button" value="목록" onclick="location.href='memberWrite'">
+			<input type="button" value="목록" onclick="location.href='memberList'">
 		</li>		
 	</ul>
 			<div class="align-right">
@@ -35,18 +35,18 @@
 		</div>
 	</form>
 		<div class = "category">
-		<input class="btn" type="button" value="전체게시판" onclick="location.href='memberWrite'"> 
-		<input class="btn" type="button" value="자유게시판" onclick="location.href='memberWrite?comm_category=1'"> 
-		<input class="btn" type="button" value="뮤지컬" onclick="location.href='memberWrite?comm_category=2'">
-		<input class="btn" type="button" value="공연" onclick="location.href='memberWrite?comm_category=3'">
-		<input class="btn" type="button" value="콘서트" onclick="location.href='memberWrite?comm_category=4'">
-		<input class="btn" type="button" value="클래식" onclick="location.href='memberWrite?comm_category=5'"> 
+		<input class="btn" type="button" value="전체게시판" onclick="location.href='memberList'"> 
+		<input class="btn" type="button" value="자유게시판" onclick="location.href='memberList?comm_category=1'"> 
+		<input class="btn" type="button" value="뮤지컬" onclick="location.href='memberList?comm_category=2'">
+		<input class="btn" type="button" value="공연" onclick="location.href='memberList?comm_category=3'">
+		<input class="btn" type="button" value="콘서트" onclick="location.href='memberList?comm_category=4'">
+		<input class="btn" type="button" value="클래식" onclick="location.href='memberList?comm_category=5'"> 
 		</div>
 			<c:if test="${count == 0}">
 				<div class="result-display">표시할 게시물이 없습니다.</div>
 			</c:if>
 			<c:if test="${count > 0}">
-				<table class="striped-table">
+				<table class="table-main">
 					<tr class="align-center" >
 						<th>번호</th>
 						<th>카테고리</th>
@@ -95,9 +95,9 @@ $(function(){
 	//정렬선택
 	$('#order').change(function(){
 		if(${!empty param.comm_category}){
-			location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val()+'&comm_category=${param.comm_category}';
+			location.href='memberList?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val()+'&comm_category=${param.comm_category}';
 		}else{
-			location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
+			location.href='memberList?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
 		}
 	});
 });

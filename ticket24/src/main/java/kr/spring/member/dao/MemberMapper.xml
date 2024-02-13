@@ -134,29 +134,27 @@
 	
 	<!-- sql 태그외 include 태그를 이용해 SQL문 재사용 -->
 	<sql id="commSearch">
-	    <where>
-	        <if test="keyword != null and keyword != ''">
-	            <choose>
-	                <when test="keyfield == 1">
-	                    AND comm_title LIKE '%' || #{keyword} || '%'
-	                </when>
-	                <when test="keyfield == 2">
-	                    AND (mem_id LIKE '%' || #{keyword} || '%' OR
-	                    mem_nickname LIKE '%' || #{keyword} || '%')
-	                </when>
-	                <when test="keyfield == 3">
-	                    AND comm_content LIKE '%' || #{keyword} || '%'
-	                </when>
-	                <when test="keyfield == 4">
-	                    AND (comm_title LIKE '%' || #{keyword} || '%' OR
-	                    comm_content LIKE '%' || #{keyword} || '%')
-	                </when>
-	            </choose>
-	        </if>
-	        <if test="comm_category != null and comm_category != ''">
-	            AND comm_category = #{comm_category}
-	        </if>
-	    </where>
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <when test="keyfield == 1">
+                    AND comm_title LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="keyfield == 2">
+                    AND (mem_id LIKE '%' || #{keyword} || '%' OR
+                    mem_nickname LIKE '%' || #{keyword} || '%')
+                </when>
+                <when test="keyfield == 3">
+                    AND comm_content LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="keyfield == 4">
+                    AND (comm_title LIKE '%' || #{keyword} || '%' OR
+                    comm_content LIKE '%' || #{keyword} || '%')
+                </when>
+            </choose>
+        </if>
+        <if test="comm_category != null and comm_category != ''">
+            AND comm_category = #{comm_category}
+        </if>
 	</sql>
 	
 	<sql id="commOrder">

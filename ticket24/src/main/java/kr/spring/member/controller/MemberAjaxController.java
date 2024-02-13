@@ -59,12 +59,11 @@ public class MemberAjaxController {
 	 *=========================*/
 	@GetMapping("/member/mailCheck")
 	@ResponseBody
-	public String mailCheck(String mem_email) {
-	    System.out.println("이메일 인증 요청이 들어옴!");
-	    System.out.println("이메일 인증 이메일 : " + mem_email);
-
+	public String mailCheck(String mem_email,HttpSession session) {
 	    String str = sendEmailService.getTempPassword(); // 랜덤한 인증번호 생성
 
+	    session.setAttribute("email_val", str);
+	    
 	    MailVO vo = sendEmailService.createMailconfirmEmail(mem_email, str); // 인증번호를 이메일 서비스에 전달
 	    sendEmailService.mailSend(vo); // 이메일 발송
 

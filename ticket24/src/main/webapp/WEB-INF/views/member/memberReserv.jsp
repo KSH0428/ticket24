@@ -5,13 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- 시작 -->
 <div>
-	<h2>예약목록</h2>
+	<h5>공연장 대관 예약 목록</h5>
 	<hr size="1" width="100%">
 	<c:if test="${empty list}">
 		예약목록이 없습니다.
 	</c:if>
 	<c:if test="${!empty list}">
-		<table class="striped-table">
+		<table class="table-main">
 			<tr>
 				<th>신청일</th>
 				<th>신청인</th>

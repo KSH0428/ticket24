@@ -4,6 +4,8 @@ $(function(){
 	$('#photo_btn').click(function(){
 		$('#photo_choice').show();
 		$(this).hide();
+		$('.member-point').hide(); // member-point 숨기기
+        $('.mypage-button').hide(); // mypage-button 숨기기
 	});
 	
 	//처음 화면에 보여지는 이미지 읽기
@@ -74,5 +76,7 @@ $(function(){
 		$('#upload').val('');
 		$('#photo_choice').hide();
 		$('#photo_btn').show();
+		$('.member-point').show();
+        $('.mypage-button').show();
 	});//end of click - 취소 버튼 처리
 });

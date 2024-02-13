@@ -10,13 +10,13 @@
 			<form:errors element="div" cssClass="error-color"/>
 			<ul>
 				<li class="floating-label">
-					<form:label path="mem_id" id="login_id">아이디</form:label>
 					<form:input path="mem_id" placeholder="아이디" cssClass="form-input" autocomplete="off"/>
+					<form:label path="mem_id" id="login_id">아이디</form:label>
 					<form:errors path="mem_id" element="div" cssClass="error-color"/>
 				</li>
 				<li class="floating-label">
-					<form:label path="mem_passwd">비밀번호</form:label>
 					<form:password path="mem_passwd" placeholder="비밀번호" cssClass="form-input"/>
+					<form:label path="mem_passwd">비밀번호</form:label>
 					<form:errors path="mem_passwd" element="div" cssClass="error-color"/>
 				</li>
 				<li>

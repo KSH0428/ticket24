@@ -228,9 +228,9 @@ public class MemberController {
 				
 				if(member.getMem_auth() == 9) {//관리자는 관리자 메인으로 이동
 					//======추후 수정======//
-					return "redirect:/main/main";
+					return "redirect:/concert/list";
 				}else {//일반 사용자는 사용자 메인으로 이동
-					return "redirect:/main/main";
+					return "redirect:/concert/list";
 				}
 			}
 			//인증 실패
@@ -262,7 +262,7 @@ public class MemberController {
 		
 		response.addCookie(auto_cookie);
 		//=====자동로그인 처리 끝=======//
-		return "redirect:/main/main";
+		return "redirect:/concert/list";
 	}
 	
 	/*========================
@@ -456,7 +456,7 @@ public class MemberController {
 	/*========================
 	 * 마이페이지 공연장 대관
 	 *=======================*/
-	@RequestMapping("reserv/reservListUser")
+	@RequestMapping("member/memberReserv")
 	public String userReservList(HttpSession session, Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		List<ReservHallVO> list = new ArrayList<ReservHallVO>();
@@ -493,7 +493,7 @@ public class MemberController {
 	/*========================
 	 * 마이페이지 작성한 게시글
 	 *=======================*/
-	@RequestMapping("/member/memberWrite")
+	@RequestMapping("/member/memberList")
 	public ModelAndView writeprocess(@RequestParam(value="pageNum",defaultValue="1")int currentPage,
 			                   @RequestParam(value="order",defaultValue="1") int order,
 			                   @RequestParam(value="comm_category",defaultValue="") String comm_category,
@@ -521,7 +521,7 @@ public class MemberController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("memberWrite");
+		mav.setViewName("memberList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());

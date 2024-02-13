@@ -13,25 +13,15 @@
 					<li><a href="${pageContext.request.contextPath}/reserv/list">공연 예약 내역</a></li>
 				</ul>
 			</li>
-			<li class="main-menu"><a href="${pageContext.request.contextPath}/reserv/reservListUser">공연장</a></li>
-			<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">MD</a>
-				<ul class="sub-menu">
-					<li><a href="${pageContext.request.contextPath}/reserv/list">주문 내역</a></li>
-					<li><a href="${pageContext.request.contextPath}/reserv/list">작성한 문의</a></li>
-				</ul>
-			</li>
+			<li class="main-menu"><a href="${pageContext.request.contextPath}/member/memberReserv">공연장</a></li>
+			<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">MD 주문</a></li>
 			<li class="main-menu"><a href="${pageContext.request.contextPath}/member/memberComm">커뮤니티</a>
 				<ul class="sub-menu">
-					<li><a href="${pageContext.request.contextPath}/member/memberWrite">작성한 게시글</a></li>
+					<li><a href="${pageContext.request.contextPath}/member/memberList">작성한 게시글</a></li>
 					<li><a href="${pageContext.request.contextPath}/member/memberFav">좋아요한 게시글</a></li>
 				</ul>
 			</li>
-			<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">티켓양도</a>
-				<ul class="sub-menu">
-					<li><a href="${pageContext.request.contextPath}/reserv/list">찜한 티켓 양도글</a></li>
-					<li><a href="${pageContext.request.contextPath}/reserv/list">양도 티켓 결제 내역</a></li>
-				</ul>
-			</li>
+			<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">티켓양도</a></li>
 			<li class="main-menu"><a href="${pageContext.request.contextPath}/notice/list">1:1 문의</a></li>
 		</ul>
 	</div>
