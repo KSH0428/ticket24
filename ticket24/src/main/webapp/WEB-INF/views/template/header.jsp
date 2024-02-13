@@ -62,7 +62,7 @@
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
       <div class="col-md-3 mb-2 mb-md-0">
-        <a href="${pageContext.request.contextPath}/main/main">
+        <a href="${pageContext.request.contextPath}/concert/list">
           <img src="${pageContext.request.contextPath}/images/logo2.jpg" width="180px" height="50px">
         </a>
       </div>
