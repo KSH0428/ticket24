@@ -98,8 +98,7 @@ public class ConcertController {
 		
 		//회원번호
 		MemberVO vo = (MemberVO)session.getAttribute("user");
-		
-		
+		int point = concertService.searchUserPoint(vo.getMem_num());
 		log.debug("<<예약 팝업창 concert_num>> : " + concert_num);
 		log.debug("<<c_round_num>> : " + c_round_num);
 		
@@ -108,6 +107,7 @@ public class ConcertController {
 		
 		model.addAttribute("concert", concert);
 		model.addAttribute("round", round);
+		model.addAttribute("point", point);
 		
 		return "reserveConcertPopUp";
 	}

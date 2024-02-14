@@ -33,6 +33,9 @@ public interface ConcertService {
 	
 	//단일 콘서트 회차 정보
 	public ConcertRoundVO selectRound(int c_round_num);
+	
+	//--------------포인트 조회-----------------
+	public int searchUserPoint(int mem_num);
 	//--------------웹 스크롤 -----------------
 
 	//콘서트 리스트

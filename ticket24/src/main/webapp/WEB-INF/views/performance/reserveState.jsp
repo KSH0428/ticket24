@@ -246,8 +246,8 @@ function requestPay() {
 		<div class="reserve-state-payment2">
 			<ul>
 				<li>
-					<span class="reserve-state-ticket-payment-text">할인금액</span>
-					<span class="reserve-state-selected-ticket-price">0</span>
+					<span class="reserve-state-ticket-payment-text">보유 포인트</span>
+					<span class="reserve-state-selected-ticket-price">${point}</span>
 				</li>
 			</ul>
 		</div>

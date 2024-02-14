@@ -451,6 +451,7 @@ function createSeats(rows, cols) {
 				//사이드바에 금액 반영
 				let total_price = parseInt($('#reserve-state-total-price').text()) - parseInt($('#tickets-2-price').text());
 				$('#reserve-state-total-price').text('').text(total_price);
+				$('#total-payment-number').text('').text($('#reserve-state-total-price').text());
 				
 				//step 3
 				$('.selected-ticket-container-body #tickets-2-seatNum, #tickets-2-grade, #tickets-2-price, #tickets-2-amount').remove();
@@ -460,6 +461,7 @@ function createSeats(rows, cols) {
 				//사이드바에 금액 반영
 				let total_price = parseInt($('#reserve-state-total-price').text()) - parseInt($('#tickets-1-price').text());
 				$('#reserve-state-total-price').text('').text(total_price);
+				$('#total-payment-number').text('').text($('#reserve-state-total-price').text());
 				
 				//step 3
 				$('.selected-ticket-container-body #tickets-1-seatNum, #tickets-1-grade, #tickets-1-price, #tickets-1-amount').remove();
@@ -506,6 +508,7 @@ function createSeats(rows, cols) {
 					//사이드바에 금액 반영
 					let total_price = parseInt($('#reserve-state-total-price').text()) + parseInt(price2);
 					$('#reserve-state-total-price').text('').text(total_price);
+					$('#total-payment-number').text('').text($('#reserve-state-total-price').text());
 					
 					$('.selected-ticket-container-body').append("<li id='tickets-2-grade'>"+grade2+"</li>");
 					$('.selected-ticket-container-body').append("<li id='tickets-2-price'>"+price2+"</li>");
@@ -533,6 +536,7 @@ function createSeats(rows, cols) {
 					//사이드바에 금액 반영
 					let total_price = parseInt($('#reserve-state-total-price').text()) + parseInt(price1);
 					$('#reserve-state-total-price').text('').text(total_price);
+					$('#total-payment-number').text('').text($('#reserve-state-total-price').text());
 					
 					$('.selected-ticket-container-body').append("<li id='tickets-1-grade'>"+grade1+"</li>");
 					$('.selected-ticket-container-body').append("<li id='tickets-1-price'>"+price1+"</li>");
@@ -547,7 +551,11 @@ function createSeats(rows, cols) {
 		
 		
 	});
-
+	
+	$(document).on('click', '#deduction_point', function() {
+		let total_price = parseInt($('#total-payment-number').text()) - parseInt(${point});
+		$('#total-payment-number').text('').text(total_price);
+	});
 </script>
 
 <!-- =========================================================================== -->
@@ -568,5 +576,10 @@ function createSeats(rows, cols) {
 			<ul class="selected-ticket-container-body">
 			</ul>
 		</div>
+		
+		<div style = "margin-top: 200px;"class="select-concert-round-container-header">포인트</div>
+		<div style = "text-align:center; font-weight: bold; margin-top:10px;">현재 보유 포인트는 <u>${point}</u> 포인트 입니다.</div>
+		<div style = "text-align:center; font-weight: bold;">사용하시겠습니까?</div>
+		<button id = "deduction_point" style = "margin-left: 330px; margin-top: 10px;">예</button>
 	</div>
 </div>
