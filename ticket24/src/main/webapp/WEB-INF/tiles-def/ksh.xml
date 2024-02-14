@@ -5,53 +5,53 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="commList" extends="main">
+    <definition name="commList" extends="main2">
     	<put-attribute name="title" value="게시판 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/comm/commList.jsp"/>                                           
     </definition>
-	<definition name="commWrite" extends="main">
+	<definition name="commWrite" extends="main2">
 		<put-attribute name="title" value="글쓰기" />
 		<put-attribute name="css" value="/WEB-INF/views/comm/commCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/comm/commWrite.jsp"/>
 	</definition>
-	 <definition name="commView" extends="main">
+	 <definition name="commView" extends="main2">
     	<put-attribute name="title" value="글상세"/>
     	<put-attribute name="body" value="/WEB-INF/views/comm/commView.jsp"/>
     </definition>
-    <definition name="commModify" extends="main">
+    <definition name="commModify" extends="main2">
     	<put-attribute name="title" value="글 수정"/>
     	<put-attribute name="css" value="/WEB-INF/views/comm/commCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/comm/commModify.jsp"/>
     </definition>
-        <definition name="ticketList" extends="main">
+        <definition name="ticketList" extends="main2">
     	<put-attribute name="title" value="티켓양도 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/ticket/ticketList.jsp"/>                                           
     </definition>
-	<definition name="ticketWrite" extends="main">
+	<definition name="ticketWrite" extends="main2">
 		<put-attribute name="title" value="티켓양도 등록" />
 		<put-attribute name="css" value="/WEB-INF/views/ticket/ticketCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticket/ticketWrite.jsp"/>
 	</definition>
-	 <definition name="ticketView" extends="main">
+	 <definition name="ticketView" extends="main2">
     	<put-attribute name="title" value="티켓양도글 상세"/>
     	<put-attribute name="body" value="/WEB-INF/views/ticket/ticketView.jsp"/>
     </definition>
-    <definition name="ticketModify" extends="main">
+    <definition name="ticketModify" extends="main2">
     	<put-attribute name="title" value="티켓양도글 수정"/>
     	<put-attribute name="css" value="/WEB-INF/views/ticket/ticketCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/ticket/ticketModify.jsp"/>
 	</definition>
-	<definition name="ticketPayWrite" extends="main">
+	<definition name="ticketPayWrite" extends="main2">
 		<put-attribute name="title" value="정보 등록" />
 		<put-attribute name="css" value="/WEB-INF/views/ticketPay/ticketPayCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticketPay/ticketPayWrite.jsp"/>
 	</definition>
-	<definition name="ticketPayList" extends="main">
+	<definition name="ticketPayList" extends="main2">
 		<put-attribute name="title" value="예약 목록" />
 		<put-attribute name="css" value="/WEB-INF/views/ticketPay/ticketPayCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/ticketPay/ticketPayList.jsp"/>
 	</definition>
-	<definition name="ticketPayView" extends="main">
+	<definition name="ticketPayView" extends="main2">
     	<put-attribute name="title" value="예약 상세"/>
     	<put-attribute name="body" value="/WEB-INF/views/ticketPay/ticketPayView.jsp"/>
     </definition> 
