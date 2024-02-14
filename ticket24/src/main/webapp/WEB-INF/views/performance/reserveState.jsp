@@ -134,10 +134,14 @@ function requestPay() {
     }, function (rsp) { // callback
     	 if (rsp.success) {
     		 paymentVerify(rsp);
+    		 window.opener.postMessage(1, '*');
+    		 window.close();
+
    		} else {
    		      var msg = '결제에 실패하였습니다.';
    		      msg += '에러내용 : ' + rsp.error_msg;
    		      alert(msg);
+   		   	  window.close();
    		}
     });
     //결제완료

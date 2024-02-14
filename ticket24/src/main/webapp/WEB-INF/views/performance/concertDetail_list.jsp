@@ -238,6 +238,17 @@ $(function() {
 		let height = 644;
 		let popOption = "width=" + width + ", height=" + height;
 		window.open(url,"concertPopUp", popOption);
+		
+		window.addEventListener('message', function(event) {
+			/* alert(event.data); */
+            if(event.data == 1){
+            	location.href='/member/myPage';
+            	
+            }
+            	
+        });
+		
+		
 	});
 });
 
