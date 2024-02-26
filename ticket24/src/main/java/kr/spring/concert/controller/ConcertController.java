@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +27,7 @@ import kr.spring.concert.service.ConsertServiceImpl;
 import kr.spring.concert.vo.ConcertDetailVO;
 import kr.spring.concert.vo.ConcertRoundVO;
 import kr.spring.concert.vo.ConcertVO;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -87,10 +91,14 @@ public class ConcertController {
 	
 	//예약 팝업창
 	@RequestMapping("/concert/concertReservePopup")
-	public String popUp(Model model, @RequestParam int concert_num, @RequestParam int c_round_num) {
+	public String popUp(Model model, @RequestParam int concert_num, @RequestParam int c_round_num, HttpServletRequest request,
+			 			HttpSession session) {
 		//팝업창 tiles는 modelandview를 사용하면 안되는지?
 		//modelAttribute로 데이터를 넣어야할듯
 		
+		//회원번호
+		MemberVO vo = (MemberVO)session.getAttribute("user");
+		int point = concertService.searchUserPoint(vo.getMem_num());
 		log.debug("<<예약 팝업창 concert_num>> : " + concert_num);
 		log.debug("<<c_round_num>> : " + c_round_num);
 		
@@ -99,6 +107,7 @@ public class ConcertController {
 		
 		model.addAttribute("concert", concert);
 		model.addAttribute("round", round);
+		model.addAttribute("point", point);
 		
 		return "reserveConcertPopUp";
 	}

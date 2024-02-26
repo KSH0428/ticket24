@@ -134,10 +134,14 @@ function requestPay() {
     }, function (rsp) { // callback
     	 if (rsp.success) {
     		 paymentVerify(rsp);
+    		 window.opener.postMessage(1, '*');
+    		 window.close();
+
    		} else {
    		      var msg = '결제에 실패하였습니다.';
    		      msg += '에러내용 : ' + rsp.error_msg;
    		      alert(msg);
+   		   	  window.close();
    		}
     });
     //결제완료
@@ -242,8 +246,8 @@ function requestPay() {
 		<div class="reserve-state-payment2">
 			<ul>
 				<li>
-					<span class="reserve-state-ticket-payment-text">할인금액</span>
-					<span class="reserve-state-selected-ticket-price">0</span>
+					<span class="reserve-state-ticket-payment-text">보유 포인트</span>
+					<span class="reserve-state-selected-ticket-price">${point}</span>
 				</li>
 			</ul>
 		</div>
@@ -263,7 +267,7 @@ function requestPay() {
 	</div>
 	<div id="btn-step3" class="button-area" style="display:none;">
 		<button id="btn-prev-step3">이전 단계</button>
-		<button id="btn-next-step3" onclick="requestPay()">다음 단계</button>
+		<button id="btn-next-step3" onclick="requestPay()">결제하기</button>
 	</div>
 </div>
 	

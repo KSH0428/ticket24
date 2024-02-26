@@ -63,7 +63,7 @@ input[type="file"] {
 				<div style="width: 67%;float: left;"><label style="width: 100%;" class="form-col col-form-label">신청서 <span style="font-size: 15px;color: gray">*최대 3개만 등록할 수 있습니다.</span></label></div><div style="float:left;width: 30%" id="uploadSpace"></div>
 				<div class="col-sm-9">
 				<br>
-				<div id="uploadList"></div>
+				<div id="uploadList" style="clear: both"></div>
 				</div>
 			</div>
 		</div>
@@ -108,7 +108,7 @@ $(function(){
 		let fileId = $(this).attr('id');
 		output += '<p class="file_btn">'+$(this).val().split('\\').pop()
 		output += ' <button type="button" data-id="'+fileId+'" class="btn-close delete-btn"></button>'
-		output += '</p>'
+		output += '</p><br>'
 		$('#uploadList').append(output);
 		$('label[for="'+fileId+'"]').remove();
 		createFile();

@@ -32,6 +32,9 @@ public interface ConcertMapper {
 	//콘서트 회차 단독
 	public ConcertRoundVO selectRound(int c_round_num);
 	
+	//--------------포인트 조회-----------------
+	@Select("SELECT NVL(SUM(pt_amount),0) AS pt_sum FROM member_point WHERE mem_num=#{mem_num}")
+	public int searchUserPoint(int mem_num);
 	//--------------웹 크롤링 -----------------
 
 	//콘서트 리스트

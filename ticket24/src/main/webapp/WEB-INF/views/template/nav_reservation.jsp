@@ -6,7 +6,7 @@
 	<ul class="nav nav-underline flex-column side-bar-menu">
 	<li class="ul-label"><span>Ticket24<br>Art Center</span></li>	
 	  <li class="nav-item">
-	    <a class="nav-link" aria-current="page" href="reservMain"><i class="bi bi-suit-diamond-fill"></i> 시설소개</a>
+	    <a class="nav-link" id="reservMain" href="reservMain"><i class="bi bi-suit-diamond-fill"></i> 시설소개</a>
 	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link" id="reservSchedule" href="reservSchedule"><i class="bi bi-suit-diamond-fill"></i> 대관일정</a>

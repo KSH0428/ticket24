@@ -89,6 +89,11 @@ public class ConsertServiceImpl implements ConcertService{
 		return concertMapper.selectSeatsList(concert_num, c_round_num);
 	}
 
+	@Override
+	public int searchUserPoint(int mem_num) {
+		return concertMapper.searchUserPoint(mem_num);
+	}
+
 
 	
 	

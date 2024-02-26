@@ -335,5 +335,9 @@
 		<!--//tbl_consection-->
 	</div>
 </div>
-
+<script>
+$(function(){
+	$('#reservMain').addClass('active');
+});
+</script>
 <!-- 시설 소개 끝 -->

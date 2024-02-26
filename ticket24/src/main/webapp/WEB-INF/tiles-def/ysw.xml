@@ -20,6 +20,16 @@
     	<put-attribute name="body" value="/WEB-INF/views/performance/concertDetail_list.jsp"/>                                                            
     </definition>
     
+	<definition name="classic" extends="main">
+    	<put-attribute name="title" value="클래식 목록"/>                                      
+    	<put-attribute name="body" value="/WEB-INF/views/performance/classic_list.jsp"/>                                                            
+    </definition>
+
+	<definition name="musical" extends="main">
+    	<put-attribute name="title" value="뮤지컬 목록"/>                                      
+    	<put-attribute name="body" value="/WEB-INF/views/performance/musical_list.jsp"/>                                                            
+    </definition>
+
 </tiles-definitions>
 
 
