@@ -108,19 +108,10 @@ public class MdCartController {
 	 *  =================================
 	 */
 	@RequestMapping("/mdCart/updateCart")
-	public String update(
-				@RequestParam int[] order_quantity,
-				@RequestParam int[] md_num, HttpSession session) {
-		String mem_num = (String) session.getAttribute("mem_num");
-		//레코드의 갯수 만큼 반복문 실행
-		for(int i=0; i<md_num.length;i++) {
-			MdCartVO vo = new MdCartVO();
-			vo.setMem_num(i);
-			vo.setOrder_quantity(i);
-			vo.setMd_num(i);
-			mdCartService.updateCart(vo);
-		}
-		
+	public String update(MdCartVO mdCartVO) {
+			
+			mdCartService.updateCart(mdCartVO);
+			
 		return "redirect:/mdCart/cartList";
 	}
 	

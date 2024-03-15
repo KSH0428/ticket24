@@ -4,6 +4,52 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script>
+/* 결제 시작 */
+var IMP = window.IMP;
+IMP.init('imp06364606');
+function requestPay() {
+	
+	//결제시작
+	IMP.request_pay({
+      pg: "html5_inicis",
+      pay_method: 'card',
+      merchant_uid: 'ticket_hall'+new Date().getTime(),   // 주문번호
+      name: "TICKET24 아트센터",
+      amount: 100,                         // 숫자 타입
+      /* buyer_email: $('#reservation_email').val(),
+      buyer_name: $('#reservation_name').val(),
+      buyer_tel: $('#reservation_phone').val(), */
+    }, function (rsp) { // callback
+    	 if (rsp.success) {
+    		 paymentVerify(rsp);
+    		 window.opener.postMessage(1, '*');
+    		 window.close();
+
+   		} else {
+   		      var msg = '결제에 실패하였습니다.';
+   		      msg += '에러내용 : ' + rsp.error_msg;
+   		      alert(msg);
+   		   	  window.close();
+   		}
+    });
+    //결제완료
+ }
+ function paymentVerify(rsp){
+	 $.ajax({
+         type: 'POST',
+         url: '/verify/' + rsp.imp_uid
+      }).done(function(data) {
+          if(rsp.paid_amount === data.response.amount){
+              alert('결제 성공')
+          } else {
+              alert("결제 실패");
+          }
+      });
+ }
+ 
+</script>
 <!-- 내용 시작 -->
 <div class="page-main">
 	<div class="container overflow-hidden">
@@ -34,16 +80,20 @@
 								</div>
 							</td>
 							<td class="align-center">${mdCart.mdVO.md_name}</td>
+							
 							<td class="align-center">
+							<form action="/mdCart/updateCart">
+								<input type="hidden" name="md_cart_num" value="${mdCartVO.md_cart_num}">
 								<div class="d-grid gap-2 col-6 mx-auto">
 								${mdCart.order_quantity} 
 								<input type="number" name="order_quantity" min="1"
-								max="${mdCart.order_quantity}" autocomplete="off"
-								id="order_quantity" class="quantity-width">
-								<button class="btn btn-secondary btn-sm text-light"
-									type="button" onclick="location.href='/mdCart/updateCart?order_quantity=${mdCart.order_quantity}'">변경</button>
+								max="${mdCart.order_quantity}" id="order_quantity" class="form-control">
+								<input class="btn btn-secondary btn-sm text-light" type="submit" value="수정"
+								>
 								</div>	
+							</form>
 							</td>
+							
 							<td class="align-center">${mdCart.mdVO.md_price}</td>
 							<td class="align-center">${mdCart.sub_price}</td>
 							<td class="align-center">
@@ -76,10 +126,11 @@
 				
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 					<span class="fs-5 fw-bold">선택한 상품</span>
-					<button class="btn btn-dark me-md-2" type="button" 
-					 onclick="location.href='location.href='/mdOrder/mdOrderPayment'">주문하기</button>
-					<button class="btn btn-outline-dark" type="button"
-					onclick="location.href='#'">삭제</button>
+					<!-- <button class="btn btn-dark me-md-2" type="button" 
+					 onclick="location.href='location.href='/mdOrder/mdOrderPayment'">주문하기</button> -->
+					<button class="btn btn-dark me-md-2" onclick="requestPay()">주문하기</button>
+					<button class="btn btn-outline-dark me-md-2" onclick="location.href='#'">
+					삭제</button>
 				</div>
 		</div>
 	</div>
